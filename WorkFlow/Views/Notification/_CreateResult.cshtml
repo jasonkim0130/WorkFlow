@@ -1,0 +1,28 @@
+﻿@using Newtonsoft.Json
+@using WorkFlowLib.DTO
+@using WorkFlow.Controllers
+@using WorkFlow.Ext
+@model FlowInfo
+@{
+    string[] users = ViewBag.NextApprovers as string[];
+}
+<div class="text-center">
+    <div style="margin: 10px">
+        @Html.Partial("~/Views/Inbox/_FlowSteps.cshtml", Model)
+    </div>
+    <hr class="step-line">
+    <img src="~/Content/Images/Workflow/Application/Submitted.png" style="width: 266px; height: 183px;" />
+    <h2 style="line-height: 50px;">
+        @if (users != null && users.Any())
+        {
+            @: Application is on its way to <br />
+            <span class="userno" style="margin-top: 10px;">@string.Join(",", users.Select(p => WebCacheHelper.GetWF_UsernameByNo(p)))</span>
+        }
+    </h2>
+    @Html.Partial("~/Views/Inbox/_ApplicationLogs.cshtml", (int)ViewBag.FlowCaseId)
+    <script type="text/javascript">
+        $(function () {
+            $.page.badgeSubject.updatePage(@Html.Raw(JsonConvert.SerializeObject(WorkFlowBadgeData.GetPendingBadgeData(ViewBag.PendingCount))));
+        });
+    </script>
+</div>

@@ -1,0 +1,18 @@
+table {
+    border-collapse: collapse;
+    border: solid 1px gray;
+    font-size: 18px;
+}
+
+    table td, table th {
+        border: solid 1px gray;
+        padding: 8px;
+    }
+
+@page {
+    size: A4;
+}
+
+.paging {
+    page-break-after: always;
+}

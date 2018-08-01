@@ -1,0 +1,26 @@
+﻿@using WorkFlowLib.Data
+@using WorkFlow.Ext
+@model WF_FlowTypes[]
+<div class="page-header text-center">
+    <h2> Please select an application template to start</h2>
+</div>
+@if (Model != null)
+{
+    foreach (WF_FlowTypes type in Model)
+    {
+        <div class="flow-type-block" data-typeid="@type.FlowTypeId">
+            <a data-ajax="true" data-ajax-loading="#div_progress" data-ajax-mode="replace" data-ajax-update="#div_content" href="@Url.Action("FillFormValue", new { flowTypeId = type.FlowTypeId })">
+                <img src="~/Content/Images/Workflow/Application/@(type.Icon)" />
+            </a>
+            @{
+                var templateName = type.Name.ToLocal();
+                if (templateName == null || templateName.Length == 0)
+                {
+                    templateName = type.Name;
+                }
+
+            }
+            <div>@templateName</div>
+        </div>
+    }
+}

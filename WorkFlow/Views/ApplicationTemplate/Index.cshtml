@@ -1,0 +1,120 @@
+﻿@using WorkFlowLib.Data
+@using WorkFlowLib.DTO
+@using WorkFlow.Ext
+@using Resources
+@model FlowTypeModel[]
+<div style="margin: 10px">
+    <div class="text-right">
+        <a data-ajax="true" class="btn btn-primary btn-sm" data-ajax-method="get" data-ajax-mode="replace" data-ajax-loading="#div_progress" data-ajax-update="#addNewTemplate" href="@Url.Action("AddNewTemplate")" style="margin-bottom: 8px;">
+            Add new template
+        </a>
+    </div>
+    <div id="addNewTemplate"></div>
+    <table class="table order-table tablesorter" id="tb_templates">
+        <thead>
+            <tr>
+                <th style="text-align: center;">
+                    <span class="orderable-display-value">Icon</span>
+                </th>
+                <th data-compare="true" style="text-align: center;">
+                    <span class="orderable-display-value">Template name</span>
+                </th>
+                <th data-compare="true" style="text-align: center;">
+                    <span class="orderable-display-value">@StringResource.CREATOR</span>
+                </th>
+                <th data-compare="true" style="text-align: center;">
+                    <span class="orderable-display-value">@StringResource.DEPARTMENT</span>
+                </th>
+                <th data-compare="true" style="text-align: center;">
+                    <span class="orderable-display-value">Grade</span>
+                </th>
+                <th data-compare="true" style="text-align: center;">
+                    <span class="orderable-display-value">Dynamic design</span>
+                </th>
+                <th data-compare="true" style="text-align: center;">
+                    <span class="orderable-display-value">@StringResource.CreateTime</span>
+                </th>
+                <th style="text-align: center;">
+                    @StringResource.Version
+                </th>
+                <th style="text-align: center;">
+                    @StringResource.STATUS
+                </th>
+                <th>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (FlowTypeModel item in Model)
+            {
+                WF_FlowTypes type = item.Template;
+                string templateName = type.Name.ToLocal();
+                if (string.IsNullOrEmpty(templateName))
+                {
+                    templateName = type.Name;
+                }
+                <tr class="data-row" id="templaterow_@(type.FlowTypeId)">
+                    <td><img src="~/Content/Images/Workflow/Application/@(type.Icon)" style="min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px;" /></td>
+                    <td style="text-align: left;">@templateName</td>
+                    <td>@type.Creator</td>
+                    <td>@type.Dep</td>
+                    <td>@type.Grade</td>
+                    <td>@((type.TemplateType == 9) ? "Yes" : "No")</td>
+                    <td>@type.Created.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
+                    <td>@item.Version</td>
+                    <td>
+                        @if (item.IsEditing)
+                        {
+                            <span style="color: crimson">Draft</span>
+                        }
+                        else
+                        {
+                            <text>Published</text>
+                        }
+                    </td>
+                    <td>
+                        @Ajax.ModalActionLink(StringResource.EDIT, "Edit", new { flowTypeId = type.FlowTypeId }, new ModalAjaxOptions
+                        {
+                            HttpMethod = "get",
+                            InsertionMode = InsertionMode.Replace,
+                            Class = "btn btn-warning btn-sm",
+                            ModalTargetId = "div_cannot_eidt",
+                            UpdateTargetId = "div_content",
+                            LoadingElementId = "div_progress"
+                        })
+                        @Ajax.ActionLink(StringResource.DELETE, "RemoveTemplate", new { flowTypeId = type.FlowTypeId }, new AjaxOptions
+                        {
+                            HttpMethod = "Post",
+                            Confirm = "Are you sure to remove this template?",
+                            OnSuccess = $"$('#templaterow_{item.Template.FlowTypeId}').remove();"
+                        }, new { @class = "btn btn-danger btn-sm" })
+                        @Ajax.ModalActionLink("View", "ViewDetails", new { flowTypeId = type.FlowTypeId }, new ModalAjaxOptions
+                        {
+                            HttpMethod = "get",
+                            InsertionMode = InsertionMode.Replace,
+                            Class = "btn btn-primary btn-sm",
+                            ModalTargetId = "div_cannot_eidt",
+                            UpdateTargetId = "div_content",
+                            LoadingElementId = "div_progress"
+                        })
+                        @Ajax.ModalActionLink("Previous version", "ViewHistory", new { flowTypeId = type.FlowTypeId }, new ModalAjaxOptions
+                        {
+                            HttpMethod = "get",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "div_progress",
+                            Class = "btn btn-info btn-sm",
+                            ModalTargetId = "div_cannot_eidt",
+                            UpdateTargetId = "div_content"
+                        })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div id="div_cannot_eidt"></div>
+<script type="text/javascript">
+    $(function () {
+        $('#tb_templates').sortCommonTable();
+    });
+</script>

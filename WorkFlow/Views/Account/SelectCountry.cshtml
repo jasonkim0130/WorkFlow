@@ -1,0 +1,71 @@
+﻿@using WorkFlowLib
+@model WorkFlow.Models.LogOnViewModel
+@{
+    ViewBag.Title = "LogOn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    #menu-toggle-btn {
+        display: none;
+    }
+
+    .content-section {
+        left: 0;
+    }
+</style>
+<div class="row text-center">
+    <div class="login-section">
+        <div>
+            @if (Codehelper.IsUat)
+            {
+                <p style="font-size: 42px; color: crimson;">
+                    OMNI-BACKEND UAT
+                </p>
+            }
+            else
+            {
+                <p style="font-size: 42px">
+                    OMNI-BACKEND
+                </p>
+            }
+            <p style="font-size: 30px; letter-spacing: 4px;">
+                @(Resources.StringResource.WEB_APP_NAME)
+            </p>
+        </div>
+        <div>
+            @Html.Label(Resources.StringResource.COUNTRY + "/Country", new { @class = "control-label" })
+        </div>
+        @*@Html.HiddenFor(model => model.)*@
+        <div class="country-list">
+            <a href="http://chnapp.blsretail.com:8809/OmniBackendUAT?country=CHN">
+                <button data-val="CHN" type="button" class="country-unchecked">
+                    <img src="~/Content/Images/china.png" />
+                    <span>@(Resources.StringResource.CHN)</span>
+                    <span>CH</span>
+                </button>
+            </a>
+            <a href="http://twapp.blsretail.com:8809/OmnibackendUAT?country=TWN">
+                <button data-val="TWN" type="button" class="country-unchecked">
+                    <img src="~/Content/Images/taiwan.png" />
+                    <span>@(Resources.StringResource.TWN)</span>
+                    <span>TW</span>
+                </button>
+            </a>
+            <button data-val="HKG" type="button" class="country-unchecked">
+                <img src="~/Content/Images/hongkong.png" />
+                <span>@(Resources.StringResource.HKG)</span>
+                <span>HK</span>
+            </button>
+            <button data-val="SGP" type="button" class="country-unchecked">
+                <img src="~/Content/Images/singapore.png" />
+                <span>@(Resources.StringResource.SGP)</span>
+                <span>SG</span>
+            </button>
+            <button data-val="KOR" type="button" class="country-unchecked">
+                <img src="~/Content/Images/korea.png" />
+                <span>@(Resources.StringResource.KOR)</span>
+                <span>KOR</span>
+            </button>
+        </div>
+    </div>
+</div>

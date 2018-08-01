@@ -1,0 +1,198 @@
+﻿
+@using WorkFlowLib.DTO
+@using WorkFlow.Ext
+@model FlowInfo
+@{
+    FlowConditionInfo conditions = ViewBag.Conditions as FlowConditionInfo;
+}
+<div id="flowtemplate@(Model.FlowId)">
+    <div id="flow_edit_@(Model.FlowId)"></div>
+    <table style="margin-top: 20px; font-size: 12px; width: 100%;">
+        <tr>
+            <td style="padding: 0 20px; vertical-align: top; text-align: left; width: 200px; max-width: 200px;">
+                <h5>
+                    FlowId: @Model.FlowId
+                </h5>
+                <h5>
+                    Conditions &nbsp;&nbsp; (@Model.ConditionRelation)
+                </h5>
+                <div id="flow_props_@(Model.FlowId)">
+                    @if (conditions != null && conditions.FlowConditions != null)
+                    {
+                        foreach (var condition in conditions.FlowConditions)
+                        {
+                            <div style="margin-bottom: 6px;">
+                                <label class="label label-info">
+                                    <span>@(condition.WF_FlowPropertys != null ? condition.WF_FlowPropertys.PropertyName : condition.OtherPropertyType)</span>
+                                    <span>@condition.Operator</span>
+                                    <span>@condition.Value</span>
+                                </label>
+                            </div>
+                        }
+                    }
+                </div>
+            </td>
+            <td>
+                <div class="step-block-group inactive">
+                    <div class="step-block min">
+                        <p style="line-height: 70px;">Applicant</p>
+                    </div>
+                </div>
+                @{
+                    var groups = Model.StepGroups.OrderBy(p => p.OrderId).ToArray();
+                    for (int i = 0; i < groups.Length; i++)
+                    {
+                        var stepGroup = groups.ToArray()[i];
+                        int childStepCount = 0;
+                        <div class="step-block-group inactive" id="stepgroup@(stepGroup.StepGroupId)">
+                            <table>
+                                <tr>
+                                    <td style="vertical-align: top;">
+                                        @{
+                                            bool hasStepCondition = conditions?.StepGroupConditons.Any(p => p.StepGroupId == stepGroup.StepGroupId) == true;
+                                        }
+                                        <a data-ajax="true" class="step-arrow" data-ajax-method="get" data-ajax-mode="append" data-ajax-loading="#div_progress"
+                                           data-ajax-update="#flow_edit_@(Model.FlowId)"
+                                           href="@Url.Action("AddStepCondition", "ApplicationTemplate", new {stepGroupId = stepGroup.StepGroupId, flowTypeId = Model.FlowTypeId, flowId = Model.FlowId})"
+                                           style="line-height: 36px; font-size: 14px; color: white;">
+                                            @(hasStepCondition ? "?" : string.Empty)
+                                        </a>
+                                        @{
+                                            if (i == 0)
+                                            {
+                                                if (Model.ApplicantNotificationUsers.Any())
+                                                {
+                                                    <div class="step-arrow-down"></div>
+                                                }
+                                                <div class="notifyusers">
+                                                    @foreach (var item in Model.ApplicantNotificationUsers)
+                                                    {
+                                                        <div style="position: relative; margin-bottom: 10px;">
+                                                            <a data-ajax="true" data-ajax-method="get" data-ajax-mode="replace" data-ajax-loading="#div_progress" data-ajax-update="#flow_edit_@(Model.FlowId)" href="@Url.Action("ViewNotifyUser", "ApplicationTemplate", new {notifyUserId = item.NotificateUserId, flowId = Model.FlowId, stepGroupId = -1})" style="color: white;text-decoration: none;">
+                                                                @WebCacheHelper.GetWF_UsernameByNo(item.GetNotifyUser())
+                                                            </a>
+
+                                                        </div>
+                                                    }
+                                                </div>
+                                            }
+                                            else if (i - 1 < groups.Length - 1 && i > 0)
+                                            {
+                                                var preGroup = groups[i - 1];
+                                                if (preGroup.NotificationUsers.Any())
+                                                {
+                                                    <div class="step-arrow-down"></div>
+                                                }
+                                                <div class="notifyusers">
+                                                    @foreach (var item in preGroup.NotificationUsers)
+                                                    {
+                                                        <div style="position: relative; margin-bottom: 10px;">
+                                                            <a data-ajax="true" data-ajax-method="get" data-ajax-mode="replace" data-ajax-loading="#div_progress" data-ajax-update="#flow_edit_@(Model.FlowId)" href="@Url.Action("ViewNotifyUser", "ApplicationTemplate", new {notifyUserId = item.NotificateUserId, flowId = Model.FlowId, stepGroupId = preGroup.StepGroupId})" style="color: white;text-decoration: none;">
+                                                                @WebCacheHelper.GetWF_UsernameByNo(item.GetNotifyUser())
+                                                            </a>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            }
+                                        }
+                                    </td>
+                                    <td style="vertical-align: top;">
+                                        <h5 style="color: black">STEP: @(i + 2)</h5>
+                                        @foreach (var step in stepGroup.Steps.OrderBy(p => p.OrderId))
+                                        {
+                                            childStepCount++;
+                                            <a data-ajax="true" data-ajax-method="get" data-ajax-mode="replace" data-ajax-loading="#div_progress" data-ajax-update="#flow_edit_@(Model.FlowId)" href="@Url.Action("ViewSubStep", "ApplicationTemplate", new {flowstepid = step.FlowStepId, flowId = Model.FlowId})" style="text-decoration: none; color: white;">
+                                                <div class="step-block min flowstep" id="step@(step.FlowStepId)">
+                                                    @if (step.NoApprover.GetValueOrDefault())
+                                                    {
+                                                        <div class="text-left" style="padding-left: 6px">No Approver</div>
+                                                    }
+                                                    @if (step.FinalApprover != null)
+                                                    {
+                                                        <div class="text-left" style="padding-left: 6px;">Department:</div>
+                                                        <div>@step.FinalDepartment</div>
+                                                        <div class="text-left" style="padding-left: 6px;">Person:</div>
+                                                        <div>@WebCacheHelper.GetWF_UsernameByNo(step.FinalApprover)</div>
+                                                    }
+                                                    else if (step.ApproverType == (int)ApproverType.Person)
+                                                    {
+                                                        <div class="text-left" style="padding-left: 6px;">Department:</div>
+                                                        <div>@step.Department</div>
+                                                        <div class="text-left" style="padding-left: 6px;">Person:</div>
+                                                        <div>@WebCacheHelper.GetWF_UsernameByNo(step.Approver)</div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="text-left" style="padding-left: 6px;">@step.GetApprover()</div>
+                                                    }
+                                                </div>
+                                            </a>
+                                        }
+                                        @if (childStepCount > 1)
+                                        {
+                                            if (stepGroup.StepConditionId == 1)
+                                            {
+                                                <h4 style="color: black; text-align: center;">
+                                                    All
+                                                </h4>
+                                            }
+                                            if (stepGroup.StepConditionId == 2)
+                                            {
+                                                <h4 style="color: black; text-align: center;">
+                                                    Any
+                                                </h4>
+                                            }
+                                        }
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    }
+                }
+                <div style="float: left">
+                    @if (groups.Length == 0)
+                    {
+                        <!--Applicant notification users-->
+                        <div class="step-block-group inactive">
+                            @if (Model.ApplicantNotificationUsers.Any())
+                            {
+                                <div class="step-arrow-down" style="margin-left: 20px !important; margin-top: 70px;"></div>
+                            }
+                            <div class="notifyusers">
+                                @foreach (var item in Model.ApplicantNotificationUsers)
+                                {
+                                    <div style="position: relative; margin-bottom: 10px;">
+                                        <a data-ajax="true" data-ajax-method="get" data-ajax-mode="replace" data-ajax-loading="#div_progress" data-ajax-update="#flow_edit_@(Model.FlowId)" href="@Url.Action("ViewNotifyUser", "ApplicationTemplate", new {notifyUserId = item.NotificateUserId, flowId = Model.FlowId, stepGroupId = -1})" style="color: white; text-decoration: none;">
+                                            @WebCacheHelper.GetWF_UsernameByNo(item.GetNotifyUser())
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <!--Last Step Notify Users-->
+                        <div class="step-block-group inactive">
+                            @if (Model.LastStepNotifyUsers.Any())
+                            {
+                                <div class="step-arrow-down" style="margin-left: 20px !important; margin-top: 70px;"></div>
+                            }
+                            <div class="notifyusers">
+                                @foreach (var item in Model.LastStepNotifyUsers)
+                                {
+                                    <div style="position: relative; margin-bottom: 10px;">
+                                        <a data-ajax="true" data-ajax-method="get" data-ajax-mode="replace" data-ajax-loading="#div_progress" data-ajax-update="#flow_edit_@(Model.FlowId)" href="@Url.Action("ViewNotifyUser", "ApplicationTemplate", new {notifyUserId = item.NotificateUserId, flowId = Model.FlowId, stepGroupId = -2})" style="color: white;text-decoration: none;">
+                                            @WebCacheHelper.GetWF_UsernameByNo(item.GetNotifyUser())
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+            </td>
+        </tr>
+    </table>
+    <hr style="border-top-color: lightgray;" />
+</div>

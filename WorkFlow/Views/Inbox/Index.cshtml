@@ -1,0 +1,190 @@
+﻿@using Newtonsoft.Json
+@using WorkFlowLib.DTO.Query
+@using WorkFlow.Controllers
+@using WorkFlow.Ext
+@using Dreamlab.Core
+@model IEnumerable<InboxQueryRow>
+@{
+    var order = ViewBag.Order as string ?? "datetime";
+    var type = ViewBag.Type as string ?? "desc";
+    var newType = type.EqualsIgnoreCaseAndBlank("desc") ? "asc" : "desc";
+}
+<div style="margin: 10px">
+    <div id="div_attach_cont"></div>
+    <table class="table order-table" id="table_inbox">
+        <thead>
+            <tr>
+                <th></th>
+                <th style="text-align: center;">
+                    <span class="orderable-display-value" data-order="department" data-type="@newType">Department</span>
+                    @if (order == "department")
+                    {
+                        <span>&nbsp;@(type == "desc" ? "∨" : "∧")</span>
+                    }
+                </th>
+                <th style="text-align: center;">
+                    <span class="orderable-display-value" data-order="applicant" data-type="@newType">Applicant</span>
+                    @if (order == "applicant")
+                    {
+                        <span>&nbsp;@(type == "desc" ? "∨" : "∧")</span>
+                    }
+                </th>
+                <th style="text-align: center;">
+                    <span class="orderable-display-value" data-order="type" data-type="@newType">Type</span>
+                    @if (order == "type")
+                    {
+                        <span>&nbsp;@(type == "desc" ? "∨" : "∧")</span>
+                    }
+                </th>
+                <th style="text-align: center;">
+                    <span class="orderable-display-value" data-order="subject" data-type="@newType">Subject</span>
+                    @if (order == "subject")
+                    {
+                        <span>&nbsp;@(type == "desc" ? "∨" : "∧")</span>
+                    }
+                </th>
+                @*<th style="text-align: center;">
+                        <span class="orderable-display-value" data-order="ver" data-type="@newType">Version</span>
+                        @if (order == "ver")
+                        {
+                            <span>&nbsp;@(type == "desc" ? "∨" : "∧")</span>
+                        }
+                    </th>*@
+                <th style="text-align: center;">
+                    <span class="orderable-display-value" data-order="datetime" data-type="@newType">Received</span>
+                    @if (order == "datetime")
+                    {
+                        <span>&nbsp;@(type == "desc" ? "∨" : "∧")</span>
+                    }
+                </th>
+                <th style="text-align: center;">
+                    <span class="orderable-display-value" data-order="deadline" data-type="@newType">Requested Deadline</span>
+                    @if (order == "deadline")
+                    {
+                        <span>&nbsp;@(type == "desc" ? "∨" : "∧")</span>
+                    }
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var lvlGroup in Model.GroupBy(p => p.Priority))
+            {
+                <tr><td colspan="9" style="text-align: left;"><strong>@(lvlGroup.Key == 1 ? "PRIORITY" : "REGULAR")</strong></td></tr>
+                var items = lvlGroup.ToArray();
+                if (!string.IsNullOrWhiteSpace(order))
+                {
+                    var orderbyAsc = type.EqualsIgnoreCaseAndBlank("asc");
+                    switch (order)
+                    {
+                        case "department":
+                            items = orderbyAsc
+                                ? items.OrderBy(p => p.Department).ToArray()
+                                : items.OrderByDescending(p => p.Department).ToArray();
+                            break;
+                        case "applicant":
+                            items = orderbyAsc
+                                ? items.OrderBy(p => p.Applicant).ToArray()
+                                : items.OrderByDescending(p => p.Applicant).ToArray();
+                            break;
+                        case "type":
+                            items = orderbyAsc
+                                ? items.OrderBy(p => p.Type).ToArray()
+                                : items.OrderByDescending(p => p.Type).ToArray();
+                            break;
+                        case "subject":
+                            items = orderbyAsc
+                                ? items.OrderBy(p => p.Subject).ToArray()
+                                : items.OrderByDescending(p => p.Subject).ToArray();
+                            break;
+                        case "datetime":
+                            items = orderbyAsc
+                                ? items.OrderBy(p => p.Received).ToArray()
+                                : items.OrderByDescending(p => p.Received).ToArray();
+                            break;
+                        case "deadline":
+                            items = orderbyAsc
+                                ? items.OrderBy(p => p.Deadline).ToArray()
+                                : items.OrderByDescending(p => p.Deadline).ToArray();
+                            break;
+                    }
+                }
+                foreach (var item in items)
+                {
+                    string actionUrl = item.Aborted == null ? Url.Action("ViewCase", "Inbox", new { flowCaseId = item.FlowCaseId }) : Url.Action("EditCase", "Pending", new { id = item.FlowCaseId });
+                    <tr class="data-row@(item.IsRead ? " inbox-read" : string.Empty)" data-url="@actionUrl">
+                        <td style="text-align: left;">
+                            @{
+                                var days = (DateTime.UtcNow - item.Received).TotalDays;
+                                if (days > 10)
+                                {
+                                    <img title="10 days over" src="~/Content/Images/Workflow/approval/Expired Cheese Icon.png" style="width: 20px; height: 20px;" />
+                                }
+                                else if (days > 5)
+                                {
+                                    <img title="5 days over" src="~/Content/Images/Workflow/approval/Molded Cheese.png" style="width: 20px; height: 20px;" />
+                                }
+                                else
+                                {
+                                    <img title="less than or eqal to 5 days" src="~/Content/Images/Workflow/approval/Fresh Cheese.png" style="width: 20px; height: 20px;" />
+                                }
+                                if (item.HasAttachment)
+                                {
+                                    <a data-ajax="true" data-ajax-method="get" data-ajax-mode="replace" data-ajax-update="#div_attach_cont" href="@Url.Action("ViewAttachmentContent", new {flowCaseId = item.FlowCaseId})">
+                                        <img src="~/Content/Images/Workflow/Application/paperclip.png" style="width: 20px; height: 20px; margin-left: 5px;" class="view-attach" />
+                                    </a>
+                                }
+                                if (item.Aborted != null)
+                                {
+                                    <a class="glyphicon glyphicon-pencil" />
+                                }
+                            }
+                        </td>
+                        <td>@item.Department</td>
+                        <td>@WebCacheHelper.GetWF_UsernameByNo(item.Applicant)</td>
+                        <td>@item.Type</td>
+                        <td>@item.Subject</td>
+                        @*<td>@(item.Ver ?? 0)</td>*@
+                        <td>@item.Received.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>@(item.Deadline.HasValue ? item.Deadline.Value.ToLocalTime().ToString("yyyy-MM-dd HH:mm") : string.Empty)</td>
+                        <td class="flag-cell">
+                            @if (item.Flag == 1)
+                            {
+                                <img src="~/Content/Images/Workflow/approval/Pinned Icon.png" data-url="@Url.Action("MarkFlag", "Inbox", new {flowCaseId = item.FlowCaseId, flag = 1})" />
+                            }
+                            else
+                            {
+                                <img src="~/Content/Images/Workflow/approval/Unpinned Icon.png" data-url="@Url.Action("MarkFlag", "Inbox", new {flowCaseId = item.FlowCaseId, flag = 2})" />
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+    $('#table_inbox').on('click', 'th span', function () {
+        $.postProgressData('@Url.Action("Index", "Inbox")', { order: $(this).data('order'), type: $(this).data('type') }, function (data) {
+            $('#div_content').html(data);
+        });
+    });
+
+    $('#table_inbox').on('click', '.flag-cell img', function (e) {
+        e.stopPropagation();
+        $.postProgressData($(this).data('url'), null, function (data) {
+            $('#div_content').html(data);
+        });
+    });
+
+    $('#table_inbox').on('click', '.data-row', function (e) {
+        if ($(e.target).is('img')) {
+            return;
+        }
+        $.postProgressData($(this).data('url'), {}, function (data) {
+            $('#div_content').html(data);
+        });
+    });
+
+    $.page.badgeSubject.updatePage(@Html.Raw(JsonConvert.SerializeObject(WorkFlowBadgeData.GetInboxBadgeData(Model.Count()))));
+</script>

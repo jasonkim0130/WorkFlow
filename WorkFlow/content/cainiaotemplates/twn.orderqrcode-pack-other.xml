@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<page
+  xmlns="http://cloudprint.cainiao.com/print"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://cloudprint.cainiao.com/print http://cloudprint-docs-resource.oss-cn-shanghai.aliyuncs.com/lpml_schema.xsd"
+  xmlns:editor="http://cloudprint.cainiao.com/schema/editor"
+  width="30" height="30"  splitable="false">
+  <layout
+    editor:_for_="150760229595326"
+    id="150760229596965" width="20" height="20" left="5" top="3"  style="zIndex:1;">
+    <barcode type="qrcode" width="20" height="20" ratioMode="keepRatio"  style="opacity:1;"  >
+      <![CDATA[<%=_data.qrcode%>]]>
+    </barcode>
+  </layout>
+  <layout
+    editor:_for_="150760229595327"
+    id="150760229596966" width="30" height="10" left="0" top="24"  style="zIndex:1;">
+    <text
+      style="fontFamily:SimHei;align:center;fontSize:11;">
+      <![CDATA[<%=_data.saletransno%>]]>:<![CDATA[<%=_data.memberType%>]]>
+    </text>
+  </layout>
+</page>

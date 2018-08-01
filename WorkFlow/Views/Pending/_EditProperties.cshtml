@@ -1,0 +1,138 @@
+﻿@using WorkFlowLib.Data
+@using WorkFlowLib.DTO
+@using WorkFlow.Ext
+@using Dreamlab.Core
+@model FlowInfo
+@{
+    PropertiesValue properties = ViewBag.Properties as PropertiesValue;
+    string[] users = ViewBag.FinalNotifyUsers;
+    string[] nextApprovers = ViewBag.NextApprover as string[];
+}
+
+@Html.Hidden("FlowId", Model.FlowId)
+<table class="properties-table">
+    <tr>
+        <td><span>DEPARTMENT</span></td>
+        <td colspan="3">
+            @(Model.CaseInfo.Department)
+            @Html.Hidden("Dep", Model.CaseInfo.Department)
+        </td>
+    <tr>
+    <tr>
+        <td><span>SUBJECT</span></td>
+        <td><input type="text" name="Subject" value="@Model.CaseInfo.Subject" data-val="true" data-val-required="*" class="form-control" /></td>
+        <td><span>DEADLINE</span></td>
+        <td><input type="text" name="Deadline" value="@(Model.CaseInfo.Deadline?.ToString("yyyy-MM-dd HH:mm") ?? string.Empty)" data-val="true" data-val-required="*" class="form-control datetime" /></td>
+    </tr>
+    @if (properties?.PropertyInfo != null)
+    {
+        int index = 0;
+        foreach (var props in properties.PropertyInfo.SplitToGroup(2))
+        {
+            <tr>
+                @foreach (WF_FlowPropertys prop in props)
+                {
+                    WF_CasePropertyValues value = properties.Values.FirstOrDefault(p => p.PropertyId == prop.FlowPropertyId);
+                    var v = value?.StringValue
+    ?? value?.IntValue?.ToString()
+    ?? value?.DateTimeValue?.ToString("yyyy-MM-ddTHH:mm")
+    ?? value?.NumericValue?.ToString("f2")
+    ?? value?.TextValue
+    ?? value?.DateValue?.ToString("yyyy-MM-dd")
+    ?? value?.UserNoValue;
+                    <td><span>@prop.PropertyName</span></td>
+                    <td>
+                        @HtmlUIHelper.RenderControl(prop, Html, index, v)
+                        @Html.Hidden("Properties[" + index + "].Id", prop.FlowPropertyId)
+                        @Html.Hidden("Properties[" + index + "].Type", prop.PropertyType)
+                    </td>
+                    index++;
+                }
+            </tr>
+        }
+    }
+    @if ((ViewBag.HasCoverDuties as bool?).GetValueOrDefault())
+    {
+        <tr>
+            <td>
+                <span>PERSON TO COVER DUTIES</span>
+            </td>
+            <td colspan="3">
+                <div class="clearfix" style="padding-bottom: 10px"></div>
+                <div id="div_cover_duties">
+                    @if (Model.CaseInfo.CoverDuties.Count() > 0)
+                    {
+                        for (int i = 0; i < Model.CaseInfo.CoverDuties.Count(); i++)
+                        {
+                            @Html.Partial("~/Views/Application/_CoverDuties.cshtml",
+                                             new ViewDataDictionary
+                                         {
+                                           { "CurrentStaffNo", Model.CaseInfo.Applicant},
+                                           { "SelectedStaffNo", Model.CaseInfo.CoverDuties.ElementAt(i)},
+                                           { "Deletable", i > 0}
+                                         })
+                        }
+                    }
+                    else
+                    {
+                        @Html.Partial("~/Views/Application/_CoverDuties.cshtml",
+                                             new ViewDataDictionary
+                                     {
+                                       { "CurrentStaffNo", Model.CaseInfo.Applicant}
+                                      })
+                    }
+                </div>
+
+                <a href="#" id="add_person_cover_duty" style="padding:4px;">Add more</a>
+            </td>
+        </tr>
+    }
+    <tr>
+        <td><span>FINAL NOTIFY USER</span></td>
+        <td colspan="3">
+            <div id="div_notify_users">
+                @foreach (var item in users)
+                {
+                    @Html.Partial("~/Views/Application/_NotifyUser.cshtml", item)
+                }
+            </div>
+            <a href="#" id="add_user">Add more final notify user</a>
+        </td>
+    </tr>
+    <tr>
+        <td><span>ATTACHMENTS</span></td>
+        <td colspan="3">
+            @Html.Partial("~/Views/Application/_Upload.cshtml")
+        </td>
+    </tr>
+    @if (nextApprovers != null)
+    {
+        <tr>
+            <td><span>APPROVERS</span></td>
+            <td colspan="3">
+                @foreach (string approver in nextApprovers)
+                {
+                    <div style="margin-bottom: 10px">
+                        @Html.DropDownList("Approver", WebCacheHelper.GetUsernames().Select(p => new SelectListItem { Text = p.Value, Value = p.Key, Selected = p.Key.EqualsIgnoreCaseAndBlank(approver) }), "", new { data_val = "true", data_val_required = "*", @class = "form-control" })
+                    </div>
+                }
+            </td>
+        </tr>
+    }
+</table>
+
+<script type="text/javascript">
+    $(function () {
+        $('#add_user').on('click', function () {
+            $.postData('@Url.Action("NotifyUser","Application")', {}, function (data) {
+                $('#div_notify_users').append(data);
+            });
+        });
+        $.addDateAndTimePicker();
+        $('#add_person_cover_duty').on('click', function () {
+            $.postData('@Url.Action("AddCoverDuties", "Application")', {}, function (data) {
+                $('#div_cover_duties').append(data);
+            });
+        });
+    });
+</script>

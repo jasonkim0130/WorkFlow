@@ -1,0 +1,386 @@
+﻿@using WorkFlowLib.Data
+@using WorkFlow.Ext
+@using WorkFlow.Logic
+@model WF_FlowPropertys[]
+@{
+    var Dep = ViewBag.CurrentDep as string;
+    //这个StaffNo是LoginStaffNo
+    var StaffNo = ViewBag.StaffNo as string;
+    var StaffInfo = WFUtilities.GetUserStaffInfo(StaffNo);
+    var Country = StaffInfo?.Country;
+    var PositionName = string.Join("-", new[] { StaffInfo?.DepartmentTypeName, StaffInfo?.DepartmentName, StaffInfo?.PositionName });
+    var validBalance = (double)ViewBag.ValidBalance;
+    var displayBalance = (double)ViewBag.DisplayBalance;
+    var notstartedBalance = (double)ViewBag.NotStartedBalance;
+    var apiReturnBalance = (double)ViewBag.APIReturnBalance;
+    var StaffName = string.IsNullOrWhiteSpace(StaffInfo?.StaffName) ? StaffNo : StaffInfo.StaffName;
+    Dictionary<string, string> LeaveType = ViewBag.LeaveTypes as Dictionary<string, string>;
+
+}
+@helper GenerateHiddenHtml(WF_FlowPropertys prop, string guid)
+    {
+        @Html.Hidden("PropertyList.Index", guid);
+        @Html.Hidden("PropertyList[" + guid + "].Id", prop?.FlowPropertyId.ToString())
+        @Html.Hidden("PropertyList[" + guid + "].Type", prop?.PropertyType.ToString())
+}
+
+@helper GenerateTextBox(string propName, string id = null, bool disabled = false, string style = null, object value = null, bool readOnly = false)
+    {
+        var guid = Guid.NewGuid().ToString();
+        WF_FlowPropertys prop = Model.FirstOrDefault(p => p.StatusId < 0 && p.PropertyName == propName);
+        var attributes = GetAttributesByPropertyName(propName, id, disabled, style);
+        if (readOnly)
+        {
+            attributes.Add("readonly", true);
+        }
+        @Html.TextBox("PropertyList[" + guid + "].Value", value, attributes)
+        @GenerateHiddenHtml(prop, guid)
+}
+
+@helper GenerateTextArea(string propName, string id = null, string style = null, string value = "")
+    {
+        var guid = Guid.NewGuid().ToString();
+        WF_FlowPropertys prop = Model.FirstOrDefault(p => p.StatusId < 0 && p.PropertyName == propName);
+        @Html.TextArea("PropertyList[" + guid + "].Value", value, GetAttributesByPropertyName(propName, id, style: style))
+        @GenerateHiddenHtml(prop, guid)
+}
+
+@helper GenerateHidden(string propName, string value = "", string validationMessage = null, string controlId = null)
+    {
+        var guid = Guid.NewGuid().ToString();
+        WF_FlowPropertys prop = Model.FirstOrDefault(p => p.StatusId < 0 && p.PropertyName == propName);
+        IDictionary<string, object> attributes = new Dictionary<string, object>();
+        if (validationMessage != null)
+        {
+            attributes.Add("data-val", "true");
+            attributes.Add("data-val-required", validationMessage);
+            @Html.ValidationMessage("PropertyList[" + guid + "].Value")
+        }
+        if (controlId != null)
+        {
+            attributes.Add("id", controlId);
+        }
+        @Html.Hidden("PropertyList[" + guid + "].Value", value, attributes)
+        @GenerateHiddenHtml(prop, guid)
+}
+
+@helper GenerateDropDownList(string propName, string texts, string id = null, string value = "", string title = null)
+    {
+        var guid = Guid.NewGuid().ToString();
+        WF_FlowPropertys prop = Model.FirstOrDefault(p => p.StatusId < 0 && p.PropertyName == propName);
+        @HtmlUIHelper.GenerateDropDownList(Html, "PropertyList[" + guid + "].Value", texts, GetAttributesByPropertyName(propName, id), value, title)
+        @GenerateHiddenHtml(prop, guid)
+}
+
+@helper GenerateDropDownList(string propName, Dictionary<string, string> items, string id = null, string value = "", string title = null)
+    {
+        var guid = Guid.NewGuid().ToString();
+        WF_FlowPropertys prop = Model.FirstOrDefault(p => p.StatusId < 0 && p.PropertyName == propName);
+        @HtmlUIHelper.GenerateDropDownList(Html, "PropertyList[" + guid + "].Value", items, GetAttributesByPropertyName(propName, id), value, title)
+        @GenerateHiddenHtml(prop, guid)
+}
+
+@helper GenerateCheckBox(string propName, string id = null, bool disabled = false)
+    {
+        var guid = Guid.NewGuid().ToString();
+        WF_FlowPropertys prop = Model.FirstOrDefault(p => p.StatusId < 0 && p.PropertyName == propName);
+        var attributes = GetAttributesByPropertyName(propName, id, disabled);
+        attributes.Remove("class");
+        @Html.CheckBox("PropertyList[" + guid + "].Value", attributes)
+        @GenerateHiddenHtml(prop, guid)
+}
+
+@functions{
+    public IDictionary<string, object> GetAttributesByPropertyName(string propertyName, string id = null, bool disabled = false, string style = null)
+    {
+        WF_FlowPropertys prop = Model.FirstOrDefault(p => p.StatusId < 0 && p.PropertyName.Equals(propertyName));
+        IDictionary<string, object> attributes = HtmlUIHelper.GetHtmlAttributes(prop, true, disabled, style);
+        if (id != null)
+        {
+            attributes["id"] = id;
+        }
+        return attributes;
+    }
+}
+<style type="text/css">
+    .table-borderless > thead > tr > th,
+    .table-borderless > tbody > tr > th,
+    .table-borderless > tfoot > tr > th,
+    .table-borderless > thead > tr > td,
+    .table-borderless > tbody > tr > td,
+    .table-borderless > tfoot > tr > td,
+    .table-borderless > thead,
+    .table-borderless > tbody,
+    .table-borderless > tfoot {
+        border: none;
+    }
+
+    .vertical-middle {
+        vertical-align: middle !important;
+    }
+
+    .nopadding {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .padding-left {
+        padding-left: 20px !important;
+    }
+
+    .textcolor-grey {
+        color: grey !important;
+    }
+
+    .control-hide {
+        display: none;
+    }
+
+    .backgroundcolor-red {
+        background-color: red;
+    }
+
+    .backgroundcolor-green {
+        background-color: green;
+    }
+
+    .backgroundcolor-yellow {
+        background-color: yellow;
+    }
+
+    .checkbox input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        margin-top: -2px;
+        margin-left: -25px !important;
+    }
+</style>
+@if (Model != null)
+{
+    @Html.Hidden("Dep", Dep)
+    @Html.Hidden("Subject", "Leave Application - " + StaffName)
+    <div class="container">
+        <table class="table table-borderless">
+            <tr>
+                <td class="col-sm-1">
+                    <label class="control-label">Country:</label>
+                </td>
+                <td style="vertical-align: bottom;">
+                    @Country
+                    @GenerateHidden("Country", Country)
+                </td>
+                <td class="col-sm-1">
+                    <label class="control-label">Position:</label>
+                </td>
+                <td style="vertical-align: bottom;">
+                    @PositionName
+                    @GenerateHidden("Position", PositionName)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="control-label">Applicant:</label>
+                </td>
+                <td style="vertical-align: bottom;">
+                    @WebCacheHelper.GetWF_UsernameByNo(StaffNo)
+                </td>
+                <td>
+                    <label class="control-label">Staff No:</label>
+                </td>
+                <td style="vertical-align: bottom;">
+                    @(StaffInfo?.StaffId)
+                    @GenerateHidden("StaffNo", StaffInfo?.StaffId)
+                </td>
+            </tr>
+        </table>
+        <div style="border-bottom: 1px solid; height: 1px"></div>
+        <div class="clearfix" style="padding-bottom: 15px;"></div>
+        <div class="panel">
+            <div class="panel-body">
+                <label class="control-label">Leave Information</label>
+                <div class="clearfix" style="padding-bottom: 15px;"></div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">From:</label>
+                    <div class="nopadding col-sm-2">
+                        @GenerateTextBox("FromDate", "txtFromDate")
+                    </div>
+                    <label class="control-label col-sm-1">To:</label>
+                    <div class="nopadding col-sm-2">
+                        @GenerateTextBox("ToDate", "txtToDate")
+                    </div>
+                    <span class="field-validation-error control-hide" id="spErrorForDates" style="padding-left: 20px">
+                        The to date can not be earlier than the from date
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Time:</label>
+                    <div class="nopadding col-sm-2">
+                        @GenerateDropDownList("FromTime", "AM,PM", "ddlFromTime", title: "Please select")
+                    </div>
+                    <div class="nopadding text-center">
+                        <label class="control-label col-sm-1">Time:</label>
+                    </div>
+                    <div class="nopadding col-sm-2">
+                        @GenerateDropDownList("ToTime", "AM,PM", "ddlToTime", title: "Please select")
+                    </div>
+                    <label class="control-label padding-left">Total Days:</label>
+                    <label class="control-label" id="lblTotalHours"></label>
+                    @GenerateHidden("TotalHours", controlId: "txtTotalHours")
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-2 nopadding"></div>
+                    <span class="nopadding field-validation-error control-hide" id="spErrorOverBalance" style="padding-left: 20px">
+                        Remaining Balance is not enough!
+                    </span>
+                </div>
+                <div style="border-bottom: 1px solid; height: 1px"></div>
+                <div class="clearfix" style="padding-bottom: 15px;"></div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Leave Type:</label>
+                    <div class="col-sm-4 nopadding">
+                        @GenerateDropDownList("LeaveCode", LeaveType, "ddlLeaveCode", title: "")
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" id="lblRemainingBalance">Remaining Balance:</label>
+                    @GenerateTextBox("RemainingBalance", "txtRemainingBalance", readOnly: true)
+                </div>
+                <div style="border-bottom: 1px solid; height: 1px"></div>
+                <div class="clearfix" style="padding-bottom: 15px;"></div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Reason for Leave:</label>
+                    <div class="col-sm-8 nopadding">
+                        @GenerateTextArea("ReasonForLeave", style: "min-width:100%")
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Who will cover your duties?</label>
+                    <div class="col-sm-4 nopadding">
+                        <div class="clearfix" style="padding-bottom: 10px"></div>
+                        <div id="div_cover_duties">
+                            @Html.Partial("_CoverDuties", new ViewDataDictionary
+                                                                                {
+                                                                                    {"CurrentStaffNo", StaffNo}
+                                                                                })
+                        </div>
+                        <a href="#" id="add_user" style="padding: 4px;">Add more</a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Notify Users:</label>
+                    <div class="col-sm-4 nopadding">
+                        <div id="div_notify_users">
+                            @Html.Partial("_NotifyUser", string.Empty)
+                        </div>
+                        <a href="#" id="add_notify_user">Add more final notify user</a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Attachments:</label>
+                    <div class="col-sm-4 nopadding">
+                        @Html.Partial("_Upload")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    $(function() {
+        $.addDateAndTimePicker();
+        function validateRemainingBalance() {
+            $("#spErrorOverBalance").addClass("control-hide");
+            $("[type=submit]").unbind("click", null);
+            if ($("#ddlLeaveCode").val() === "ANNUAL LEAVE") {
+                var hoursInHalfDay = 4;
+                var total = parseInt($("#txtTotalHours").val());
+                var remainingBalance = @(validBalance);
+                if (!isNaN(total) && !isNaN(remainingBalance)) {
+                    if (total > remainingBalance * hoursInHalfDay * 2) {
+                        $("#spErrorOverBalance").removeClass("control-hide");
+                        $("[type=submit]").bind("click", function () {
+                            return false;
+                        });
+                    }
+                }
+            }
+        }
+        $("#ddlLeaveCode").bind("change", function () {
+            var value = $(this).val();
+            if (value == "ANNUAL LEAVE") {
+                $("#lblRemainingBalance").removeClass("textcolor-grey");
+                $("#txtRemainingBalance").val('@($"{apiReturnBalance} (Available) + {notstartedBalance} (Coming) = {displayBalance}")').removeProp("disabled");
+            } else {
+                $("#lblRemainingBalance").addClass("textcolor-grey");
+                $("#txtRemainingBalance").val("").prop("disabled", "disabled");
+            }
+            validateRemainingBalance();
+        });
+        $("#txtFromDate,#txtToDate,#ddlFromTime,#ddlToTime").bind("change", function () {
+            $("[type=submit]").unbind("click", null);
+            $("#lblTotalHours").text("");
+            $("#txtTotalHours").val("");
+            var fromDate = $("#txtFromDate").val();
+            var toDate = $("#txtToDate").val();
+            $("#spErrorForDates").addClass("control-hide");
+            if (fromDate !== "" && toDate !== "") {
+                var from = new Date(fromDate);
+                var to = new Date(toDate);
+                if (to.getTime() < from.getTime() ||
+                    (to.getTime() === from.getTime() && $("#ddlFromTime").val() == "PM" && $("#ddlToTime").val() === "AM")) {
+                    $("#spErrorForDates").removeClass("control-hide");
+                    $("[type=submit]").bind("click", function () {
+                        return false;
+                    });
+                    return;
+                }
+                if ($("#ddlFromTime").val() === "" || $("#ddlToTime").val() === "") return;
+                $('#div_progress').show();
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("GetTotalHoursWithoutHoliday")',
+                    data: {
+                        country: '@Country',
+                        fromDate: fromDate,
+                        toDate: toDate,
+                        fromTime: $("#ddlFromTime").val(),
+                        toTime: $("#ddlToTime").val()
+                    },
+                    error: ajaxError,
+                    success: function (data) {
+                        var total = parseInt(data);
+                        if (!isNaN(total) && total > -1) {
+                            $("#lblTotalHours").text(total / 8 + " days");
+                            $("#txtTotalHours").val(total);
+                        } else {
+                            $("#lblTotalHours").text("");
+                            $("#txtTotalHours").val("");
+                        }
+                        validateRemainingBalance();
+                    },
+                    complete: function () {
+                        $('#div_progress').hide();
+                    }
+                });
+            }
+        });
+
+        $('#add_user').on('click', function () {
+            $.postData('@Url.Action("AddCoverDuties")', {}, function (data) {
+                $('#div_cover_duties').append(data);
+            });
+        });
+        $('#add_notify_user').on('click', function () {
+            $.postData('@Url.Action("NotifyUser")', {}, function (data) {
+                $('#div_notify_users').append(data);
+            });
+        });
+        $("#ddlLeaveCode").on("change", function () {
+            var subject = "Leave Application - " + '@StaffName';
+            if (this.value == "CANCEL LEAVE") {
+                subject += "[Cancel]";
+            }
+            $("#Subject").val(subject);
+        });
+    });
+</script>

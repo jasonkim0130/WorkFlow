@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<SpecialWFTemplate>
+  <!--Store Approval Form-->
+  <Template TypeId="1">
+    <Property Name="Country" Type="9" Compulsory="True" Required="True"></Property>
+    <Property Name="Brand" Type="14" Compulsory="True" Required="True"></Property>
+    <!--Reason for application-->
+    <Property Name="ReasonForApplication" Type="1" Compulsory="True" Required="True"></Property>
+    <Property Name="StoreType" Type="1" Compulsory="True" Required="True"></Property>
+    <Property Name="ReplacementStore" Type="1" Compulsory="True" Required="True"></Property>
+    
+    <!--Store Infomation-->
+    <Property Name="ShopCode" Type="7" Compulsory="True" Required="True"></Property>
+    <Property Name="StoreNamePrefix" Type="1" Compulsory="True" Required="True"></Property>
+    <Property Name="City" Type="1" Compulsory="True" Required="True"></Property>
+    <Property Name="StoreLocation" Type="1" Compulsory="True" Required="True"></Property>
+    <Property Name="StoreTypeForName" Type="1" Compulsory="True" Required="True"></Property>
+    <Property Name="CityTier" Type="1" Compulsory="True" Required="True"></Property>
+    <Property Name="MallDeptStoreTier" Type="1" Compulsory="True" Required="True"></Property>
+    <Property Name="StoreSize" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="OfSalesStaff" Type="2" Compulsory="True" Required="True"></Property>
+    <Property Name="ExpectedOpeningDate" Type="5" Compulsory="True" Required="True"></Property>
+    <Property Name="LocationCustomerProfile" Type="1" Compulsory="True" Required="True"></Property>
+    <Property Name="LocationTraffic" Type="1" Compulsory="True" Required="True"></Property>
+    
+    <!--Key Contract Terms-->
+    <Property Name="NameOfLandlord" Type="1" Compulsory="True" Required="True"></Property>
+    <Property Name="CreditTerms" Type="4" Compulsory="False" Required="False"></Property>
+    <Property Name="ContractPeriodFrom" Type="5" Compulsory="True" Required="True"></Property>
+    <Property Name="ContractPeriodTo" Type="5" Compulsory="True" Required="True"></Property>
+    <Property Name="FirstRenewal" Type="1" Compulsory="False" Required="True"></Property>
+    <Property Name="FirstRenewalPeriodFrom" Type="5" Compulsory="True" Required="True"></Property>
+    <Property Name="FirstRenewalPeriodTo" Type="5" Compulsory="True" Required="True"></Property>
+    <Property Name="SecondRenewal" Type="1" Compulsory="False" Required="True"></Property>
+    <Property Name="SecondRenewalPeriodFrom" Type="5" Compulsory="True" Required="True"></Property>
+    <Property Name="SecondRenewalPeriodTo" Type="5" Compulsory="True" Required="True"></Property>
+    <Property Name="CurrentTermType" Type="1" Compulsory="True" Required="True"></Property>
+    <Property Name="CurrentTermRent" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="CurrentTermTurnover" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PreviousTermType" Type="1" Compulsory="True" Required="True"></Property>
+    <Property Name="PreviousTermRent" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PreviousTermTurnover" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="CashAmount" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="MoneyRefundable" Type="1" Compulsory="True" Required="True"></Property>
+    <Property Name="Premium" Type="4" Compulsory="False" Required="False"></Property>
+
+    <!--Financial Information-->
+    <!--P&L Summary-->
+    <Property Name="PLSales1" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLSales2" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLSales3" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLGrossProfit1" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLGrossProfit2" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLGrossProfit3" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLGrossMargin1" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLGrossMargin2" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLGrossMargin3" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLOccupancyCosts1" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLOccupancyCosts2" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLOccupancyCosts3" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLStaffSalary1" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLStaffSalary2" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLStaffSalary3" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLStaffCommission1" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLStaffCommission2" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLStaffCommission3" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLDepreciation1" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLDepreciation2" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLDepreciation3" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLRoyalty1" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLRoyalty2" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLRoyalty3" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLOther1" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLOther2" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLOther3" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLTotalOperatingExpenses1" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLTotalOperatingExpenses2" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLTotalOperatingExpenses3" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLStoreNOP1" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLStoreNOP2" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="PLStoreNOP3" Type="4" Compulsory="True" Required="True"></Property>
+
+    <!--Construction Cost-->
+    <Property Name="WallsCeilingFloor" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="Furniture" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="LaborCost" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="ITEquipment" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="Others" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="MovingAssemblyRemoval" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="TotalConstructionCost" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="NetGain" Type="4" Compulsory="True" Required="True"></Property>
+    
+    <!--Statistics-->
+    <Property Name="SalesPerSqm" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="CAPEXPerSqm" Type="4" Compulsory="True" Required="True"></Property>
+    <Property Name="SalesPerHeadcount" Type="4" Compulsory="True" Required="True"></Property>
+    
+    <Property Name="ExpectedTimeToBreakeven" Type="4" Compulsory="False" Required="True"></Property>
+    <Property Name="ExpectedTimeToCAPEXRecovery" Type="4" Compulsory="False" Required="True"></Property>
+    
+    <Property Name="SalesPerHeadcountWithinGl" Type="1" Compulsory="False" Required="True"></Property>
+    <Property Name="SalesPerSqmWithinGl" Type="1" Compulsory="False" Required="True"></Property>
+    <Property Name="CAPEXPerSqmWithinGl" Type="1" Compulsory="False" Required="True"></Property>
+    <Property Name="ExpectedTimeToBreakevenWithinGl" Type="1" Compulsory="False" Required="True"></Property>
+    <Property Name="ExpectedTimeToCAPEXRecoveryWithinGl" Type="1" Compulsory="False" Required="True"></Property>
+
+    <Property Name="WithinAnnualBudget" Type="1" Compulsory="True" Required="True"></Property>
+
+    <!--Franchisee Information-->
+    <Property Name="NameOfFranchisee" Type="1" Compulsory="True" Required="True"></Property>
+    <Property Name="DeptStoreLeaseContract" Type="1" Compulsory="True" Required="True"></Property>
+    <Property Name="DeptStoreLeaseContractRemark" Type="1" Compulsory="False" Required="True"></Property>
+    <Property Name="Rent" Type="1" Compulsory="True" Required="True"></Property>
+    <Property Name="RentRemark" Type="1" Compulsory="False" Required="True"></Property>
+    <Property Name="InventoryRisk" Type="1" Compulsory="True" Required="True"></Property>
+    <Property Name="InventoryRiskRemark" Type="1" Compulsory="False" Required="True"></Property>
+    <Property Name="ConstructionWallsCeilingFlooring" Type="1" Compulsory="True" Required="True"></Property>
+    <Property Name="ConstructionWallsCeilingFlooringRemark" Type="1" Compulsory="False" Required="True"></Property>
+    <Property Name="LooseFumiture" Type="1" Compulsory="True" Required="True"></Property>
+    <Property Name="LooseFumitureRemark" Type="1" Compulsory="False" Required="True"></Property>
+    <Property Name="Staff" Type="1" Compulsory="True" Required="True"></Property>
+    <Property Name="StaffRemark" Type="1" Compulsory="False" Required="True"></Property>
+    <Property Name="StoreOpsExpenses" Type="1" Compulsory="True" Required="True"></Property>
+    <Property Name="StoreOpsExpensesRemark" Type="1" Compulsory="False" Required="True"></Property>
+    <Property Name="CollectMoneyFromDeptStorePOS" Type="1" Compulsory="True" Required="True"></Property>
+    <Property Name="CollectMoneyFromDeptStorePOSRemark" Type="1" Compulsory="False" Required="True"></Property>
+    <Property Name="POSSystem" Type="1" Compulsory="True" Required="True"></Property>
+    <Property Name="POSSystemRemark" Type="1" Compulsory="False" Required="True"></Property>
+    <Property Name="PaidByFranchiseeToBLS" Type="4" Compulsory="True" Required="True"></Property>
+
+    <Property Name="POSSales" Type="4" Compulsory="False" Required="False"></Property>
+    <Property Name="Rental" Type="4" Compulsory="False" Required="False"></Property>
+    <Property Name="ChargedByLandlord" Type="4" Compulsory="False" Required="False"></Property>
+    <Property Name="ChargedToFranchisee" Type="4" Compulsory="False" Required="False"></Property>
+    <Property Name="FeePercentage" Type="4" Compulsory="False" Required="False"></Property>
+
+    <!--Other Information-->
+    <Property Name="OtherInformation" Type="7" Compulsory="False" Required="False"></Property>
+  </Template>
+
+  <!--Leave Application-->
+  <Template TypeId="2">
+    <Property Name="Country" Type="9" Compulsory="True" Required="True" Code="Country"></Property>
+    <Property Name="Position" Type="1" Compulsory="True" Required="True" Code="Position"></Property>
+    <Property Name="StaffNo" Type="1" Compulsory="True" Required="True" Code="StaffNo"></Property>
+    <Property Name="FromDate" Type="5" Compulsory="True" Required="True" Code="From_Date"></Property>
+    <Property Name="FromTime" Type="1" Compulsory="True" Required="True" Code="From_Time"></Property>
+    <Property Name="ToDate" Type="5" Compulsory="True" Required="True" Code="To_Date"></Property>
+    <Property Name="ToTime" Type="1" Compulsory="True" Required="True" Code="To_Time"></Property>
+    <Property Name="LeaveCode" Type="1" Compulsory="True" Required="True" Code="Leave_Type"></Property>
+    <Property Name="RemainingBalance" Type="1" Compulsory="True" Required="True" Code="Remaining_Balance"></Property>
+    <Property Name="ReasonForLeave" Type="7" Compulsory="True" Required="True" Code="Reason_For_Leave"></Property>
+    <Property Name="TotalHours" Type="4" Compulsory="True" Required="True" Code="Total_Hours"></Property>
+    <Property Name="Cancel" Type="1" Compulsory="True" Required="True" Code="LA_Cancel"></Property>
+  </Template>
+  
+  <!--Overseas Business Trip Application-->
+  <Template TypeId="3">
+    <!--Trip details-->
+    <Property Name="Destinations" Type="1" Compulsory="True" Required="True" Code="OTA_Destinations"></Property>
+    <Property Name="From" Type="5" Compulsory="True" Required="True" Code="OTA_From"></Property>
+    <Property Name="To" Type="5" Compulsory="True" Required="True" Code="OTA_To"></Property>
+    <Property Name="TripDays" Type="4" Compulsory="True" Required="True" Code="OTA_TripDays"></Property>
+    <Property Name="Purpose" Type="7" Compulsory="True" Required="True" Code="OTA_Purpose"></Property>
+    .
+    
+    <!--Estimated costs-->
+    <Property Name="Fare" Type="4" Compulsory="True" Required="True" Code="Fare"></Property>
+    <Property Name="Accommodation" Type="4" Compulsory="True" Required="True" Code="OTA_Accommodation"></Property>
+    <Property Name="LocalTransportation" Type="4" Compulsory="True" Required="True" Code="OTA_LocalTransportation"></Property>
+    <Property Name="Entertainment" Type="4" Compulsory="False" Required="True" Code="OTA_Entertainment"></Property>
+    <!--Others format:[{"desc":"", "cost": 0}]-->
+    <Property Name="Others" Type="1" Compulsory="False" Required="True" Code="OTA_Others"></Property>
+    <Property Name="Buffer" Type="4" Compulsory="True" Required="True" Code="OTA_Buffer"></Property>
+    <Property Name="EstimatedTotal" Type="4" Compulsory="True" Required="True" Code="OTA_Estimated_Total"></Property>
+    <Property Name="CostChargeTo" Type="1" Compulsory="True" Required="True" Code="OTA_CostChargeTo"></Property>
+    
+    <!--Notification-->
+    <Property Name="PERSON TO COVER DUTIES" Type="1" Compulsory="True" Required="True" Code="OTA_CoverDuties"></Property>
+    
+  </Template>
+  <Template TypeId="4">
+    <!--Trip details-->
+    <Property Name="Destinations" Type="1" Compulsory="True" Required="True" Code="OCA_Destinations"></Property>
+    <Property Name="From" Type="5" Compulsory="True" Required="True" Code="OCA_From"></Property>
+    <Property Name="To" Type="5" Compulsory="True" Required="True" Code="OCA_To"></Property>
+    <Property Name="TripDays" Type="4" Compulsory="True" Required="True" Code="OCA_TripDays"></Property>
+    <Property Name="Purpose" Type="7" Compulsory="True" Required="True" Code="OCA_Purpose"></Property>
+    <!--Expense Details-->
+    <Property Name="ExpenseDetails" Type="7" Compulsory="True" Required="True" Code="OCA_Expense_Details"></Property>
+    <Property Name="TotalHomeCurrency" Type="4" Compulsory="True" Required="True" Code="OCA_Total_Home_Currency"></Property>
+    <!--Summary-->
+    <Property Name="PrePaid" Type="4" Required="True" Compulsory="True" Code="OCA_Pre_Paid"></Property>
+    <Property Name="CashFromCompany" Type="4" Required="True" Compulsory="True" Code="OCA_Cash_From_Company"></Property>
+    <Property Name="ReimburseIn" Type="7" Required="True" Compulsory="True" Code="OCA_Reimburse_In"></Property>
+    <Property Name="BudgetedAmount" Type="4" Required="True" Compulsory="True" Code="OCA_Budgeted_Amount"></Property>
+  </Template>
+
+  <!--Local Employee Expense Claim-->
+  <Template TypeId="5">
+    <!--Expense Details-->
+    <Property Name="ExpenseDetails" Type="7" Compulsory="True" Required="True" Code="LEEC_Expense_Details"></Property>
+    <Property Name="TotalExpenses" Type="4" Compulsory="True" Required="True" Code="LEEC_TOTAL_EXPENSES"></Property>
+    <!--Summary-->
+    <Property Name="PrePaid" Type="4" Required="True" Compulsory="True" Code="LEEC_Pre_Paid"></Property>
+    <Property Name="CashFromCompany" Type="4" Required="True" Compulsory="True" Code="LEEC_Cash_From_Company"></Property>
+  </Template>
+
+<!--Staff requisition-->
+  <Template TypeId="6">
+    <!--Position Details-->
+    <Property Name="Title" Type="7" Compulsory="True" Required="True" Code="SR_Title"></Property>
+    <Property Name="Grade" Type="1" Compulsory="True" Required="True" Code="SR_Grade"></Property>
+    <Property Name="Division" Type="1" Compulsory="True" Required="True" Code="SR_Division"></Property>
+    <Property Name="Salary_From" Type="4" Compulsory="True" Required="True" Code="SR_Salary_From"></Property>
+    <Property Name="Salary_To" Type="4" Compulsory="True" Required="True" Code="SR_Salary_To"></Property>
+    <Property Name="Currency" Type="1" Compulsory="True" Required="True" Code="SR_Currency"></Property>
+    <Property Name="Target_Bonus" Type="4" Compulsory="True" Required="True" Code="SR_Target_Bonus"></Property>
+    <Property Name="Main_Responsibilities" Type="7" Compulsory="True" Required="True" Code="SR_Main_Responsibilities"></Property>
+    <Property Name="Justification_Radio" Type="7" Compulsory="True" Required="True" Code="SR_Justification_Radio"></Property>
+    <Property Name="Justification_Text" Type="7" Compulsory="True" Required="True" Code="SR_Justification_Text"></Property>
+    <Property Name="Last_Working" Type="3" Compulsory="True" Required="True" Code="SR_Last_Working"></Property>
+    <!--<Property Name="Add_Head_Radio" Type="7" Compulsory="False" Required="True" Code="SR_Additional_HeadCount_Radio"></Property>-->
+    <!--<Property Name="Add_Head_Text" Type="7" Compulsory="False" Required="True" Code="SR_Additional_HeadCount_Text"></Property>-->
+    <Property Name="Head_Budgeted" Type="7" Compulsory="True" Required="True" Code="SR_Headcount_Budgeted"></Property>
+    <!--<Property Name="Head_Nonbudgeted" Type="7" Compulsory="False" Required="True" Code="SR_Headcount_Nonbudgeted"></Property>-->
+    <Property Name="Pre_Approved" Type="7" Compulsory="False" Required="True" Code="SR_Pre_Approved"></Property>
+    <Property Name="Local_Staff" Type="7" Compulsory="True" Required="True" Code="SR_Local_Staff"></Property>
+    <!--<Property Name="Expatriate" Type="7" Compulsory="False" Required="True" Code="SR_Expatriate"></Property>-->
+    <!--Employment Status-->
+    <Property Name="Employment_Type" Type="7" Required="True" Compulsory="True" Code="SR_Employment_Type"></Property>
+    <Property Name="Permanent" Type="3" Compulsory="False" Required="True" Code="SR_Permanent"></Property>
+    <!--<Property Name="Temporary_Radio" Type="7" Compulsory="False" Required="True" Code="SR_Temporary_Radio"></Property>-->
+    <Property Name="Temporary_From" Type="3" Compulsory="False" Required="True" Code="SR_Temporary_From"></Property>
+    <Property Name="Temporary_To" Type="3" Compulsory="False" Required="True" Code="SR_Temporary_To"></Property>
+    <!--<Property Name="Contractor_Radio" Type="7" Required="False" Compulsory="True" Code="SR_Contractor_Radio"></Property>-->
+    <Property Name="Contractor_From" Type="3" Required="True" Compulsory="False" Code="SR_Contractor_From"></Property>
+    <Property Name="Contractor_To" Type="3" Required="True" Compulsory="False" Code="SR_Contractor_To"></Property>
+    <!--<Property Name="Part_Time" Type="7" Required="False" Compulsory="True" Code="SR_Part_Time"></Property>-->
+    <Property Name="Tax_Equalization" Type="4" Required="True" Compulsory="True" Code="SR_Tax_Equalization"></Property>
+    <Property Name="Housing" Type="4" Required="True" Compulsory="True" Code="SR_Housing"></Property>
+    <Property Name="Home_Trips" Type="2" Required="True" Compulsory="True" Code="SR_Home_Trips"></Property>
+    <Property Name="Working_Hours" Type="7" Required="True" Compulsory="True" Code="SR_Working_Hours"></Property>
+    <!--<Property Name="W_Others_Radio" Type="7" Required="True" Compulsory="True" Code="SR_Working_Others_Radio"></Property>-->
+    <Property Name="W_Others" Type="7" Required="True" Compulsory="False" Code="SR_Working_Others"></Property>
+    <!--Candidate Specifications-->
+    <Property Name="Experience" Type="7" Required="True" Compulsory="True" Code="SR_Experience"></Property>
+    <Property Name="Education_Radio" Type="7" Required="True" Compulsory="True" Code="SR_Education_Radio"></Property>
+    <Property Name="G_Degree" Type="7" Required="True" Compulsory="False" Code="SR_G_Degree"></Property>
+    <!--<Property Name="U_Degree_Radio" Type="7" Required="True" Compulsory="True" Code="SR_U_Degree_Radio"></Property>-->
+    <Property Name="U_Degree" Type="7" Required="True" Compulsory="True" Code="SR_U_Degree"></Property>
+    <!--<Property Name="HS_Degree" Type="7" Required="True" Compulsory="True" Code="SR_HS_Degree"></Property>-->
+    <!--<Property Name="MS_Secondary" Type="7" Required="True" Compulsory="True" Code="SR_MS_Secondary"></Property>-->
+    <!--<Property Name="E_School" Type="7" Required="True" Compulsory="True" Code="SR_E_School"></Property>-->
+    <Property Name="T_Course_Check" Type="7" Required="True" Compulsory="False" Code="SR_T_Course_Check"></Property>
+    <Property Name="T_Course" Type="7" Required="True" Compulsory="False" Code="SR_T_Course"></Property>
+    <Property Name="P_Q_Check" Type="7" Required="True" Compulsory="False" Code="SR_P_Qualifications_Check"></Property>
+    <Property Name="P_Q" Type="7" Required="True" Compulsory="False" Code="SR_P_Qualifications"></Property>
+    <Property Name="Language_Check" Type="7" Required="True" Compulsory="False" Code="SR_Language_Check"></Property>
+    <Property Name="Language" Type="7" Required="True" Compulsory="False" Code="SR_Language"></Property>
+    <Property Name="T_Speed_Check" Type="7" Required="True" Compulsory="False" Code="SR_T_Speed_Check"></Property>
+    <Property Name="T_Speed" Type="7" Required="True" Compulsory="False" Code="SR_T_Speed"></Property>
+    <Property Name="Software_Check" Type="7" Required="True" Compulsory="False" Code="SR_Software_Check"></Property>
+    <Property Name="Software" Type="7" Required="True" Compulsory="False" Code="SR_Software"></Property>
+    <Property Name="S_Others_Check" Type="7" Required="True" Compulsory="False" Code="SR_Skills_Others_Check"></Property>
+    <Property Name="S_Others" Type="7" Required="True" Compulsory="False" Code="SR_Skills_Others"></Property>
+  </Template>
+
+  <Template TypeId ="7">
+    <!--Store Search-->
+    <Property Name="Country" Type="9" Compulsory="True" Required="True" Code="SCF_Country"></Property>
+    <Property Name="Brand" Type="14" Compulsory="True" Required="True" Code="SCF_Brand"></Property>
+    <Property Name="Shop" Type="1" Compulsory="True" Required="True" Code="SCF_Shop"></Property>
+    <!--Store Information-->
+    <Property Name="StoreType" Type="1" Compulsory="True" Required="True" Code="SCF_StoreType"></Property>
+    <Property Name="StoreName" Type="1" Compulsory="True" Required="True" Code="SCF_StoreName"></Property>
+    <Property Name="CityTier" Type="1" Compulsory="True" Required="True" Code="SCF_CityTier"></Property>
+    <Property Name="MallDeptStoreTier" Type="1" Compulsory="True" Required="True" Code="SCF_MallDeptStoreTier"></Property>
+    <Property Name="StoreSize" Type="4" Compulsory="True" Required="True" Code="SCF_StoreSize"></Property>
+    <Property Name="StaffCount" Type="4" Compulsory="True" Required="True" Code="SCF_StaffCount"></Property>
+    <Property Name="ShopOpeningDate" Type="5" Compulsory="True" Required="True" Code="SCF_ShopOpeningDate"></Property>
+    <!--Key Contract Terms-->
+    <Property Name="NameOfLandlord" Type="1" Compulsory="True" Required="True" Code="SCF_NameOfLandlord"></Property>
+    <Property Name="CreditTerms" Type="4" Compulsory="False" Required="True" Code ="SCF_CreditTerms"></Property>
+    <Property Name="ContractPeriodFrom" Type="5" Compulsory="True" Required="True" Code="SCF_ContractPeriodFrom"></Property>
+    <Property Name="ContractPeriodTo" Type="5" Compulsory="True" Required="True" Code="SCF_ContractPeriodTo"></Property>
+    <Property Name="CurrentTermType" Type="1" Compulsory="True" Required="True" Code="SCF_CurrentTermType"></Property>
+    <Property Name="CurrentTermRent" Type="4" Compulsory="True" Required="True" Code="SCF_CurrentTermRent"></Property>
+    <Property Name="CurrentTermTurnover" Type="4" Compulsory="True" Required="True" Code="SCF_CurrentTermTurnover"></Property>
+    <Property Name="DepositMoney" Type="4" Compulsory="True" Required="True" Code="SCF_DepositMoney"></Property>
+    <Property Name="RefundableAmount" Type="4" Compulsory="True" Required="True" Code="SCF_RefundableAmount"></Property>
+    <Property Name="Premium" Type="4" Compulsory="False" Required="True" Code="SCF_Premium"></Property>
+    <!--Closure Information-->
+    <Property Name="StoreClosureDate" Type="5" Compulsory="True" Required="True" Code="SCF_StoreClosureDate"></Property>
+    <Property Name="ReasonForClosure" Type="7" Compulsory="True" Required="True" Code="SCF_ReasonForClosure"></Property>
+    <Property Name="LossOnDisposal" Type="4" Compulsory="True" Required="True" Code="SCF_LossOnDisposal"></Property>
+    <Property Name="ReinstatementCost" Type="4" Compulsory="True" Required="True" Code="SCF_ReinstatementCost"></Property>
+    <Property Name="LeaseTerminationCost" Type="4" Compulsory="True" Required="True" Code="SCF_LeaseTerminationCost"></Property>
+    <Property Name="StaffTerminationCost" Type="4" Compulsory="True" Required="True" Code="SCF_StaffTerminationCost"></Property>
+    <!--Financial Information-->
+    <Property Name="PLSales1" Type="4" Compulsory="True" Required="True" Code="SCF_PLSales1"></Property>
+    <Property Name="PLSales2" Type="4" Compulsory="True" Required="True" Code="SCF_PLSales2"></Property>
+ 
+    <Property Name="PLGrossProfit1" Type="4" Compulsory="True" Required="True" Code="SCF_PLGrossProfit1"></Property>
+    <Property Name="PLGrossProfit2" Type="4" Compulsory="True" Required="True" Code="SCF_PLGrossProfit2"></Property>
+
+    <Property Name="PLOccupancyCosts1" Type="4" Compulsory="True" Required="True" Code="SCF_PLOccupancyCosts1"></Property>
+    <Property Name="PLOccupancyCosts2" Type="4" Compulsory="True" Required="True" Code="SCF_PLOccupancyCosts2"></Property>
+
+    <Property Name="PLStaffSalary1" Type="4" Compulsory="True" Required="True" Code="SCF_PLStaffSalary1"></Property>
+    <Property Name="PLStaffSalary2" Type="4" Compulsory="True" Required="True" Code="SCF_PLStaffSalary2"></Property>
+    
+    <Property Name="PLDepreciation1" Type="4" Compulsory="True" Required="True" Code="SCF_PLDepreciation1"></Property>
+    <Property Name="PLDepreciation2" Type="4" Compulsory="True" Required="True" Code="SCF_PLDepreciation2"></Property>
+    
+    <Property Name="PLRoyalty1" Type="4" Compulsory="True" Required="True" Code="SCF_PLRoyalty1"></Property>
+    <Property Name="PLRoyalty2" Type="4" Compulsory="True" Required="True" Code="SCF_PLRoyalty2"></Property>
+    
+    <Property Name="PLOther1" Type="4" Compulsory="True" Required="True" Code="SCF_PLOtherActual1"></Property>
+    <Property Name="PLOther2" Type="4" Compulsory="True" Required="True" Code="SCF_PLOtherActual2"></Property>
+
+    <Property Name="PLTotalOperatingExpenses1" Type="4" Compulsory="True" Required="True" Code="SCF_PLTotalOperatingExpenses1"></Property>
+    <Property Name="PLTotalOperatingExpenses2" Type="4" Compulsory="True" Required="True" Code="SCF_PLTotalOperatingExpenses2"></Property>
+
+    <Property Name="PLStoreNOP1" Type="4" Compulsory="True" Required="True" Code="SCF_PLStoreNOP1"></Property>
+    <Property Name="PLStoreNOP2" Type="4" Compulsory="True" Required="True" Code="SCF_PLStoreNOP2"></Property>
+    
+    <!--Other Information-->
+    <Property Name="OtherInformation" Type="7" Compulsory="False" Required="True" Code="SCF_OtherInformation"></Property>
+  </Template>
+
+  <!--Personal Data Changed Form-->
+  <Template TypeId ="8">
+    <Property Name="EnglishFirstName" Type="7" Compulsory="True" Required="True" Code="PDC_EnglishFirstName"></Property>
+    <Property Name="EnglishLastName" Type="7" Compulsory="True" Required="True" Code="PDC_EnglishLastName"></Property>
+    <Property Name="LocalLanguageFirstName" Type="7" Compulsory  ="True" Required="True" Code="PDC_LocalLanguageFirstName"></Property>
+    <Property Name="LocalLanguageLastName" Type="7" Compulsory="True" Required="True" Code="PDC_LocalLanguageLastName"></Property>
+    <Property Name="ResidentialAddress" Type="7" Compulsory="True" Required="True" Code="PDC_ResidentialAddress"></Property>
+    <Property Name="CorrespondenceAddress" Type="7" Compulsory="True" Required="True" Code="PDC_CorrespondenceAddress"></Property>
+    <Property Name="HomeTelephone" Type="7" Compulsory="True" Required="True" Code="PDC_HomeTelephone"></Property>
+    <Property Name="MobileTelephone" Type="7" Compulsory="True" Required="True" Code="PDC_MobileTelephone"></Property>
+    <Property Name="BankName" Type="7" Compulsory="True" Required="True" Code="PDC_BankName"></Property>
+    <Property Name="BankAccountNumber" Type="7" Compulsory="True" Required="True" Code="PDC_BankAccountNumber"></Property>
+    <Property Name="MaritalStatus" Type="1" Compulsory="True" Required="True" Code="PDC_MaritalStatus"></Property>
+    <Property Name="FamilyMembers" Type="7" Compulsory="True" Required="True" Code="PDC_FamilyMembers"></Property>
+    <Property Name="Qualification" Type="7" Compulsory="True" Required="True" Code="PDC_Qualification"></Property>
+    <Property Name="EmailAddress" Type="7" Compulsory="True" Required="True" Code="PDC_EmailAddress"></Property>
+    <Property Name="EffectiveDateForChanges" Type="5" Compulsory="True" Required="True" Code="PDC_EffectiveDateForChanges"></Property>
+    <Property Name="CurrentData" Type="7" Compulsory="True" Required="True" Code="PDC_CurrentData"></Property>
+  </Template>
+</SpecialWFTemplate>

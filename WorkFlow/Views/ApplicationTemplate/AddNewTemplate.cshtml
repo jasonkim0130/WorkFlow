@@ -1,0 +1,94 @@
+﻿@using Resources
+@using WorkFlowLib.DTO
+@using WorkFlow.Ext
+@model NewTemplateModel
+@using Resources
+@{
+    ViewBag.Title = "Add new template";
+    var templateTypeNames = new[]
+    {
+"Store Approval Form",
+"Leave",
+"Overseas Business Trip Application",
+"Overseas Business Claim Application",
+"Local Employee Expense Claim",
+"Staff Requisition",
+"Store Closure Form",
+"Personal Data Changed",
+"Dynamic Form"
+};
+    var templateTypeList = new List<SelectListItem>();
+    for (int i = 0; i < templateTypeNames.Length; i++)
+    {
+        templateTypeList.Add(new SelectListItem
+        {
+            Text = templateTypeNames[i],
+            Value = (i + 1).ToString()
+        });
+    }
+}
+@using (Ajax.BeginModalForm("AddNewTemplate", new ModalAjaxOptions
+{
+    HttpMethod = "post",
+    LoadingElementId = "div_progress",
+    Id = "addtemplate_form",
+    UpdateTargetId = "div_content"
+}, new { enctype = "multipart/form-data" }))
+{
+    @Html.Hidden("FlowTypeId")
+    <div class="form-group">
+        <label>Template Name:</label>
+        @Html.TextBox("name", null, new { @class = "form-control", required = true, data_val = "true", data_val_required = "*" })
+    </div>
+    <div class="form-group">
+        <label>Template type:</label>
+        @Html.DropDownList("templateType", templateTypeList, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Applicable departments:</label>
+        @Html.DropDownList("dep", new SelectList(WebCacheHelper.GetDepartments(), "Value", "Value"), StringResource.ALL, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Grade allowed for submission:</label>
+        @Html.DropDownList("grade", new SelectList(new[] { 1, 2, 3, 4, 5, 6, 7, 8 }), StringResource.ALL, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Icon:</label>
+        <div>
+            <button class="btn btn-sm btn-primary" onclick="$('#uploadicon').trigger('click');">@StringResource.UPLOAD_IMG</button>
+            <span id="uploadicon_msg" style="color: red"></span>
+        </div>
+        <input type="file" id="uploadicon" class="form-control" accept="image/*" style="display: none" />
+        @Html.Hidden("iconUrl", null, new { required = true, data_val = "true", data_val_required = "*" })
+    </div>
+    <div class="form-group">
+        <label>Platform:</label>
+        @Html.DropDownList("platform", new SelectList(new[] { "Web", "App", "Both" }), new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Tabs:</label>
+        @Html.TextBox("tabs", null, new { @class = "form-control", required = true, data_val = "true", data_val_required = "*" })
+    </div>
+}
+
+<script type="text/javascript">
+    $("#addtemplate_form").addUnobtrusiveValidation();
+
+    $('#uploadicon').fileupload({
+        url: '@Url.Action("UploadIcon")',
+        send: function (e, data) {
+            if (data.files && data.files[0] && data.files[0].size > 1024 * 1024 * 10) {
+                alert('Please select a file less than10MB.');
+                return false;
+            }
+        },
+        complete: function (e, data) {
+            if (e.responseText.length > 0) {
+                $('#uploadicon_msg').html('upload success');
+                $('#iconUrl').val(e.responseText);
+            } else {
+                $('#uploadicon_msg').html('upload faild.');
+            }
+        }
+    });
+</script>

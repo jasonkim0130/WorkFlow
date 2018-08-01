@@ -1,0 +1,10 @@
+﻿<iframe id="mainlayout" src="@ViewBag.Url" style="width: 100%; height: 100%; border: none;"></iframe>
+<script type="text/javascript">
+    $(function () {
+        $('#mainlayout').height(($('#main_section').height() - 40) + 'px');
+        window.onresize = function() {
+            $('#mainlayout').height(($('#main_section').height() - 40) + 'px');
+            //document.title = ($('#main_section').height() - 40) + 'px';
+        }
+    });
+</script>

@@ -1,0 +1,132 @@
+﻿@using WorkFlowLib.DTO.Query
+@using WorkFlow.Ext
+@using WorkFlowLib
+@using Dreamlab.Core
+@model IEnumerable<NotificationQueryRow>
+<div style="margin: 10px">
+    <div id="div_attach_cont"></div>
+    <table class="table order-table tablesorter" id="table_archives">
+        <thead>
+            <tr>
+                <th></th>
+                <th data-compare="true" style="text-align: center;">
+                    <span class="orderable-display-value">Subject</span>
+                </th>
+                <th data-compare="true" style="text-align: center;">
+                    <span class="orderable-display-value">Version</span>
+                </th>
+                <th data-compare="true" style="text-align: center;">
+                    <span class="orderable-display-value">Department</span>
+                </th>
+                <th data-compare="true" style="text-align: center;">
+                    <span class="orderable-display-value">Applicant</span>
+                </th>
+                <th data-compare="true" style="text-align: center;">
+                    <span class="orderable-display-value">Type</span>
+                </th>
+                <th data-compare="true" style="text-align: center;">
+                    <span class="orderable-display-value">Date</span>
+                </th>
+                <th data-compare="true" style="text-align: center;">
+                    <span class="orderable-display-value">Status</span>
+                </th>
+                <th data-compare="true" style="text-align: center;">
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderByDescending(p => p.FlowCaseId))
+            {
+                var isSelf = (ViewBag.currentUser as string).EqualsIgnoreCaseAndBlank(item.Applicant);
+                string status = null;
+                if (item.Approved != null)
+                {
+                    status = "Approved";
+                }
+                else if (item.Rejected != null)
+                {
+                    status = "Declined";
+                }
+                else if (item.Cancelled != null)
+                {
+                    status = "Cancelled";
+                }
+                else if (item.Aborted != null)
+                {
+                    status = "Amendment Required";
+                }
+                <tr class="data-row notification-row">
+                    <td style="text-align: left;">
+                        @if ((isSelf) && (item.NotificationType == (int)NotificationTypes.AppFinishedApproved
+                                          || item.NotificationType == (int)NotificationTypes.AppFinishedAbort
+                                          || item.NotificationType == (int)NotificationTypes.AppFinishedRejected
+                                          || item.NotificationType == (int)NotificationTypes.CancelApp))
+                        {
+                            <img src="~/Content/Images/Workflow/Application/Application.png" style="max-width: 30px; max-height: 30px;" />
+                        }
+                        else if (!isSelf && status == null)
+                        {
+                            <img src="~/Content/Images/Workflow/Application/Pending.png" style="max-width: 30px; max-height: 30px;" />
+                        }
+                        else if (item.NotificationType == (int)NotificationTypes.Comments)
+                        {
+                            <img src="~/Content/Images/Workflow/Application/Message.png" style="max-width: 30px; max-height: 30px;" />
+                        }
+                        else
+                        {
+                            <img src="~/Content/Images/Workflow/Application/Notification.png" style="max-width: 30px; max-height: 30px;" />
+                        }
+                        @if (item.HasAttachment)
+                        {
+                            <a data-ajax="true" data-ajax-method="get" data-ajax-mode="replace" data-ajax-update="#div_attach_cont" href="@Url.Action("ViewAttachmentContent", new {flowCaseId = item.FlowCaseId})">
+                                <img src="~/Content/Images/Workflow/Application/paperclip.png" style="width: 22px; height: 22px; margin-left: 10px;" class="view-attach" />
+                            </a>
+                        }
+                    </td>
+                    <td>
+                        @item.FlowCaseId
+                        @item.Subject
+                    </td>
+                    <td>@(item.Ver ?? 0)</td>
+                    <td>@item.Department</td>
+                    <td>@(isSelf ? "Myself" : WebCacheHelper.GetWF_UsernameByNo(item.Applicant))</td>
+                    <td>@item.Type</td>
+                    <td>@item.Created.ToLocalTime()</td>
+                    <td data-compare-number="@status">
+                        @status
+                    </td>
+                    <td>
+                        @if (item.CaseNotificationReceiverId > 0)
+                        {
+                            @Ajax.ActionLink("View", "ViewItem", "Notification", new { flowcaseid = item.FlowCaseId, caseNotificationReceiverId = item.CaseNotificationReceiverId, enableCancel = true }, new AjaxOptions
+                            {
+                                HttpMethod = "Get",
+                                InsertionMode = InsertionMode.Replace,
+                                LoadingElementId = "div_progress",
+                                UpdateTargetId = "div_content",
+                                OnFailure = "ajaxError"
+                            })
+                        }
+                        else
+                        {
+                            @Ajax.ActionLink("View", "ViewCase", new { id = item.FlowCaseId }, new AjaxOptions
+                            {
+                                HttpMethod = "Get",
+                                InsertionMode = InsertionMode.Replace,
+                                LoadingElementId = "div_progress",
+                                UpdateTargetId = "div_content",
+                                OnFailure = "ajaxError"
+                            })
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#table_archives').sortCommonTable();
+    });
+</script>

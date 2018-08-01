@@ -1,0 +1,108 @@
+﻿
+@using WorkFlowLib.DTO
+@using WorkFlow.Ext
+@model FlowInfo
+@{
+    var flowCase = Model.CaseInfo;
+}
+<table style="margin: 0 auto; margin-top: 20px; ">
+    <tr>
+        <td>
+            <div class="step-block-group">
+                <table>
+                    <tr>
+                        <td>
+                            <div class="step-block approved" style="position: relative;">
+                                <div style="position: absolute; top: -20px; color: black; right: 0; left: 0">Applicant</div>
+                                <p>@flowCase.Department</p>
+                                <p>@WebCacheHelper.GetWF_UsernameByNo(flowCase.Applicant)</p>
+                            </div>
+                        </td>
+                        <td style="vertical-align: top; text-align: center;">
+                            <div class="step-arrow">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            @{
+                var groups = Model.StepGroups.OrderBy(p => p.OrderId).ToArray();
+                for (int i = 0; i < groups.Length; i++)
+                {
+                    var stepGroup = Model.StepGroups.OrderBy(p => p.OrderId).ToArray()[i];
+                    var isActive = (groups[i].StepStatus == StepStatus.Approved);
+                    int childStepCount = 0;
+                    <div class="step-block-group@(isActive?" active":" inactive")" id="stepgroup@(stepGroup.StepGroupId)">
+                        <table>
+                            <tr>
+                                <td style="vertical-align: top;">
+                                    @foreach (var step in stepGroup.Steps.OrderBy(p => p.OrderId))
+                                    {
+                                        childStepCount++;
+                                        var status = flowCase.StepResults.FirstOrDefault(p => p.FlowStepId == step.FlowStepId)?.Status;
+                                        var css = HtmlUIHelper.GetStatus(status);
+                                        <div class="step-block @css" id="step@(step.FlowStepId)">
+                                            @if (step.NoApprover.GetValueOrDefault())
+                                            {
+                                                <p class="text-center" style="padding-left: 6px;margin-top: -10px">No Approver</p>
+                                            }
+                                            @if (step.FinalApprover != null)
+                                            {
+                                                @*<div class="text-left" style="padding-left: 6px;">Department:</div>*@
+                                                <p>@step.FinalDepartment</p>
+                                                @*<div class="text-left" style="padding-left: 6px;">Person:</div>*@
+                                                <p>@WebCacheHelper.GetWF_UsernameByNo(step.FinalApprover)</p>
+                                            }
+                                            else if (step.ApproverType == (int)ApproverType.Person)
+                                            {
+                                                @*<div class="text-left" style="padding-left: 6px;">Department:</div>*@
+                                                <p>@step.Department</p>
+                                                @*<div class="text-left" style="padding-left: 6px;">Person:</div>*@
+                                                <div>@WebCacheHelper.GetWF_UsernameByNo(step.Approver)</div>
+                                            }
+                                            else
+                                            {
+                                                <div class="text-left" style="padding-left: 6px;">
+                                                    @step.GetApprover()
+                                                    @WebCacheHelper.GetWF_UsernameByNo(step.FinalApprover)
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+                                    @if (childStepCount > 1)
+                                    {
+                                        if (stepGroup.StepConditionId == 1)
+                                        {
+                                            <h4 style="color: black; text-align: center;">All</h4>
+                                        }
+                                        if (stepGroup.StepConditionId == 2)
+                                        {
+                                            <h4 style="color: black; text-align: center;">Any</h4>
+                                        }
+                                    }
+                                </td>
+                                <td style="vertical-align: top; text-align: center;">
+                                    @if (i < groups.Length - 1)
+                                    {
+                                        <div class="step-arrow">
+                                        </div>
+                                    }
+                                    @if (i < groups.Length - 1 && stepGroup.NotificationUsers.Any())
+                                    {
+                                        <div class="step-arrow-down"></div>
+                                        <div class="notifyusers">
+                                            @foreach (var item in stepGroup.NotificationUsers)
+                                            {
+                                                <div>@WebCacheHelper.GetWF_UsernameByNo(item.GetNotifyUser())</div>
+                                            }
+                                        </div>
+                                    }
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                }
+            }
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,143 @@
+﻿@using WorkFlowLib.Data
+@using WorkFlowLib.DTO
+@using WorkFlowLib
+@using WorkFlow.Ext
+@using Dreamlab.Core
+@model FlowInfo
+@{
+    WF_CaseNotificationReceivers rec = ViewBag.Notification as WF_CaseNotificationReceivers;
+    WF_CaseNotifications notification = rec.WF_CaseNotifications;
+    var Created = notification.Created.ToLocalTime();
+}
+<div style="margin: 10px">
+    @Html.Partial("~/Views/Inbox/ViewSimpleCase.cshtml", Model)
+</div>
+<hr class="step-line">
+<div style="text-align: center; margin: 40px; font-size: 20px; font-weight: bold">
+    @if (notification.NotificationType == (int)NotificationTypes.CancelApp)
+    {
+        <p>
+            @(WebCacheHelper.GetWF_UsernameByNo(notification.Sender)) cancelled the application "@(Model.CaseInfo.Subject)" on @(Created).
+        </p>
+    }
+    else if (notification.NotificationType == (int)NotificationTypes.FinalMessage)
+    {
+        <p>
+            Application "@(Model.CaseInfo.Subject)" finished on @(Created),
+            <br />
+            you are the final notify person.
+        </p>
+    }
+    else if (notification.NotificationType == (int)NotificationTypes.CoverUserMessage)
+    {
+        <p>
+            Application "@(Model.CaseInfo.Subject)" finished on @(Created),
+            <br />
+            you are the person to cover his(her) duties.
+        </p>
+    }
+    else if (notification.NotificationType == (int)NotificationTypes.ReadStatus)
+    {
+        <p>
+            @(WebCacheHelper.GetWF_UsernameByNo(notification.Sender)) opened the application "@(Model.CaseInfo.Subject)" on @(Created).
+        </p>
+    }
+    else if (notification.NotificationType == (int)NotificationTypes.ApproveApp)
+    {
+        <p>
+            @(WebCacheHelper.GetWF_UsernameByNo(notification.Sender)) approved the application "@(Model.CaseInfo.Subject)" on @(Created).
+        </p>
+    }
+    else if (notification.NotificationType == (int)NotificationTypes.RejectApp)
+    {
+        <p>
+            @(WebCacheHelper.GetWF_UsernameByNo(notification.Sender)) reject the application "@(Model.CaseInfo.Subject)" on @(Created).
+        </p>
+    }
+    else if (notification.NotificationType == (int)NotificationTypes.AppFinishedApproved)
+    {
+        <h2>
+            @if (Model.CaseInfo.Applicant.EqualsIgnoreCaseAndBlank(User.Identity.Name))
+            {
+                <p style="color: #fb523c">Application "@(Model.CaseInfo.Subject)" All Approvals Obtained</p>
+            }
+            else
+            {
+                <p style="color: #fb523c">Application "@(Model.CaseInfo.Subject)" Fully Approved</p>
+            }
+        </h2>
+    }
+    else if (notification.NotificationType == (int)NotificationTypes.AppFinishedRejected)
+    {
+        <span class="h2">
+            <img src="~/Content/Images/Workflow/approval/Abort.png" style="width: 250px;height: 200px;" />
+            <p style="color: crimson;">
+                Application "@(Model.CaseInfo.Subject)" rejected.
+            </p>
+        </span>
+    }
+    else if (notification.NotificationType == (int)NotificationTypes.AppFinishedAbort)
+    {
+        <span class="h2">
+            <img src="~/Content/Images/Workflow/approval/Abort.png" style="width: 250px;height: 200px;" />
+            <p style="color: crimson;">
+                Application "@(Model.CaseInfo.Subject)" is sent back to revise.
+            </p>
+        </span>
+    }
+    else if (notification.NotificationType == (int)NotificationTypes.Comments)
+    {
+        <p>
+            @(WebCacheHelper.GetWF_UsernameByNo(notification.Sender)) commentted the application "@(Model.CaseInfo.Subject)" on @(Created).
+        </p>
+    }
+    else
+    {
+        <p>
+            @(WebCacheHelper.GetWF_UsernameByNo(notification.Sender)) just applied for @(Model.CaseInfo.Subject) on @(Created),
+            <br />
+            you are the person to cover his(her) duties.
+        </p>
+    }
+</div>
+<div>
+    @{
+        WF_FlowTypes flowType = ViewBag.FlowType as WF_FlowTypes;
+        if (flowType != null && flowType.TemplateType == 1)
+        {
+            @Html.Partial("~/Views/Inbox/_ViewStoreApprovalForm.cshtml", Model)
+        }
+        else if (flowType != null && flowType.TemplateType == 2)
+        {
+            @Html.Partial("~/Views/Inbox/_ViewLeaveApplication.cshtml", Model)
+        }
+        else if (flowType != null && flowType.TemplateType == 7)
+        {
+            @Html.Partial("~/Views/Inbox/_ViewStoreClosureForm.cshtml", Model)
+        }
+        else
+        {
+            @Html.Partial("~/Views/Inbox/_ViewProperties.cshtml", Model)
+        }
+        if ((bool)ViewBag.EnableCancel)
+        {
+            using (Ajax.BeginModalForm("CreateCancel", new ModalAjaxOptions()
+            {
+                HttpMethod = "post",
+                InsertionMode = InsertionMode.Replace,
+                LoadingElementId = "div_progress",
+                Id = "create_cancel_form",
+                ModalTargetId = "submit_cont",
+                UpdateTargetId = "div_content",
+                Class = "form-horizontal"
+            }))
+            {
+                @Html.Hidden("flowcaseid", Model.CaseInfo.FlowCaseId)
+                <div id="submit_cont"></div>
+                <div style="text-align: center">
+                    <button type="submit" class="btn btn-lg btn-warning">Cancel</button>
+                </div>
+            }
+        }
+    }
+</div>

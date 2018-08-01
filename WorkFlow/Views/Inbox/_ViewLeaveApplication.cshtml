@@ -1,0 +1,226 @@
+﻿@using WorkFlowLib.Data
+@using WorkFlowLib.DTO
+@using WorkFlowLib
+@using WorkFlow.Ext
+@using Dreamlab.Core
+@using Resources
+@model FlowInfo
+@{
+    PropValueResolver pvr = new PropValueResolver(ViewBag.Properties as PropertiesValue);
+    string country = pvr.GetValueByName("Country");
+    string staffNo = pvr.GetValueByName("StaffNo");
+    string positionName = pvr.GetValueByName("Position");
+    WF_FlowCases_Attachments[] attachments = ViewBag.Attachments as WF_FlowCases_Attachments[];
+}
+
+@functions{
+
+}
+
+<style type="text/css">
+    .table-borderless > thead > tr > th,
+    .table-borderless > tbody > tr > th,
+    .table-borderless > tfoot > tr > th,
+    .table-borderless > thead > tr > td,
+    .table-borderless > tbody > tr > td,
+    .table-borderless > tfoot > tr > td,
+    .table-borderless > thead,
+    .table-borderless > tbody,
+    .table-borderless > tfoot {
+        border: none;
+    }
+
+    .vertical-middle {
+        vertical-align: middle !important;
+    }
+
+    .nopadding {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .padding-left {
+        padding-left: 20px !important;
+    }
+
+    .textcolor-grey {
+        color: grey !important;
+    }
+
+    .control-hide {
+        display: none;
+    }
+</style>
+
+@if (Model != null)
+{
+    <div class="container">
+        <div class="row text-center">
+            <div id="div_history"></div>
+            <h4>
+                @if (Model.CaseInfo.Ver > 0)
+                {
+                    @Ajax.ActionLink("Version:" + (Model.CaseInfo.Ver ?? 0), "ViewHistoryCases", "Inbox", new { id = Model.CaseInfo.FlowCaseId, ignorehistory = true }, new AjaxOptions
+                    {
+                        HttpMethod = "Get",
+                        InsertionMode = InsertionMode.Replace,
+                        LoadingElementId = "div_progress",
+                        UpdateTargetId = "div_history",
+                        OnFailure = "ajaxError"
+                    })
+                }
+                else
+                {
+                    @: Version: @(Model.CaseInfo.Ver ?? 0)
+                }
+            </h4>
+        </div>
+        <div class="clearfix">
+            <div class="col-sm-4">
+                <label class="control-label inline">Country:</label>
+                <span class="inline">@country</span>
+            </div>
+            <div class="col-sm-4">
+                <label class="control-label inline">Position:</label>
+                <span class="inline">@positionName</span>
+            </div>
+        </div>
+        <div class="clearfix">
+            <div class="col-sm-4">
+                <label class="control-label inline">Applicant:</label>
+                <span class="inline">@WebCacheHelper.GetWF_UsernameByNo(staffNo)</span>
+            </div>
+            <div class="col-sm-4">
+                <label class="control-label inline">Staff No:</label>
+                <span class="inline">@staffNo</span>
+            </div>
+        </div>
+        <div class="clearfix" style="padding-bottom:10px;"></div>
+        <div style="border-bottom: 1px solid; height: 1px"></div>
+        <div class="panel">
+            <div class="panel-body">
+                <label class="control-label">Leave Information</label>
+                @if (Model.CaseInfo.RelatedFlowCaseId != null && Model.CaseInfo.RelatedFlowCaseId > 0)
+                {
+                    <span class="alert alert-danger" style="margin-left:10px; padding:2px;">
+                        <strong>Cancel</strong>
+                    </span>
+                }
+                <div class="clearfix" style="padding-bottom: 15px;"></div>
+                @{
+                    string fromDate = pvr.GetValueByName("FromDate");
+                    string toDate = pvr.GetValueByName("ToDate");
+                    string fromTime = pvr.GetValueByName("FromTime");
+                    string toTime = pvr.GetValueByName("ToTime");
+                    string totalHours = pvr.GetValueByName("TotalHours");
+                }
+                <div class="row">
+                    <label class="control-label col-sm-2">From:</label>
+                    <div class="nopadding col-sm-2">
+                        @fromDate
+                    </div>
+                    <label class="control-label col-sm-1">To:</label>
+                    <div class="nopadding col-sm-2">
+                        @toDate
+                    </div>
+                    <span class="field-validation-error control-hide" id="spErrorForDates">
+                        The to date can not be earlier than the from date
+                    </span>
+                </div>
+                <div class="row">
+                    <label class="control-label col-sm-2">Time:</label>
+                    <div class="nopadding col-sm-2">
+                        @fromTime
+                    </div>
+                    <div class="nopadding">
+                        <label class="control-label col-sm-1">Time:</label>
+                    </div>
+                    <div class="nopadding col-sm-2">
+                        @toTime
+                    </div>
+                    <label class="control-label padding-left">Total Day:</label>
+
+                    <label class="control-label" id="lblTotalHours">@(String.IsNullOrEmpty(totalHours) ? "0" : (double.Parse(totalHours) / 8.0).ToString("0.##") + " days")</label>
+                </div>
+                <div style="border-bottom: 1px solid; height: 1px"></div>
+                <div class="clearfix" style="padding-bottom: 15px;"></div>
+                <div class="row">
+                    <label class="control-label col-sm-2">Leave Type:</label>
+                    <div>
+                        @pvr.GetValueByName("LeaveCode")
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="control-label col-sm-2" id="lblRemainingBalance">Remaining Balance:</label>
+                    @pvr.GetValueByName("RemainingBalance")
+                </div>
+                <div style="border-bottom: 1px solid; height: 1px"></div>
+                <div class="clearfix" style="padding-bottom: 15px;"></div>
+                <div class="row">
+                    <label class="control-label col-sm-2">Reason for Leave:</label>
+                    <div class="col-sm-8 nopadding">
+                        @pvr.GetValueByName("ReasonForLeave")
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="control-label col-sm-2">Who will cover your duties?</label>
+                    <div class="col-sm-4 nopadding">
+                        <div class="clearfix" style="padding-bottom: 10px"></div>
+                        @{
+                            var userNames = WebCacheHelper.GetUsernames();
+                            var addedUserNames = Model.CaseInfo.CoverDuties.Select(
+                                n => userNames.FirstOrDefault(u => u.Key.EqualsIgnoreCaseAndBlank(n)).Value);
+                        }
+                        @(String.Join(",", addedUserNames))
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="control-label col-sm-2">Attachments:</label>
+                    <div class="col-sm-4 nopadding">
+                        @if (attachments != null && attachments.Length > 0)
+                        {
+                            <table>
+                                @for (int i = 0; i < attachments.Length; i++)
+                                {
+                                    var item = attachments[i];
+                                    <tr>
+                                        <td style="text-align: left;">
+                                            @{
+                                                var contenttype = HtmlUIHelper.GetContentType(item.FileName);
+                                                if (contenttype != null)
+                                                {
+                                                    <h5>
+                                                        <a href="@Url.Action("ViewAttachment", new {attachementId = item.AttachementId})" target="_blank">
+                                                            @(i + 1). @item.OriFileName
+                                                        </a>
+                                                        <a href="@Url.Action("ViewAttachment", new {attachementId = item.AttachementId, download = true})" target="_blank">
+                                                            @StringResource.DOWNLOAD
+                                                        </a>
+                                                    </h5>
+                                                    if (contenttype.StartsWith("image"))
+                                                    {
+                                                        <img src="@Url.Action("GetImageFile", new {attachmentId = item.AttachementId})" style="max-height: 180px; max-width: 180px;" />
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <h5>
+                                                        @(i + 1). @item.OriFileName
+                                                        <a href="@Url.Action("ViewAttachment", new {attachementId = item.AttachementId, download = true})" target="_blank">
+                                                            @StringResource.DOWNLOAD
+                                                        </a>
+                                                    </h5>
+                                                }
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        @Html.Partial("~/Views/Inbox/UsersComment.cshtml")
+    </div>
+}

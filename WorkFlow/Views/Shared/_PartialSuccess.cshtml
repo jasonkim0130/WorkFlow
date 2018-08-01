@@ -1,0 +1,9 @@
+﻿@model string
+@{
+    ViewBag.Title = "Success";
+}
+<div style="margin: 40px">
+    <hgroup>
+        <h3 class="alert alert-success">@Html.Raw(Model?.Replace("\n","<br/>"))</h3>
+    </hgroup>
+</div>

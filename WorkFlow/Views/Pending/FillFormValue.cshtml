@@ -1,0 +1,62 @@
+﻿@using WorkFlowLib.Data
+@using WorkFlowLib.DTO
+@using WorkFlow.Ext
+@using Resources
+@model FlowInfo
+@{
+    WF_FlowTypes flowType = ViewBag.FlowType as WF_FlowTypes;
+}
+@using (Ajax.BeginModalForm("SaveApp", new ModalAjaxOptions()
+{
+    HttpMethod = "post",
+    InsertionMode = InsertionMode.Replace,
+    Id = "select_flow_form",
+    ModalTargetId = "submit_cont",
+    UpdateTargetId = "div_content",
+    Class = "form-horizontal",
+    LoadingElementId = "div_progress"
+}))
+{
+    <div id="submit_cont"></div>
+    <div id="div_create_data">
+        @if (!Model.CaseInfo.IsDraft)
+        {
+            <div style="margin: 10px">
+                @Html.Partial("~/Views/Inbox/ViewSimpleCase.cshtml", Model)
+            </div>
+            <hr class="step-line">
+        }
+        @if (flowType != null && flowType.TemplateType == 1)
+        {
+            @Html.Partial("EditStoreApprovalForm", Model)
+        }
+        else if (flowType != null && flowType.TemplateType == 2)
+        {
+            @Html.Partial("_EditLeaveApplication", Model)
+        }
+        else if (flowType.TemplateType == 7)
+        {
+            @Html.Partial("_EditStoreClosureForm", Model)
+        }
+        else
+        {
+            @Html.Partial("_EditProperties", Model)
+        }
+        @Html.Hidden("flowTypeId", Model.FlowTypeId)
+        @Html.Hidden("flowCaseId", Model.CaseInfo.FlowCaseId)
+        <div class="text-center approve-btn-cell">
+            <div id="btn_list_div" style="margin-top: 40px;">
+                <button type="submit" class="btn btn-success btn-lg">
+                    SUBMIT
+                </button>
+                @Ajax.ActionLink(StringResource.CANCEL, "CancelApp", new { flowCaseId = Model.CaseInfo.FlowCaseId }, HtmlUIHelper.DefaultAjaxPostOption, new { @class = "btn btn-danger btn-lg" })
+            </div>
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    $("#select_flow_form").addUnobtrusiveValidation();
+    if ($("#select_flow_form input:hidden").length > 0) {
+        $('#select_flow_form').data('validator').settings.ignore = '';
+    }
+</script>

@@ -1,0 +1,10 @@
+﻿
+@using WorkFlowLib.DTO
+@using WorkFlow.Ext
+@using Resources
+@model FlowInfo
+<div class="page-header text-center">
+    <h2>@Model.TypeName.ToLocal()</h2>
+    <h2>@(Model.CaseInfo.IsDraft ? "" : "Resubmit a new application")</h2>
+</div>
+@Html.Partial("FillFormValue", Model)

@@ -1,0 +1,33 @@
+﻿@using Resources
+@using WorkFlowLib.DTO.Query
+@model IEnumerable<PendingQueryRow>
+<style type="text/css">
+    #ui-datepicker-div {
+        z-index: 9999 !important;
+    }
+</style>
+<div class="page-header text-center">
+    <div class="input-group" style="margin: 20px 0 20px 10px; max-width: 520px;">
+        <div class="input-group-addon">@StringResource.START</div>
+        @Html.TextBox("start", null, new { @class = "form-control datepicker" })
+        <div class="input-group-addon">@StringResource.EndTime</div>
+        @Html.TextBox("end", null, new { @class = "form-control datepicker" })
+        <span class="input-group-btn">
+            <button class="btn btn-success" id="btnSearch" type="submit">@StringResource.SEARCH</button>
+        </span>
+    </div>
+</div>
+
+<div>
+    @Html.Partial("~/Views/Pending/Index.cshtml", Model)
+</div>
+
+<script type="text/javascript">
+    $('.datepicker').datepicker({ dateFormat: 'yy-mm-dd' });
+    
+    $('.page-header').on('click', '#btnSearch', function () {
+        $.postProgressData('@Url.Action("DraftIndex", "Pending")', null, function (data) {
+            $('#div_workflow_content').html(data);
+        });
+    });
+</script>

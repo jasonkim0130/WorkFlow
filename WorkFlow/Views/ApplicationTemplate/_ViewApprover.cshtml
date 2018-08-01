@@ -1,0 +1,296 @@
+﻿@using WorkFlowLib
+@using WorkFlowLib.Data
+@using WorkFlowLib.DTO
+@using WorkFlowLib.Logic
+@using WorkFlow.Ext
+@using WorkFlow.Controllers
+@using Resources
+@using Dreamlab.Core
+
+@functions{
+    public IEnumerable<SelectListItem> GetGradeItems(object selectedValue)
+    {
+        List<SelectListItem> items = new List<SelectListItem>();
+        for (int i = 0; i <= 8; i++)
+        {
+            items.Add(new SelectListItem
+            {
+                Text = (i == 0 ? "s" : i.ToString()),
+                Value = i.ToString(),
+                Selected = i.ToString().Equals(selectedValue?.ToString())
+            });
+        }
+        return items;
+    }
+}
+<div id="div_notimp">
+    @if (ViewBag.Type == FindUserType.Step)
+    {
+        <div>
+            @{
+                NoApproverModel[] noApproverConditionses = ViewBag.NoApproverConditions as NoApproverModel[];
+                bool NoApprover = noApproverConditionses != null && noApproverConditionses.Length > 0;
+                WF_FlowPropertys[] properties = ViewBag.Properties as WF_FlowPropertys[];
+                var NoApproverDataItems = properties
+                    .Where(p => p.StatusId != 0)
+                    .Select(p => new SelectListItem
+                    {
+                        Text = p.PropertyName,
+                        Value = p.FlowPropertyId.ToString()
+                    })
+                    .ToList();
+                NoApproverDataItems.Insert(0, new SelectListItem
+                {
+                    Text = "Applicant Grade",
+                    Value = $"{ExtraProperty.ApplicantGrade:d}"
+                });
+                NoApproverDataItems.Insert(0, new SelectListItem
+                {
+                    Text = "Approver Grade",
+                    Value = $"{ExtraProperty.ApproverGrade:d}"
+                });
+                NoApproverDataItems.Insert(0, new SelectListItem
+                {
+                    Text = "Approver Staff No",
+                    Value = $"{ExtraProperty.ApproverStaffNo:d}"
+                });
+                var Operators = new List<string>(FlowCondition.Operators);
+            }
+            <table style="border-collapse: separate; border-spacing: 5px">
+                <tbody id="table_no_approver">
+                    <tr>
+                        <td>
+                            <label>
+                                @Html.CheckBox("NoApprover", NoApprover, new { style = "width:20px; height:20px;" })
+                                No Approver
+                            </label>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    @if (NoApprover)
+                    {
+                        foreach (var item in noApproverConditionses)
+                        {
+                            NoApproverDataItems.ForEach(p => p.Selected = false);
+                            @Html.Partial("_NoApproverCondition", item, new ViewDataDictionary
+                                        {
+                                            {"NoApproverDataItems", NoApproverDataItems},
+                                            {"Operators", Operators},
+                                            {"Value", item.NoApproverValue},
+                                            {"MaxValue", item.NoApproverMaxValue},
+                                            {"Editable", false}
+                                        })
+                        }
+                    }
+                    else
+                    {
+                        @Html.Partial("_NoApproverCondition", null, new ViewDataDictionary
+                                    {
+                                        {"NoApproverDataItems", NoApproverDataItems},
+                                        {"Operators", Operators},
+                                        {"Value", string.Empty},
+                                        {"MaxValue", string.Empty},
+                                        {"Editable", false}
+                                    })
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    <div class="form-group">
+        <div>
+            <label><input type="radio" name="approvertype" value="PredefinedRole" style="width: 15px; height: 15px;" checked="@(ViewBag.UserTypeId == 1)" disabled="disabled" />Predefined Role</label>
+        </div>
+        <table>
+            <tr>
+                <td>User Role</td>
+                <td>Country</td>
+                <td>Department Type</td>
+                <td>Department</td>
+                <td>Brand</td>
+            </tr>
+            <tr>
+                <td style="padding-right: 10px;">
+                    @Html.DropDownList("predefinedrole.userrole", WebCacheHelper.GetRoles().Select(p => new SelectListItem { Text = p.Value, Value = p.Key, Selected = Int32.Parse(p.Key) == ViewBag.UserRole }), StringResource.SELECT, new { @class = "form-control inline", disabled = "disabled", data_val = "true", data_val_required = "*" })
+                </td>
+                <td style="padding-right: 10px;">
+                    @Html.DropDownList("predefinedrole.countrytype", new[] { new SelectListItem { Text = "Applicant", Value = "0", Selected = ViewBag.CountryType == 0 && ViewBag.UserTypeId == 1 }, new SelectListItem { Text = "User input", Value = "1", Selected = ViewBag.CountryType == 1 && ViewBag.UserTypeId == 1 }, new SelectListItem { Text = "Fixed", Value = "2", Selected = ViewBag.CountryType == 2 && ViewBag.UserTypeId == 1 } }, StringResource.SELECT, new { @class = "form-control inline", disabled = "disabled", data_val = "true", data_val_required = "*" })
+                    @Html.DropDownList("predefinedrole.fixedcountry", Consts.Countries.Select(p => new SelectListItem { Text = p, Value = p, Selected = p.EqualsIgnoreCaseAndBlank(ViewBag.FixedCountry as string) }), new { @class = "form-control", style = "margin-top: 5px", data_val = "true", data_val_required = "*", disabled = "disabled" })
+                </td>
+                <td style="padding-right: 10px;">
+                    @Html.DropDownList("predefinedrole.depttypesource", new[] { new SelectListItem { Text = "Applicant", Value = "0", Selected = ViewBag.DeptTypeSource == 0 && ViewBag.UserTypeId == 1 }, new SelectListItem { Text = "User input", Value = "1", Selected = ViewBag.DeptTypeSource == 1 && ViewBag.UserTypeId == 1 }, new SelectListItem { Text = "Fixed", Value = "2", Selected = ViewBag.DeptTypeSource == 2 && ViewBag.UserTypeId == 1 } }, StringResource.SELECT, new { @class = "form-control inline", disabled = "disabled", data_val = "true", data_val_required = "*" })
+                    @Html.DropDownList("predefinedrole.fixeddepttype", WebCacheHelper.GetDeptTypes().Select(p => new SelectListItem { Text = p.Value, Value = p.Key, Selected = p.Key.EqualsIgnoreCaseAndBlank(ViewBag.FixedDeptType as string) }), new { @class = "form-control", style = "margin-top: 5px", data_val = "true", data_val_required = "*", disabled = "disabled" })
+                </td>
+                <td style="padding-right: 10px;">
+                    @Html.DropDownList("predefinedrole.depttype", new[] { new SelectListItem { Text = "Applicant", Value = "0", Selected = ViewBag.DeptType == 0 && ViewBag.UserTypeId == 1 }, new SelectListItem { Text = "User input", Value = "1", Selected = ViewBag.DeptType == 1 && ViewBag.UserTypeId == 1 }, new SelectListItem { Text = "Fixed", Value = "2", Selected = ViewBag.DeptType == 2 && ViewBag.UserTypeId == 1 } }, StringResource.SELECT, new { @class = "form-control inline", disabled = "disabled", data_val = "true", data_val_required = "*" })
+                    @Html.DropDownList("predefinedrole.fixeddept", WebCacheHelper.GetDepartments().Select(p => new SelectListItem { Text = p.Value, Value = p.Key, Selected = p.Key.EqualsIgnoreCaseAndBlank(ViewBag.FixedDept as string) }), new { @class = "form-control", style = "margin-top: 5px", data_val = "true", data_val_required = "*", disabled = "disabled" })
+                </td>
+                <td style="padding-right: 10px;">
+                    @Html.DropDownList("predefinedrole.brandtype", new[] { new SelectListItem { Text = "Blank", Value = "0", Selected = ViewBag.BrandType == 0 }, new SelectListItem { Text = "User input", Value = "1", Selected = ViewBag.BrandType == 1 }, new SelectListItem { Text = "Fixed", Value = "2", Selected = ViewBag.BrandType == 2 } }, StringResource.SELECT, new { @class = "form-control inline", disabled = "disabled", data_val = "true", data_val_required = "*" })
+                    @Html.DropDownList("predefinedrole.fixedbrand", Consts.Brands.Select(p => new SelectListItem { Text = p, Value = p, Selected = p.EqualsIgnoreCaseAndBlank(ViewBag.FixedBrand as string) }), new { @class = "form-control", style = "margin-top: 5px;", data_val = "true", data_val_required = "*", disabled = "disabled" })
+                </td>
+            </tr>
+        </table>
+        <div style="clear: both"></div>
+    </div>
+    <div class="form-group">
+        <div>
+            <label><input type="radio" name="approvertype" value="RoleCriteria" style="width: 15px; height: 15px;" checked="@(ViewBag.UserTypeId == 2)" disabled="disabled" />Role Criteria</label>
+        </div>
+        <table>
+            <tr>
+                <td>Condition</td>
+                <td>Grade</td>
+                <td>Country</td>
+                <td>Department</td>
+            </tr>
+            <tr>
+                <td style="padding-right: 10px;">
+                    @Html.DropDownList("rolecriteria.gradeoperator", new SelectList(FlowCondition.SimpleOperators, ViewBag.CriteriaGradeOperator), StringResource.SELECT, new { @class = "form-control inline", disabled = "disabled", data_val = "true", data_val_required = "*" })
+                </td>
+                <td style="padding-right: 10px;">
+                    @Html.DropDownList("rolecriteria.grade", new SelectList(new[] { 1, 2, 3, 4, 5, 6, 7, 8 }, ViewBag.CriteriaGrade), StringResource.SELECT, new { @class = "form-control inline", disabled = "disabled", data_val = "true", data_val_required = "*" })
+                </td>
+                <td style="padding-right: 10px;">
+                    @Html.DropDownList("rolecriteria.countrytype", new[] { new SelectListItem { Text = "Applicant", Value = "0", Selected = ViewBag.CountryType == 0 && ViewBag.UserTypeId == 2 }, new SelectListItem { Text = "User input", Value = "1", Selected = ViewBag.CountryType == 1 && ViewBag.UserTypeId == 2 }, new SelectListItem { Text = "Fixed", Value = "2", Selected = ViewBag.CountryType == 2 && ViewBag.UserTypeId == 2 } }, StringResource.SELECT, new { @class = "form-control inline", disabled = "disabled", data_val = "true", data_val_required = "*" })
+                    @Html.DropDownList("rolecriteria.fixedcountry", Consts.Countries.Select(p => new SelectListItem { Text = p, Value = p, Selected = p.EqualsIgnoreCaseAndBlank(ViewBag.FixedCountry as string) }), new { @class = "form-control", style = "margin-top: 5px", data_val = "true", data_val_required = "*", disabled = "disabled" })
+                </td>
+                <td style="padding-right: 10px;">
+                    @Html.DropDownList("rolecriteria.depttype", new[] { new SelectListItem { Text = "Applicant", Value = "0", Selected = ViewBag.DeptType == 0 && ViewBag.UserTypeId == 2 }, new SelectListItem { Text = "User input", Value = "1", Selected = ViewBag.DeptType == 1 && ViewBag.UserTypeId == 2 }, new SelectListItem { Text = "Fixed", Value = "2", Selected = ViewBag.DeptType == 2 && ViewBag.UserTypeId == 2 } }, StringResource.SELECT, new { @class = "form-control inline", disabled = "disabled", data_val = "true", data_val_required = "*" })
+                    @Html.DropDownList("rolecriteria.fixeddept", WebCacheHelper.GetDepartments().Select(p => new SelectListItem { Text = p.Value, Value = p.Key, Selected = p.Key.EqualsIgnoreCaseAndBlank(ViewBag.FixedDept as string) }), new { @class = "form-control", style = "margin-top: 5px", data_val = "true", data_val_required = "*", disabled = "disabled" })
+                </td>
+            </tr>
+        </table>
+        <div style="clear: both"></div>
+    </div>
+    <div class="form-group">
+        <label><input type="radio" name="approvertype" value="PredefinedReportingLine" style="width: 15px; height: 15px;" checked="@(ViewBag.UserTypeId == 3)" disabled="disabled" />Predefined Reporting Line</label>
+        <table>
+            <tr>
+                <td>Option</td>
+                <td>Condition</td>
+                <td>Grade</td>
+                <td class="maxlevel">Max Grade</td>
+            </tr>
+            <tr>
+                <td style="padding-right: 10px;">
+                    @Html.DropDownList("manageroption.option", new[]
+                                                  {
+                                                                        new SelectListItem
+                                                                        {
+                                                                            Text = "Applicant", Value = "2", Selected = (ViewBag.ManagerOption == 2)
+                                                                        },
+                                                                        new SelectListItem
+                                                                        {
+                                                                            Text = "Approver", Value = "1", Selected = (ViewBag.ManagerOption == 1)
+                                                                        }
+                                                                    }, StringResource.SELECT, new { @class = "form-control inline", disabled = "disabled", data_val = "true", data_val_required = "*" })
+                </td>
+                <td style="padding-right: 10px;">
+                    @Html.DropDownList("manageroption.manageroptionoperator", new SelectList(FlowCondition.SimpleOperatorsWithIn, ViewBag.ManagerLevelOperator), StringResource.SELECT, new { @class = "form-control inline", disabled = "disabled", data_val = "true", data_val_required = "*" })
+                </td>
+                <td style="padding-right: 10px;">
+                    @{
+                        IEnumerable<SelectListItem> levelGradeItems = GetGradeItems(ViewBag.ManagerLevel);
+                        IEnumerable<SelectListItem> maxLevelGradeItems = GetGradeItems(ViewBag.ManagerMaxLevel);
+                    }
+                    @Html.DropDownList("manageroption.level", levelGradeItems, StringResource.SELECT, new { @class = "form-control inline", disabled = "disabled", data_val = "true", data_val_required = "*" })
+                </td>
+                <td class="maxlevel">
+                    @Html.DropDownList("manageroption.maxlevel", maxLevelGradeItems, StringResource.SELECT, new { @class = "form-control inline", disabled = "disabled", data_val = "true", data_val_required = "*" })
+                </td>
+            </tr>
+        </table>
+        <div style="clear: both"></div>
+    </div>
+</div>
+
+<div class="form-group">
+    <label><input type="radio" name="approvertype" value="Person" style="width: 15px; height: 15px;" checked="@(ViewBag.UserTypeId == null || ViewBag.UserTypeId == 4)" disabled="disabled" />Select Person</label>
+    <div style="margin-left: 30px">
+        @Html.DropDownList("approver", new SelectList(EmployeeData.GetAllUsers(), "UserNo", "Name", ViewBag.Approver), "", new
+        { @class = "form-control", data_val = "true", data_val_required = "*", disabled = "disabled" })
+    </div>
+</div>
+<hr />
+<div>
+    @{
+        SecretaryRule[] secretaryRules = ViewBag.SecretaryRules as SecretaryRule[];
+        bool hasRules = secretaryRules != null && secretaryRules.Length > 0;
+    }
+    <table style="border-collapse: separate; border-spacing: 5px">
+        <tbody id="table_secretary">
+            <tr>
+                <td>
+                    <label>
+                        Secretary Rule
+                    </label>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            @if (hasRules)
+            {
+                foreach (var item in secretaryRules)
+                {
+                    @Html.Partial("_secretaryRule", item, new ViewDataDictionary
+                {
+                    {"Editable", false}
+                })
+                }
+            }
+            else
+            {
+                @Html.Partial("_secretaryRule", null, new ViewDataDictionary
+                {
+                    {"Editable", false}
+                })
+            }
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+    $('#predefinedrole_countrytype, #predefinedrole_depttype, #predefinedrole_brandtype,#predefinedrole_depttypesource, #rolecriteria_countrytype, #rolecriteria_depttype').change(function () {
+        var $this = $(this);
+        if ($this.val() == '2') {
+            $this.siblings('select').show();
+        } else {
+            $this.siblings('select').hide();
+        }
+    }).trigger('change');
+    $('#manageroption_manageroptionoperator').change(function () {
+        if ($(this).val() == 'in') {
+            $('.maxlevel').show();
+        } else {
+            $('.maxlevel').hide();
+        }
+    }).trigger('change');
+</script>
+@if (ViewBag.Type == FindUserType.Step)
+{
+    <script type="text/javascript">
+        $("#NoApproverModel_NoApproverDataKey").on("change", function() {
+            var value = $(this).val();
+            if (value === '@((int)ExtraProperty.ApplicantGrade)' || value === '@((int)ExtraProperty.ApproverGrade)') {
+                $("#ddlNoApproverValue").show();
+                $("#txtNoApproverValue").hide();
+            } else {
+                $("#ddlNoApproverValue").hide();
+                $("#ddlNoApproverMaxValue").hide();
+                $("#txtNoApproverValue").show();
+            }
+        }).trigger("change");
+        $("#NoApproverModel_NoApproverOperator").on("change", function () {
+            $("#ddlNoApproverMaxValue").hide();
+            if ($(this).val() == "in") {
+                $("#ddlNoApproverMaxValue").show();
+            }
+        }).trigger("change");
+    </script>
+}
+

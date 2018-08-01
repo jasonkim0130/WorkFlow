@@ -1,0 +1,24 @@
+﻿
+@using WorkFlow.Ext
+@{
+    ViewBag.Title = "Select notification user";
+}
+@using (Ajax.BeginModalForm("AddNotifyUser", new ModalAjaxOptions()
+{
+    HttpMethod = "post",
+    InsertionMode = InsertionMode.Replace,
+    LoadingElementId = "div_progress",
+    Id = "template_form",
+    UpdateTargetId = "flowtemplate" + ViewBag.FlowId.ToString()
+}))
+{
+    @Html.Hidden("stepGroupId", ViewBag.StepGroupId as object)
+    @Html.DropDownList("notifyuser",
+            WebCacheHelper.GetUsernames().Select(p => new SelectListItem { Text = p.Value, Value = p.Key }), "", new
+            { data_val = "true", data_val_required = "*", @class = "form-control" })
+}
+<script type="text/javascript">
+    $("#template_form").addUnobtrusiveValidation();
+</script>
+
+

@@ -1,0 +1,274 @@
+﻿@using WorkFlowLib.Data
+@using WorkFlowLib.DTO
+@using WorkFlow.Ext
+@using Resources
+@using Dreamlab.Core
+@model FlowInfo
+
+@{
+    CaseHistory[] history = ViewBag.History as CaseHistory[];
+    var Country = GetPropertyValueByPropertyName("Country");
+    var StaffNo = GetPropertyValueByPropertyName("StaffNo");
+    var PositionName = GetPropertyValueByPropertyName("Position");
+    WF_FlowCases_Attachments[] attachments = ViewBag.Attachments as WF_FlowCases_Attachments[];
+}
+
+@functions{
+    public string GetPropertyValueByPropertyName(string propertyName)
+    {
+        PropertiesValue properties = ViewBag.Properties as PropertiesValue;
+        WF_FlowPropertys prop = properties.PropertyInfo.FirstOrDefault(p => p.StatusId < 0 && p.PropertyName.Equals(propertyName));
+        return GetPropertyValue(properties, prop);
+    }
+
+    public string GetPropertyValue(PropertiesValue properties, WF_FlowPropertys prop)
+    {
+        if (prop == null)
+        {
+            return null;
+        }
+        WF_CasePropertyValues value = properties.Values.FirstOrDefault(p => p.PropertyId == prop.FlowPropertyId);
+        return value?.StringValue
+            ?? value?.IntValue?.ToString()
+            ?? value?.DateTimeValue?.ToString("yyyy-MM-ddTHH:mm")
+            ?? value?.NumericValue?.ToString("#.##")
+            ?? value?.TextValue
+            ?? value?.DateValue?.ToString("yyyy-MM-dd")
+            ?? value?.UserNoValue;
+    }
+
+    public IDictionary<string, object> GetAttributesByPropertyName(string propertyName, string id = null, bool disabled = false, string style = null)
+    {
+        PropertiesValue properties = ViewBag.Properties as PropertiesValue;
+        WF_FlowPropertys prop = properties.PropertyInfo.FirstOrDefault(p => p.StatusId < 0 && p.PropertyName.Equals(propertyName));
+        IDictionary<string, object> attributes = HtmlUIHelper.GetHtmlAttributes(prop, true, disabled, style);
+        if (id != null)
+        {
+            attributes["id"] = id;
+        }
+        return attributes;
+    }
+}
+
+<style type="text/css">
+    .table-borderless > thead > tr > th,
+    .table-borderless > tbody > tr > th,
+    .table-borderless > tfoot > tr > th,
+    .table-borderless > thead > tr > td,
+    .table-borderless > tbody > tr > td,
+    .table-borderless > tfoot > tr > td,
+    .table-borderless > thead,
+    .table-borderless > tbody,
+    .table-borderless > tfoot {
+        border: none;
+    }
+
+    .vertical-middle {
+        vertical-align: middle !important;
+    }
+
+    .nopadding {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .padding-left {
+        padding-left: 20px !important;
+    }
+
+    .textcolor-grey {
+        color: grey !important;
+    }
+
+    .control-hide {
+        display: none;
+    }
+</style>
+
+@if (Model != null)
+{
+    <div class="container text-left">
+        <div class="row text-center">
+            <label class="control-label">
+                Version @(Model.CaseInfo.Ver ?? 0)
+            </label>
+        </div>
+        <div class="clearfix">
+            <div class="col-sm-4">
+                <label class="control-label inline">Country:</label>
+                <span class="inline">@Country</span>
+            </div>
+            <div class="col-sm-4">
+                <label class="control-label inline">Position:</label>
+                <span class="inline">@PositionName</span>
+            </div>
+        </div>
+        <div class="clearfix">
+            <div class="col-sm-4">
+                <label class="control-label inline">Applicant:</label>
+                <span class="inline">@WebCacheHelper.GetWF_UsernameByNo(StaffNo)</span>
+            </div>
+            <div class="col-sm-4">
+                <label class="control-label inline">Staff No:</label>
+                <span class="inline">@StaffNo</span>
+            </div>
+        </div>
+        <div class="clearfix" style="padding-bottom:10px;"></div>
+        <div style="border-bottom: 1px solid; height: 1px"></div>
+        <div class="panel">
+            <div class="panel-body">
+                <label class="control-label">Leave Information</label>
+                @if (Model.CaseInfo.RelatedFlowCaseId != null && Model.CaseInfo.RelatedFlowCaseId > 0)
+                {
+                    <span class="alert alert-danger" style="margin-left:10px; padding:2px;">
+                        <strong>Cancel</strong>
+                    </span>
+                }
+                <div class="clearfix" style="padding-bottom:15px;"></div>
+                @{
+                    var FromDate = GetPropertyValueByPropertyName("FromDate");
+                    var ToDate = GetPropertyValueByPropertyName("ToDate");
+                    var FromTime = GetPropertyValueByPropertyName("FromTime");
+                    var ToTime = GetPropertyValueByPropertyName("ToTime");
+                    var TotalHours = GetPropertyValueByPropertyName("TotalHours");
+                }
+                <div class="row">
+                    <label class="control-label col-sm-2">From:</label>
+                    <div class="nopadding col-sm-2">
+                        @FromDate
+                    </div>
+                    <label class="control-label col-sm-1">To:</label>
+                    <div class="nopadding col-sm-2">
+                        @ToDate
+                    </div>
+                    <span class="field-validation-error control-hide" id="spErrorForDates">
+                        The to date can not be earlier than the from date
+                    </span>
+                </div>
+                <div class="row">
+                    <label class="control-label col-sm-2">Time:</label>
+                    <div class="nopadding col-sm-2">
+                        @FromTime
+                    </div>
+                    <div class="nopadding">
+                        <label class="control-label col-sm-1">Time:</label>
+                    </div>
+                    <div class="nopadding col-sm-2">
+                        @ToTime
+                    </div>
+                    <label class="control-label padding-left">Total Days:</label>
+
+                    <label class="control-label" id="lblTotalHours">@(String.IsNullOrEmpty(TotalHours) ? "0" : (double.Parse(TotalHours) / 8.0).ToString("0.##") + " days")</label>
+                </div>
+                <div style="border-bottom: 1px solid; height: 1px"></div>
+                <div class="clearfix" style="padding-bottom:15px;"></div>
+                <div class="row">
+                    <label class="control-label col-sm-2">Leave Type:</label>
+                    <div>
+                        @GetPropertyValueByPropertyName("LeaveCode")
+                        <label class="control-label">
+                            @(GetPropertyValueByPropertyName("Cancel").AsBool() ? "[Cancel]" : "")
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="control-label col-sm-2" id="lblRemainingBalance">Remaining Balance:</label>
+                    @GetPropertyValueByPropertyName("RemainingBalance")
+                </div>
+                <div style="border-bottom: 1px solid; height: 1px"></div>
+                <div class="clearfix" style="padding-bottom:15px;"></div>
+                <div class="row">
+                    <label class="control-label col-sm-2">Reason for Leave:</label>
+                    <div class="col-sm-8 nopadding">
+                        @GetPropertyValueByPropertyName("ReasonForLeave")
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="control-label col-sm-2">Who will cover your duties?</label>
+                    <div class="col-sm-4 nopadding">
+                        <div class="clearfix" style="padding-bottom: 10px"></div>
+                        @{
+                            var userNames = WebCacheHelper.GetUsernames();
+                            var addedUserNames = Model.CaseInfo.CoverDuties.Select(
+                                n => userNames.FirstOrDefault(u => u.Key.EqualsIgnoreCaseAndBlank(n)).Value);
+                        }
+                        @(String.Join(",", addedUserNames))
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="control-label col-sm-2">Attachments:</label>
+                    <div class="col-sm-4 nopadding">
+                        @if (attachments != null && attachments.Length > 0)
+                        {
+                            <table>
+                                @for (int i = 0; i < attachments.Length; i++)
+                                {
+                                    var item = attachments[i];
+                                    <tr>
+                                        <td style="text-align: left;">
+                                            @{
+                                                var contenttype = HtmlUIHelper.GetContentType(item.FileName);
+                                                if (contenttype != null)
+                                                {
+                                                    <h5>
+                                                        <a href="@Url.Action("ViewAttachment", new {attachementId = item.AttachementId})" target="_blank">
+                                                            @(i + 1). @item.OriFileName
+                                                        </a>
+                                                        <a href="@Url.Action("ViewAttachment", new {attachementId = item.AttachementId, download = true})" target="_blank">
+                                                            @StringResource.DOWNLOAD
+                                                        </a>
+                                                    </h5>
+                                                    if (contenttype.StartsWith("image"))
+                                                    {
+                                                        <img src="@Url.Action("GetImageFile", new {attachmentId = item.AttachementId})" style="max-height: 180px; max-width: 180px;" />
+                                                        @*<img src="@Url.Content("~/temp/app/" + item.FileName)" style="max-height: 180px; max-width: 180px;"/>*@
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <h5>
+                                                        @(i + 1). @item.OriFileName
+                                                        <a href="@Url.Action("ViewAttachment", new {attachementId = item.AttachementId, download = true})" target="_blank">
+                                                            @StringResource.DOWNLOAD
+                                                        </a>
+                                                    </h5>
+                                                }
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        @if (history != null && history.Length > 0)
+        {
+            <table class="table table-borderless">
+                <tr>
+                    <td>
+                        <h4>Revise history:</h4>
+                    </td>
+                </tr>
+                @foreach (var item in history)
+                {
+                    <tr>
+                        <td style="font-weight: bold; padding: 4px 20px;">
+                            <div id="div_history"></div>
+                            Version: @(item.Ver ?? 0)
+                            @Ajax.ActionLink("View", "ViewReadOnlyCase", new { id = item.FlowCaseId }, new AjaxOptions
+                            {
+                                HttpMethod = "Get",
+                                InsertionMode = InsertionMode.Replace,
+                                LoadingElementId = "div_progress",
+                                UpdateTargetId = "div_history",
+                                OnFailure = "ajaxError"
+                            })
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+    </div>
+}

@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DD7CF1A6-EF18-488B-B06C-5F95D3ADCBF1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WorkFlowLib</RootNamespace>
+    <AssemblyName>WorkFlowLib</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net47\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="Dreamlab.Core">
+      <HintPath>..\WorkFlow\libs\Dreamlab.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Dreamlab.Db">
+      <HintPath>..\WorkFlow\libs\Dreamlab.Db.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="jpush, Version=3.2.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\jpush.3.2.7\lib\net45\jpush.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PlexusIS.Mvc, Version=1.15.10.28, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\PlexusIS.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="PushSharp.Amazon, Version=4.0.10.0, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
+      <HintPath>..\packages\PushSharp.4.0.10\lib\net45\PushSharp.Amazon.dll</HintPath>
+    </Reference>
+    <Reference Include="PushSharp.Apple, Version=4.0.10.0, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
+      <HintPath>..\packages\PushSharp.4.0.10\lib\net45\PushSharp.Apple.dll</HintPath>
+    </Reference>
+    <Reference Include="PushSharp.Blackberry, Version=4.0.10.0, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
+      <HintPath>..\packages\PushSharp.4.0.10\lib\net45\PushSharp.Blackberry.dll</HintPath>
+    </Reference>
+    <Reference Include="PushSharp.Core, Version=4.0.10.0, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
+      <HintPath>..\packages\PushSharp.4.0.10\lib\net45\PushSharp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="PushSharp.Firefox, Version=4.0.10.0, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
+      <HintPath>..\packages\PushSharp.4.0.10\lib\net45\PushSharp.Firefox.dll</HintPath>
+    </Reference>
+    <Reference Include="PushSharp.Google, Version=4.0.10.0, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
+      <HintPath>..\packages\PushSharp.4.0.10\lib\net45\PushSharp.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="PushSharp.Windows, Version=4.0.10.0, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
+      <HintPath>..\packages\PushSharp.4.0.10\lib\net45\PushSharp.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Unity.Abstractions, Version=3.3.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net47\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Configuration, Version=5.2.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net47\Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.8.6.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net47\Unity.Container.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Interception, Version=5.5.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net47\Unity.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Interception.Configuration, Version=5.1.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net47\Unity.Interception.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RegistrationByConvention, Version=2.1.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net47\Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ServiceLocation, Version=2.1.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net47\Unity.ServiceLocation.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApiClient.cs" />
+    <Compile Include="Applicant.cs" />
+    <Compile Include="ApplicationUser.cs" />
+    <Compile Include="Approver.cs" />
+    <Compile Include="Codehelper.cs" />
+    <Compile Include="Consts.cs" />
+    <Compile Include="Data\BLSShopView.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\BLSSKUMaster.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Cities.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\GlobalUserView.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Provinces.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\StaffInfo.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SystemLogs.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UserDeviceTokens.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Users.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WF_ApplicantNotificationUsers.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WF_CaseCoverUsers.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WF_CaseLogs.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WF_CaseNotificateUsers.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WF_CaseNotificationReceivers.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WF_CaseNotifications.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WF_CasePropertyValues.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WF_CaseSteps.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WF_CaseUserActions.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WF_CountryArchivePaths.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WF_FlowCases.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WF_FlowCases_Attachments.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WF_FlowConditions.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WF_FlowGroups.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WF_FlowPropertys.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WF_Flows.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WF_FlowSteps.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WF_FlowTypes.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WF_LastStepNotifyUser.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WF_NoApproverConditions.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WF_Secretary.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WF_StepConditions.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WF_StepGroupConditions.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WF_StepGroups.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WF_StepNotificateUsers.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WF_TemplatePropCode.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WorkFlowModel.Context.cs">
+      <DependentUpon>WorkFlowModel.Context.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Data\WorkFlowModel.cs">
+      <DependentUpon>WorkFlowModel.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Data\WorkFlowModel.Designer.cs">
+      <DependentUpon>WorkFlowModel.edmx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="DbLogWriter.cs" />
+    <Compile Include="DTO\AddNotifyUserResult.cs" />
+    <Compile Include="DTO\AppendStepResult.cs" />
+    <Compile Include="DTO\ApplicantNotificationUser.cs" />
+    <Compile Include="DTO\ApproverType.cs" />
+    <Compile Include="DTO\BaseNotificationUser.cs" />
+    <Compile Include="DTO\CaseHistory.cs" />
+    <Compile Include="DTO\CaseLog.cs" />
+    <Compile Include="DTO\CaseNotification.cs" />
+    <Compile Include="DTO\CommentStepResult.cs" />
+    <Compile Include="DTO\Employee.cs" />
+    <Compile Include="DTO\FlowCaseInfo.cs" />
+    <Compile Include="DTO\FlowConditionInfo.cs" />
+    <Compile Include="DTO\FlowInfo.cs" />
+    <Compile Include="DTO\FlowStep.cs" />
+    <Compile Include="DTO\FlowTypeModel.cs" />
+    <Compile Include="DTO\LastStepNotifyUser.cs" />
+    <Compile Include="DTO\ManagerOption.cs" />
+    <Compile Include="DTO\NewTemplateModel.cs" />
+    <Compile Include="DTO\NoApproverModel.cs" />
+    <Compile Include="DTO\TemplateConfigurationModel.cs" />
+    <Compile Include="DTO\UserHolidayInfo.cs" />
+    <Compile Include="DTO\UserStaffInfo.cs" />
+    <Compile Include="HttpClientWrapper.cs" />
+    <Compile Include="IUserManager.cs" />
+    <Compile Include="LoginApiClient.cs" />
+    <Compile Include="Parameters\Attachment.cs" />
+    <Compile Include="Parameters\CaseLogType.cs" />
+    <Compile Include="Parameters\CreateFlowCaseInfo.cs" />
+    <Compile Include="Parameters\HolidayParameter.cs" />
+    <Compile Include="Parameters\MasterCodeSearchParams.cs" />
+    <Compile Include="Parameters\MenuParams.cs" />
+    <Compile Include="Parameters\PropertyInfo.cs" />
+    <Compile Include="DTO\PDFFlowCase.cs" />
+    <Compile Include="DTO\PredefinedRole.cs" />
+    <Compile Include="DTO\PropertiesValue.cs" />
+    <Compile Include="DTO\Query\InboxQueryRow.cs" />
+    <Compile Include="DTO\Query\NotificationQueryRow.cs" />
+    <Compile Include="DTO\Query\PendingQueryRow.cs" />
+    <Compile Include="DTO\RefreshFlowCaseModel.cs" />
+    <Compile Include="Parameters\SetNotifyMsgPara.cs" />
+    <Compile Include="Parameters\UserEmailParams.cs" />
+    <Compile Include="Parameters\UserGradeSearchParams.cs" />
+    <Compile Include="Parameters\UserListSearchParams.cs" />
+    <Compile Include="Parameters\UserRoleSearchParams.cs" />
+    <Compile Include="Parameters\UserStaffSearchParams.cs" />
+    <Compile Include="Results\ApproveResult.cs" />
+    <Compile Include="Results\BoolResult.cs" />
+    <Compile Include="Results\CancelFlowResult.cs" />
+    <Compile Include="Results\CreateFlowResult.cs" />
+    <Compile Include="DTO\RoleCriteria.cs" />
+    <Compile Include="DTO\StepGroup.cs" />
+    <Compile Include="DTO\StepNotificationUser.cs" />
+    <Compile Include="DTO\StepResult.cs" />
+    <Compile Include="DTO\StepStatus.cs" />
+    <Compile Include="EmailService.cs" />
+    <Compile Include="ILogWritter.cs" />
+    <Compile Include="Logic\ApprovedCasePdfExporter.cs" />
+    <Compile Include="Logic\EmployeeData.cs" />
+    <Compile Include="Logic\FlowCondition.cs" />
+    <Compile Include="Logic\FlowTemplateType.cs" />
+    <Compile Include="Logic\INotificationSender.cs" />
+    <Compile Include="Logic\JPush.cs" />
+    <Compile Include="Logic\PresetValues.cs" />
+    <Compile Include="MailService.cs" />
+    <Compile Include="NewPropertyModel.cs" />
+    <Compile Include="NextStepData.cs" />
+    <Compile Include="NotificationManager.cs" />
+    <Compile Include="NotificationSources.cs" />
+    <Compile Include="NotificationTypes.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyTypes.cs" />
+    <Compile Include="PropValueResolver.cs" />
+    <Compile Include="PushService.cs" />
+    <Compile Include="ReadFlowMode.cs" />
+    <Compile Include="Results\HolidayResult.cs" />
+    <Compile Include="Results\MasterCodeSearchResult.cs" />
+    <Compile Include="Results\MenuResult.cs" />
+    <Compile Include="Results\UserGradeSearchResult.cs" />
+    <Compile Include="Results\UserLastLoginShop.cs" />
+    <Compile Include="Results\UserListSearchResult.cs" />
+    <Compile Include="Results\UserManagerSearchResult.cs" />
+    <Compile Include="Results\UserProfileResult.cs" />
+    <Compile Include="Results\UserRoleSearchResult.cs" />
+    <Compile Include="Results\UserStaffSearchResult.cs" />
+    <Compile Include="SpecialPropertyModel.cs" />
+    <Compile Include="TemplateManager.cs" />
+    <Compile Include="UserManager.cs" />
+    <Compile Include="UserResolver.cs" />
+    <Compile Include="UserSearchModel.cs" />
+    <Compile Include="WorkFlowApiClient.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Data\WorkFlowModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WorkFlowModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\WorkFlowModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WorkFlowModel.edmx</DependentUpon>
+      <LastGenOutput>WorkFlowModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\WorkFlowModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WorkFlowModel.edmx</DependentUpon>
+      <LastGenOutput>WorkFlowModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Libs\Dreamlab.Core.dll" />
+    <Content Include="Libs\Dreamlab.Db.dll" />
+    <Content Include="Libs\PlexusIS.Mvc.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\WorkFlowModel.edmx.diagram">
+      <DependentUpon>WorkFlowModel.edmx</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

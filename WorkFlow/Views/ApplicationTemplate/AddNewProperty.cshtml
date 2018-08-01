@@ -1,0 +1,161 @@
+﻿@using WorkFlowLib
+@using WorkFlowLib.Data
+@using WorkFlow.Ext
+@{
+    ViewBag.Title = "Add new property";
+    var typeList = PropertyTypesList.GetPropertyTypesList()
+         .Select(p => new SelectListItem { Text = p.Key, Value = p.Value.ToString() });
+    WF_FlowTypes flowtype = ViewBag.FlowType as WF_FlowTypes;
+}
+@using (Ajax.BeginModalForm("AddNewProperty", new ModalAjaxOptions
+{
+    HttpMethod = "post",
+    LoadingElementId = "div_progress",
+    Id = "addprop_form",
+    UpdateTargetId = "prop_table_cont"
+}, new { @class = "form-horizontal " }))
+{
+    @Html.Hidden("flowGroupId", ViewBag.FlowGroupId as object)
+    if (flowtype.TemplateType == 9)
+    {
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Tab</label>
+            <div class="col-sm-10">
+                @Html.DropDownList("Tab", new SelectList(flowtype.Tabs?.Split('|') ?? new String[0]), new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Row</label>
+            <div class="col-sm-10">
+                @Html.TextBox("RowIndex", null, new { @class = "form-control", required = true, data_val = "true", data_val_required = "*" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Column</label>
+            <div class="col-sm-10">
+                @Html.TextBox("ColumnIndex", null, new { @class = "form-control", required = true, data_val = "true", data_val_required = "*" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">ViewType</label>
+            <div class="col-sm-10">
+                @Html.DropDownList("ViewType", new SelectList(new[] { "", "Hint", "Label", "Calendar", "TextBox", "TextArea", "DropdownList", "ComboBox", "Attachment" }), new { @class = "form-control", required = true, data_val = "true", data_val_required = "*" })
+            </div>
+        </div>
+        <div class="form-group" id="div_datasource">
+            <label class="col-sm-2 control-label">Data source</label>
+            <div class="col-sm-10">
+                @Html.TextArea("datasource", null, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group" id="div_fieldType">
+            <label class="col-sm-2 control-label">Field Type</label>
+            <div class="col-sm-10">
+                @Html.DropDownList("fieldTypeId", typeList, "", new { @class = "form-control", required = true, data_val = "true", data_val_required = "*" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label ">Width</label>
+            <div class="col-sm-10">
+                @Html.TextBox("Width", null, null, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Height</label>
+            <div class="col-sm-10">
+                @Html.DropDownList("Height", new SelectList(new[] { 1, 2, 3 }), "", new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label ">Align</label>
+            <div class="col-sm-10">
+                @Html.DropDownList("Align", new SelectList(new[] { "Left", "Center", "Rigth" }), new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label ">Font Size</label>
+            <div class="col-sm-10">
+                @Html.TextBox("FontSize", null, null, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label ">Font Color</label>
+            <div class="col-sm-10">
+                @Html.TextBox("FontColor", null, null, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group" id="div_text">
+            <label class="col-sm-2 control-label ">Text</label>
+            <div class="col-sm-10">
+                @Html.TextArea("Text", null, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group" id="div_text">
+            <label class="col-sm-2 control-label ">Background color</label>
+            <div class="col-sm-10">
+                @Html.TextArea("BgColor", null, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group" id="div_text">
+            <label class="col-sm-2 control-label ">Validation</label>
+            <div class="col-sm-10">
+                @Html.TextArea("Validation", null, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group" id="div_text">
+            <label class="col-sm-2 control-label ">Validation message</label>
+            <div class="col-sm-10">
+                @Html.TextArea("ValidationMsg", null, new { @class = "form-control" })
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="form-group" id="div_fieldType">
+            <label class="col-sm-2 control-label">Field Type</label>
+            <div class="col-sm-10">
+                @Html.DropDownList("fieldTypeId", typeList, "", new { @class = "form-control", required = true, data_val = "true", data_val_required = "*" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Field Name</label>
+            <div class="col-sm-10">
+                @Html.TextBox("fieldName", null, new { @class = "form-control", required = true, data_val = "true", data_val_required = "*" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Code</label>
+            <div class="col-sm-10">
+                @Html.DropDownList("code", ViewBag.CodeList as SelectListItem[] ?? new SelectListItem[0], "", new { @class = "form-control" })
+            </div>
+        </div>
+    }
+    <div class="form-group" id="div_cmpulsory">
+        <label class="col-sm-2 control-label">Compulsory</label>
+        <div class="col-sm-10">
+            @Html.DropDownList("compulsory", new[] { new SelectListItem { Text = "是", Value = "true" }, new SelectListItem { Text = "否", Value = "false" } }, "", new { @class = "form-control", required = true, data_val = "true", data_val_required = "*" })
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    $("#addprop_form").addUnobtrusiveValidation();
+    $("#ViewType").change(function () {
+        var type = $('#ViewType').val();
+        if (type == "DropdownList" || type == "ComboBox") {
+            $('#div_datasource').removeClass('hidden');
+        }
+        else {
+            $('#div_datasource').addClass('hidden');
+        }
+        if (type == "Hint" || type == "Label" || type == "Calendar") {
+            $('#div_fieldType,#div_cmpulsory').addClass('hidden');
+        }
+        else {
+            $('#div_fieldType,#div_cmpulsory').removeClass('hidden');
+            $('#Text').val("");
+            $('#compulsory').val("false");
+            $('#fieldTypeId').val("");
+        }
+    }).trigger('change');
+</script>

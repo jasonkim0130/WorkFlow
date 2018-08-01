@@ -1,0 +1,119 @@
+﻿@using Dreamlab.Core
+@using Resources
+@using WorkFlow.Ext
+@using WorkFlowLib.Results
+@using WorkFlowLib
+@helper GetCountryImgStr(string country)
+    {
+        switch (country)
+        {
+            case "CHN":
+                <img src="~/Content/Images/china.png" style="width: 40px; height: 40px; margin: 5px" />
+                break;
+            case "TWN":
+                <img src="~/Content/Images/taiwan.png" style="width: 40px; height: 40px; margin: 5px" />
+                break;
+            case "HKG":
+                <img src="~/Content/Images/hongkong.png" style="width: 40px; height: 40px; margin: 5px" />
+                break;
+            case "SGP":
+                <img src="~/Content/Images/singapore.png" style="width: 40px; height: 40px; margin: 5px" />
+                break;
+            case "KOR":
+                <img src="~/Content/Images/korea.png" style="width: 40px; height: 40px; margin: 5px" />
+                break;
+            case "MYS":
+                <img src="~/Content/Images/malaysia.png" style="width: 40px; height: 40px; margin: 5px" />
+                break;
+        }
+}
+<div class="pull-right">
+    @*@GetCountryImgStr(this.GetCountry())*@
+</div>
+<div class="pull-right login-info">
+    @if (Request.IsAuthenticated)
+    {
+        var lang = ViewContext.RouteData.Values["lang"] as string;
+        var model = ViewData["UserProfile"] as UserProfile;
+        var countryList = model?.Authority.Select(p => new SelectListItem
+        {
+            Text = p,
+            Value = Url.Action("SwitchSite", "Account", new { country = p, language = Codehelper.GetLang(model.Language) }),
+            Selected = Codehelper.DefaultCountry.EqualsIgnoreCaseAndBlank(p)
+        });
+        var languageList = new[]
+        {
+new SelectListItem {Text = "English", Value = Url.Action("Index", "Home", new {lang = "EN"}), Selected = lang.EqualsIgnoreCaseAndBlank("EN")},
+new SelectListItem {Text = "中文(简体)", Value = Url.Action("Index", "Home", new {lang = "SC"}), Selected = lang.EqualsIgnoreCaseAndBlank("SC")},
+new SelectListItem {Text = "中文(繁體)", Value = Url.Action("Index", "Home", new {lang = "TC"}), Selected = lang.EqualsIgnoreCaseAndBlank("TC")},
+new SelectListItem {Text = "한국어", Value = Url.Action("Index", "Home", new {lang = "KO"}), Selected = lang.EqualsIgnoreCaseAndBlank("KO")}
+};
+        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="logout" id="div_logout">
+                <div class="text-center" style="font-size: 16px;">@WebCacheHelper.GetUsernameByNo(User.Identity.Name)</div>
+                <div class="text-center" style="font-size: 10px;">
+                    <span>@(Codehelper.DefaultCountry)</span>
+                    <span style="margin-left: 10px;" class="hidden">
+                        <a href="javascript:document.getElementById('logoutForm').submit()">
+                            <i class="glyphicon glyphicon-log-out"></i>
+                            @StringResource.LOGOUT
+                        </a>
+                    </span>
+                </div>
+            </div>
+            <div class="logout-popover">
+                <p>@StringResource.CURRENT_LOGIN_USER_TYPE</p>
+                <p>
+                    @if (Request.IsLocal)
+                    {
+                        @Ajax.ActionLink(WebCacheHelper.GetUsernameByNo(User.Identity.Name),
+                                     "LoginAsOther", new { controller = "Account" }, new AjaxOptions { UpdateTargetId = "div_main_modal" })
+                    }
+                    else
+                    {
+                        <strong>@(WebCacheHelper.GetUsernameByNo(User.Identity.Name))</strong>
+                    }
+                </p>
+                <hr />
+                <div style="color: black; margin: 5px">
+                    <span>@StringResource.Language : </span>
+                    @Html.DropDownList("language", languageList, "")
+                </div>
+                <hr />
+                @if (countryList != null)
+                {
+                    <div style="color: black; margin: 5px">
+                        <span>@StringResource.MARKET : </span>
+                        @Html.DropDownList("country", countryList, StringResource.SELECT)
+                    </div>
+                    <hr />
+                }
+                <p>
+                    @Ajax.ModalActionLink("修改密码", "ChangePassword", null, new ModalAjaxOptions
+                    {
+                        HttpMethod = "get",
+                        InsertionMode = InsertionMode.InsertBefore,
+                        LoadingElementId = "div_progress",
+                        UpdateTargetId = "div_main_modal",
+                    })
+                    <a href="javascript:document.getElementById('logoutForm').submit()"><strong>@StringResource.LOGOUT</strong></a>
+                </p>
+            </div>
+        }
+    }
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('.logout').click(function () {
+            $('.logout-popover').toggle();
+            popups['logout'] = { container: '.logout-popover', triggerElement: '#div_logout', close: function () { $('.logout-popover').hide(); } }
+        });
+
+        $('#language, #country').change(function () {
+            window.location.href = $(this).val();
+        });
+    });
+</script>

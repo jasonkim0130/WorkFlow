@@ -1,0 +1,41 @@
+﻿@using Resources
+@if (ViewBag.success != null)
+{
+    <div class="alert alert-success">
+        @ViewBag.success
+    </div>
+}
+@if (ViewBag.error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.error
+    </div>
+}
+<div style="padding: 0 40px">
+    <input type="file" id="uploadfile@(ViewBag.datatype)" name="uploadfile@(ViewBag.datatype)" accept=".xls,.xlsx,.csv" style="visibility: hidden" />
+    <button class="btn btn-primary" onclick="$('#uploadfile@(ViewBag.datatype)').trigger('click');">@StringResource.UPLOAD_CSV_EXCEL</button>
+    <span id="sp_prog_@(ViewBag.datatype)" style="font-size: large; color: crimson;"></span>
+    <a href="@Url.Action("DownloadSampleCSV",new { datatype = ViewBag.datatype})" class="h5">@StringResource.DOWNLOAD_SAMPLE_CSV</a>
+    <a href="@Url.Action("DownloadSampleExcel",new { datatype = ViewBag.datatype})" class="h5">@StringResource.DOWNLOAD_SAMPLE_EXCEL</a>
+</div>
+
+<script type="text/javascript">
+    $('#uploadfile@(ViewBag.datatype)').fileupload({
+        url: '@Url.Action("RecieveFile",new { datatype = ViewBag.datatype })',
+        send: function (e, data) {
+            if (data.files && data.files[0] && data.files[0].size > 1024 * 1024 * 10) {
+                alert('Please select a file less than10MB.');
+                return false;
+            }
+        },
+        complete: function (e, data) {
+            var text = e.responseText;
+            $('#div_content').html(text);
+            //$('#uploadfile@(ViewBag.datatype)').fileupload('destroy');
+        },
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10) + "%";
+            $('#sp_prog_@(ViewBag.datatype)').html(progress);
+        }
+    });
+</script>

@@ -1,0 +1,26 @@
+﻿
+@using WorkFlow.Ext
+@using Resources
+@model string
+@{
+    ViewBag.Title = "Alert";
+    ViewBag.DisplayButtons = false;
+    ViewBag.DisplaySelfButtons = true;
+}
+<div style="margin: 20px">
+    <hgroup>
+        <h2 class="alert alert-danger">A new copy of this template will be created,are you sure to edit the template ? </h2>
+    </hgroup>
+</div>
+@section buttons{
+    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="$('#div_modal_cont').remove();">@StringResource.CANCEL</button>
+    @Ajax.ModalActionLink("Continue", "Edit", new { flowTypeId = ViewBag.FlowTypeId, propmt = false }, new ModalAjaxOptions
+    {
+        HttpMethod = "get",
+        InsertionMode = InsertionMode.Replace,
+        LoadingElementId = "div_progress",
+        Class = "btn btn-primary",
+        ModalTargetId = "div_cannot_eidt",
+        UpdateTargetId = "div_content"
+    })
+}

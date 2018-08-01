@@ -1,0 +1,2814 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ACCOUNT_PERMISSION_SETTINGS" xml:space="preserve">
+    <value>账号权限设定</value>
+  </data>
+  <data name="ACCOUNT_STAFF_CODE" xml:space="preserve">
+    <value>帐号 (员编)</value>
+  </data>
+  <data name="ACTIVITY_WAREHOUSE" xml:space="preserve">
+    <value>活动仓库</value>
+  </data>
+  <data name="ACTUAL_INVENTORY" xml:space="preserve">
+    <value>實際庫存</value>
+  </data>
+  <data name="ADD" xml:space="preserve">
+    <value>新增</value>
+  </data>
+  <data name="ADD_AT_LEAST_ONE_SKU" xml:space="preserve">
+    <value>请至少添加一个Sku</value>
+  </data>
+  <data name="ADD_STOCK" xml:space="preserve">
+    <value>补货</value>
+  </data>
+  <data name="ADDRESS" xml:space="preserve">
+    <value>地址</value>
+  </data>
+  <data name="AddressUncleared" xml:space="preserve">
+    <value>收件資訊不全</value>
+  </data>
+  <data name="AddrMissing" xml:space="preserve">
+    <value>电话，收件人或者寄件地址为空，无法配送</value>
+  </data>
+  <data name="ADVANCED" xml:space="preserve">
+    <value>高级</value>
+  </data>
+  <data name="AFTERNOON" xml:space="preserve">
+    <value>下午</value>
+  </data>
+  <data name="AGE" xml:space="preserve">
+    <value>年龄</value>
+  </data>
+  <data name="ALL" xml:space="preserve">
+    <value>所有</value>
+  </data>
+  <data name="ALL_BRANDS" xml:space="preserve">
+    <value>所有品牌</value>
+  </data>
+  <data name="ALL_CHANNEL" xml:space="preserve">
+    <value>所有平台</value>
+  </data>
+  <data name="ALL_CITY" xml:space="preserve">
+    <value>全县市</value>
+  </data>
+  <data name="ALL_ORDER_STATE" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="ALL_PROVINCE" xml:space="preserve">
+    <value>全省</value>
+  </data>
+  <data name="ALL_PROVINCE_LIST" xml:space="preserve">
+    <value>所有省区</value>
+  </data>
+  <data name="ALLOW_ASSIGN_TO_DEPOT" xml:space="preserve">
+    <value>是否允许分配到Depot</value>
+  </data>
+  <data name="ALLOW_SPLIT" xml:space="preserve">
+    <value>允许拆单到Warehouse或者Depot</value>
+  </data>
+  <data name="AllowSplitOrder" xml:space="preserve">
+    <value>允许拆单</value>
+  </data>
+  <data name="ALREADY_SHIPPED" xml:space="preserve">
+    <value>已出货</value>
+  </data>
+  <data name="AMOUNT" xml:space="preserve">
+    <value>金额</value>
+  </data>
+  <data name="AMOUNT_DECIMAL" xml:space="preserve">
+    <value>金额（小数位）</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>申请</value>
+  </data>
+  <data name="APPROVER_EXISTED_IN_PREVIOUS_STEPS" xml:space="preserve">
+    <value>审批者在前面的步骤已经存在</value>
+  </data>
+  <data name="Archive" xml:space="preserve">
+    <value>存档</value>
+  </data>
+  <data name="ArchiveApplications" xml:space="preserve">
+    <value>我的申请</value>
+  </data>
+  <data name="ArchiveFinishedApplications" xml:space="preserve">
+    <value>审批记录</value>
+  </data>
+  <data name="ArchiveNotifications" xml:space="preserve">
+    <value>通知</value>
+  </data>
+  <data name="AREA" xml:space="preserve">
+    <value>区域</value>
+  </data>
+  <data name="ASSIGN_MODE" xml:space="preserve">
+    <value>分配模式</value>
+  </data>
+  <data name="ASSIGN_PENDING_NUM" xml:space="preserve">
+    <value>等待配置订单数量大于</value>
+  </data>
+  <data name="ASSIGN_SEQ_BY" xml:space="preserve">
+    <value>自动配置顺序(DESC)</value>
+  </data>
+  <data name="ASSIGN_TO_DEPOT_END" xml:space="preserve">
+    <value>分配到Depot结束时间</value>
+  </data>
+  <data name="ASSIGN_TO_DEPOT_START" xml:space="preserve">
+    <value>分配到Depot开始时间</value>
+  </data>
+  <data name="ASSINGING_ORDERS" xml:space="preserve">
+    <value>待配订单</value>
+  </data>
+  <data name="ATTACHMENT_NOT_FOUND" xml:space="preserve">
+    <value>附件未找到</value>
+  </data>
+  <data name="ATTACHMENTS" xml:space="preserve">
+    <value>附件</value>
+  </data>
+  <data name="ATTRIBUTE" xml:space="preserve">
+    <value>屬性</value>
+  </data>
+  <data name="Authority" xml:space="preserve">
+    <value>权限</value>
+  </data>
+  <data name="AUTO_REFRESH" xml:space="preserve">
+    <value>數字角標自动刷新</value>
+  </data>
+  <data name="AutoTransfer" xml:space="preserve">
+    <value>自动调货</value>
+  </data>
+  <data name="AXInventory" xml:space="preserve">
+    <value>AX库存</value>
+  </data>
+  <data name="BackToSchedule" xml:space="preserve">
+    <value>重新配置</value>
+  </data>
+  <data name="BALANCE_PAYMENT_UNPAID" xml:space="preserve">
+    <value>(尾款未付)</value>
+  </data>
+  <data name="BARCODE" xml:space="preserve">
+    <value>二维码</value>
+  </data>
+  <data name="BasicInfo" xml:space="preserve">
+    <value>基本资料</value>
+  </data>
+  <data name="Batch" xml:space="preserve">
+    <value>Job #</value>
+  </data>
+  <data name="BIRTHDAY" xml:space="preserve">
+    <value>生日</value>
+  </data>
+  <data name="BOOKED_ORDER" xml:space="preserve">
+    <value>已付订订单</value>
+  </data>
+  <data name="BOX_NO" xml:space="preserve">
+    <value>箱号</value>
+  </data>
+  <data name="BoxSeq" xml:space="preserve">
+    <value>格</value>
+  </data>
+  <data name="BRAND" xml:space="preserve">
+    <value>品牌</value>
+  </data>
+  <data name="BRAND_SELECT" xml:space="preserve">
+    <value>请选择一个品牌活动</value>
+  </data>
+  <data name="BUYER" xml:space="preserve">
+    <value>订购人</value>
+  </data>
+  <data name="BuyerNick" xml:space="preserve">
+    <value>买家昵称</value>
+  </data>
+  <data name="CampaignManagement" xml:space="preserve">
+    <value>广告管理</value>
+  </data>
+  <data name="CampaignName" xml:space="preserve">
+    <value>广告名称</value>
+  </data>
+  <data name="CampaignSetup" xml:space="preserve">
+    <value>广告设定</value>
+  </data>
+  <data name="CANCEL" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="CANCEL_CHOSEN" xml:space="preserve">
+    <value>取消选中项</value>
+  </data>
+  <data name="CANCEL_CURRENT_JOB" xml:space="preserve">
+    <value>是否要取消当前Job?</value>
+  </data>
+  <data name="CANCEL_ORDER" xml:space="preserve">
+    <value>取消订单</value>
+  </data>
+  <data name="CANCEL_ORDER_CONFIRM" xml:space="preserve">
+    <value>确定要取消订单吗？</value>
+  </data>
+  <data name="Cancelled" xml:space="preserve">
+    <value>已取消</value>
+  </data>
+  <data name="Closed" xml:space="preserve">
+    <value>已關閉</value>
+  </data>
+  <data name="CANCELLED_ORDERS" xml:space="preserve">
+    <value>已取消订单</value>
+  </data>
+  <data name="CancelRF" xml:space="preserve">
+    <value>取消退货</value>
+  </data>
+  <data name="CardNo" xml:space="preserve">
+    <value>卡号</value>
+  </data>
+  <data name="CartCheckOut" xml:space="preserve">
+    <value>拣货车拣货确认</value>
+  </data>
+  <data name="CartGet" xml:space="preserve">
+    <value>拣货车配置</value>
+  </data>
+  <data name="CartLoad" xml:space="preserve">
+    <value>拣货车装载</value>
+  </data>
+  <data name="CartUnload" xml:space="preserve">
+    <value>拣货车卸除</value>
+  </data>
+  <data name="CASH_ON_DELIVERY" xml:space="preserve">
+    <value>货到付款</value>
+  </data>
+  <data name="CellPhone" xml:space="preserve">
+    <value>手機</value>
+  </data>
+  <data name="CellPhone1" xml:space="preserve">
+    <value>手機</value>
+  </data>
+  <data name="ChangedOrders" xml:space="preserve">
+    <value>修改</value>
+  </data>
+  <data name="ChangeWarehouse" xml:space="preserve">
+    <value>转仓操作</value>
+  </data>
+  <data name="ChangeWHSetting" xml:space="preserve">
+    <value>修改仓库设置</value>
+  </data>
+  <data name="CHANNEL" xml:space="preserve">
+    <value>平台</value>
+  </data>
+  <data name="CHECK" xml:space="preserve">
+    <value>审核</value>
+  </data>
+  <data name="CHECK_RESULT" xml:space="preserve">
+    <value>审核结果</value>
+  </data>
+  <data name="CHECK_STATUS" xml:space="preserve">
+    <value>查看状态</value>
+  </data>
+  <data name="CheckData" xml:space="preserve">
+    <value>数据审核</value>
+  </data>
+  <data name="Checker" xml:space="preserve">
+    <value>检查员</value>
+  </data>
+  <data name="CheckRefund" xml:space="preserve">
+    <value>检查退款</value>
+  </data>
+  <data name="CHN" xml:space="preserve">
+    <value>中国</value>
+  </data>
+  <data name="Choose" xml:space="preserve">
+    <value>选择</value>
+  </data>
+  <data name="CITY" xml:space="preserve">
+    <value>市</value>
+  </data>
+  <data name="COLLAPSE" xml:space="preserve">
+    <value>收起</value>
+  </data>
+  <data name="COLOR" xml:space="preserve">
+    <value>颜色</value>
+  </data>
+  <data name="Column" xml:space="preserve">
+    <value>架</value>
+  </data>
+  <data name="COMMENT_REQUIRED" xml:space="preserve">
+    <value>欄位不得為空值</value>
+  </data>
+  <data name="COMMENTS" xml:space="preserve">
+    <value>意见</value>
+  </data>
+  <data name="COMMODITY_ID" xml:space="preserve">
+    <value>商品Id</value>
+  </data>
+  <data name="COMMODITY_NUMBER" xml:space="preserve">
+    <value>商品数量</value>
+  </data>
+  <data name="COMMODITY_PLACE" xml:space="preserve">
+    <value>商品所在地</value>
+  </data>
+  <data name="COMMON_ORDER" xml:space="preserve">
+    <value>一般订单</value>
+  </data>
+  <data name="COMPANY" xml:space="preserve">
+    <value>公司</value>
+  </data>
+  <data name="Completed" xml:space="preserve">
+    <value>已完成</value>
+  </data>
+  <data name="CompltedRate" xml:space="preserve">
+    <value>完成率</value>
+  </data>
+  <data name="CONFIEM_MODE" xml:space="preserve">
+    <value>审核模式</value>
+  </data>
+  <data name="CONFIG" xml:space="preserve">
+    <value>配置</value>
+  </data>
+  <data name="ConfigReason" xml:space="preserve">
+    <value>改配原因</value>
+  </data>
+  <data name="CONFIRM" xml:space="preserve">
+    <value>确认</value>
+  </data>
+  <data name="CONFIRM_AND_FROZEN" xml:space="preserve">
+    <value>确定并冻结</value>
+  </data>
+  <data name="CONFIRM_AND_REVIEW" xml:space="preserve">
+    <value>确定并审核</value>
+  </data>
+  <data name="CONFIRM_PRINT_PICKLIST" xml:space="preserve">
+    <value>确定要打印拣货单？</value>
+  </data>
+  <data name="ConfirmAndApprove" xml:space="preserve">
+    <value>确定并审核</value>
+  </data>
+  <data name="ConfirmAndFrozen" xml:space="preserve">
+    <value>确定并冻结</value>
+  </data>
+  <data name="ConfirmedQty" xml:space="preserve">
+    <value>已确认数量</value>
+  </data>
+  <data name="CONNECTED_PRINTERS" xml:space="preserve">
+    <value>当前仓库已连接的印表机</value>
+  </data>
+  <data name="CORRESPONDING_ORDER_NOT_FIND" xml:space="preserve">
+    <value>无法找到对应的订单</value>
+  </data>
+  <data name="CountedDate" xml:space="preserve">
+    <value>盘点日期</value>
+  </data>
+  <data name="CountedQty" xml:space="preserve">
+    <value>盘点量</value>
+  </data>
+  <data name="CountedShop" xml:space="preserve">
+    <value>已盘店铺</value>
+  </data>
+  <data name="COUNTRY" xml:space="preserve">
+    <value>国家</value>
+  </data>
+  <data name="COUPON_CONTENT" xml:space="preserve">
+    <value>COUPON折抵內容</value>
+  </data>
+  <data name="COUPON_DISCOUNT" xml:space="preserve">
+    <value>COUPON折抵</value>
+  </data>
+  <data name="CourierCompany" xml:space="preserve">
+    <value>物流公司</value>
+  </data>
+  <data name="CREATE_NEW_EVENT" xml:space="preserve">
+    <value>新建活动</value>
+  </data>
+  <data name="CREATE_NEW_JOB" xml:space="preserve">
+    <value>新建任务</value>
+  </data>
+  <data name="CREATE_ORDER" xml:space="preserve">
+    <value>自建单据</value>
+  </data>
+  <data name="CreateCampaign" xml:space="preserve">
+    <value>创建广告</value>
+  </data>
+  <data name="CreateTime" xml:space="preserve">
+    <value>创建时间</value>
+  </data>
+  <data name="CreateWHSetting" xml:space="preserve">
+    <value>设置当前仓库</value>
+  </data>
+  <data name="CREATOR" xml:space="preserve">
+    <value>创建者</value>
+  </data>
+  <data name="CREDITCARD" xml:space="preserve">
+    <value>信用卡</value>
+  </data>
+  <data name="CROSS_CHANNEL_TOTAL" xml:space="preserve">
+    <value>(跨平台总计)</value>
+  </data>
+  <data name="CSV_NOT_DELETE" xml:space="preserve">
+    <value>此CSV文件已經被其他店鋪設為默認模板，無法刪除！</value>
+  </data>
+  <data name="CsvTemplate" xml:space="preserve">
+    <value>Csv模板</value>
+  </data>
+  <data name="CURRENCY_SETTING_BY_COUNTRY" xml:space="preserve">
+    <value>訂單參數設定</value>
+  </data>
+  <data name="CURRENT_LOCATION" xml:space="preserve">
+    <value>现在位置</value>
+  </data>
+  <data name="CURRENT_LOGIN_USER_TYPE" xml:space="preserve">
+    <value>用户的登入身份是：</value>
+  </data>
+  <data name="CurrentQty" xml:space="preserve">
+    <value>可用量</value>
+  </data>
+  <data name="CurrentSeason" xml:space="preserve">
+    <value>当前季节</value>
+  </data>
+  <data name="CustomerFav" xml:space="preserve">
+    <value>消费者偏好</value>
+  </data>
+  <data name="CustomerInfo" xml:space="preserve">
+    <value>消费者资料</value>
+  </data>
+  <data name="DAILY_SEND_EMAIL" xml:space="preserve">
+    <value>Daily Report 寄发 Email</value>
+  </data>
+  <data name="DailyReport" xml:space="preserve">
+    <value>日报</value>
+  </data>
+  <data name="Data" xml:space="preserve">
+    <value>数据</value>
+  </data>
+  <data name="DATA_NOT_CONFIRM_SETTING" xml:space="preserve">
+    <value>数据不符合货架设定</value>
+  </data>
+  <data name="DATA_NOT_FOUND" xml:space="preserve">
+    <value>没有数据行</value>
+  </data>
+  <data name="DATA_NOT_UPLOAD" xml:space="preserve">
+    <value>数据无法上传</value>
+  </data>
+  <data name="DATA_SAVE_FAILED" xml:space="preserve">
+    <value>保存失敗，請檢查后再保存</value>
+  </data>
+  <data name="DATA_TYPE" xml:space="preserve">
+    <value>數據類型</value>
+  </data>
+  <data name="DATA_UPLOAD_SUCCEED" xml:space="preserve">
+    <value>数据上传成功</value>
+  </data>
+  <data name="DataSaved" xml:space="preserve">
+    <value>数据已保存</value>
+  </data>
+  <data name="DATE" xml:space="preserve">
+    <value>日期</value>
+  </data>
+  <data name="DATE_FROM" xml:space="preserve">
+    <value>开始时间</value>
+  </data>
+  <data name="DATE_RANGE" xml:space="preserve">
+    <value>日期区间</value>
+  </data>
+  <data name="DATE_TO" xml:space="preserve">
+    <value>截止时间</value>
+  </data>
+  <data name="Deadline" xml:space="preserve">
+    <value>截止时间</value>
+  </data>
+  <data name="DELETE" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="DELETE_CONFIRM" xml:space="preserve">
+    <value>是否确定要删除？</value>
+  </data>
+  <data name="DELETE_COUNTRY_PRIVILEGES" xml:space="preserve">
+    <value>确定删除当前国家的所有权限？</value>
+  </data>
+  <data name="Delete_RackBox" xml:space="preserve">
+    <value>删除Sku货架与箱号</value>
+  </data>
+  <data name="DELETE_USER_CONFIRM" xml:space="preserve">
+    <value>确认要删除当前用户？</value>
+  </data>
+  <data name="DELETE_WAREHOUSE_CONFIRM" xml:space="preserve">
+    <value>是否删除此作业仓库？</value>
+  </data>
+  <data name="DELETED" xml:space="preserve">
+    <value>删除成功</value>
+  </data>
+  <data name="DELIVERY_ADDRESS" xml:space="preserve">
+    <value>寄送地址</value>
+  </data>
+  <data name="DeliveryQuery" xml:space="preserve">
+    <value>送货查询</value>
+  </data>
+  <data name="DEPARTMENT" xml:space="preserve">
+    <value>部门</value>
+  </data>
+  <data name="DepartmentType" xml:space="preserve">
+    <value>부서타입</value>
+  </data>
+  <data name="DepartmentType1" xml:space="preserve">
+    <value>부서타입</value>
+  </data>
+  <data name="DEPLICATE_ROWS" xml:space="preserve">
+    <value>无法上传，存在重复的数据行。</value>
+  </data>
+  <data name="DEPOT_ORDER_END" xml:space="preserve">
+    <value>Depot订单结束时间</value>
+  </data>
+  <data name="DEPOT_ORDER_START" xml:space="preserve">
+    <value>Depot订单开始时间</value>
+  </data>
+  <data name="DepotNotAllowToReturnBack" xml:space="preserve">
+    <value>该仓库为Depot, 不允许退回</value>
+  </data>
+  <data name="DepotReceive" xml:space="preserve">
+    <value>收货仓库</value>
+  </data>
+  <data name="DepotStatus" xml:space="preserve">
+    <value>收货状态</value>
+  </data>
+  <data name="DESC" xml:space="preserve">
+    <value>描述</value>
+  </data>
+  <data name="Division" xml:space="preserve">
+    <value>소속</value>
+  </data>
+  <data name="Division1" xml:space="preserve">
+    <value>소속</value>
+  </data>
+  <data name="DO_CONFIRM" xml:space="preserve">
+    <value>进行确认</value>
+  </data>
+  <data name="DOWNLOAD" xml:space="preserve">
+    <value>下载</value>
+  </data>
+  <data name="DOWNLOAD_CLIENT" xml:space="preserve">
+    <value>下载打印客户端</value>
+  </data>
+  <data name="Download_Error_Message" xml:space="preserve">
+    <value>下载错误信息</value>
+  </data>
+  <data name="DOWNLOAD_SAMPLE_CSV" xml:space="preserve">
+    <value>下载示例CSV文件</value>
+  </data>
+  <data name="DOWNLOAD_SAMPLE_EXCEL" xml:space="preserve">
+    <value>下载示例Excel文件</value>
+  </data>
+  <data name="Draft" xml:space="preserve">
+    <value>草稿</value>
+  </data>
+  <data name="DUPLICATE_APPROVERS" xml:space="preserve">
+    <value>重复的审批者</value>
+  </data>
+  <data name="DUPLICATE_CONDITIONS" xml:space="preserve">
+    <value>重复的条件</value>
+  </data>
+  <data name="DUPLICATE_NOTIFY_USER" xml:space="preserve">
+    <value>重复的通知用户</value>
+  </data>
+  <data name="EACH_PRINT_QUANTITY" xml:space="preserve">
+    <value>每批次订单数量</value>
+  </data>
+  <data name="ECGUIQuery" xml:space="preserve">
+    <value>EC GUI 查询</value>
+  </data>
+  <data name="EDIT" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+  <data name="EDIT_APPROVER" xml:space="preserve">
+    <value>编辑审批者</value>
+  </data>
+  <data name="EDIT_ORDER_INFO" xml:space="preserve">
+    <value>编辑订单资料</value>
+  </data>
+  <data name="EditOrders" xml:space="preserve">
+    <value>订单修改</value>
+  </data>
+  <data name="EMail" xml:space="preserve">
+    <value>이메일</value>
+  </data>
+  <data name="EMail1" xml:space="preserve">
+    <value>이메일</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>结束日期</value>
+  </data>
+  <data name="EndTime" xml:space="preserve">
+    <value>结束时间</value>
+  </data>
+  <data name="ENGLISH" xml:space="preserve">
+    <value>英语</value>
+  </data>
+  <data name="ENTER_BARCODE" xml:space="preserve">
+    <value>或输入Barcode</value>
+  </data>
+  <data name="ENTER_PASSWORD" xml:space="preserve">
+    <value>请输入验证密码</value>
+  </data>
+  <data name="ENTER_QRCODE" xml:space="preserve">
+    <value>或输入QRCODE</value>
+  </data>
+  <data name="ENTER_WEIGHT" xml:space="preserve">
+    <value>或输入重量</value>
+  </data>
+  <data name="ENTRIE_TO_DEPOT" xml:space="preserve">
+    <value>整单配置到Depot</value>
+  </data>
+  <data name="ENTRIE_TO_WAREHOUSE" xml:space="preserve">
+    <value>整单配置到Warehouse</value>
+  </data>
+  <data name="ERROR" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="ERROR_LOADING_ORDERS" xml:space="preserve">
+    <value>读取订单时出错</value>
+  </data>
+  <data name="ERROR_PROCESSING_REQUEST" xml:space="preserve">
+    <value>处理你的请求时出错</value>
+  </data>
+  <data name="Event" xml:space="preserve">
+    <value>活动</value>
+  </data>
+  <data name="EVENT_DEPOT" xml:space="preserve">
+    <value>活动depot</value>
+  </data>
+  <data name="EVENT_SHOP" xml:space="preserve">
+    <value>活动店铺</value>
+  </data>
+  <data name="EVENT_SKU" xml:space="preserve">
+    <value>活动SKU</value>
+  </data>
+  <data name="EventManagement" xml:space="preserve">
+    <value>活动管理</value>
+  </data>
+  <data name="EventName" xml:space="preserve">
+    <value>活动</value>
+  </data>
+  <data name="EventSetup" xml:space="preserve">
+    <value>活动设定</value>
+  </data>
+  <data name="EventType" xml:space="preserve">
+    <value>活动类型</value>
+  </data>
+  <data name="ExchangeDetails" xml:space="preserve">
+    <value>换货明细</value>
+  </data>
+  <data name="ExchangeOrders" xml:space="preserve">
+    <value>退换货</value>
+  </data>
+  <data name="EXISTED_TYPE_OF_PROPERTY" xml:space="preserve">
+    <value>属性类型已经存在</value>
+  </data>
+  <data name="EXPORT_EXCEL" xml:space="preserve">
+    <value>导出Excel</value>
+  </data>
+  <data name="EXTERNAL_CODE" xml:space="preserve">
+    <value>外部編碼</value>
+  </data>
+  <data name="FAIL" xml:space="preserve">
+    <value>失败</value>
+  </data>
+  <data name="FAIlED_MATCH_STORE" xml:space="preserve">
+    <value>未能匹配到店铺</value>
+  </data>
+  <data name="FAILURE_CANCEL_ORDER" xml:space="preserve">
+    <value>无法取消订单</value>
+  </data>
+  <data name="FAILURE_TO_DELETE" xml:space="preserve">
+    <value>无法删除</value>
+  </data>
+  <data name="FAILURE_TO_SAVE" xml:space="preserve">
+    <value>保存失败</value>
+  </data>
+  <data name="FaxNumber" xml:space="preserve">
+    <value>팩스 번호</value>
+  </data>
+  <data name="FaxNumber1" xml:space="preserve">
+    <value>팩스 번호</value>
+  </data>
+  <data name="FewInvNum" xml:space="preserve">
+    <value>回报快没货次数</value>
+  </data>
+  <data name="FIELD_NOT_FOUND" xml:space="preserve">
+    <value>字段未找到</value>
+  </data>
+  <data name="FILE_IS_MISSING" xml:space="preserve">
+    <value>文件丢失</value>
+  </data>
+  <data name="FileName" xml:space="preserve">
+    <value>文件名称</value>
+  </data>
+  <data name="FINISHED_L" xml:space="preserve">
+    <value>已完成</value>
+  </data>
+  <data name="Flag" xml:space="preserve">
+    <value>旗标</value>
+  </data>
+  <data name="FOCUS_SCAN" xml:space="preserve">
+    <value>请聚焦到当前区域，然后再扫描NFC/QRCode</value>
+  </data>
+  <data name="FOCUS_SCAN_NFC" xml:space="preserve">
+    <value>请聚焦到当前区域，然后再扫描NFC/QRCode</value>
+  </data>
+  <data name="FORBIDDEN_CREATE_REFUND" xml:space="preserve">
+    <value>禁止重複創建退貨單</value>
+  </data>
+  <data name="FRAME_TIME" xml:space="preserve">
+    <value>下架时间</value>
+  </data>
+  <data name="FREEZE_ON" xml:space="preserve">
+    <value>冻结于</value>
+  </data>
+  <data name="FREIGHT" xml:space="preserve">
+    <value>運費</value>
+  </data>
+  <data name="Frozen" xml:space="preserve">
+    <value>冻结</value>
+  </data>
+  <data name="FrozenOrder" xml:space="preserve">
+    <value>订单已冻结</value>
+  </data>
+  <data name="GENDER" xml:space="preserve">
+    <value>性别</value>
+  </data>
+  <data name="GENERATE" xml:space="preserve">
+    <value>生成</value>
+  </data>
+  <data name="GENERATE_DOC_AFTERSHIPPED" xml:space="preserve">
+    <value>包货完成后产生文字档</value>
+  </data>
+  <data name="GetTrackingNo" xml:space="preserve">
+    <value>获取单号</value>
+  </data>
+  <data name="Globalhotel" xml:space="preserve">
+    <value>Li &amp; Fung Global Hotels</value>
+  </data>
+  <data name="GOODS_AMOUNT" xml:space="preserve">
+    <value>商品合計</value>
+  </data>
+  <data name="GOODS_NOT_RECEIVED" xml:space="preserve">
+    <value>未到货</value>
+  </data>
+  <data name="GOODS_RACK" xml:space="preserve">
+    <value>货架</value>
+  </data>
+  <data name="GOODS_RECEIVED" xml:space="preserve">
+    <value>已到貨</value>
+  </data>
+  <data name="GOODS_STATUS" xml:space="preserve">
+    <value>到货状态</value>
+  </data>
+  <data name="Handler" xml:space="preserve">
+    <value>处理人员</value>
+  </data>
+  <data name="HKG" xml:space="preserve">
+    <value>香港</value>
+  </data>
+  <data name="HOMEPAGE" xml:space="preserve">
+    <value>官网</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>图片</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>导入</value>
+  </data>
+  <data name="Inbox" xml:space="preserve">
+    <value>收件箱</value>
+  </data>
+  <data name="IndividualSKUCheck" xml:space="preserve">
+    <value>SKU检查</value>
+  </data>
+  <data name="InProgress" xml:space="preserve">
+    <value>处理中</value>
+  </data>
+  <data name="InputMemberInfo" xml:space="preserve">
+    <value>请输入欲查询会员之</value>
+  </data>
+  <data name="InQty" xml:space="preserve">
+    <value>转入量</value>
+  </data>
+  <data name="INTERVAL_AFTER_LAST" xml:space="preserve">
+    <value>距离上次配置时间大于(分钟)</value>
+  </data>
+  <data name="Interview" xml:space="preserve">
+    <value>面试评估表</value>
+  </data>
+  <data name="INVALID_CONDITION_VALUE" xml:space="preserve">
+    <value>无效的条件值</value>
+  </data>
+  <data name="INVALID_DEADLINE" xml:space="preserve">
+    <value>无效的截止日期</value>
+  </data>
+  <data name="INVALID_EMAIL_FORMAT" xml:space="preserve">
+    <value>电子邮件格式不正确</value>
+  </data>
+  <data name="INVALID_FORMAT" xml:space="preserve">
+    <value>格式不正确</value>
+  </data>
+  <data name="INVALID_PARAMETER" xml:space="preserve">
+    <value>参数不正确</value>
+  </data>
+  <data name="INVALID_PASSWORD" xml:space="preserve">
+    <value>密码不正确</value>
+  </data>
+  <data name="INVALID_USERNAME_OR_PASSWORD" xml:space="preserve">
+    <value>用户名或者密码不正确</value>
+  </data>
+  <data name="INVALID_VALUE" xml:space="preserve">
+    <value>无效的值</value>
+  </data>
+  <data name="Inventory" xml:space="preserve">
+    <value>盘点</value>
+  </data>
+  <data name="INVENTORY_QUANTITY" xml:space="preserve">
+    <value>庫存數量</value>
+  </data>
+  <data name="InventoryCheck" xml:space="preserve">
+    <value>盘点</value>
+  </data>
+  <data name="InventoryPullback" xml:space="preserve">
+    <value>调货</value>
+  </data>
+  <data name="InventorySync" xml:space="preserve">
+    <value>库存同步</value>
+  </data>
+  <data name="Invoice" xml:space="preserve">
+    <value>统一发票</value>
+  </data>
+  <data name="INVOICE_CHOOSE" xml:space="preserve">
+    <value>發票選擇</value>
+  </data>
+  <data name="IptPhone" xml:space="preserve">
+    <value>IPT Phone</value>
+  </data>
+  <data name="IptPhone1" xml:space="preserve">
+    <value>IPT Phone</value>
+  </data>
+  <data name="IS_PRINT_REMARK" xml:space="preserve">
+    <value>是否列印备注</value>
+  </data>
+  <data name="JOB_WAREHOUSE" xml:space="preserve">
+    <value>作业仓库</value>
+  </data>
+  <data name="KOR" xml:space="preserve">
+    <value>韩国</value>
+  </data>
+  <data name="KOREAN" xml:space="preserve">
+    <value>韩语</value>
+  </data>
+  <data name="l" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Lane" xml:space="preserve">
+    <value>排</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="LARGEST_INVENTORY" xml:space="preserve">
+    <value>最大庫存</value>
+  </data>
+  <data name="Leave" xml:space="preserve">
+    <value>假期申请表</value>
+  </data>
+  <data name="Level" xml:space="preserve">
+    <value>层</value>
+  </data>
+  <data name="LicensingBackend" xml:space="preserve">
+    <value>授权管理</value>
+  </data>
+  <data name="LOCATION" xml:space="preserve">
+    <value>位置</value>
+  </data>
+  <data name="LOCKED" xml:space="preserve">
+    <value>已锁定</value>
+  </data>
+  <data name="LOGIN" xml:space="preserve">
+    <value>登录</value>
+  </data>
+  <data name="LOGISTICS" xml:space="preserve">
+    <value>物流</value>
+  </data>
+  <data name="LOGISTICS_COMPANY" xml:space="preserve">
+    <value>货运行资讯</value>
+  </data>
+  <data name="LOGISTICS_CONFIG" xml:space="preserve">
+    <value>物流配置</value>
+  </data>
+  <data name="LOGISTICS_UNIT" xml:space="preserve">
+    <value>货运行</value>
+  </data>
+  <data name="LogisticsConfig" xml:space="preserve">
+    <value>物流配置</value>
+  </data>
+  <data name="LogisticUnit" xml:space="preserve">
+    <value>货运行资讯</value>
+  </data>
+  <data name="LOGOUT" xml:space="preserve">
+    <value>登出</value>
+  </data>
+  <data name="Logs" xml:space="preserve">
+    <value>日志</value>
+  </data>
+  <data name="LOOK_FOR_APPROVER" xml:space="preserve">
+    <value>查找审批者</value>
+  </data>
+  <data name="LOOK_FOR_NOTIFY_USER" xml:space="preserve">
+    <value>查找通知用户</value>
+  </data>
+  <data name="MAIN_PICTURE" xml:space="preserve">
+    <value>商品主图片</value>
+  </data>
+  <data name="MARKET" xml:space="preserve">
+    <value>市场</value>
+  </data>
+  <data name="MEMBER_RECORED" xml:space="preserve">
+    <value>会员记录</value>
+  </data>
+  <data name="MembershipRecords" xml:space="preserve">
+    <value>会员记录</value>
+  </data>
+  <data name="MENBER_CONTENT" xml:space="preserve">
+    <value>會員折抵內容</value>
+  </data>
+  <data name="MENBER_DISCOUNT" xml:space="preserve">
+    <value>會員折抵</value>
+  </data>
+  <data name="MenuGroup" xml:space="preserve">
+    <value>메뉴 그룹</value>
+  </data>
+  <data name="MenuGroup1" xml:space="preserve">
+    <value>메뉴 그룹</value>
+  </data>
+  <data name="Merchandise" xml:space="preserve">
+    <value>商品</value>
+  </data>
+  <data name="MERCHANDISE_NO" xml:space="preserve">
+    <value>商品货号</value>
+  </data>
+  <data name="MERCHANDISE_QUANTITY" xml:space="preserve">
+    <value>商品数量</value>
+  </data>
+  <data name="MERGE_ORDERS" xml:space="preserve">
+    <value>合并订单</value>
+  </data>
+  <data name="MIN_WAREHOUSE_PiCKING_NUM" xml:space="preserve">
+    <value>其中一个仓的Picking数量小于</value>
+  </data>
+  <data name="MINIMUN_INVENTORY" xml:space="preserve">
+    <value>最小庫存</value>
+  </data>
+  <data name="MOBILE" xml:space="preserve">
+    <value>移动电话</value>
+  </data>
+  <data name="MODIFY" xml:space="preserve">
+    <value>修改</value>
+  </data>
+  <data name="MODIFY_RULE" xml:space="preserve">
+    <value>修改规则</value>
+  </data>
+  <data name="MORE" xml:space="preserve">
+    <value>更多</value>
+  </data>
+  <data name="MORNING" xml:space="preserve">
+    <value>早上</value>
+  </data>
+  <data name="MULTIPLE_ORDER" xml:space="preserve">
+    <value>一单多件</value>
+  </data>
+  <data name="MYS" xml:space="preserve">
+    <value>马来西亚</value>
+  </data>
+  <data name="NAME" xml:space="preserve">
+    <value>姓名</value>
+  </data>
+  <data name="NEED_DECIMAL_POINT" xml:space="preserve">
+    <value>货币是否需要小数点(.)</value>
+  </data>
+  <data name="NEED_PRINT_PICKLIST" xml:space="preserve">
+    <value>是否需要打印拣货单</value>
+  </data>
+  <data name="NEED_PRINT_QRCODE" xml:space="preserve">
+    <value>是否需要打印QRCode</value>
+  </data>
+  <data name="NEED_PRINT_SHOPPING_DETAILS" xml:space="preserve">
+    <value>是否需要打印购买明细</value>
+  </data>
+  <data name="NEED_WEIGHTTING" xml:space="preserve">
+    <value>是否需要秤重</value>
+  </data>
+  <data name="NEWCOMMING_ORDER" xml:space="preserve">
+    <value>新进订单</value>
+  </data>
+  <data name="Next_Page" xml:space="preserve">
+    <value>下一页</value>
+  </data>
+  <data name="NFC_MUST_EQUAL_CODE" xml:space="preserve">
+    <value>NFC No 必须等于 Code</value>
+  </data>
+  <data name="NIGHT" xml:space="preserve">
+    <value>晚上</value>
+  </data>
+  <data name="NO" xml:space="preserve">
+    <value>否</value>
+  </data>
+  <data name="NO_APPROVER_FOUND" xml:space="preserve">
+    <value>未找到审批者</value>
+  </data>
+  <data name="NO_CORRECT_ORDER" xml:space="preserve">
+    <value>未找到对应的订单</value>
+  </data>
+  <data name="NO_ELIGIBLE_WORKFLOW_FOUND" xml:space="preserve">
+    <value>未找到符合条件的工作流</value>
+  </data>
+  <data name="NO_NEXT_APPROVER_FOUND" xml:space="preserve">
+    <value>未找到下一个审批者</value>
+  </data>
+  <data name="NO_SKU_FOUND" xml:space="preserve">
+    <value>查无其他可修改SKU</value>
+  </data>
+  <data name="NO_TRANSFER_TO_DEPOT" xml:space="preserve">
+    <value>不允许转移到DEPOT仓库</value>
+  </data>
+  <data name="NormalPhone" xml:space="preserve">
+    <value>Normal Phone</value>
+  </data>
+  <data name="NormalPhone1" xml:space="preserve">
+    <value>Normal Phone</value>
+  </data>
+  <data name="NOT_FIND_CA" xml:space="preserve">
+    <value>没有找到CA订单对应的活动</value>
+  </data>
+  <data name="NOT_FIND_PA" xml:space="preserve">
+    <value>没有找到PA订单对应的活动</value>
+  </data>
+  <data name="NOT_SUPPORT_REFUND" xml:space="preserve">
+    <value>当前渠道不支持退换货</value>
+  </data>
+  <data name="Notification" xml:space="preserve">
+    <value>通知</value>
+  </data>
+  <data name="NOTIFY_USER_NOT_FOUND" xml:space="preserve">
+    <value>未找到通知用户</value>
+  </data>
+  <data name="NotInOrder" xml:space="preserve">
+    <value>此商品不在订单内</value>
+  </data>
+  <data name="NotStarted" xml:space="preserve">
+    <value>没开始</value>
+  </data>
+  <data name="NoWHSetting" xml:space="preserve">
+    <value>当前仓库没有设置</value>
+  </data>
+  <data name="NUM_ALL_NOT_ZERO" xml:space="preserve">
+    <value>所有的數量不能都爲 0</value>
+  </data>
+  <data name="OfficialWebsiteOrders" xml:space="preserve">
+    <value>官网订单</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>确定</value>
+  </data>
+  <data name="OLD_NEW" xml:space="preserve">
+    <value>商品新旧程度</value>
+  </data>
+  <data name="OMS" xml:space="preserve">
+    <value>订单管理系统</value>
+  </data>
+  <data name="ORDER" xml:space="preserve">
+    <value>订单</value>
+  </data>
+  <data name="ORDER_AMOUNT" xml:space="preserve">
+    <value>订单金额</value>
+  </data>
+  <data name="ORDER_CONFIGURATION_SETTING" xml:space="preserve">
+    <value>订单配置 【审核模式】</value>
+  </data>
+  <data name="ORDER_EXIST_REFUND_OR_EXCHANGE" xml:space="preserve">
+    <value>当前已存在未完成的换货单或退货单</value>
+  </data>
+  <data name="ORDER_FILTER_MODE" xml:space="preserve">
+    <value>启用OrderFilter模式</value>
+  </data>
+  <data name="ORDER_HAS_MORE_ORDERNO" xml:space="preserve">
+    <value>此单有多个原单号，无法继续操作</value>
+  </data>
+  <data name="ORDER_MERCHANDISES" xml:space="preserve">
+    <value>订购商品</value>
+  </data>
+  <data name="ORDER_NO" xml:space="preserve">
+    <value>订单编号</value>
+  </data>
+  <data name="ORDER_NOT_EDIT" xml:space="preserve">
+    <value>此订单无法编辑</value>
+  </data>
+  <data name="ORDER_NOT_FOUND" xml:space="preserve">
+    <value>没有找到相关订单！</value>
+  </data>
+  <data name="ORDER_NOT_FOUND_OR_NO_NEED_CONFIRM" xml:space="preserve">
+    <value>没有找到此订单或此订单状态无需确认</value>
+  </data>
+  <data name="ORDER_NOT_FOUND_OR_NO_NEED_PACK" xml:space="preserve">
+    <value>没有找到此订单或此订单状态无法包货</value>
+  </data>
+  <data name="ORDER_NOT_FOUND_OR_NO_NEED_RETURNBACK" xml:space="preserve">
+    <value>沒有找到此訂單或此訂單狀態無法退回</value>
+  </data>
+  <data name="ORDER_NUM" xml:space="preserve">
+    <value>笔订单</value>
+  </data>
+  <data name="ORDER_OPERATION" xml:space="preserve">
+    <value>订单作业</value>
+  </data>
+  <data name="ORDER_OPERATION_SETTING" xml:space="preserve">
+    <value>订单作业 审核模式设定</value>
+  </data>
+  <data name="ORDER_PARAMETER_SETTING" xml:space="preserve">
+    <value>订单参数设定</value>
+  </data>
+  <data name="ORDER_PURCHASE_DATE" xml:space="preserve">
+    <value>订购时间</value>
+  </data>
+  <data name="ORDER_RECORDS" xml:space="preserve">
+    <value>订单记录</value>
+  </data>
+  <data name="ORDER_REVIEW_AMOUNT" xml:space="preserve">
+    <value>订单审核金额</value>
+  </data>
+  <data name="ORDER_REVIEW_QUANTITY" xml:space="preserve">
+    <value>订单审核总件数</value>
+  </data>
+  <data name="ORDER_SENT" xml:space="preserve">
+    <value>订单已经发送到</value>
+  </data>
+  <data name="ORDER_SHPPED" xml:space="preserve">
+    <value>订单出货完成</value>
+  </data>
+  <data name="ORDER_STATUS" xml:space="preserve">
+    <value>訂單狀態</value>
+  </data>
+  <data name="Order_Status_Approved" xml:space="preserve">
+    <value>已审核</value>
+  </data>
+  <data name="Order_Status_Assigned" xml:space="preserve">
+    <value>已分配</value>
+  </data>
+  <data name="Order_Status_Canceled" xml:space="preserve">
+    <value>已取消</value>
+  </data>
+  <data name="Order_Status_Ordered" xml:space="preserve">
+    <value>已下单</value>
+  </data>
+  <data name="Order_Status_Packed" xml:space="preserve">
+    <value>已包装</value>
+  </data>
+  <data name="Order_Status_Packing" xml:space="preserve">
+    <value>包装中</value>
+  </data>
+  <data name="Order_Status_Picked" xml:space="preserve">
+    <value>已拣货</value>
+  </data>
+  <data name="Order_Status_Picking" xml:space="preserve">
+    <value>拣货中</value>
+  </data>
+  <data name="Order_Status_Received" xml:space="preserve">
+    <value>已收货</value>
+  </data>
+  <data name="Order_Status_Returned" xml:space="preserve">
+    <value>已退回</value>
+  </data>
+  <data name="Order_Status_Shipped" xml:space="preserve">
+    <value>已发货</value>
+  </data>
+  <data name="Order_Status_Shipping" xml:space="preserve">
+    <value>发货中</value>
+  </data>
+  <data name="ORDER_SUCCESSFULLY" xml:space="preserve">
+    <value>訂單已成功回復，但無法更新至已出貨狀態</value>
+  </data>
+  <data name="OrderActions" xml:space="preserve">
+    <value>订单作业</value>
+  </data>
+  <data name="OrderCancelled" xml:space="preserve">
+    <value>订单取消</value>
+  </data>
+  <data name="OrderDetails" xml:space="preserve">
+    <value>订单明细</value>
+  </data>
+  <data name="OrderHistory" xml:space="preserve">
+    <value>订单记录</value>
+  </data>
+  <data name="ORDERNO_REQ" xml:space="preserve">
+    <value>單号不能为空</value>
+  </data>
+  <data name="OrderNoneOfStock" xml:space="preserve">
+    <value>断货</value>
+  </data>
+  <data name="OrderOutOfStock" xml:space="preserve">
+    <value>缺货</value>
+  </data>
+  <data name="OrderQuery" xml:space="preserve">
+    <value>订单查询</value>
+  </data>
+  <data name="OrderRef" xml:space="preserve">
+    <value>原单号</value>
+  </data>
+  <data name="OrdersOnHold" xml:space="preserve">
+    <value>查看On Hold订单列表</value>
+  </data>
+  <data name="OriOrderDetails" xml:space="preserve">
+    <value>原訂單明細</value>
+  </data>
+  <data name="OTHER" xml:space="preserve">
+    <value>其他</value>
+  </data>
+  <data name="OTHER_PARAMETERS" xml:space="preserve">
+    <value>其他参数</value>
+  </data>
+  <data name="OTHER_SHOP" xml:space="preserve">
+    <value>其他店铺</value>
+  </data>
+  <data name="OtherCountry" xml:space="preserve">
+    <value>其他国家</value>
+  </data>
+  <data name="OtherReason" xml:space="preserve">
+    <value>其他原因</value>
+  </data>
+  <data name="OUT_OF_STOCK_CONTROL" xml:space="preserve">
+    <value>缺貨控管</value>
+  </data>
+  <data name="OUTOFSTOCK_ORDER" xml:space="preserve">
+    <value>缺货订单</value>
+  </data>
+  <data name="OutOfStockQuery" xml:space="preserve">
+    <value>缺货查询</value>
+  </data>
+  <data name="OutQty" xml:space="preserve">
+    <value>转出量</value>
+  </data>
+  <data name="OVERDUR" xml:space="preserve">
+    <value>过期</value>
+  </data>
+  <data name="OVERDUR_HOURS" xml:space="preserve">
+    <value>超时订单（小时）</value>
+  </data>
+  <data name="Pack" xml:space="preserve">
+    <value>包货</value>
+  </data>
+  <data name="PACK_FINISHED" xml:space="preserve">
+    <value>包装完成</value>
+  </data>
+  <data name="PACKER" xml:space="preserve">
+    <value>包货员</value>
+  </data>
+  <data name="PAGE_UNDER_DEVELOPMENT" xml:space="preserve">
+    <value>请稍后，此页内容尚在开发中......</value>
+  </data>
+  <data name="Pager_Next" xml:space="preserve">
+    <value>下一页</value>
+  </data>
+  <data name="Pager_Previous" xml:space="preserve">
+    <value>上一页</value>
+  </data>
+  <data name="Pager_Total" xml:space="preserve">
+    <value>总计</value>
+  </data>
+  <data name="PARAMETER_NAME" xml:space="preserve">
+    <value>参数名称</value>
+  </data>
+  <data name="PARAMETER_SETTINGS" xml:space="preserve">
+    <value>参数设定</value>
+  </data>
+  <data name="PARAMETER_VALUE" xml:space="preserve">
+    <value>参数值</value>
+  </data>
+  <data name="PartialShip" xml:space="preserve">
+    <value>部分发货</value>
+  </data>
+  <data name="PasswardExpiredDate" xml:space="preserve">
+    <value>패스워드 만료일</value>
+  </data>
+  <data name="PasswardExpiredDate1" xml:space="preserve">
+    <value>패스워드 만료일</value>
+  </data>
+  <data name="PASSWORD" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="PASSWORD_CHANGE" xml:space="preserve">
+    <value>密码已经修改</value>
+  </data>
+  <data name="PASSWORD_REPEATED" xml:space="preserve">
+    <value>新密码不能和旧密码重复</value>
+  </data>
+  <data name="PASSWORD_REQUIRED" xml:space="preserve">
+    <value>密码不能为空</value>
+  </data>
+  <data name="PASTE_AND_SCAN_PACKAGE" xml:space="preserve">
+    <value>请将快递单黏贴至包裹上，并扫描BAR CODE</value>
+  </data>
+  <data name="PAYMENT_STATUS" xml:space="preserve">
+    <value>付款狀態</value>
+  </data>
+  <data name="PAYMENT_WAY" xml:space="preserve">
+    <value>付款方式</value>
+  </data>
+  <data name="PEDDING_ORDERS" xml:space="preserve">
+    <value>待审订单</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>待审批</value>
+  </data>
+  <data name="PENDING_ORDERS_SETTING" xml:space="preserve">
+    <value>待审订单 【审核模式】</value>
+  </data>
+  <data name="PERCENTAGE" xml:space="preserve">
+    <value>百分比</value>
+  </data>
+  <data name="PERMISSIONS" xml:space="preserve">
+    <value>权限</value>
+  </data>
+  <data name="PERMISSIONS_SETTING" xml:space="preserve">
+    <value>权限设定</value>
+  </data>
+  <data name="PHONE" xml:space="preserve">
+    <value>电话</value>
+  </data>
+  <data name="Pick" xml:space="preserve">
+    <value>捡货</value>
+  </data>
+  <data name="PICK_CONFIRM" xml:space="preserve">
+    <value>捡货确认</value>
+  </data>
+  <data name="PICK_CONFIRMED" xml:space="preserve">
+    <value>捡货已确认</value>
+  </data>
+  <data name="PICK_ORDER" xml:space="preserve">
+    <value>拣货单</value>
+  </data>
+  <data name="Picked" xml:space="preserve">
+    <value>捡货确认</value>
+  </data>
+  <data name="PICKER" xml:space="preserve">
+    <value>检货员</value>
+  </data>
+  <data name="PICKING_AREA" xml:space="preserve">
+    <value>拣货区</value>
+  </data>
+  <data name="PICKING_PROBLEM_ORDER" xml:space="preserve">
+    <value>拣货问题订单</value>
+  </data>
+  <data name="PLEASE_SCAN_NFC_OR_QRCode" xml:space="preserve">
+    <value>请扫描NFC/QRCode</value>
+  </data>
+  <data name="PLEASE_SELECT" xml:space="preserve">
+    <value>请选择</value>
+  </data>
+  <data name="PLEASE_SELECT_A_VALUE" xml:space="preserve">
+    <value>请选择一个值</value>
+  </data>
+  <data name="PleaseInputBarcode" xml:space="preserve">
+    <value>请填写Barcode</value>
+  </data>
+  <data name="PleaseInputPassword" xml:space="preserve">
+    <value>请输入密码</value>
+  </data>
+  <data name="POINTS_DISCOUNT" xml:space="preserve">
+    <value>點數折抵</value>
+  </data>
+  <data name="POSDate" xml:space="preserve">
+    <value>POS日期</value>
+  </data>
+  <data name="Position" xml:space="preserve">
+    <value>位置</value>
+  </data>
+  <data name="Position1" xml:space="preserve">
+    <value>직위</value>
+  </data>
+  <data name="POSNo" xml:space="preserve">
+    <value>POS单号</value>
+  </data>
+  <data name="PREORDER_END" xml:space="preserve">
+    <value>预定订单结束时间</value>
+  </data>
+  <data name="PREORDER_START" xml:space="preserve">
+    <value>预定订单开始时间</value>
+  </data>
+  <data name="PREPACKAGE" xml:space="preserve">
+    <value>预装包裹</value>
+  </data>
+  <data name="PRESELL" xml:space="preserve">
+    <value>预售</value>
+  </data>
+  <data name="PRESELL_WAREHOUSE" xml:space="preserve">
+    <value>预售仓库</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>价格</value>
+  </data>
+  <data name="PRINT" xml:space="preserve">
+    <value>列印</value>
+  </data>
+  <data name="PRINT_BATCHES" xml:space="preserve">
+    <value>打印批次</value>
+  </data>
+  <data name="PRINT_PARAMETERS" xml:space="preserve">
+    <value>Print cilent 参数</value>
+  </data>
+  <data name="PRINT_PICKLIST" xml:space="preserve">
+    <value>打印拣货单</value>
+  </data>
+  <data name="PRINT_WORK" xml:space="preserve">
+    <value>列印并作业</value>
+  </data>
+  <data name="PrintByBatch" xml:space="preserve">
+    <value>批次捡货打印</value>
+  </data>
+  <data name="PRINTER" xml:space="preserve">
+    <value>印表机</value>
+  </data>
+  <data name="PRINTER_TYPE" xml:space="preserve">
+    <value>类别</value>
+  </data>
+  <data name="Printers" xml:space="preserve">
+    <value>打印机</value>
+  </data>
+  <data name="PRIORITY" xml:space="preserve">
+    <value>优先级</value>
+  </data>
+  <data name="Privileges" xml:space="preserve">
+    <value>权限设定</value>
+  </data>
+  <data name="PROBLEM_ORDER" xml:space="preserve">
+    <value>问题订单</value>
+  </data>
+  <data name="PROCEESSED_ORDER" xml:space="preserve">
+    <value>已处理订单</value>
+  </data>
+  <data name="PROCESSING_ORDER" xml:space="preserve">
+    <value>处理中订单</value>
+  </data>
+  <data name="PRODUCT_SYNC" xml:space="preserve">
+    <value>貨品同步策略</value>
+  </data>
+  <data name="PRODUCT_SYNC_NOT_SAVED" xml:space="preserve">
+    <value>無法保存貨品同步策略</value>
+  </data>
+  <data name="PRODUCT_SYNC_SAVED" xml:space="preserve">
+    <value>货品同步策略已经保存</value>
+  </data>
+  <data name="ProductDetails" xml:space="preserve">
+    <value>产品明细</value>
+  </data>
+  <data name="ProductName" xml:space="preserve">
+    <value>产品名称</value>
+  </data>
+  <data name="ProductNo" xml:space="preserve">
+    <value>商品号</value>
+  </data>
+  <data name="Progressing" xml:space="preserve">
+    <value>进度</value>
+  </data>
+  <data name="PROVINCE" xml:space="preserve">
+    <value>省</value>
+  </data>
+  <data name="PullbackedQty" xml:space="preserve">
+    <value>调货量</value>
+  </data>
+  <data name="PullbackQty" xml:space="preserve">
+    <value>调货需求量</value>
+  </data>
+  <data name="Purchaser" xml:space="preserve">
+    <value>购买人</value>
+  </data>
+  <data name="QRCODE_INCORRECT_FORMAT" xml:space="preserve">
+    <value>QRCode 格式不正確</value>
+  </data>
+  <data name="QRCODE_UNRECONGNIZED" xml:space="preserve">
+    <value>无法识别的QRcode</value>
+  </data>
+  <data name="QTY_MORE_THAN_ZERO" xml:space="preserve">
+    <value>QTY必须大于0</value>
+  </data>
+  <data name="QUANTITY" xml:space="preserve">
+    <value>数量</value>
+  </data>
+  <data name="Query" xml:space="preserve">
+    <value>查询</value>
+  </data>
+  <data name="RACK" xml:space="preserve">
+    <value>Rack</value>
+  </data>
+  <data name="RACK_MANAGEMENT" xml:space="preserve">
+    <value>储位维护</value>
+  </data>
+  <data name="RackBox" xml:space="preserve">
+    <value>SKU货架与箱号</value>
+  </data>
+  <data name="RACKNO_REPETITION" xml:space="preserve">
+    <value>重复的 RackNo</value>
+  </data>
+  <data name="RE_RENTER_FOR_PAGE" xml:space="preserve">
+    <value>有新的调货, 请重新进入该页面操作</value>
+  </data>
+  <data name="REASON" xml:space="preserve">
+    <value>原因</value>
+  </data>
+  <data name="REASON_AND_REMARK" xml:space="preserve">
+    <value>Reason &amp; Remark</value>
+  </data>
+  <data name="ReceiveDate" xml:space="preserve">
+    <value>收货时间</value>
+  </data>
+  <data name="ReceivedQty" xml:space="preserve">
+    <value>收货数量</value>
+  </data>
+  <data name="RECEIVER" xml:space="preserve">
+    <value>收件人</value>
+  </data>
+  <data name="Receiving_Shop" xml:space="preserve">
+    <value>收货店铺</value>
+  </data>
+  <data name="Receiving_Status" xml:space="preserve">
+    <value>收货状态</value>
+  </data>
+  <data name="RecentAccessDate" xml:space="preserve">
+    <value>최근접속일</value>
+  </data>
+  <data name="RecentAccessDate1" xml:space="preserve">
+    <value>최근접속일</value>
+  </data>
+  <data name="REFUND_CLOSED" xml:space="preserve">
+    <value>退款关闭</value>
+  </data>
+  <data name="REFUND_CONFIGURATION_SETTING" xml:space="preserve">
+    <value>退款訂單配置 【審核模式】</value>
+  </data>
+  <data name="REFUND_JDRefund" xml:space="preserve">
+    <value>有退款</value>
+  </data>
+  <data name="REFUND_LOGISTICS_COMPANY" xml:space="preserve">
+    <value>退货物流公司</value>
+  </data>
+  <data name="REFUND_NO_REFUND" xml:space="preserve">
+    <value>无退款</value>
+  </data>
+  <data name="REFUND_SELLER_REFUSE_BUYER" xml:space="preserve">
+    <value>卖家拒绝退款</value>
+  </data>
+  <data name="REFUND_STATUS" xml:space="preserve">
+    <value>退款状态</value>
+  </data>
+  <data name="REFUND_SUCCESS" xml:space="preserve">
+    <value>退款成功</value>
+  </data>
+  <data name="REFUND_TIME" xml:space="preserve">
+    <value>退货时间</value>
+  </data>
+  <data name="REFUND_WAIT_BUYER_RETURN_GOODS" xml:space="preserve">
+    <value>同意退款，等待买家退货</value>
+  </data>
+  <data name="REFUND_WAIT_SELLER_AGREE" xml:space="preserve">
+    <value>买家申请退款，等待卖家同意</value>
+  </data>
+  <data name="REFUND_WAIT_SELLER_CONFIRM_GOODS" xml:space="preserve">
+    <value>买家已经退货，等待卖家收货</value>
+  </data>
+  <data name="RefundAmount" xml:space="preserve">
+    <value>退货金额</value>
+  </data>
+  <data name="RefundDetails" xml:space="preserve">
+    <value>退貨明細</value>
+  </data>
+  <data name="RefundOrder" xml:space="preserve">
+    <value>订单退回</value>
+  </data>
+  <data name="RefundOrderNo" xml:space="preserve">
+    <value>退货单号</value>
+  </data>
+  <data name="RefundPerson" xml:space="preserve">
+    <value>退货人</value>
+  </data>
+  <data name="RefundProduct" xml:space="preserve">
+    <value>退货商品</value>
+  </data>
+  <data name="RefuseRefund" xml:space="preserve">
+    <value>拒绝退货</value>
+  </data>
+  <data name="Region" xml:space="preserve">
+    <value>区域</value>
+  </data>
+  <data name="REMARK" xml:space="preserve">
+    <value>备注</value>
+  </data>
+  <data name="ReplaceGoodsDetails" xml:space="preserve">
+    <value>換貨明細</value>
+  </data>
+  <data name="REPLENISH_AREA" xml:space="preserve">
+    <value>补货区</value>
+  </data>
+  <data name="REPLENISHMENT_AREA_SHELF" xml:space="preserve">
+    <value>补货区货架</value>
+  </data>
+  <data name="REPORT_RECIPIENT" xml:space="preserve">
+    <value>Report 收件人</value>
+  </data>
+  <data name="Reporting" xml:space="preserve">
+    <value>报表</value>
+  </data>
+  <data name="REPRINT_PICK_ORDER" xml:space="preserve">
+    <value>重印捡货单</value>
+  </data>
+  <data name="REPRINT_QRCODE" xml:space="preserve">
+    <value>重印QRCode</value>
+  </data>
+  <data name="RequestDateTime" xml:space="preserve">
+    <value>需求日</value>
+  </data>
+  <data name="RequestedQuantity" xml:space="preserve">
+    <value>请求数量</value>
+  </data>
+  <data name="RequiredFinalShipByDate" xml:space="preserve">
+    <value>最终出货日期</value>
+  </data>
+  <data name="RETURN" xml:space="preserve">
+    <value>返回</value>
+  </data>
+  <data name="RETURN_BACK" xml:space="preserve">
+    <value>退回</value>
+  </data>
+  <data name="RETURN_MANAGEMENT" xml:space="preserve">
+    <value>退货办理</value>
+  </data>
+  <data name="RETURN_PICK_ORDER" xml:space="preserve">
+    <value>退回到拣货单</value>
+  </data>
+  <data name="RETURNBACK_FINISHED" xml:space="preserve">
+    <value>退回完成</value>
+  </data>
+  <data name="ReturnConfirm" xml:space="preserve">
+    <value>退货确认</value>
+  </data>
+  <data name="ReturnDetails" xml:space="preserve">
+    <value>退货明细</value>
+  </data>
+  <data name="ReturnHandle" xml:space="preserve">
+    <value>退货办理</value>
+  </data>
+  <data name="ReturnRequest" xml:space="preserve">
+    <value>退货办理</value>
+  </data>
+  <data name="ReviewOrders" xml:space="preserve">
+    <value>待审订单</value>
+  </data>
+  <data name="REWORK_REASON" xml:space="preserve">
+    <value>改配原因</value>
+  </data>
+  <data name="RFCFM" xml:space="preserve">
+    <value>退货确认</value>
+  </data>
+  <data name="RFJobs" xml:space="preserve">
+    <value>退货作业</value>
+  </data>
+  <data name="RFReview" xml:space="preserve">
+    <value>退货审核</value>
+  </data>
+  <data name="ROW" xml:space="preserve">
+    <value>行</value>
+  </data>
+  <data name="ROW_DATA_DUPLICATED" xml:space="preserve">
+    <value>相同数据行已经存在</value>
+  </data>
+  <data name="SAME_BUYER_HOURS" xml:space="preserve">
+    <value>相同订购人订购时间（小时）</value>
+  </data>
+  <data name="SAME_BUYER_QUANTITY" xml:space="preserve">
+    <value>于同品牌购买的订单数量 (跨平台总计)</value>
+  </data>
+  <data name="SAVE" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="SAVE_COMMENT_FAILED" xml:space="preserve">
+    <value>保存意见失败</value>
+  </data>
+  <data name="SAVE_CONDITION_FAILED" xml:space="preserve">
+    <value>保存条件失败</value>
+  </data>
+  <data name="SAVE_EXECUTE" xml:space="preserve">
+    <value>保存并立即执行</value>
+  </data>
+  <data name="SAVE_FAILED" xml:space="preserve">
+    <value>保存失敗，缺少 Brand</value>
+  </data>
+  <data name="SCAN_BARCODE" xml:space="preserve">
+    <value>请扫描商品BAR CODE，进行确认</value>
+  </data>
+  <data name="SCAN_NFC" xml:space="preserve">
+    <value>请扫描NFC/QRCode</value>
+  </data>
+  <data name="SCAN_NFC_CARD" xml:space="preserve">
+    <value>请扫描NFC卡片</value>
+  </data>
+  <data name="SCAN_NFC_TO_UNINSTALL" xml:space="preserve">
+    <value>刷入CART的NFC/QRCode解除车与人、车与BAR关系</value>
+  </data>
+  <data name="SCAN_QRCODE" xml:space="preserve">
+    <value>请扫描QRCODE</value>
+  </data>
+  <data name="ScheduledWarehouses" xml:space="preserve">
+    <value>任务仓库</value>
+  </data>
+  <data name="SEARCH" xml:space="preserve">
+    <value>搜索</value>
+  </data>
+  <data name="SECONDS" xml:space="preserve">
+    <value>秒</value>
+  </data>
+  <data name="SELECT" xml:space="preserve">
+    <value>选择</value>
+  </data>
+  <data name="SELECT_COUNTRY" xml:space="preserve">
+    <value>请选择国家</value>
+  </data>
+  <data name="SELECT_LOGISTICS_COMPANY" xml:space="preserve">
+    <value>选择货运行</value>
+  </data>
+  <data name="SELECT_ONE_ORDER" xml:space="preserve">
+    <value>请选择单个订单进行操作</value>
+  </data>
+  <data name="SELECT_ORDER" xml:space="preserve">
+    <value>请选择订单</value>
+  </data>
+  <data name="SELECT_REWORK_REASON" xml:space="preserve">
+    <value>请选择改配原因</value>
+  </data>
+  <data name="SELETE_BRAND" xml:space="preserve">
+    <value>请选择一个brand</value>
+  </data>
+  <data name="SelledQty" xml:space="preserve">
+    <value>卖出量</value>
+  </data>
+  <data name="SELLER_CONSIGNED_PART" xml:space="preserve">
+    <value>卖家部分发货</value>
+  </data>
+  <data name="SEND_TO_LOGISTICS_CONFIG" xml:space="preserve">
+    <value>送至物流配置</value>
+  </data>
+  <data name="Sendback_Order_Please" xml:space="preserve">
+    <value>客户已申请退款 , 请将订单退回</value>
+  </data>
+  <data name="SenderCity" xml:space="preserve">
+    <value>卖家城市</value>
+  </data>
+  <data name="SenderDetails" xml:space="preserve">
+    <value>卖家地址</value>
+  </data>
+  <data name="SenderDistrict" xml:space="preserve">
+    <value>卖家区县</value>
+  </data>
+  <data name="SenderMobile" xml:space="preserve">
+    <value>卖家手机</value>
+  </data>
+  <data name="SenderName" xml:space="preserve">
+    <value>卖家名称</value>
+  </data>
+  <data name="SenderPhone" xml:space="preserve">
+    <value>卖家电话</value>
+  </data>
+  <data name="SenderProvince" xml:space="preserve">
+    <value>卖家省份</value>
+  </data>
+  <data name="SenderTown" xml:space="preserve">
+    <value>Sender town</value>
+  </data>
+  <data name="SendToWHWaitReceive" xml:space="preserve">
+    <value>送至仓库待收货</value>
+  </data>
+  <data name="ServiceDetails" xml:space="preserve">
+    <value>订单明细</value>
+  </data>
+  <data name="ServiceOrder" xml:space="preserve">
+    <value>客服订单</value>
+  </data>
+  <data name="SET_NEW_RULE" xml:space="preserve">
+    <value>设定新规则</value>
+  </data>
+  <data name="SetOutOfStock" xml:space="preserve">
+    <value>缺货驳回</value>
+  </data>
+  <data name="SetReplenished" xml:space="preserve">
+    <value>补货</value>
+  </data>
+  <data name="SGP" xml:space="preserve">
+    <value>新加坡</value>
+  </data>
+  <data name="SHELF_TIME" xml:space="preserve">
+    <value>上架时间</value>
+  </data>
+  <data name="Ship" xml:space="preserve">
+    <value>出货</value>
+  </data>
+  <data name="ShipmentDate" xml:space="preserve">
+    <value>出货时间</value>
+  </data>
+  <data name="Shipped" xml:space="preserve">
+    <value>已发货</value>
+  </data>
+  <data name="ShippedRefundOrder" xml:space="preserve">
+    <value>已出货退货单</value>
+  </data>
+  <data name="SHIPPER" xml:space="preserve">
+    <value>出货员</value>
+  </data>
+  <data name="SHIPPING" xml:space="preserve">
+    <value>出货</value>
+  </data>
+  <data name="SHIPPING_COST" xml:space="preserve">
+    <value>运费</value>
+  </data>
+  <data name="Shipping_Shop" xml:space="preserve">
+    <value>出货店铺</value>
+  </data>
+  <data name="Shipping_Status" xml:space="preserve">
+    <value>出货状态</value>
+  </data>
+  <data name="SHOP" xml:space="preserve">
+    <value>店铺</value>
+  </data>
+  <data name="ShopCode" xml:space="preserve">
+    <value>店铺</value>
+  </data>
+  <data name="SHORTAGE_OF_REJECTED" xml:space="preserve">
+    <value>缺货驳回</value>
+  </data>
+  <data name="SIMPLIFIED_CHINESE" xml:space="preserve">
+    <value>简体中文</value>
+  </data>
+  <data name="SINGLE_ORDER" xml:space="preserve">
+    <value>一单一件</value>
+  </data>
+  <data name="SIZE" xml:space="preserve">
+    <value>尺寸</value>
+  </data>
+  <data name="SKU" xml:space="preserve">
+    <value>Sku</value>
+  </data>
+  <data name="SKU_EDIT_ECOMM_ONLY" xml:space="preserve">
+    <value>仅能修改ECOMM</value>
+  </data>
+  <data name="SKU_INFORMATION_LACK" xml:space="preserve">
+    <value>Sku_资料缺失</value>
+  </data>
+  <data name="SKU_NOT_FOUND" xml:space="preserve">
+    <value>sku未找到</value>
+  </data>
+  <data name="SKU_NUM_WRONG" xml:space="preserve">
+    <value>sku数量不正确</value>
+  </data>
+  <data name="UPLOAD_STOCKTRANSFER_WRONG" xml:space="preserve">
+    <value>Sku 或 Shop不正确</value>
+  </data>
+  <data name="SkuInventorysQuery" xml:space="preserve">
+    <value>仓库标记缺货查询</value>
+  </data>
+  <data name="SkuRack" xml:space="preserve">
+    <value>储位维护</value>
+  </data>
+  <data name="SLJobs" xml:space="preserve">
+    <value>出货作业</value>
+  </data>
+  <data name="SpecialStore" xml:space="preserve">
+    <value>利丰集团员购特约商店</value>
+  </data>
+  <data name="SPECIFY_DELIVERY_DATE" xml:space="preserve">
+    <value>指定配送日</value>
+  </data>
+  <data name="SPECIFY_DELIVERY_TIME" xml:space="preserve">
+    <value>指定配送时段</value>
+  </data>
+  <data name="SPLITING_FAILED" xml:space="preserve">
+    <value>拆單失敗，当前用户没有订单所在仓库的拆单权限</value>
+  </data>
+  <data name="SplitOrder" xml:space="preserve">
+    <value>拆单</value>
+  </data>
+  <data name="SplitSuccess" xml:space="preserve">
+    <value>订单已拆分成功</value>
+  </data>
+  <data name="StaffDataManagement" xml:space="preserve">
+    <value>员工资料管理</value>
+  </data>
+  <data name="START" xml:space="preserve">
+    <value>开始时间</value>
+  </data>
+  <data name="START_OPERATION" xml:space="preserve">
+    <value>进行作业</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>开始日期</value>
+  </data>
+  <data name="StartTime" xml:space="preserve">
+    <value>开始时间</value>
+  </data>
+  <data name="Stationery" xml:space="preserve">
+    <value>文具申请表</value>
+  </data>
+  <data name="STATUS" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="StatusSummary" xml:space="preserve">
+    <value>Status Summary</value>
+  </data>
+  <data name="STOCK_SHORTAGE" xml:space="preserve">
+    <value>Sku 未找到或者庫存不足</value>
+  </data>
+  <data name="STOCK_TRANSFER" xml:space="preserve">
+    <value>转仓</value>
+  </data>
+  <data name="STOCKOUT" xml:space="preserve">
+    <value>缺货</value>
+  </data>
+  <data name="StockOutNum" xml:space="preserve">
+    <value>回报找不到次数</value>
+  </data>
+  <data name="StockTransfer" xml:space="preserve">
+    <value>调货</value>
+  </data>
+  <data name="Store" xml:space="preserve">
+    <value>店铺</value>
+  </data>
+  <data name="STORE_NOT_FOUND" xml:space="preserve">
+    <value>未能匹配到店铺</value>
+  </data>
+  <data name="STORED" xml:space="preserve">
+    <value>已存储</value>
+  </data>
+  <data name="StoreDesign" xml:space="preserve">
+    <value>Store Design approval form</value>
+  </data>
+  <data name="StoreInspection" xml:space="preserve">
+    <value>店铺检查</value>
+  </data>
+  <data name="Style" xml:space="preserve">
+    <value>款式</value>
+  </data>
+  <data name="StyleOrBarcodeRequired" xml:space="preserve">
+    <value>请至少填写SKU或者Barcode中的一项</value>
+  </data>
+  <data name="SUBCLSS_MERCHANDISE" xml:space="preserve">
+    <value>商品所属子类目</value>
+  </data>
+  <data name="SUCCESS" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="SyncStatus" xml:space="preserve">
+    <value>同步状态</value>
+  </data>
+  <data name="SYSTEM_SETTINGS" xml:space="preserve">
+    <value>系统设定</value>
+  </data>
+  <data name="SystemParameters" xml:space="preserve">
+    <value>参数设定</value>
+  </data>
+  <data name="SystemSettings" xml:space="preserve">
+    <value>系统设定</value>
+  </data>
+  <data name="SystemTotal" xml:space="preserve">
+    <value>系统总量</value>
+  </data>
+  <data name="TEMPLATE_NAME" xml:space="preserve">
+    <value>模板名称</value>
+  </data>
+  <data name="TEMPLATE_OUT_OF_DATE" xml:space="preserve">
+    <value>模板已过期</value>
+  </data>
+  <data name="TemplateSetting" xml:space="preserve">
+    <value>模板设定</value>
+  </data>
+  <data name="TestAll" xml:space="preserve">
+    <value>测试-子步骤-全部通过</value>
+  </data>
+  <data name="TestAny" xml:space="preserve">
+    <value>测试-子步骤-任意通过</value>
+  </data>
+  <data name="TIME" xml:space="preserve">
+    <value>时间</value>
+  </data>
+  <data name="TMALL_SHIPPED_MODE" xml:space="preserve">
+    <value>Tmall发货模式</value>
+  </data>
+  <data name="TOO_MANY_PRINTS" xml:space="preserve">
+    <value>一次打印数量过多</value>
+  </data>
+  <data name="TooManyRows" xml:space="preserve">
+    <value>数据行过多，是否直接更新到数据库?</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>总量</value>
+  </data>
+  <data name="TOTAL_COUNT" xml:space="preserve">
+    <value>总件数</value>
+  </data>
+  <data name="TOTAL_ORDER_AMOUNT" xml:space="preserve">
+    <value>合計訂單金額(NT)</value>
+  </data>
+  <data name="TOTAL_ORDER_COUNT" xml:space="preserve">
+    <value>总订单数</value>
+  </data>
+  <data name="TOTAL_QTY" xml:space="preserve">
+    <value>總量</value>
+  </data>
+  <data name="TOTAL_QTY_COUNT" xml:space="preserve">
+    <value>总件数</value>
+  </data>
+  <data name="TRACKING_NO" xml:space="preserve">
+    <value>货运单号</value>
+  </data>
+  <data name="TrackingNumber" xml:space="preserve">
+    <value>跟踪单号</value>
+  </data>
+  <data name="TRADE_BUYER_SIGNED" xml:space="preserve">
+    <value>买家已签收</value>
+  </data>
+  <data name="TRADE_CANCELED" xml:space="preserve">
+    <value>已取消</value>
+  </data>
+  <data name="TRADE_CLOSED" xml:space="preserve">
+    <value>付款后退款成功，交易自动关闭</value>
+  </data>
+  <data name="TRADE_CLOSED_BY_TAOBAO" xml:space="preserve">
+    <value>卖家或买家主动关闭交易</value>
+  </data>
+  <data name="TRADE_FINISHED" xml:space="preserve">
+    <value>交易成功</value>
+  </data>
+  <data name="TRADITIONAL_CHINESE" xml:space="preserve">
+    <value>繁体中文</value>
+  </data>
+  <data name="TRANSACTION_ID" xml:space="preserve">
+    <value>交易编号</value>
+  </data>
+  <data name="TransferCompltedRate" xml:space="preserve">
+    <value>调货完成率</value>
+  </data>
+  <data name="TRANSTYPE" xml:space="preserve">
+    <value>交易類別</value>
+  </data>
+  <data name="TravelAbroad" xml:space="preserve">
+    <value>国外出差申请表</value>
+  </data>
+  <data name="TRTURN_DISABLED_TIME" xml:space="preserve">
+    <value>退回时禁用时间</value>
+  </data>
+  <data name="TWN" xml:space="preserve">
+    <value>台湾</value>
+  </data>
+  <data name="TYPE" xml:space="preserve">
+    <value>类别</value>
+  </data>
+  <data name="UNABLE_CANCEL_NOT_EFULL" xml:space="preserve">
+    <value>无法取消订单</value>
+  </data>
+  <data name="UNABLE_CHANGE_CONDITION" xml:space="preserve">
+    <value>无法更改此条件</value>
+  </data>
+  <data name="UNABLE_CHANGE_CONDITION_RELATION" xml:space="preserve">
+    <value>无法更改条件关系</value>
+  </data>
+  <data name="UNABLE_CREATE_NEW_TEMPLATE" xml:space="preserve">
+    <value>无法创建新模板</value>
+  </data>
+  <data name="UNABLE_DELETE_DATA" xml:space="preserve">
+    <value>无法删除数据</value>
+  </data>
+  <data name="UNABLE_FIND_SETTING" xml:space="preserve">
+    <value>无法找到设定</value>
+  </data>
+  <data name="UNABLE_MODIFY_ORDER" xml:space="preserve">
+    <value>无法修改此订单</value>
+  </data>
+  <data name="UNABLE_MODIFY_TO_SHIPPING" xml:space="preserve">
+    <value>无法将此订单状态修改为Shipping</value>
+  </data>
+  <data name="UNABLE_OBTAIN_TRACKING_NO" xml:space="preserve">
+    <value>无法获取快递单号</value>
+  </data>
+  <data name="UNABLE_SENT_REQ" xml:space="preserve">
+    <value>请求未能完成</value>
+  </data>
+  <data name="UNABLE_TO_ADD_NOTIFY_USER" xml:space="preserve">
+    <value>无法添加通知用户</value>
+  </data>
+  <data name="UNABLE_TO_COPY_TEMPLATE" xml:space="preserve">
+    <value>无法拷贝该模板</value>
+  </data>
+  <data name="UNABLE_TO_CREATE_YOUR_APPLICATION" xml:space="preserve">
+    <value>无法创建您的申请</value>
+  </data>
+  <data name="UNABLE_TO_EDIT_TEMPLATE" xml:space="preserve">
+    <value>无法编辑该模板</value>
+  </data>
+  <data name="UNABLE_TO_VIEW_TEMPLATE" xml:space="preserve">
+    <value>无法查看该模板</value>
+  </data>
+  <data name="UNABLE_UPDATE_DATA" xml:space="preserve">
+    <value>无法更新数据</value>
+  </data>
+  <data name="UNALBE_TO_MOVE" xml:space="preserve">
+    <value>无法移动订单</value>
+  </data>
+  <data name="UNASSIGN_TO_APP" xml:space="preserve">
+    <value>非APP派工</value>
+  </data>
+  <data name="UNAUTHORIZED_PAGE" xml:space="preserve">
+    <value>当前登录用户未被授权访问此页面。</value>
+  </data>
+  <data name="UNLIMITED" xml:space="preserve">
+    <value>不限</value>
+  </data>
+  <data name="UNPROCESSING_ORDER" xml:space="preserve">
+    <value>未处理订单</value>
+  </data>
+  <data name="UNPROCESSING_PREORDER" xml:space="preserve">
+    <value>未處理預售單</value>
+  </data>
+  <data name="UnshippedRefundOrder" xml:space="preserve">
+    <value>未出貨退货单</value>
+  </data>
+  <data name="UNSUPPORTED_FILEFORMAT" xml:space="preserve">
+    <value>文件格式不支持</value>
+  </data>
+  <data name="UNUPLOADED_PROBLEM_ORDER" xml:space="preserve">
+    <value>未上传问题订单</value>
+  </data>
+  <data name="UPDATE_FIELD_FAILED" xml:space="preserve">
+    <value>更新属性失败</value>
+  </data>
+  <data name="UpdateTimeout" xml:space="preserve">
+    <value>查询结果将在{}秒后更新</value>
+  </data>
+  <data name="UPDATING" xml:space="preserve">
+    <value>更新中......</value>
+  </data>
+  <data name="UPLOAD_ATTACHMENT_FAILED" xml:space="preserve">
+    <value>上传附件失败</value>
+  </data>
+  <data name="UPLOAD_CSV_EXCEL" xml:space="preserve">
+    <value>请上传CSV(UTF8),Excel 格式文件</value>
+  </data>
+  <data name="UPLOAD_ERROR" xml:space="preserve">
+    <value>上传出现问题，行数</value>
+  </data>
+  <data name="UPLOAD_EXCEL" xml:space="preserve">
+    <value>请上传 Excel 格式文件</value>
+  </data>
+  <data name="UPLOAD_FAILED" xml:space="preserve">
+    <value>上传失败</value>
+  </data>
+  <data name="UPLOAD_IMG" xml:space="preserve">
+    <value>上传图片</value>
+  </data>
+  <data name="Upload_RackBox" xml:space="preserve">
+    <value>上传Sku货架与箱号</value>
+  </data>
+  <data name="Upload_Skus_To_Search" xml:space="preserve">
+    <value>上传Sku列表查询</value>
+  </data>
+  <data name="UPLOAD_STORAGE" xml:space="preserve">
+    <value>上传储位</value>
+  </data>
+  <data name="UPLOAD_VIRTUAL_INVENTORY" xml:space="preserve">
+    <value>上传虛擬倉庫存</value>
+  </data>
+  <data name="UploadNewTemplate" xml:space="preserve">
+    <value>上传新模板文件</value>
+  </data>
+  <data name="UploadPicker" xml:space="preserve">
+    <value>上传拣货员名单</value>
+  </data>
+  <data name="UploadSkus" xml:space="preserve">
+    <value>上傳Sku列表</value>
+  </data>
+  <data name="USE_PREPACKAGES" xml:space="preserve">
+    <value>启用预装包裹</value>
+  </data>
+  <data name="UsedCarts" xml:space="preserve">
+    <value>查看已配置的捡货车</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>用户</value>
+  </data>
+  <data name="USER_CANNOT_OPERATION" xml:space="preserve">
+    <value>当前用户无法执行此操作</value>
+  </data>
+  <data name="USER_NO_DUPLICATED" xml:space="preserve">
+    <value>用户编号重複</value>
+  </data>
+  <data name="USER_NOT_FOUND" xml:space="preserve">
+    <value>未知用户名</value>
+  </data>
+  <data name="UserGrade" xml:space="preserve">
+    <value>用户级别</value>
+  </data>
+  <data name="UserId" xml:space="preserve">
+    <value>用户Id</value>
+  </data>
+  <data name="UserInfo" xml:space="preserve">
+    <value>사용자 정보</value>
+  </data>
+  <data name="UserManagement" xml:space="preserve">
+    <value>用户管理</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>用户名</value>
+  </data>
+  <data name="UserSearch" xml:space="preserve">
+    <value>用户搜索</value>
+  </data>
+  <data name="UseYN" xml:space="preserve">
+    <value>사용유무</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>版本号</value>
+  </data>
+  <data name="VERSION_NOT_REPEATED" xml:space="preserve">
+    <value>版本号不能重复.</value>
+  </data>
+  <data name="VIEW_ALL_ORDERS" xml:space="preserve">
+    <value>检视所有订单</value>
+  </data>
+  <data name="VIEW_APPLICATION_HISTORY" xml:space="preserve">
+    <value>查看历史纪录</value>
+  </data>
+  <data name="VIEW_APPROVER" xml:space="preserve">
+    <value>查看审批者</value>
+  </data>
+  <data name="VIEW_ASSIGN_SCHEDULER" xml:space="preserve">
+    <value>查看分配调度程序</value>
+  </data>
+  <data name="VIEW_PREVIOUS_VERSIONS" xml:space="preserve">
+    <value>查看以前的版本</value>
+  </data>
+  <data name="ViewAllOrders" xml:space="preserve">
+    <value>检视所有订单</value>
+  </data>
+  <data name="ViewAllRefund" xml:space="preserve">
+    <value>检视所有退货</value>
+  </data>
+  <data name="ViewBarsUnderPacking" xml:space="preserve">
+    <value>查看等待包货的Bars</value>
+  </data>
+  <data name="ViewInstalledCarts" xml:space="preserve">
+    <value>查看已装载捡货车</value>
+  </data>
+  <data name="ViewOrder" xml:space="preserve">
+    <value>检视订单</value>
+  </data>
+  <data name="VIRTUAL_WAREHOUSE" xml:space="preserve">
+    <value>虛擬倉</value>
+  </data>
+  <data name="VIRTUAL_WAREHOUSE_INVENTORY" xml:space="preserve">
+    <value>虛擬倉庫存</value>
+  </data>
+  <data name="WAIT_BUYER_CONFIRM_GOODS" xml:space="preserve">
+    <value>等待买家确认收货</value>
+  </data>
+  <data name="WAIT_GOODS_RECEIVE_CONFIRM" xml:space="preserve">
+    <value>等待确认收货</value>
+  </data>
+  <data name="WAIT_SELLER_SEND_GOODS" xml:space="preserve">
+    <value>等待卖家发货</value>
+  </data>
+  <data name="WAIT_SELLER_STOCK_OUT" xml:space="preserve">
+    <value>等待出库中</value>
+  </data>
+  <data name="WAREHOUSE" xml:space="preserve">
+    <value>仓库</value>
+  </data>
+  <data name="WAREHOUSE_COMBINE" xml:space="preserve">
+    <value>仓库合并</value>
+  </data>
+  <data name="WAREHOUSE_NO" xml:space="preserve">
+    <value>仓库编号</value>
+  </data>
+  <data name="WAREHOUSE_NOT_PATIALLY_PACKED" xml:space="preserve">
+    <value>仓库除赠品外，无法部分包货</value>
+  </data>
+  <data name="WAREHOUSE_PICKING_APP" xml:space="preserve">
+    <value>仓库捡货app</value>
+  </data>
+  <data name="WarehouseDepot" xml:space="preserve">
+    <value>Warehouse Depot</value>
+  </data>
+  <data name="WarehouseManagement" xml:space="preserve">
+    <value>仓库管理</value>
+  </data>
+  <data name="WAREHOUSETYPE" xml:space="preserve">
+    <value>仓库类别</value>
+  </data>
+  <data name="Waybill" xml:space="preserve">
+    <value>电子面单</value>
+  </data>
+  <data name="WAYBILL_ORDER_NOT_FIND" xml:space="preserve">
+    <value>无法找到货运单号对应的订单</value>
+  </data>
+  <data name="WEB_APP_NAME" xml:space="preserve">
+    <value>中央订单管理系统</value>
+  </data>
+  <data name="WEIGHTING" xml:space="preserve">
+    <value>进行包裹秤重</value>
+  </data>
+  <data name="WHEN_ORDER_AMOUNT_GREATER" xml:space="preserve">
+    <value>当订单金额大于</value>
+  </data>
+  <data name="WHEN_ORDER_QUANTITY_GREATER" xml:space="preserve">
+    <value>当订单总件数大于</value>
+  </data>
+  <data name="WITHOUT_RACK" xml:space="preserve">
+    <value>缺储位</value>
+  </data>
+  <data name="WorkFlow" xml:space="preserve">
+    <value>工作流</value>
+  </data>
+  <data name="WorkPlace" xml:space="preserve">
+    <value>WORK PLACE</value>
+  </data>
+  <data name="WorkPlace1" xml:space="preserve">
+    <value>WORK PLACE</value>
+  </data>
+  <data name="WRONG_BATCH" xml:space="preserve">
+    <value>错误的批次</value>
+  </data>
+  <data name="WrongPasswordOfReturnBack" xml:space="preserve">
+    <value>密码错误或者没有用户拥有该仓库的权限</value>
+  </data>
+  <data name="YES" xml:space="preserve">
+    <value>是</value>
+  </data>
+  <data name="YOU_CAN_NOT_MODIFY_APPLATION" xml:space="preserve">
+    <value>你不能修改此申请</value>
+  </data>
+  <data name="ZIPCODE" xml:space="preserve">
+    <value>邮政编码</value>
+  </data>
+  <data name="QUANTITY_LESS_ORIGINAL" xml:space="preserve">
+    <value>Quantity should large than original value</value>
+  </data>
+  <data name="CHANGE_PASSWORD" xml:space="preserve">
+    <value>修改密码</value>
+  </data>
+  <data name="PASSWORD_GEEATER_6" xml:space="preserve">
+    <value>密码长度不能小于6</value>
+  </data>
+  <data name="PASSWORD_INCONSISTENT" xml:space="preserve">
+    <value>两次密码不一致</value>
+  </data>
+  <data name="UserYN" xml:space="preserve">
+    <value>UserYN</value>
+  </data>
+  <data name="RETURN_APPLY_DATE" xml:space="preserve">
+    <value>申请退货日期</value>
+  </data>
+  <data name="RETURN_ORDER_NUM" xml:space="preserve">
+    <value>订单编号</value>
+  </data>
+  <data name="ORDER_CREATED_DATE" xml:space="preserve">
+    <value>订购时间</value>
+  </data>
+  <data name="RETURN_REFUND_METHOD" xml:space="preserve">
+    <value>退款方式</value>
+  </data>
+  <data name="RETURN_PROCESS_STATUS" xml:space="preserve">
+    <value>退货处理状况</value>
+  </data>
+  <data name="RETURN_ORDER_DETAIL" xml:space="preserve">
+    <value>订单细节</value>
+  </data>
+  <data name="RETURN_REFUND_AMOUNT" xml:space="preserve">
+    <value>退款金额</value>
+  </data>
+  <data name="RETURN_SEE_DETAIL" xml:space="preserve">
+    <value>检视细节</value>
+  </data>
+  <data name="RETURN_PROGRESS_RECEIVED" xml:space="preserve">
+    <value>已申请退货</value>
+  </data>
+  <data name="RETURN_PROGRESS_ON_GOING" xml:space="preserve">
+    <value>物流处理中</value>
+  </data>
+  <data name="RETURN_PROGRESS_IN_WAREHOUSE" xml:space="preserve">
+    <value>退货商品确认中</value>
+  </data>
+  <data name="RETURN_PROGRESS_WAITING_REFUND" xml:space="preserve">
+    <value>退款进行中</value>
+  </data>
+  <data name="RETURN_PROGRESS_DONE_REFUND" xml:space="preserve">
+    <value>已完成退款</value>
+  </data>
+  <data name="RETURN_PROGRESS_CANCELED" xml:space="preserve">
+    <value>已取消</value>
+  </data>
+  <data name="RETURN_ACCEPT_ORDER" xml:space="preserve">
+    <value>确认商品退货</value>
+  </data>
+  <data name="PROD_IMG" xml:space="preserve">
+    <value>商品图</value>
+  </data>
+  <data name="PROD_NAME" xml:space="preserve">
+    <value>商品名称</value>
+  </data>
+  <data name="PROD_STYLE_NUM" xml:space="preserve">
+    <value>商品货号</value>
+  </data>
+  <data name="PROD_SIZE" xml:space="preserve">
+    <value>尺寸</value>
+  </data>
+  <data name="PROD_COLOR" xml:space="preserve">
+    <value>颜色</value>
+  </data>
+  <data name="PROD_CUR_PRICE" xml:space="preserve">
+    <value>单价</value>
+  </data>
+  <data name="PROD_QTY" xml:space="preserve">
+    <value>数量</value>
+  </data>
+  <data name="PROD_TOTAL_AMOUNT" xml:space="preserve">
+    <value>小计</value>
+  </data>
+  <data name="ORDER_RECEIVER_NAME" xml:space="preserve">
+    <value>送件人</value>
+  </data>
+  <data name="ORDER_TEL" xml:space="preserve">
+    <value>连络电话</value>
+  </data>
+  <data name="ORDER_ADDR" xml:space="preserve">
+    <value>地址</value>
+  </data>
+  <data name="ORDER_LOGIS_STAT" xml:space="preserve">
+    <value>物流状态</value>
+  </data>
+  <data name="ORDER_PICKUP_DATE" xml:space="preserve">
+    <value>取货时段</value>
+  </data>
+  <data name="ORDER_BUYER_NAME" xml:space="preserve">
+    <value>订购人</value>
+  </data>
+  <data name="RETURN_TOTAL_QTY" xml:space="preserve">
+    <value>共计商品数量</value>
+  </data>
+  <data name="RETURN_WH_CONFIRM" xml:space="preserve">
+    <value>确认商品无误</value>
+  </data>
+  <data name="RETURN_WH_REPORT" xml:space="preserve">
+    <value>仓库回报</value>
+  </data>
+  <data name="RETURN_WH_RECEIVED" xml:space="preserve">
+    <value>设定品牌</value>
+  </data>
+  <data name="SET_BRAND" xml:space="preserve">
+    <value>設定品牌</value>
+  </data>
+  <data name="RETURN_ORDER_LIST" xml:space="preserve">
+    <value>电商退货列表</value>
+  </data>
+  <data name="SSN" xml:space="preserve">
+    <value>身分证字号</value>
+  </data>
+  <data name="RETURN_ACC_NUM" xml:space="preserve">
+    <value>汇款帐号</value>
+  </data>
+  <data name="RETURN_ACC_NAME" xml:space="preserve">
+    <value>帐号名称</value>
+  </data>
+  <data name="RETURN_BANK_NAME" xml:space="preserve">
+    <value>银行代码</value>
+  </data>
+  <data name="REJECT_BY_EC" xml:space="preserve">
+    <value>拒绝退货</value>
+  </data>
+  <data name="REJECT_PROD_DAMAGED" xml:space="preserve">
+    <value>商品污损</value>
+  </data>
+  <data name="REJECT_PROD_LACK" xml:space="preserve">
+    <value>商品缺件</value>
+  </data>
+  <data name="REJECT_OTHERS" xml:space="preserve">
+    <value>其他问题</value>
+  </data>
+  <data name="RETURN_REPORT_BTN" xml:space="preserve">
+    <value>问题回报</value>
+  </data>
+  <data name="CONFIRMED" xml:space="preserve">
+    <value>已确认</value>
+  </data>
+  <data name="ACTION" xml:space="preserve">
+    <value>動作</value>
+  </data>
+  <data name="ORCHANGE_BRAND" xml:space="preserve">
+    <value>或选择品牌进入列表</value>
+  </data>
+  <data name="LOGISTIC_TRACK_NUM" xml:space="preserve">
+    <value>物流单号</value>
+  </data>
+  <data name="RETURN_WH_COMFIRM_ALL" xml:space="preserve">
+    <value>确认商品皆无误</value>
+  </data>
+  <data name="RETURN_CHECK_PASS" xml:space="preserve">
+    <value>检查通过</value>
+  </data>
+  <data name="RETURN_PENDING_CHECK" xml:space="preserve">
+    <value>等待确认</value>
+  </data>
+  <data name="RETURN_PH_MUST" xml:space="preserve">
+    <value>(必填) 详细说明</value>
+  </data>
+  <data name="DETAIL" xml:space="preserve">
+    <value>明細</value>
+  </data>
+  <data name="CONF_ORDER_REJECT" xml:space="preserve">
+    <value>拒绝该订单？</value>
+  </data>
+  <data name="CONF_REFUND_COMPLETE" xml:space="preserve">
+    <value>已完成退款？</value>
+  </data>
+  <data name="CONF_ORDER_ACCEPT" xml:space="preserve">
+    <value>确认商品退货？</value>
+  </data>
+  <data name="CONF_APPROVE_ITEM" xml:space="preserve">
+    <value>确认商品无误？</value>
+  </data>
+  <data name="CONF_RECEIVED_PACK" xml:space="preserve">
+    <value>已收到商品？</value>
+  </data>
+  <data name="CONF_APPROVE_PACK" xml:space="preserve">
+    <value>确认商品皆无误？</value>
+  </data>
+  <data name="BATCH_ACTIONS" xml:space="preserve">
+    <value>批次处理</value>
+  </data>
+  <data name="NO_PERMISSION" xml:space="preserve">
+    <value>品牌未授权访问</value>
+  </data>
+  <data name="ORDER_RETURN_TITLE" xml:space="preserve">
+    <value>return item</value>
+  </data>
+  <data name="PASSWORD_EXPIRED" xml:space="preserve">
+    <value>密碼已經過期，請修改</value>
+  </data>
+  <data name="EXPORT_REFUND_ACCOUNT" xml:space="preserve">
+    <value>下载汇款资讯</value>
+  </data>
+  <data name="CONFIRM_DL_AC" xml:space="preserve">
+    <value>确认要下载汇款资讯 ?</value>
+  </data>
+  <data name="ORIGINAL_ORDER_AMOUNT" xml:space="preserve">
+    <value>原商品小计</value>
+  </data>
+  <data name="ORIGINAL_DANDE_FEE" xml:space="preserve">
+    <value>原运费与手续费</value>
+  </data>
+  <data name="ORIGINAL_USED_POINT" xml:space="preserve">
+    <value>原使用点数</value>
+  </data>
+  <data name="ORIGINAL_USED_COUPON" xml:space="preserve">
+    <value>原 Coupon 折抵</value>
+  </data>
+  <data name="ORIGINAL_DISCOUNT" xml:space="preserve">
+    <value>原订单折扣</value>
+  </data>
+  <data name="ORIGINAL_NET_AMOUNT" xml:space="preserve">
+    <value>原订单金额</value>
+  </data>
+  <data name="ORIGINAL_ORDER_DETAIL" xml:space="preserve">
+    <value>原订单明细</value>
+  </data>
+  <data name="NEW_ORDER_AMOUNT" xml:space="preserve">
+    <value>新商品小计</value>
+  </data>
+  <data name="NEW_ORDER_DISCOUNT" xml:space="preserve">
+    <value>新订单折扣</value>
+  </data>
+  <data name="NEW_ORDER_NET_AMOUNT" xml:space="preserve">
+    <value>新订单金额</value>
+  </data>
+  <data name="REFUND_TOTAL_AMOUNT" xml:space="preserve">
+    <value>总计退货金额</value>
+  </data>
+  <data name="REFUND_POINT_OFFSET" xml:space="preserve">
+    <value>补正后之退还点数</value>
+  </data>
+  <data name="REFUND_OFFSET" xml:space="preserve">
+    <value>补正后之退款金额</value>
+  </data>
+  <data name="REFUND_SHIPPING_FEE" xml:space="preserve">
+    <value>运费与手续费</value>
+  </data>
+  <data name="REFUND_USE_POINT" xml:space="preserve">
+    <value>退还点数</value>
+  </data>
+  <data name="RETURN_PROGRESS_RETURNED" xml:space="preserve">
+    <value>已退还商品</value>
+  </data>
+  <data name="RETURN_REPORT_MAIL_BTN" xml:space="preserve">
+    <value>发送通知信</value>
+  </data>
+  <data name="RETURN_SEND_MAIL_DESC" xml:space="preserve">
+    <value>即将发送电邮给客人告知商品问题，您要继续吗？</value>
+  </data>
+  <data name="SET_TO_RETURNED" xml:space="preserve">
+    <value>确定要将状态改为「已退还商品」？</value>
+  </data>
+  <data name="SET_TO_RETURNED_DESC" xml:space="preserve">
+    <value>確定要將狀態改為「已退還商品」？</value>
+  </data>
+  <data name="MAIL_RETURN_ALARM_TITLE" xml:space="preserve">
+    <value>退货商品处理进度</value>
+  </data>
+  <data name="PROBLEM" xml:space="preserve">
+    <value>问题</value>
+  </data>
+  <data name="UPLOAD_HR_SHIFT_TABLE" xml:space="preserve">
+    <value>上传班表</value>
+  </data>
+  <data name="DOWNLOAD_HR_FIVEDAYWORKWEEK_EXCEL" xml:space="preserve">
+    <value>下载一例一休版本范例</value>
+  </data>
+  <data name="DOWNLOAD_HR_TRANSFORM_EXCEL" xml:space="preserve">
+    <value>下载四周变形版本范例</value>
+  </data>
+  <data name="WRONG_BATCH_COUNT" xml:space="preserve">
+    <value>自动调货确认最大任务量设置错误.</value>
+  </data>
+  <data name="ALLOW_SPLIT_IFSTOCKOUT" xml:space="preserve">
+    <value>部分子订单缺货时，允许拆开分配</value>
+  </data>
+  <data name="EXPORT_ALL_REFUND_ACCOUNT" xml:space="preserve">
+    <value>下载所有汇款资讯</value>
+  </data>
+  <data name="SELECT_ITEM_PROBLEM" xml:space="preserve">
+    <value>请选择商品问题</value>
+  </data>
+  <data name="REASON_REQUIRED" xml:space="preserve">
+    <value>请勾选商品问题</value>
+  </data>
+  <data name="OR_INTO_LIST" xml:space="preserve">
+    <value>或是进入列表</value>
+  </data>
+  <data name="INVALID_TRACKING_NUM" xml:space="preserve">
+    <value>错误的物流编号</value>
+  </data>
+  <data name="CANNOT_FIND_TRACKING_NUM" xml:space="preserve">
+    <value>找不到对应的物流编号</value>
+  </data>
+  <data name="ALREADY_COMPLETE_REFUND" xml:space="preserve">
+    <value>此订单已完成退货程序.</value>
+  </data>
+  <data name="ORDER_WAITING_FOR_REFUND" xml:space="preserve">
+    <value>此订单已进入等待退款阶段.</value>
+  </data>
+  <data name="SELETE_GRAB_BRAND" xml:space="preserve">
+    <value>请选择一个品牌</value>
+  </data>
+  <data name="CUSTOMER_SERVICE" xml:space="preserve">
+    <value>客服中心</value>
+  </data>
+  <data name="ASSIGN_TO_SHIPSHOP_END" xml:space="preserve">
+    <value>分配到SHIPSHOP结束时间</value>
+  </data>
+  <data name="ASSIGN_TO_SHIPSHOP_START" xml:space="preserve">
+    <value>分配到SHIPSHOP开始时间</value>
+  </data>
+  <data name="SHIPSHOP_END" xml:space="preserve">
+    <value>SHIPSHOP订单结束时间</value>
+  </data>
+  <data name="SHIPSHOP_START" xml:space="preserve">
+    <value>SHIPSHOP订单开始时间</value>
+  </data>
+  <data name="ALLOW_ASSIGN_TO_SHIPSHOP" xml:space="preserve">
+    <value>是否允许分配到SHIPSHOP</value>
+  </data>
+  <data name="UBER_GRAB_MODE" xml:space="preserve">
+    <value>启用UberGrab模式</value>
+  </data>
+  <data name="ALREADY_CANCELED" xml:space="preserve">
+    <value>日期包含已被取消或者正在取消的日期</value>
+  </data>
+  <data name="DATA_RANGE" xml:space="preserve">
+    <value>数据范围</value>
+  </data>
+  <data name="PRINT_EXPRESS_WAYBILL" xml:space="preserve">
+    <value>打印快递单</value>
+  </data>
+</root>

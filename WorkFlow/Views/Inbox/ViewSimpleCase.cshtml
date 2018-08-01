@@ -1,0 +1,6 @@
+﻿@using WorkFlowLib.DTO
+@model FlowInfo
+<div style="margin: 10px">
+    @Html.Partial("~/Views/Inbox/_FlowSteps.cshtml", Model)
+</div>
+@Html.Partial("~/Views/Inbox/_ApplicationLogs.cshtml", Model.CaseInfo.FlowCaseId)

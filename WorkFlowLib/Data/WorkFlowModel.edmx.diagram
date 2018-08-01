@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7c18a8db199c41c7ab022e45d18cd3bb" Name="Diagram1">
+        <EntityTypeShape EntityType="WorkFlowModel.StaffInfo" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.SystemLogs" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.UserDeviceTokens" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.Users" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.WF_ApplicantNotificationUsers" Width="1.5" PointX="7.5" PointY="31.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.WF_CaseCoverUsers" Width="1.5" PointX="12" PointY="47.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.WF_CaseLogs" Width="1.5" PointX="12" PointY="50.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.WF_CaseNotificateUsers" Width="1.5" PointX="12" PointY="54.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.WF_CaseNotificationReceivers" Width="1.5" PointX="17.25" PointY="58.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.WF_CaseNotifications" Width="1.5" PointX="15" PointY="58" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.WF_CasePropertyValues" Width="1.5" PointX="12" PointY="42.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.WF_CaseSteps" Width="1.5" PointX="12" PointY="57.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.WF_CaseUserActions" Width="1.5" PointX="15" PointY="54.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.WF_CountryArchivePaths" Width="1.5" PointX="5.25" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.WF_FlowCases_Attachments" Width="1.5" PointX="12" PointY="68.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.WF_FlowConditions" Width="1.5" PointX="7.5" PointY="40" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.WF_FlowGroups" Width="1.5" PointX="3" PointY="36.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.WF_FlowPropertys" Width="1.5" PointX="5.25" PointY="34.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.WF_Flows" Width="1.5" PointX="5.25" PointY="44.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.WF_FlowSteps" Width="1.5" PointX="9.75" PointY="60" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.WF_FlowTypes" Width="1.5" PointX="0.75" PointY="36" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.WF_LastStepNotifyUser" Width="1.5" PointX="7.5" PointY="54" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.WF_NoApproverConditions" Width="1.5" PointX="12" PointY="61.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.WF_Secretary" Width="1.5" PointX="12" PointY="64.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.WF_StepConditions" Width="1.5" PointX="7.5" PointY="44.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.WF_StepGroupConditions" Width="1.5" PointX="9.75" PointY="68.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.WF_StepGroups" Width="1.5" PointX="7.5" PointY="66.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.WF_StepNotificateUsers" Width="1.5" PointX="9.75" PointY="72" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.WF_TemplatePropCode" Width="1.5" PointX="3" PointY="32.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.BLSShopView" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.BLSSKUMaster" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkFlowModel.GlobalUserView" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="WorkFlowModel.FK_WF_ApplicantNotificationUsers_WF_Flows" ManuallyRouted="false" />
+        <AssociationConnector Association="WorkFlowModel.FK_WF_CaseNotificationReceivers_WF_CaseNotifications" ManuallyRouted="false" />
+        <AssociationConnector Association="WorkFlowModel.FK_WF_CaseNotifications_WF_FlowSteps" ManuallyRouted="false" />
+        <AssociationConnector Association="WorkFlowModel.FK_WF_CasePropertyValues_WF_FlowPropertys" ManuallyRouted="false" />
+        <AssociationConnector Association="WorkFlowModel.FK_FlowCaseUserActions_FlowSteps" ManuallyRouted="false" />
+        <AssociationConnector Association="WorkFlowModel.FK_WF_CountryArchivePaths_WF_FlowGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="WorkFlowModel.FK_WF_FlowConditions_WF_FlowPropertys" ManuallyRouted="false" />
+        <AssociationConnector Association="WorkFlowModel.FK_WF_FlowConditions_WF_Flows" ManuallyRouted="false" />
+        <AssociationConnector Association="WorkFlowModel.FK_WF_FlowGroups_WF_FlowTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="WorkFlowModel.FK_WF_FlowPropertys_WF_FlowGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="WorkFlowModel.FK_WF_Flows_WF_FlowGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="WorkFlowModel.FK_WF_FlowPropertys_WF_TemplatePropCode" ManuallyRouted="false" />
+        <AssociationConnector Association="WorkFlowModel.FK_WF_StepConditions_WF_FlowPropertys" ManuallyRouted="false" />
+        <AssociationConnector Association="WorkFlowModel.FK_StepGroups_Flows" ManuallyRouted="false" />
+        <AssociationConnector Association="WorkFlowModel.FK_WF_LastStepNotifyUser_WF_Flows" ManuallyRouted="false" />
+        <AssociationConnector Association="WorkFlowModel.FK_FlowSteps_StepGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="WorkFlowModel.FK_NoApproverInfo_WF_FlowSteps" ManuallyRouted="false" />
+        <AssociationConnector Association="WorkFlowModel.FK_WF_Secretary_WF_FlowSteps" ManuallyRouted="false" />
+        <AssociationConnector Association="WorkFlowModel.FK_WF_StepGroupConditions_WF_StepGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="WorkFlowModel.FK_WF_StepNotificateUsers_WF_StepGroups" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="WorkFlowModel.Cities" Width="1.5" PointX="7.75" PointY="6.75" />
+        <EntityTypeShape EntityType="WorkFlowModel.Provinces" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="WorkFlowModel.WF_FlowCases" Width="1.5" PointX="9.75" PointY="52.125" />
+        <AssociationConnector Association="WorkFlowModel.FK_WF_CaseCoverUsers_FlowCases" />
+        <AssociationConnector Association="WorkFlowModel.FK_WF_CaseLogs_WF_FlowCases" />
+        <AssociationConnector Association="WorkFlowModel.FK_WF_CaseNotificateUsers_FlowCases" />
+        <AssociationConnector Association="WorkFlowModel.FK_WF_CaseNotifications_WF_FlowCases" />
+        <AssociationConnector Association="WorkFlowModel.FK_PropertyValues_FlowCases" />
+        <AssociationConnector Association="WorkFlowModel.FK_WF_CaseSteps_WF_FlowCases" />
+        <AssociationConnector Association="WorkFlowModel.FK_FlowCaseUserActions_FlowCases" />
+        <AssociationConnector Association="WorkFlowModel.FK_FlowCases_Flows" />
+        <AssociationConnector Association="WorkFlowModel.FK_WF_FlowCases_Attachments" />
+        <AssociationConnector Association="WorkFlowModel.FK_WF_FlowCases_WF_StepGroups" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

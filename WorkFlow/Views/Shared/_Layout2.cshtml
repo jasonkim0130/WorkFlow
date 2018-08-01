@@ -1,0 +1,53 @@
+﻿@using WorkFlowLib
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width" />
+    <title>
+        @(Codehelper.IsUat ? "IntranetUAT" : "Intranet")
+    </title>
+    @RenderSection("css", required: false)
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</head>
+<body class="login-bg">
+    <div id="top_bar_div" class="navbar navbar-inverse navbar-fixed-top">
+        <div class="img-logo pull-left">
+            <img src="~/Content/Images/logo.png" />@if (Codehelper.IsUat)
+            {
+                <span style="font-size: large; margin-left: 10px;">(UAT)</span>
+            }
+            <span class="user-type">
+            </span>
+        </div>
+        @Html.Partial("_LoginInfo")
+    </div>
+    <div class="body-content" style="background-color: #e6e6e6;">
+        <div class="content-section" id="main_section" style="left: 0;">
+            <div id="div_progress" style="display: none;left: 0;">
+                <div class="progress-bg"></div>
+                <img src="~/Content/Images/loading.gif" />
+            </div>
+            <div id="div_content" style="height: 98%;">
+                @RenderBody()
+            </div>
+        </div>
+        <div id="div_main_modal"></div>
+    </div>
+    <div style="position: fixed; right: 15px; bottom: 2px; font-size: small; color: black; z-index: 9999;">
+        @if (Codehelper.DefaultCountry == "CHN")
+        {
+            <Span>© 2017 利越(上海)服装商贸有限公司 版权所有</Span>
+        }
+        else
+        {
+            <Span>© 2017 Branded Lifestyle Holdings Limited. All rights reserved.</Span>
+        }
+    </div>
+    @Scripts.Render("~/bundles/jqueryval")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

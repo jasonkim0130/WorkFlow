@@ -1,0 +1,370 @@
+﻿body {
+    margin-top: 50px;
+}
+
+.navbar-inverse {
+    border: none;
+    background-image: url(images/top_bar_bg.jpg);
+}
+
+.img-logo {
+    color: white;
+    text-align: center;
+    margin-top: 10px;
+    position: relative;
+    font-size: 20px;
+}
+
+    .img-logo > .bar-left {
+        position: absolute;
+        left: 10px;
+        top: 2px;
+    }
+
+    .img-logo > .bar-right {
+        position: absolute;
+        right: 10px;
+        top: 2px;
+    }
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+.login-section {
+    text-align: center;
+    margin: 0 15px;
+}
+
+    .login-section form {
+        margin: 0 auto;
+    }
+
+.login-bg, .login-control {
+    background-color: #E6E6E6;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login-control {
+    background-color: white;
+}
+
+.country-list button img {
+    border: none;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    display: block;
+}
+
+.country-list button {
+    background-color: white;
+    border: solid 1px gray;
+    padding: 2px;
+}
+
+    .country-list button span {
+        display: block;
+    }
+
+    .country-list button.country-unchecked {
+        border: 1px solid #E6E6E6;
+        background-color: #E6E6E6;
+    }
+
+.login-label {
+    text-align: left;
+    line-height: 30px;
+}
+
+#left-menu {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.left-section {
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    top: 50px;
+    width: 280px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    color: #666;
+    z-index: 90;
+}
+
+.menu-node-header {
+    line-height: 50px;
+    height: 50px;
+    position: relative;
+    border-bottom: solid 1px lightgray;
+    margin-left: 10px;
+    padding-left: 10px;
+    padding-right: 20px;
+    font-size: 16px;
+}
+
+    .menu-node-header .badge {
+        letter-spacing: 0;
+    }
+
+.node-header-title {
+    cursor: pointer;
+}
+
+.menu-node-header .menu-trigger {
+    font-size: 10px;
+    position: absolute;
+    right: 0;
+    top: 20px;
+}
+
+.menu-node-header[data-level="0"] {
+    font-size: 18px;
+}
+
+.menu-node-header .header-dot {
+    visibility: hidden;
+}
+
+.menu-node-header.selected .header-dot {
+    visibility: visible;
+}
+
+.menu-node-header.selected {
+    background-color: #23AFC8;
+    /*background-image: url(images/selected_menu_bg.jpg);*/
+    background-repeat: repeat-y;
+    color: white;
+    border-bottom: solid 1px lightgray;
+    background-position-x: -10px;
+}
+
+    .menu-node-header.selected .node-header-title {
+        color: white;
+        cursor: default;
+    }
+
+.menu-node-header .icon.normal {
+    display: inline;
+}
+
+.menu-node-header .icon.inverse {
+    display: none;
+}
+
+.menu-node-header .icon.marked {
+    display: none;
+}
+
+.menu-node-header.marked .icon.normal {
+    display: none;
+}
+
+.menu-node-header.marked .icon.inverse {
+    display: none;
+}
+
+.menu-node-header.marked .icon.marked {
+    display: inline;
+}
+
+.menu-node-header.selected .icon.normal {
+    display: none;
+}
+
+.menu-node-header.selected .icon.inverse {
+    display: inline;
+}
+
+.menu-node-header.selected .icon.marked {
+    display: none;
+}
+
+.menu-node-header img {
+    width: 30px;
+    height: 30px;
+}
+
+.logout-popover {
+    font-size: 18px;
+    color: black;
+    width: 200px;
+    display: none;
+    position: absolute;
+    right: 10px;
+    margin-top: 3px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    background: white;
+}
+
+
+#div_progress {
+    position: fixed;
+    z-index: 60;
+    left: 0;
+    top: 50px;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+}
+
+.progress-bg {
+    background-color: gray;
+    opacity: 0.8;
+    position: fixed;
+    z-index: -1;
+    left: 0;
+    top: 50px;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+}
+
+#div_progress img {
+    margin: 0 auto;
+    margin-top: 95px;
+    z-index: 62;
+}
+
+.completed-100 {
+    color: green;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.completed-80 {
+    color: lightgreen;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.completed-50 {
+    color: #F7AC41;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.completed-0 {
+    color: red;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.toright {
+    position: absolute;
+    right: 10px;
+    top: 8px;
+}
+
+table.jobs-table td, table.jobs-table th {
+    padding: 2px;
+    font-size: 10px;
+}
+
+.badge.green, .badge.auto {
+    background-color: green;
+}
+
+.badge.red, .badge.stop {
+    background-color: rgb(238,28,36);
+}
+
+.badge.orange, .badge.Manual {
+    background-color: orange;
+}
+
+
+/*PHONE CSS START*/
+@media (max-width: 768px) {
+    .country-list button {
+        padding: 2px 10px;
+    }
+
+        .country-list button img {
+            width: 40px;
+            height: 40px;
+        }
+}
+
+@media (max-width: 768px) and (orientation: portrait) {
+    .jobs-table .job-completed {
+        font-size: 12px;
+        display: inline-block;
+        margin-top: 15px;
+    }
+}
+/*PHONE CSS END*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+input.input-validation-error, select.input-validation-error {
+    background-color: lightpink;
+}
+
+.table_query th {
+    color: white;
+    background-color: gray;
+    text-align: center !important;
+    height: 48px;
+    vertical-align: middle;
+}
+
+.table_query td {
+    vertical-align: middle !important;
+    text-align: center !important;
+}
+

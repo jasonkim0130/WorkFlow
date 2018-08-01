@@ -1,0 +1,41 @@
+﻿@using Resources
+<div class="modal" id="div_modal_cont" style="display: block !important;">
+    <div class="modal-dialog" style="margin-top: 80px;min-width: 1000px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('#div_modal_cont').remove();">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">@ViewBag.Title</h4>
+            </div>
+            <div class="modal-body">
+                <div style="max-height: 550px; overflow-y: auto;">
+                    @RenderBody()
+                </div>
+            </div>
+            @if (ViewBag.DisplayButtons != false)
+            {
+                <div class="modal-footer">
+                    <div class="alert alert-danger text-left hidden modal-msg" id="div_modal_message">
+                    </div>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="$('#div_modal_cont').remove();">@StringResource.CANCEL</button>
+                    <button type="button" class="btn btn-primary" onclick="$('#div_modal_cont form').submit();">@StringResource.OK</button>
+                </div>
+            }
+            @if (ViewBag.DisplaySelfButtons == true)
+            {
+                <div class="modal-footer">
+                    <div class="alert alert-danger text-left hidden modal-msg" id="div_modal_message">
+                    </div>
+                    @RenderSection("buttons", false)
+                </div>
+            }
+            else
+            {
+                <div style="display: none">
+                    @RenderSection("buttons", false)
+                </div>
+            }
+        </div>
+    </div>
+</div>

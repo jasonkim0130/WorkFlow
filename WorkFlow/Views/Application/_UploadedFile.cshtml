@@ -1,0 +1,42 @@
+﻿@using WorkFlow.Ext
+@{
+    Guid key = Guid.NewGuid();
+}
+<h5 style="color: green;">
+    <input type="hidden" name="Attachments.index" value="@key" />
+    <input type="hidden" name="Attachments[@key].FileName" value="@ViewBag.newName" />
+    <input type="hidden" name="Attachments[@key].OriFilName" value="@ViewBag.filename" />
+    <input type="hidden" name="Attachments[@key].FileSize" value="@ViewBag.fileSize" />
+    @{
+        var contenttype = HtmlUIHelper.GetContentType(ViewBag.newName as string);
+        if (contenttype != null)
+        {
+            <a target="_blank" href="@Url.Action("ViewUploaded", new {filename = ViewBag.newName as string, display = ViewBag.filename as string})">@ViewBag.filename</a>
+        }
+        else
+        {
+            @ViewBag.filename
+        }
+    }
+    &nbsp;&nbsp;
+    <a target="_blank" href="@Url.Action("ViewUploaded", new { filename = ViewBag.newName as string,display = ViewBag.filename as string,download=true })">Download</a>
+    <a href="#" onclick="deleteFile($(this))">Delete</a>
+</h5>
+<script type="text/javascript">
+    function deleteFile(a) {
+        a.parent('h5').remove();
+        if (typeof window.fileDeleted == 'function') {
+            window.fileDeleted();
+        }
+    }
+    $(function () {
+        if (typeof window.receivedAfterFileUploaded == 'function') {
+            var json = '@Html.Raw(ViewBag.FileData)';
+            var data = {};
+            if (json != '') {
+                data = $.parseJSON(json);
+            }
+            window.receivedAfterFileUploaded(data);
+        }
+    });
+</script>

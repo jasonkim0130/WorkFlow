@@ -1,0 +1,48 @@
+﻿@using WorkFlowLib.Data
+@using WorkFlowLib.DTO
+@model FlowInfo
+<div style="margin: 10px">
+    @Html.Partial("~/Views/Inbox/ViewSimpleCase.cshtml", Model)
+</div>
+<hr class="step-line">
+@{
+    WF_FlowTypes flowType = ViewBag.FlowType as WF_FlowTypes;
+    if (flowType != null && flowType.TemplateType == 1)
+    {
+        @Html.Partial("ViewStoreApprovalForm")
+    }
+    else if (flowType != null && flowType.TemplateType == 2)
+    {
+        @Html.Partial("_ViewLeaveApplication", Model)
+    }
+    else if (flowType != null && flowType.TemplateType == 7)
+    {
+        @Html.Partial("_ViewStoreClosureForm", Model)
+    }
+    else
+    {
+        @Html.Partial("~/Views/Pending/_ViewProperties.cshtml")
+    }
+}
+<br />
+<br />
+<div id="div_msg_cont2" />
+@{
+    var viewData = new ViewDataDictionary();
+    viewData.Add("msgcont", "#div_msg_cont2");
+}
+
+@Html.Partial("~/Views/Inbox/_FlowLogs.cshtml", (CaseLog[])ViewBag.Logs, viewData)
+@section buttons{
+    @if (ViewBag.FlowCaseId != null)
+    {
+        @Ajax.ActionLink("Back to list", "ViewHistoryCases", "Inbox",
+                 new { id = ViewBag.FlowCaseId, ignorehistory = true }, new AjaxOptions
+                 {
+                     HttpMethod = "Get",
+                     InsertionMode = InsertionMode.Replace,
+                     UpdateTargetId = "div_history",
+                     OnFailure = "ajaxError"
+                 }, new { @class = "btn btn-primary" })
+    }
+}

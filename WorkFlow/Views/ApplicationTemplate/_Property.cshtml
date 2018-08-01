@@ -1,0 +1,70 @@
+﻿@using WorkFlowLib
+@using WorkFlowLib.Data
+@using Resources
+@using Dreamlab.Core
+@model WF_FlowPropertys
+@{
+    bool isDynamic = ViewBag.IsDynamic == true;
+}
+
+<tr id="proptr_@(Model.FlowPropertyId)">
+    @if (isDynamic)
+    {
+        <td>@Model.Tab</td>
+        <td>@Model.RowIndex</td>
+        <td>@Model.ColumnIndex</td>
+        <td>@Model.ViewType</td>
+        <td style="max-width: 150px;word-break: break-all;">@Model.DataSource</td>
+        <td>@(Model.Width == null ? "Auto" : Model.Width.ToString())</td>
+        <td>@Model.Height</td>
+        <td>@Model.HAlign</td>
+        <td>@Model.FontSize</td>
+        <td>@Model.FontColor</td>
+        <td>@Model.BgColor</td>
+        <td style="max-width: 150px; word-break: break-all;">@Model.Text</td>
+        <td>@Model.Validation</td>
+        <td>@Model.ValidationMsg</td>
+    }
+    <td>
+        <span>
+            @{
+                string valueType = PropertyTypesList.GetPropertyTypesList().FirstOrDefault(p => p.Value == Model.PropertyType).Key;
+                if (!(isDynamic && Model.ViewType.EqualsIgnoreCaseAndBlank("HINT") || Model.ViewType.EqualsIgnoreCaseAndBlank("LABEL")))
+                {
+                    @valueType
+                }
+            }
+        </span>
+    </td>
+    @if (!isDynamic)
+    {
+        <td>@Model.PropertyName</td>
+    }
+    <td>
+        @if (!(isDynamic && Model.ViewType.EqualsIgnoreCaseAndBlank("HINT") || Model.ViewType.EqualsIgnoreCaseAndBlank("LABEL")))
+        {
+            @(Model.Compulsory ? StringResource.YES : StringResource.NO)
+        }
+    </td>
+    <td class="hidden">
+        @if (!isDynamic)
+        {
+            @(Model.WF_TemplatePropCode?.PropCode)
+        }
+    </td>
+    <td>
+        <input type="checkbox" value="@Model.FlowPropertyId" style="width: 15px; height: 15px;" onclick="$(this).closest('tr').toggleClass('selected');" />
+
+        @Ajax.ActionLink(StringResource.DELETE, "RemoveProperty", new { propertyId = Model.FlowPropertyId }, new AjaxOptions
+        {
+            HttpMethod = "Post",
+            UpdateTargetId = "div_content",
+            LoadingElementId = "div_progress",
+            Confirm = "All conditions based on this field will be removed, Are you sure to remove this field ?",
+        })
+        <a data-ajax="true" data-ajax-method="get" data-ajax-mode="replace" data-ajax-loading="#div_progress"
+           data-ajax-update="#prop_edit" href="@Url.Action("EditProperty", new {propertyId = Model.FlowPropertyId, flowgroupid = ViewBag.GroupId})">
+            @StringResource.EDIT
+        </a>
+    </td>
+</tr>

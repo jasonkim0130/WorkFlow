@@ -1,0 +1,142 @@
+﻿@using WorkFlow.Logic
+@model WorkFlow.Models.MenuViewModel
+@functions {
+    private string GetUrl(SideMenuInfo item)
+    {
+        if (!string.IsNullOrWhiteSpace(item.Action))
+        {
+            RouteValueDictionary routeValues = new RouteValueDictionary(item.Parameters);
+            if (!string.IsNullOrWhiteSpace(item.Area))
+            {
+                routeValues.Add("Area", item.Area);
+            }
+            if (item.Type == SideItemType.Warehouse)
+            {
+                routeValues.Add("controller", item.Controller);
+                routeValues.Add("action", item.Action);
+                return Url.RouteUrl("WH", routeValues);
+            }
+            if (!string.IsNullOrWhiteSpace(item.Controller))
+            {
+                return Url.Action(item.Action, item.Controller, routeValues);
+            }
+            return Url.Action(item.Action, routeValues);
+        }
+        return string.Empty;
+    }
+}
+<div id="left-menu" class="left-section">
+
+    @RenderMenuTree(Model.Create(SideMenu.AllNodes, User.Identity.Name), 0, string.Empty)
+
+    @helper RenderMenuTree(IList<SideMenuInfo> childList, int level, string prex)
+        {
+            if (childList == null || childList.Count == 0)
+            {
+                return;
+            }
+            int index = 0;
+            foreach (SideMenuInfo item in childList)
+            {
+                string newPrex = prex + "_" + index;
+                string containerId = "container" + newPrex;
+                <div class="menu-node@(item.DropSwitch?" dropswitch":string.Empty)" data-level="@level" id="@containerId">
+                    @{
+                        bool hasChild = item.ChildNodes != null && item.ChildNodes.Count > 0;
+                        bool hasIcon = !string.IsNullOrWhiteSpace(item.Icon);
+                        string nodeHeadId = "node_head" + newPrex;
+                        string nodeBodyId = "node_body" + newPrex;
+                        string url = GetUrl(item);
+                        if (!hasChild)
+                        {
+                            <div class="menu-node-header" data-url="@url" data-frame="@item.Inframe" data-fullscreen="@(item.FullScreen)">
+                                <div style="margin-left: @(level*20)px; position: relative;">
+                                    @if (hasIcon)
+                                    {
+                                        <img src="@Url.Content(item.Icon)" class="icon" />
+                                    }
+                                    <span class="node-header-title@(item.Type == SideItemType.Warehouse ? " ws" : string.Empty)@(string.IsNullOrWhiteSpace(url) ? " no-action" : string.Empty) level@(level)">@item.Name</span>
+                                    <span class="menu-badge badge @((item.Badge.HasValue) ? string.Empty : " hidden")@(" badge-" + item.BadgeId)">
+                                        <span class="@(item.BadgeId)">@item.Badge</span>
+                                    </span>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="menu-node-header" data-url="@url" data-fullscreen="@(item.FullScreen)">
+                                <div style="margin-left: @(level*20)px; position: relative;" data-trigger-toggle="collapse" data-trigger-target="#@(nodeBodyId)">
+                                    @if (hasIcon)
+                                    {
+                                        <img src="@Url.Content(item.Icon)" class="icon" />
+                                    }
+                                    <span class="node-header-title@(item.Type == SideItemType.Warehouse ? " ws" : string.Empty)@(string.IsNullOrWhiteSpace(url) ? " no-action" : string.Empty) level@(level)">@item.Name</span>
+                                    <span class="menu-badge badge @((item.Badge.HasValue) ? string.Empty : " hidden")@(" badge-" + item.BadgeId)">
+                                        <span class="@(item.BadgeId)">@item.Badge</span>
+                                    </span>
+                                    <span class="menu-trigger glyphicon glyphicon-menu-down"></span>
+                                </div>
+                            </div>
+                            <div class="menu-node-sub collapse" id="@(nodeBodyId)">
+                                @RenderMenuTree(item.ChildNodes, level + 1, newPrex)
+                            </div>
+                        }
+                    }
+                </div>
+                index++;
+            }
+}
+</div>
+<script type="text/javascript">
+    var lastajax = null;
+
+    $(function () {
+
+        $('#left-menu').on('click', '.node-header-title:not(.no-action)', function () {
+            $('#left-menu .menu-node-header').removeClass('selected').removeClass('marked');
+            var $menunode = $(this).closest('.menu-node-header');
+            $menunode.addClass('selected');
+            if ($menunode.data('fullscreen').toLowerCase() == 'true') {
+                $.forefullscreen();
+            } else { $.exitfullscreen(); }
+            if (lastajax != null)
+                lastajax.abort();
+            $('#div_progress').show();
+            var url = $menunode.data('url');
+            $('#div_main_modal').html('');
+            var inframe = ($menunode.data('frame').toLowerCase() == 'true');
+            if (inframe && $('#mainlayout').size() > 0) {
+                $('#mainlayout').attr('src', url);
+                $('#div_progress').hide();
+                return;
+            }
+            lastajax = $.ajax({
+                type: 'GET',
+                url: (inframe ? "@Url.Action("Frame", "Home",new { Area = string.Empty})?url=" + url : url),
+                error: ajaxError,
+                data: { "time": new Date().getTime(),"source":"main" },
+                context: $menunode,
+                success: function (data) {
+                    if (this.is('#left-menu .menu-node-header.selected')) {
+                        $('#div_content').html(data);
+                    }
+                },
+                complete: function () {
+                    $('#div_progress').hide();
+                }
+            });
+        });
+
+        $('#left-menu').on('click', '[data-trigger-toggle]', function () {
+            var $me = $(this);
+            var $target = $($me.data('trigger-target'));
+            if ($target.hasClass('collapse')) {
+                $target.removeClass('collapse');
+                $me.find('.menu-trigger').removeClass('glyphicon-menu-down').addClass('glyphicon-menu-up');
+            } else {
+                $target.addClass('collapse');
+                $me.find('.menu-trigger').removeClass('glyphicon-menu-up').addClass('glyphicon-menu-down');
+            }
+        });
+    });
+</script>

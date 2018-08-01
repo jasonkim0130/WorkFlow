@@ -1,0 +1,52 @@
+﻿@using WorkFlow.Ext
+@using Resources
+
+@{
+    var selectedStaffNo = (ViewData["SelectedStaffNo"] as string)?? string.Empty;
+    var selectedStaffName = WebCacheHelper.GetWF_UsernameByNo(selectedStaffNo);
+    var deletable = ViewData["Deletable"] as bool?;
+    var guid = Guid.NewGuid().ToString();
+}
+
+<div data-value="cover_duty" style="margin-bottom:4px;">
+    <div style="display: inline-block">
+        @Html.TextBox("CoverDutiesName", selectedStaffName, new {@class = "form-control input-sm cover-duty-name"})
+        @Html.Hidden("CoverDuties.index", guid)
+        @Html.Hidden("CoverDuties["+ guid +"]", selectedStaffNo, new {@class = "cover-duty-id", data_val="true", data_val_required="*"})
+    </div>
+    <div style="display: inline-block;">
+        <span class="field-validation-error" style="display: none;">Required</span>
+    </div>
+    @if (deletable.GetValueOrDefault())
+    {
+        <a href="#" onclick="$(this).closest('div[data-value=cover_duty]').remove();">@StringResource.DELETE</a>
+    }
+</div>
+
+<script type="text/javascript">
+    $("form").addUnobtrusiveValidation();
+    $(".cover-duty-name").autocomplete({
+                    source: '@Url.Action("GetUserByName")',
+        autoFocus: true,
+        select: function (event, ui) {
+            event.preventDefault();
+            $(event.target).val(ui.item.label);
+            $(event.target).siblings(".cover-duty-id").val(ui.item.value);
+            $(event.target).parents("div[data-value=cover_duty]").find(".field-validation-error").hide();
+            },
+        change: function (event, ui) {
+            if (ui.item == null) {
+                var target = $(event.target);
+                target.siblings(".cover-duty-id").val("");
+                $(target).parents("div[data-value=cover_duty]").find(".field-validation-error").show();
+            }
+        }
+    });
+    $(".cover-duty-id").bind("change", function() {
+        if ($(this).val().length > 0) {
+            $(this).parents("div[data-value=cover_duty]").find(".field-validation-error").hide();
+        } else {
+            $(this).parents("div[data-value=cover_duty]").find(".field-validation-error").show();
+        }
+    }).trigger("change");
+</script>

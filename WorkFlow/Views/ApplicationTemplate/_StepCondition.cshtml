@@ -1,0 +1,198 @@
+﻿@using WorkFlowLib.Data
+@using WorkFlowLib.DTO
+@using WorkFlowLib.Logic
+@using WorkFlow.Ext
+@using Resources
+@{
+    ViewBag.Title = "Set conditions";
+    WF_FlowPropertys[] properties = ViewBag.Properties as WF_FlowPropertys[];
+    List<SelectListItem> list = ViewBag.NextGroupList as List<SelectListItem> ?? new List<SelectListItem>();
+}
+@functions
+{
+    public string GetPropertyNameById(int propertyId)
+    {
+        return ((WF_FlowPropertys[])(ViewBag.Properties)).FirstOrDefault(p => p.FlowPropertyId == propertyId).PropertyName;
+    }
+    public IEnumerable<SelectListItem> GetGradeItems()
+    {
+        List<SelectListItem> items = new List<SelectListItem>();
+        for (int i = 0; i <= 8; i++)
+        {
+            items.Add(new SelectListItem
+            {
+                Text = (i == 0 ? "s" : i.ToString()),
+                Value = i.ToString()
+            });
+        }
+        return items;
+    }
+
+    public string GetNextStepNameByStepGroupId(int stepGroupId)
+    {
+        int flowId = ViewBag.FlowId;
+        List<SelectListItem> list = ViewBag.NextGroupList as List<SelectListItem> ?? new List<SelectListItem>();
+        if (flowId > 0 && list.Count > 0)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (Int32.Parse(list[i].Value) == stepGroupId)
+                {
+                    return list[i].Text;
+                }
+            }
+        }
+        return "";
+    }
+}
+
+@foreach (WF_StepGroupConditions item in ViewBag.GroupConditions)
+{
+    <div style="margin-bottom: 10px">
+        <label class="label label-info" style="position: relative">
+            @if (item.DataKey >= 0)
+            {
+                <span>GetPropertyNameById(item.DataKey)</span>
+            }
+            else if (item.DataKey == (int)ExtraProperty.ApplicantGrade)
+            {
+                <span>Applicant Grade</span>
+            }
+            else
+            {
+                <span>Approver Grade</span>
+            }
+            @*<span>@item.WF_FlowPropertys.PropertyName</span>*@
+            <span>@item.Operator</span>
+            @if (item.MaxValue == null)
+            {
+                <span>@item.Value</span>
+            }
+            else
+            {
+                var maxValue = item.MaxValue as string;
+                if (item.DataKey == (int)ExtraProperty.ApplicantGrade || item.DataKey == (int)ExtraProperty.ApproverGrade)
+                {
+                    if (int.Parse(maxValue) == 0)
+                    {
+                        maxValue = "S";
+                    }
+                }
+                <span>@("(" + item.Value + " , " + maxValue + ")")</span>
+            }
+            <span>@(item.NextStepGroupId.HasValue ? $"Jump to {GetNextStepNameByStepGroupId(item.NextStepGroupId.Value)}" : "")</span>
+        </label>
+        <a class="removeCondition" href="#" data-id="@(item.StepGroupConditionId)" style="margin-left: 10px;">@StringResource.DELETE</a>
+    </div>
+}
+
+@if (properties == null || properties.Length == 0)
+{
+    <span>Please add at least one field.</span>
+}
+else
+{
+    using (Ajax.BeginModalForm("AddStepCondition", new ModalAjaxOptions
+    {
+        HttpMethod = "post",
+        LoadingElementId = "div_progress",
+        Id = "addcon_form",
+        UpdateTargetId = "flowtemplate" + ViewBag.FlowId.ToString(),
+        Class = "form-inline"
+    }))
+    {
+        var DataItems = properties
+            .Where(p => p.StatusId != 0)
+            .Select(p => new SelectListItem
+            {
+                Text = p.PropertyName,
+                Value = p.FlowPropertyId.ToString()
+            })
+            .ToList();
+        DataItems.Insert(0, new SelectListItem
+        {
+            Text = "Applicant Grade",
+            Value = string.Format("{0:d}", ExtraProperty.ApplicantGrade)
+        });
+        DataItems.Insert(0, new SelectListItem
+        {
+            Text = "Approver Grade",
+            Value = string.Format("{0:d}", ExtraProperty.ApproverGrade)
+        });
+        string[] operators = { "=", ">", ">=", "<", "<=", "!=" };
+        <div class="form-group">
+            <div>IF:</div>
+            @Html.Hidden("flowId")
+            @Html.Hidden("StepGroupId")
+            @Html.DropDownList("DataKey", DataItems, new { @class = "form-control" })
+            @Html.DropDownList("Operator", new SelectList(FlowCondition.Operators), new { @class = "form-control" })
+            @Html.TextBox("Value", null, new { @class = "form-control", data_val = "true", data_val_required = "*", id = "txtValue" })
+            @Html.DropDownList("Value", GetGradeItems(), StringResource.SELECT, new { @class = "form-control inline", disabled = "disabled", style = "display: none;", id = "ddlValue", data_val = "true", data_val_required = "*", })
+            @Html.DropDownList("MaxValue", GetGradeItems(), StringResource.SELECT, new { @class = "form-control inline", disabled = "disabled", style = "display: none;", id = "ddlMaxValue", data_val = "true", data_val_required = "*" })
+            @Html.DropDownList("NextStepGroupId", list, "Next Step", new { @class = "form-control", data_val = "true", data_val_required = "*" })
+        </div>
+        <div class="form-group">
+            <span class="field-validation-error" style="display: none;" id="spGradeValidationMessage">
+                Max grade cannot be less than min grade.
+            </span>
+        </div>
+    }
+
+    <script type="text/javascript">
+        $('.removeCondition').click(function () {
+            var $this = $(this);
+            $.ajax({
+                type: 'get',
+                url: '@Url.Action("RemoveStepCondition")',
+                data: { id: $this.data('id'), flowid: @(ViewBag.FlowId) },
+                success: function(result) {
+                    if (result) {
+                        $this.closest('div').remove();
+                    }
+                }
+            });
+        });
+        $("#addcon_form").removeData("validator").removeData("unobtrusiveValidation");
+        $.validator.unobtrusive.parse($("#addcon_form"));
+
+        $("#DataKey").on("change", function () {
+            var value = $(this).val();
+            if (value === '@((int)ExtraProperty.ApplicantGrade)' || value === '@((int)ExtraProperty.ApproverGrade)') {
+                $("#ddlValue").prop("disabled", "").show();
+                $("#txtValue").val("").prop("disabled", "disabled").hide();
+                if ($("#Operator option:last").val() != "in") {
+                    $("#Operator").append("<option value='in'>in</option>");
+                }
+            } else {
+                $("#ddlValue").val("").prop("disabled", "disabled").hide();
+                $("#ddlMaxValue").val("").prop("disabled", "disabled").hide();
+                $("#txtValue").prop("disabled", "").show();
+                if ($("#Operator option:last").val() == "in") {
+                    $("#Operator option:last").remove();
+                }
+            }
+        }).trigger("change");
+        $("#Operator").on("change", function () {
+            $("#ddlMaxValue").val("").prop("disabled", "disabled").hide();
+            if ($(this).val() == "in") {
+                $("#ddlMaxValue").prop("disabled", "").show();
+            }
+        });
+        $("#ddlValue,#ddlMaxValue").on("change", function () {
+            if ($("#Operator").val() !== "in") {
+                return;
+            }
+            var minLevel = parseInt($("#ddlValue").val());
+            var maxLevel = parseInt($("#ddlMaxValue").val());
+            $("#addcon_form").unbind("submit");
+            $("#spGradeValidationMessage").hide();
+            if (!isNaN(minLevel) && !isNaN(maxLevel) && minLevel < maxLevel) {
+                $("#spGradeValidationMessage").show();
+                $("#addcon_form").submit(function (e) {
+                    return false;
+                });
+            }
+        });
+    </script>
+
+}

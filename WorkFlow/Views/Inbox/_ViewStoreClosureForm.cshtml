@@ -1,0 +1,633 @@
+﻿@using WorkFlowLib.Data
+@using WorkFlowLib.DTO
+@using Dreamlab.Core
+@model FlowInfo
+
+@{
+    WF_FlowCases_Attachments[] attachments = ViewBag.Attachments as WF_FlowCases_Attachments[];
+    var country = GetPropertyValueByPropertyName("Country");
+    var StoreType = GetPropertyValueByPropertyName("StoreType");
+    var checkedBrand = GetPropertyValueByPropertyName("Brand");
+    var shopName = "";
+    if (ViewBag.ShopList != null)
+    {
+        var shopCode = GetPropertyValueByPropertyName("Shop");
+        var shopList = ViewBag.ShopList as Dictionary<string, string>;
+        shopName = shopList[shopCode];
+    }
+    var brandImages = new Dictionary<string, string>
+{
+{ "HCT", Url.Content("~/Content/Images/Brands_HCT.png")},
+{ "HTN", Url.Content("~/Content/Images/Brands_HT.png")},
+{ "ROS", Url.Content("~/Content/Images/Brands_RTS.png")},
+{ "APM", Url.Content("~/Content/Images/Brands_AP.png")},
+{ "LEO", Url.Content("~/Content/Images/Brands_LEO.png")}
+};
+}
+
+@functions{
+
+    public string GetPropertyValueByPropertyName(string propertyName)
+    {
+        PropertiesValue properties = ViewBag.Properties as PropertiesValue;
+        WF_FlowPropertys prop = properties.PropertyInfo.FirstOrDefault(p => p.StatusId < 0 && p.PropertyName.Equals(propertyName));
+        return GetPropertyValue(properties, prop);
+    }
+
+    public string GetPropertyValue(PropertiesValue properties, WF_FlowPropertys prop)
+    {
+        if (prop == null)
+        {
+            return null;
+        }
+        WF_CasePropertyValues value = properties.Values.FirstOrDefault(p => p.PropertyId == prop.FlowPropertyId);
+        return value?.StringValue
+            ?? value?.IntValue?.ToString()
+            ?? value?.DateTimeValue?.ToString("yyyy-MM-ddTHH:mm")
+            ?? value?.NumericValue?.ToString("0.##")
+            ?? value?.TextValue
+            ?? value?.DateValue?.ToString("M/d/yyyy")
+            ?? value?.UserNoValue;
+    }
+}
+
+<style type="text/css">
+    .table-borderless > thead > tr > th,
+    .table-borderless > tbody > tr > th,
+    .table-borderless > tfoot > tr > th,
+    .table-borderless > thead > tr > td,
+    .table-borderless > tbody > tr > td,
+    .table-borderless > tfoot > tr > td,
+    .table-borderless > thead,
+    .table-borderless > tbody,
+    .table-borderless > tfoot {
+        border: none;
+    }
+
+    .vertical-middle {
+        vertical-align: middle !important;
+    }
+
+    .nopadding {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .btn-white {
+        background-color: white;
+        border: 1px black solid;
+        color: black;
+        display: inline-block;
+    }
+
+    .backgroundcolor-red {
+        background-color: red;
+    }
+
+    .backgroundcolor-green {
+        background-color: green;
+    }
+
+    .backgroundcolor-yellow {
+        background-color: yellow;
+    }
+
+    input[type="radio"] {
+        width: 20px;
+        height: 20px;
+    }
+
+    .radio-inline input[type="radio"] {
+        margin-top: 0px !important;
+    }
+
+    .textcolor-grey {
+        color: grey !important;
+    }
+
+    .textcolor-red {
+        color: red !important;
+    }
+
+    .textcolor-green {
+        color: green !important;
+    }
+
+    .control-hide {
+        display: none;
+    }
+
+    .container-btn-images {
+        display: inline-block;
+        padding: 2px;
+    }
+
+    .btn-image {
+        display: inline-block;
+        padding: 2px;
+        background-color: transparent;
+        max-width: 100px;
+    }
+
+    /*.btn-image:hover {
+            background-color: #4fa3e6;
+        }*/
+
+    .btn-image-selected {
+        background-color: #4fa3e6;
+    }
+
+    .left-offset {
+        padding-left: 30px !important;
+    }
+
+    .checkbox input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        margin-top: 0px;
+    }
+
+    .backgroundcolor-transparent {
+        background-color: transparent !important;
+        opacity: 1;
+    }
+
+    .label-normal {
+        font-weight: normal;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .label-inline {
+        float: left;
+        margin-right: 15px;
+    }
+</style>
+
+@if (Model != null)
+{
+    <div class="container-fluid text-left" style="width: 95%;">
+        <div class="row text-center">
+            <div id="div_history"></div>
+            <h4>
+                @if (Model.CaseInfo.Ver > 0)
+                {
+                    @Ajax.ActionLink("Version:" + (Model.CaseInfo.Ver ?? 0), "ViewHistoryCases", "Inbox", new { id = Model.CaseInfo.FlowCaseId, ignorehistory = true }, new AjaxOptions
+                    {
+                        HttpMethod = "Get",
+                        InsertionMode = InsertionMode.Replace,
+                        LoadingElementId = "div_progress",
+                        UpdateTargetId = "div_history",
+                        OnFailure = "ajaxError"
+                    })
+                }
+                else
+                {
+                    @: Version: @(Model.CaseInfo.Ver ?? 0)
+                }
+            </h4>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <label class="control-label">Store Search</label>
+            </div>
+            <div class="panel-body">
+                <table>
+                    <tr>
+                        <td align="right" style="padding:0 10px;">
+                            <label class="control-label">Brand:</label>
+                        </td>
+                        <td style="padding:0 10px;">
+                            @if (checkedBrand != null)
+                            {
+                                <img src="@(brandImages.ContainsKey(checkedBrand) ? brandImages[checkedBrand] : string.Empty)" class="inline" style="height:30px;" />
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:0 10px; text-align: right;">
+                            <label class="control-label">Select a Shop:</label>
+                        </td>
+                        <td style="padding:10px;">
+                            <label class="control-label">
+                                @shopName
+                            </label>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <label class="control-label">Store Information</label>
+            </div>
+            <div class="panel-body">
+                <div style="padding:0 10px;">
+                    <div>
+                        <label class="control-label">Store Type</label>
+                        <div class="left-offset">
+                            <label class="control-label">
+                                @GetPropertyValueByPropertyName("StoreType")
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="control-label">Store Name</label>
+                        <div style="padding-left:15px;">
+                            <label class="control-label">
+                                @GetPropertyValueByPropertyName("StoreName")
+                            </label>
+                        </div>
+                    </div>
+                    <div style="padding-bottom:10px;">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <label class="control-label">City Tier:</label>
+                                    </td>
+                                    <td style="padding:0 10px;">
+                                        <label class="control-label">
+                                            @GetPropertyValueByPropertyName("CityTier")
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <label class="control-label">Mall/Dept Store Tier:</label>
+                                    </td>
+                                    <td style="padding:0 10px;">
+                                        <label class="control-label">
+                                            @GetPropertyValueByPropertyName("MallDeptStoreTier")
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <label class="control-label">Store Size (sq.m)</label>
+                                    </td>
+                                    <td style="padding:0 10px;">
+                                        <label class="control-label">
+                                            @GetPropertyValueByPropertyName("StoreSize")
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <label class="control-label"># of Staff:</label>
+                                    </td>
+                                    <td style="padding:0 10px;">
+                                        <label class="control-label">
+                                            @GetPropertyValueByPropertyName("StaffCount")
+                                        </label>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <label class="control-label label-inline">Shop Opening Date:</label>
+                        <label class="control-label">
+                            @GetPropertyValueByPropertyName("ShopOpeningDate")
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <label class="control-label">Key Contract Terms</label>
+            </div>
+            <div class="panel-body">
+                <div style="padding:0 10px;">
+                    <table>
+                        <tr>
+                            <td>
+                                <label class="control-label">Name of Landlord/Operator:</label>
+                            </td>
+                            <td style="padding-left:10px;">
+                                <label class="control-label">
+                                    @GetPropertyValueByPropertyName("NameOfLandlord")
+                                </label>
+                            </td>
+                            <td width="10%">&nbsp;</td>
+                            <td>
+                                <label class="control-label">Credit Terms(if applicable):</label>
+                            </td>
+                            <td style="padding:0px 10px;">
+                                <label class="control-label">
+                                    @GetPropertyValueByPropertyName("CreditTerms")
+                                </label>
+                            </td>
+                            <td>
+                                <label class="control-label">days</label>
+                            </td>
+                        </tr>
+                    </table>
+                    <div style="border-bottom: 1px solid; height: 1px; margin:10px 0px;"></div>
+                    <table>
+                        <tr>
+                            <td>
+                                <label class="control-label">Contract Period:</label>
+                            </td>
+                            <td style="padding-left:10px;">
+                                <label class="control-label">
+                                    @GetPropertyValueByPropertyName("ContractPeriodFrom")
+                                </label>
+                            </td>
+                            <td style="padding-left:10px;">
+                                <label class="control-label">To</label>
+                            </td>
+                            <td style="padding-left:10px;">
+                                <label class="control-label">
+                                    @GetPropertyValueByPropertyName("ContractPeriodTo")
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                    <label class="control-label">Rental/Lease Amount</label>
+                    <div class="row">
+                        <div class="col-sm-offset-3 col-sm-6">
+                            <table class="table table-bordered" style="margin:5px;">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th style="text-align:center;">
+                                            <label class="control-label" style="text-decoration:underline;">Current Term</label>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        var CurrentTermType = GetPropertyValueByPropertyName("CurrentTermType");
+                                        var rentFlag = CurrentTermType.EqualsIgnoreCaseAndBlank("Fixed Rent");
+                                        var turnoverFlag = CurrentTermType.EqualsIgnoreCaseAndBlank("Turnover % with Minimum Fixed Rent");
+                                        var FixedRentFlag = CurrentTermType.EqualsIgnoreCaseAndBlank("Fixed Rent + Turnover %");
+                                    }
+                                    <tr>
+                                        <td style="vertical-align:middle;text-align:center;width:55%">
+                                            <label>Fixed Rent</label>
+                                        </td>
+                                        <td>
+                                            <table data-group-name="CurrentTerm" style="width:100%;">
+                                                <tr>
+                                                    <td style="width:60%;">
+                                                        <label class="control-label">Rent</label>
+                                                    </td>
+                                                    <td style="padding:5px 0;">
+                                                        <label class="control-label">
+                                                            @(rentFlag ? GetPropertyValueByPropertyName("CurrentTermRent") : "")
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align:middle;text-align:center;">
+                                            <label>Turnover % with Minimum Fixed Rent</label>
+                                        </td>
+                                        <td>
+                                            <table data-group-name="CurrentTerm" style="width:100%;">
+                                                <tr>
+                                                    <td style="width:60%;">
+                                                        <label class="control-label">Turnover %</label>
+                                                    </td>
+                                                    <td style="padding:5px 0px;">
+                                                        <label class="control-label">
+                                                            @(turnoverFlag ? GetPropertyValueByPropertyName("CurrentTermTurnover") : "")
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="control-label">
+                                                            Rent
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label class="control-label">
+                                                            @(turnoverFlag ? GetPropertyValueByPropertyName("CurrentTermRent") : "")
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align:middle;text-align:center;">
+                                            <label>
+                                                Fixed Rent + Turnover %
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <table data-group-name="CurrentTerm" style="width:100%;">
+                                                <tr>
+                                                    <td style="width:60%;">
+                                                        <label class="control-label">Turnover %</label>
+                                                    </td>
+                                                    <td style="padding:5px 0px;">
+                                                        <label class="control-label">
+                                                            @(FixedRentFlag ? GetPropertyValueByPropertyName("CurrentTermTurnover") : "")
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="control-label">
+                                                            Rent
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label class="control-label">
+                                                            @(FixedRentFlag ? GetPropertyValueByPropertyName("CurrentTermRent") : "")
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div style="border-bottom: 1px solid; height: 1px; margin:10px 0px;"></div>
+
+                    <div style="margin:10px 0px;">
+                        <label class="control-label label-inline">Deposit/Key Money:</label>
+                        <label class="control-label">
+                            @GetPropertyValueByPropertyName("DepositMoney")
+                        </label>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="control-label label-inline">Premium(if applicable):</label>
+                            <label class="control-label">
+                                @GetPropertyValueByPropertyName("Premium")
+                            </label>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="control-label label-inline">Refundable Amount:</label>
+                            <label class="control-label">
+                                @GetPropertyValueByPropertyName("RefundableAmount")
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <label class="control-label">Closure Information</label>
+            </div>
+            <div class="panel-body">
+                <div style="padding:0px 10px;">
+                    <div>
+                        <label class="control-label label-inline">Store Closure Date:</label>
+                        <div>
+                            <label class="control-label">
+                                @GetPropertyValueByPropertyName("StoreClosureDate")
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="control-label">Reason for Closure:</label>
+                        <div class="left-offset">
+                            <label class="control-label">
+                                @GetPropertyValueByPropertyName("ReasonForClosure")
+                            </label>
+                        </div>
+                    </div>
+                    <div style="border-bottom: 1px solid; height: 1px; margin:10px 0px;"></div>
+                    @{
+                        var LossOnDisposal = Double.Parse(GetPropertyValueByPropertyName("LossOnDisposal") ?? "0");
+                        var ReinstatementCost = Double.Parse(GetPropertyValueByPropertyName("ReinstatementCost") ?? "0");
+                        var LeaseTerminationCost = Double.Parse(GetPropertyValueByPropertyName("LeaseTerminationCost") ?? "0");
+                        var StaffTerminationCost = Double.Parse(GetPropertyValueByPropertyName("StaffTerminationCost") ?? "0");
+                        var total = LossOnDisposal + ReinstatementCost + LeaseTerminationCost + StaffTerminationCost;
+                    }
+                    <div id="divCostOfClosure">
+                        <div class="row" style="margin-bottom:10px;">
+                            <label class="control-label col-sm-2">Loss on Disposal:</label>
+                            <div class="col-sm-4">
+                                <label class="control-label">
+                                    @LossOnDisposal.ToString("#,###.##")
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="control-label col-sm-2">Reinstatement Cost:</label>
+                            <div class="col-sm-4">
+                                <label class="control-label">
+                                    @ReinstatementCost.ToString("#,###.##")
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="control-label col-sm-2">Lease Termination Cost(if applicable):</label>
+                            <div class="col-sm-4">
+                                <div class="clearfix" style="margin-bottom: 10px"></div>
+                                <label class="control-label">
+                                    @LeaseTerminationCost.ToString("#,###.##")
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="control-label col-sm-2">Staff Termination Cost(if applicable):</label>
+                            <div class="col-sm-4">
+                                <div class="clearfix" style="margin-bottom: 10px"></div>
+                                <label class="control-label">
+                                    @StaffTerminationCost.ToString("#,###.##")
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="control-label col-sm-2">Total Cost of Closure:</label>
+                            <label class="control-label col-sm-4" style="text-align:left;" id="lblTotalCostOfClosure">
+                                @total.ToString("#,###.##")
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <label class="control-label">Financial Information</label>
+            </div>
+            <div class="panel-body">
+                <div style="background-color:#7f7f7f;text-align:center;vertical-align:middle;">
+                    <label style="color:white;padding-top:5px;font-size:larger;">
+                        P&amp;L Summary
+                    </label>
+                </div>
+                <div class="clearfix" style="margin-bottom:10px;"></div>
+                <div class="row nopadding">
+                    <table class="col-sm-8 text-center">
+                        <thead>
+                            <tr>
+                                <th style="width:30%"></th>
+                                <th style="width:35%;background-color:#959595;vertical-align:middle;text-align:center;border-right:1px solid white;">
+                                    <label style="color:white;padding-top:5px;">
+                                        Past 12 Months
+                                    </label>
+                                </th>
+                                <th style="width:35%;background-color:#959595;vertical-align:middle;text-align:center;">
+                                    <label style="color:white;padding-top:5px;">
+                                        Year1 (if renewed)
+                                    </label>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                var summaries = new[]
+                                {
+                                                                new KeyValuePair<string, string>("Sales", "PLSales"),
+                                                                new KeyValuePair<string, string>("Gross Profit", "PLGrossProfit"),
+                                                                new KeyValuePair<string, string>("Occupancy Costs", "PLOccupancyCosts"),
+                                                                new KeyValuePair<string, string>("Staff Salary", "PLStaffSalary"),
+                                                                new KeyValuePair<string, string>("Depreciation", "PLDepreciation"),
+                                                                new KeyValuePair<string, string>("Royalty", "PLRoyalty"),
+                                                                new KeyValuePair<string, string>("Other", "PLOther"),
+                                                                new KeyValuePair<string, string>("Total Operating Expenses", "PLTotalOperatingExpenses"),
+                                                                new KeyValuePair<string, string>("Store NOP", "PLStoreNOP")
+                                                            };
+                                var DataGroupName = "PLSummary";
+                                foreach (var item in summaries)
+                                {
+                                    <tr>
+                                        <td class="text-right">
+                                            <label class="control-label">
+                                                @item.Key
+                                            </label>
+                                        </td>
+                                        @for (int i = 1; i <= 2; i++)
+                                        {
+                                            var lblName = "lbl" + item.Value + i;
+                                            var txtName = "txt" + item.Value + i;
+                                            var propName = item.Value + i;
+                                            var propValue = GetPropertyValueByPropertyName(propName);
+                                            var floatValue = double.Parse(propValue ?? "0");
+                                            <td>
+                                                <label class="control-label" id="@lblName" data-group-name="@DataGroupName">@floatValue.ToString("#,###.##")</label>
+                                            </td>
+                                        }
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <label class="control-label">Other Information</label>
+            </div>
+            <div class="panel-body">
+                <label class="control-label">
+                    @GetPropertyValueByPropertyName("OtherInformation")
+                </label>
+            </div>
+        </div>
+        @Html.Partial("~/Views/Inbox/UsersComment.cshtml")
+    </div>
+}

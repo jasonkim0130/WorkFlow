@@ -1,0 +1,47 @@
+﻿
+@using WorkFlowLib
+@using Resources
+@model SpecialPropertyModel
+@{
+    bool isDynamic = ViewBag.IsDynamic == true;
+}
+<tr>
+    @if (isDynamic)
+    {
+        <td>Tab</td>
+        <td>Row</td>
+        <td>Column</td>
+        <td>ViewType</td>
+        <td>Data source</td>
+        <td>Width</td>
+        <td>Height</td>
+        <td>Align</td>
+        <td>Font size</td>
+        <td>Font color</td>
+        <td>Text</td>
+    }
+    <td>
+        <span>Special</span>
+    </td>
+    @if (!isDynamic)
+    {
+        <td>@Model.FieldName</td>
+    }
+    <td>@(Model.Compulsory ? StringResource.YES : StringResource.NO)</td>
+    @if (!isDynamic)
+    {
+        <td>@Model.Code</td>
+    }
+    @if (Model.Required)
+    {
+        <td style="color: red">
+            無法操作
+        </td>
+    }
+    else
+    {
+        <td style="padding-left: 8px">
+            <input class="SpecialChecbox" style="width: 20px; height: 20px" type="checkbox" data-flowgroupid="@ViewBag.GroupId" data-fieldtypeid="@Model.FieldTypeId" data-fieldname="@Model.FieldName" data-compulsory="@Model.Compulsory" @(ViewBag.Checked ? "checked" : "") />
+        </td>
+    }
+</tr>

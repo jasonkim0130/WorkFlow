@@ -1,0 +1,50 @@
+﻿@using WorkFlowLib.Logic
+@using WorkFlowLib.Data
+@using WorkFlow.Ext
+@{
+    ViewBag.Title = "Set conditions";
+    WF_FlowPropertys[] properties = ViewBag.Properties as WF_FlowPropertys[];
+    List<SelectListItem> list = new List<SelectListItem>
+{
+new SelectListItem {Text = "Applicant ID", Value = "ID"}, new SelectListItem {Text = "Applicant Grade", Value = "GRADE"}
+};
+    if (properties != null && properties.Length > 0)
+    {
+        list.AddRange(properties.Where(p => p.StatusId != 0).Select(p => new SelectListItem
+        {
+            Text = p.PropertyName,
+            Value = p.FlowPropertyId.ToString()
+        }));
+    }
+}
+@using (Ajax.BeginModalForm("AddFlowCondition", new ModalAjaxOptions
+{
+    HttpMethod = "post",
+    UpdateTargetId = "flowtemplate" + ViewBag.FlowId.ToString(),
+    Class = "form-inline",
+    LoadingElementId = "div_progress",
+    Id = "addcon_form"
+}))
+{
+    <div class="form-group">
+        <div>IF:</div>
+        @Html.Hidden("FlowId")
+        @Html.Hidden("StepGroupId")
+        @Html.DropDownList("ComparedData", list, new { @class = "form-control" })
+        @Html.DropDownList("Operator", new SelectList(FlowCondition.Operators), new { @class = "form-control" })
+        @Html.TextBox("Value", null, new { @class = "form-control", data_val = "true", data_val_required = "*" })
+    </div>
+}
+
+<script type="text/javascript">
+    $("#addcon_form").addUnobtrusiveValidation();
+
+    $('#ComparedData').change(function () {
+        if ($(this).val() == 'GRADE') {
+            $('#Value').attr('data-val-number', '*');
+        } else {
+            $('#Value').removeAttr('data-val-number');
+        }
+        $("#addcon_form").addUnobtrusiveValidation();
+    });
+</script>

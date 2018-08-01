@@ -1,0 +1,2811 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ACCOUNT_PERMISSION_SETTINGS" xml:space="preserve">
+    <value>계정 권한</value>
+  </data>
+  <data name="ACCOUNT_STAFF_CODE" xml:space="preserve">
+    <value>계정 (보고관 시리즈)</value>
+  </data>
+  <data name="ACTIVITY_WAREHOUSE" xml:space="preserve">
+    <value>活动仓库</value>
+  </data>
+  <data name="ACTUAL_INVENTORY" xml:space="preserve">
+    <value>實際庫存</value>
+  </data>
+  <data name="ADD" xml:space="preserve">
+    <value>추가</value>
+  </data>
+  <data name="ADD_AT_LEAST_ONE_SKU" xml:space="preserve">
+    <value>请至少添加一个Sku</value>
+  </data>
+  <data name="ADD_STOCK" xml:space="preserve">
+    <value>补货</value>
+  </data>
+  <data name="ADDRESS" xml:space="preserve">
+    <value>주소</value>
+  </data>
+  <data name="AddressUncleared" xml:space="preserve">
+    <value>불완전한 정보 쓰기</value>
+  </data>
+  <data name="AddrMissing" xml:space="preserve">
+    <value>전화 번호, 이름 또는 주소가 누락되었습니다</value>
+  </data>
+  <data name="ADVANCED" xml:space="preserve">
+    <value>고급</value>
+  </data>
+  <data name="AFTERNOON" xml:space="preserve">
+    <value>오후</value>
+  </data>
+  <data name="AGE" xml:space="preserve">
+    <value>나이</value>
+  </data>
+  <data name="ALL" xml:space="preserve">
+    <value>모든</value>
+  </data>
+  <data name="ALL_BRANDS" xml:space="preserve">
+    <value>모든 브랜드</value>
+  </data>
+  <data name="ALL_CHANNEL" xml:space="preserve">
+    <value>모든 플랫폼</value>
+  </data>
+  <data name="ALL_CITY" xml:space="preserve">
+    <value>모든 도시</value>
+  </data>
+  <data name="ALL_ORDER_STATE" xml:space="preserve">
+    <value>모든 국가</value>
+  </data>
+  <data name="ALL_PROVINCE" xml:space="preserve">
+    <value>지역</value>
+  </data>
+  <data name="ALL_PROVINCE_LIST" xml:space="preserve">
+    <value>모든 지역</value>
+  </data>
+  <data name="ALLOW_ASSIGN_TO_DEPOT" xml:space="preserve">
+    <value>是否允许分配到Depot</value>
+  </data>
+  <data name="ALLOW_SPLIT" xml:space="preserve">
+    <value>允许拆单到Warehouse或者Depot</value>
+  </data>
+  <data name="AllowSplitOrder" xml:space="preserve">
+    <value>Allow split order</value>
+  </data>
+  <data name="ALREADY_SHIPPED" xml:space="preserve">
+    <value>배송완료</value>
+  </data>
+  <data name="AMOUNT" xml:space="preserve">
+    <value>금액</value>
+  </data>
+  <data name="AMOUNT_DECIMAL" xml:space="preserve">
+    <value>금액 (소수점 이하 자릿수)</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>신청서</value>
+  </data>
+  <data name="APPROVER_EXISTED_IN_PREVIOUS_STEPS" xml:space="preserve">
+    <value>이미 승인한 결재자입니다</value>
+  </data>
+  <data name="Archive" xml:space="preserve">
+    <value>아카이브</value>
+  </data>
+  <data name="ArchiveApplications" xml:space="preserve">
+    <value>내 응용 프로그램</value>
+  </data>
+  <data name="ArchiveFinishedApplications" xml:space="preserve">
+    <value>승인 기록</value>
+  </data>
+  <data name="ArchiveNotifications" xml:space="preserve">
+    <value>공고</value>
+  </data>
+  <data name="AREA" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="ASSIGN_MODE" xml:space="preserve">
+    <value>分配模式</value>
+  </data>
+  <data name="ASSIGN_PENDING_NUM" xml:space="preserve">
+    <value>等待配置订单数量大于</value>
+  </data>
+  <data name="ASSIGN_SEQ_BY" xml:space="preserve">
+    <value>自动配置顺序(DESC)</value>
+  </data>
+  <data name="ASSIGN_TO_DEPOT_END" xml:space="preserve">
+    <value>分配到Depot结束时间</value>
+  </data>
+  <data name="ASSIGN_TO_DEPOT_START" xml:space="preserve">
+    <value>分配到Depot开始时间</value>
+  </data>
+  <data name="ASSINGING_ORDERS" xml:space="preserve">
+    <value>로에게 주문을 할 수 있습니다</value>
+  </data>
+  <data name="ATTACHMENT_NOT_FOUND" xml:space="preserve">
+    <value>첨부파일이 없습니다</value>
+  </data>
+  <data name="ATTACHMENTS" xml:space="preserve">
+    <value>첨부</value>
+  </data>
+  <data name="ATTRIBUTE" xml:space="preserve">
+    <value>屬性</value>
+  </data>
+  <data name="Authority" xml:space="preserve">
+    <value>권한</value>
+  </data>
+  <data name="AUTO_REFRESH" xml:space="preserve">
+    <value>자동 새로 고침</value>
+  </data>
+  <data name="AutoTransfer" xml:space="preserve">
+    <value>Auto transfer</value>
+  </data>
+  <data name="AXInventory" xml:space="preserve">
+    <value>AX Inventory</value>
+  </data>
+  <data name="BackToSchedule" xml:space="preserve">
+    <value>BackToSchedule</value>
+  </data>
+  <data name="BALANCE_PAYMENT_UNPAID" xml:space="preserve">
+    <value>(尾款未付)</value>
+  </data>
+  <data name="BARCODE" xml:space="preserve">
+    <value>바코드</value>
+  </data>
+  <data name="BasicInfo" xml:space="preserve">
+    <value>Basic Info</value>
+  </data>
+  <data name="Batch" xml:space="preserve">
+    <value>Job #</value>
+  </data>
+  <data name="BIRTHDAY" xml:space="preserve">
+    <value>생일</value>
+  </data>
+  <data name="BOOKED_ORDER" xml:space="preserve">
+    <value>已付定訂單</value>
+  </data>
+  <data name="BOX_NO" xml:space="preserve">
+    <value>Box No</value>
+  </data>
+  <data name="BoxSeq" xml:space="preserve">
+    <value>BoxSeq</value>
+  </data>
+  <data name="BRAND" xml:space="preserve">
+    <value>브랜드</value>
+  </data>
+  <data name="BRAND_SELECT" xml:space="preserve">
+    <value>请选择一个品牌活动</value>
+  </data>
+  <data name="BUYER" xml:space="preserve">
+    <value>구매자</value>
+  </data>
+  <data name="BuyerNick" xml:space="preserve">
+    <value>구매자 별명</value>
+  </data>
+  <data name="CampaignManagement" xml:space="preserve">
+    <value>광고 관리</value>
+  </data>
+  <data name="CampaignName" xml:space="preserve">
+    <value>광고 이름</value>
+  </data>
+  <data name="CampaignSetup" xml:space="preserve">
+    <value>광고 설정</value>
+  </data>
+  <data name="CANCEL" xml:space="preserve">
+    <value>취소</value>
+  </data>
+  <data name="CANCEL_CHOSEN" xml:space="preserve">
+    <value>CANCEL CHOSEN</value>
+  </data>
+  <data name="CANCEL_CURRENT_JOB" xml:space="preserve">
+    <value>현재 작업을 취소 하시겠습니까?</value>
+  </data>
+  <data name="CANCEL_ORDER" xml:space="preserve">
+    <value>주문 취소</value>
+  </data>
+  <data name="CANCEL_ORDER_CONFIRM" xml:space="preserve">
+    <value>물론 당신은 주문을 취소 하시겠습니까?</value>
+  </data>
+  <data name="Cancelled" xml:space="preserve">
+    <value>취소</value>
+  </data>
+  <data name="Closed" xml:space="preserve">
+    <value>Closed</value>
+  </data>
+  <data name="CANCELLED_ORDERS" xml:space="preserve">
+    <value>취소 주문</value>
+  </data>
+  <data name="CancelRF" xml:space="preserve">
+    <value>Cancel RF</value>
+  </data>
+  <data name="CardNo" xml:space="preserve">
+    <value>CardNo</value>
+  </data>
+  <data name="CartCheckOut" xml:space="preserve">
+    <value>Cart Checkout</value>
+  </data>
+  <data name="CartGet" xml:space="preserve">
+    <value>Cart Get</value>
+  </data>
+  <data name="CartLoad" xml:space="preserve">
+    <value>Cart Load</value>
+  </data>
+  <data name="CartUnload" xml:space="preserve">
+    <value>Cart Unload</value>
+  </data>
+  <data name="CASH_ON_DELIVERY" xml:space="preserve">
+    <value>배달시현금결제</value>
+  </data>
+  <data name="CellPhone" xml:space="preserve">
+    <value>핸드폰 번호</value>
+  </data>
+  <data name="CellPhone1" xml:space="preserve">
+    <value>핸드폰 번호</value>
+  </data>
+  <data name="ChangedOrders" xml:space="preserve">
+    <value>수정</value>
+  </data>
+  <data name="ChangeWarehouse" xml:space="preserve">
+    <value>Change Warehouse</value>
+  </data>
+  <data name="ChangeWHSetting" xml:space="preserve">
+    <value>Change Setting</value>
+  </data>
+  <data name="CHANNEL" xml:space="preserve">
+    <value>플랫폼</value>
+  </data>
+  <data name="CHECK" xml:space="preserve">
+    <value>CHECK</value>
+  </data>
+  <data name="CHECK_RESULT" xml:space="preserve">
+    <value>Check Result</value>
+  </data>
+  <data name="CHECK_STATUS" xml:space="preserve">
+    <value>View status</value>
+  </data>
+  <data name="CheckData" xml:space="preserve">
+    <value>Check Data</value>
+  </data>
+  <data name="Checker" xml:space="preserve">
+    <value>체커</value>
+  </data>
+  <data name="CheckRefund" xml:space="preserve">
+    <value>CheckRefund</value>
+  </data>
+  <data name="CHN" xml:space="preserve">
+    <value>중국</value>
+  </data>
+  <data name="Choose" xml:space="preserve">
+    <value>선택</value>
+  </data>
+  <data name="CITY" xml:space="preserve">
+    <value>도시</value>
+  </data>
+  <data name="COLLAPSE" xml:space="preserve">
+    <value>축소</value>
+  </data>
+  <data name="COLOR" xml:space="preserve">
+    <value>COLOR</value>
+  </data>
+  <data name="Column" xml:space="preserve">
+    <value>Column</value>
+  </data>
+  <data name="COMMENT_REQUIRED" xml:space="preserve">
+    <value>This field cannot be empty.</value>
+  </data>
+  <data name="COMMENTS" xml:space="preserve">
+    <value>의견</value>
+  </data>
+  <data name="COMMODITY_ID" xml:space="preserve">
+    <value>商品Id</value>
+  </data>
+  <data name="COMMODITY_NUMBER" xml:space="preserve">
+    <value>商品数量</value>
+  </data>
+  <data name="COMMODITY_PLACE" xml:space="preserve">
+    <value>商品所在地</value>
+  </data>
+  <data name="COMMON_ORDER" xml:space="preserve">
+    <value>일반 주문</value>
+  </data>
+  <data name="COMPANY" xml:space="preserve">
+    <value>회사</value>
+  </data>
+  <data name="Completed" xml:space="preserve">
+    <value>완료</value>
+  </data>
+  <data name="CompltedRate" xml:space="preserve">
+    <value>완료율</value>
+  </data>
+  <data name="CONFIEM_MODE" xml:space="preserve">
+    <value>审核模式</value>
+  </data>
+  <data name="CONFIG" xml:space="preserve">
+    <value>구성</value>
+  </data>
+  <data name="ConfigReason" xml:space="preserve">
+    <value>변경 사유</value>
+  </data>
+  <data name="CONFIRM" xml:space="preserve">
+    <value>확인</value>
+  </data>
+  <data name="CONFIRM_AND_FROZEN" xml:space="preserve">
+    <value>Confirm and frozen</value>
+  </data>
+  <data name="CONFIRM_AND_REVIEW" xml:space="preserve">
+    <value>Confirm and send to logistics</value>
+  </data>
+  <data name="CONFIRM_PRINT_PICKLIST" xml:space="preserve">
+    <value>피킹리스트 프린트 확인 </value>
+  </data>
+  <data name="ConfirmAndApprove" xml:space="preserve">
+    <value>확인 및 승인</value>
+  </data>
+  <data name="ConfirmAndFrozen" xml:space="preserve">
+    <value>확인 및 냉동</value>
+  </data>
+  <data name="ConfirmedQty" xml:space="preserve">
+    <value>확인 수량</value>
+  </data>
+  <data name="CONNECTED_PRINTERS" xml:space="preserve">
+    <value>연결된 프린터</value>
+  </data>
+  <data name="CORRESPONDING_ORDER_NOT_FIND" xml:space="preserve">
+    <value>无法找到对应的订单</value>
+  </data>
+  <data name="CountedDate" xml:space="preserve">
+    <value>카운트 날짜</value>
+  </data>
+  <data name="CountedQty" xml:space="preserve">
+    <value>수량</value>
+  </data>
+  <data name="CountedShop" xml:space="preserve">
+    <value>매장</value>
+  </data>
+  <data name="COUNTRY" xml:space="preserve">
+    <value>국가</value>
+  </data>
+  <data name="COUPON_CONTENT" xml:space="preserve">
+    <value>COUPON折抵內容</value>
+  </data>
+  <data name="COUPON_DISCOUNT" xml:space="preserve">
+    <value>COUPON折抵</value>
+  </data>
+  <data name="CourierCompany" xml:space="preserve">
+    <value>택배 회사</value>
+  </data>
+  <data name="CREATE_NEW_EVENT" xml:space="preserve">
+    <value>새이벤트 생성</value>
+  </data>
+  <data name="CREATE_NEW_JOB" xml:space="preserve">
+    <value>새 작업</value>
+  </data>
+  <data name="CREATE_ORDER" xml:space="preserve">
+    <value>Create Order</value>
+  </data>
+  <data name="CreateCampaign" xml:space="preserve">
+    <value>광고 만들기</value>
+  </data>
+  <data name="CreateTime" xml:space="preserve">
+    <value>생성시간</value>
+  </data>
+  <data name="CreateWHSetting" xml:space="preserve">
+    <value>Create Setting</value>
+  </data>
+  <data name="CREATOR" xml:space="preserve">
+    <value>생성자</value>
+  </data>
+  <data name="CREDITCARD" xml:space="preserve">
+    <value>신용카드</value>
+  </data>
+  <data name="CROSS_CHANNEL_TOTAL" xml:space="preserve">
+    <value>(총 크로스 플랫폼)</value>
+  </data>
+  <data name="CSV_NOT_DELETE" xml:space="preserve">
+    <value>此CSV文件已經被其他店鋪設為默認模板，無法刪除！</value>
+  </data>
+  <data name="CsvTemplate" xml:space="preserve">
+    <value>Csv주형</value>
+  </data>
+  <data name="CURRENCY_SETTING_BY_COUNTRY" xml:space="preserve">
+    <value>국가별 환경셋팅</value>
+  </data>
+  <data name="CURRENT_LOCATION" xml:space="preserve">
+    <value>현재위치</value>
+  </data>
+  <data name="CURRENT_LOGIN_USER_TYPE" xml:space="preserve">
+    <value>사용자가로 로그인 :</value>
+  </data>
+  <data name="CurrentQty" xml:space="preserve">
+    <value>현재수량</value>
+  </data>
+  <data name="CurrentSeason" xml:space="preserve">
+    <value>현재 시즌</value>
+  </data>
+  <data name="CustomerFav" xml:space="preserve">
+    <value>Customer Fav</value>
+  </data>
+  <data name="CustomerInfo" xml:space="preserve">
+    <value>Buyer Info</value>
+  </data>
+  <data name="DAILY_SEND_EMAIL" xml:space="preserve">
+    <value>이메일 매일 전송</value>
+  </data>
+  <data name="DailyReport" xml:space="preserve">
+    <value>일일 보고서</value>
+  </data>
+  <data name="Data" xml:space="preserve">
+    <value>데이터</value>
+  </data>
+  <data name="DATA_NOT_CONFIRM_SETTING" xml:space="preserve">
+    <value>数据不符合货架设定</value>
+  </data>
+  <data name="DATA_NOT_FOUND" xml:space="preserve">
+    <value>데이터 없음</value>
+  </data>
+  <data name="DATA_NOT_UPLOAD" xml:space="preserve">
+    <value>数据无法上传</value>
+  </data>
+  <data name="DATA_SAVE_FAILED" xml:space="preserve">
+    <value>保存失敗，請檢查后再保存</value>
+  </data>
+  <data name="DATA_TYPE" xml:space="preserve">
+    <value>數據類型</value>
+  </data>
+  <data name="DATA_UPLOAD_SUCCEED" xml:space="preserve">
+    <value>数据上传成功</value>
+  </data>
+  <data name="DataSaved" xml:space="preserve">
+    <value>Data saved</value>
+  </data>
+  <data name="DATE" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="DATE_FROM" xml:space="preserve">
+    <value>시작일</value>
+  </data>
+  <data name="DATE_RANGE" xml:space="preserve">
+    <value>날짜</value>
+  </data>
+  <data name="DATE_TO" xml:space="preserve">
+    <value>종료일</value>
+  </data>
+  <data name="Deadline" xml:space="preserve">
+    <value>마감</value>
+  </data>
+  <data name="DELETE" xml:space="preserve">
+    <value>삭제</value>
+  </data>
+  <data name="DELETE_CONFIRM" xml:space="preserve">
+    <value>是否确定要删除？</value>
+  </data>
+  <data name="DELETE_COUNTRY_PRIVILEGES" xml:space="preserve">
+    <value>삭제 모든 현재 권한? </value>
+  </data>
+  <data name="Delete_RackBox" xml:space="preserve">
+    <value>Delete RackBox</value>
+  </data>
+  <data name="DELETE_USER_CONFIRM" xml:space="preserve">
+    <value>현재 사용자 삭제를 확인?</value>
+  </data>
+  <data name="DELETE_WAREHOUSE_CONFIRM" xml:space="preserve">
+    <value>창고 확인을 삭제하시겠습니까?</value>
+  </data>
+  <data name="DELETED" xml:space="preserve">
+    <value>성공적으로 삭제</value>
+  </data>
+  <data name="DELIVERY_ADDRESS" xml:space="preserve">
+    <value>배송지</value>
+  </data>
+  <data name="DeliveryQuery" xml:space="preserve">
+    <value>주문 조회</value>
+  </data>
+  <data name="DEPARTMENT" xml:space="preserve">
+    <value>부서</value>
+  </data>
+  <data name="DepartmentType" xml:space="preserve">
+    <value>부서타입</value>
+  </data>
+  <data name="DepartmentType1" xml:space="preserve">
+    <value>부서타입</value>
+  </data>
+  <data name="DEPLICATE_ROWS" xml:space="preserve">
+    <value>无法上传，存在重复的数据行。</value>
+  </data>
+  <data name="DEPOT_ORDER_END" xml:space="preserve">
+    <value>Depot订单结束时间</value>
+  </data>
+  <data name="DEPOT_ORDER_START" xml:space="preserve">
+    <value>Depot订单开始时间</value>
+  </data>
+  <data name="DepotNotAllowToReturnBack" xml:space="preserve">
+    <value>Warehouse is the depot, return back not allowed</value>
+  </data>
+  <data name="DepotReceive" xml:space="preserve">
+    <value>창고 영수증</value>
+  </data>
+  <data name="DepotStatus" xml:space="preserve">
+    <value>수신 상태</value>
+  </data>
+  <data name="DESC" xml:space="preserve">
+    <value>설명</value>
+  </data>
+  <data name="Division" xml:space="preserve">
+    <value>소속</value>
+  </data>
+  <data name="Division1" xml:space="preserve">
+    <value>소속</value>
+  </data>
+  <data name="DO_CONFIRM" xml:space="preserve">
+    <value>확인</value>
+  </data>
+  <data name="DOWNLOAD" xml:space="preserve">
+    <value>다운로드</value>
+  </data>
+  <data name="DOWNLOAD_CLIENT" xml:space="preserve">
+    <value>다운로드 및 인쇄 클라이언트</value>
+  </data>
+  <data name="Download_Error_Message" xml:space="preserve">
+    <value>Download error message</value>
+  </data>
+  <data name="DOWNLOAD_SAMPLE_CSV" xml:space="preserve">
+    <value>다운로드 샘플 CSV 파일</value>
+  </data>
+  <data name="DOWNLOAD_SAMPLE_EXCEL" xml:space="preserve">
+    <value>다운로드 샘플 엑셀 파일</value>
+  </data>
+  <data name="Draft" xml:space="preserve">
+    <value>Draft</value>
+  </data>
+  <data name="DUPLICATE_APPROVERS" xml:space="preserve">
+    <value>결재자가 중복되었습니다</value>
+  </data>
+  <data name="DUPLICATE_CONDITIONS" xml:space="preserve">
+    <value>조건이 중복되었습니다</value>
+  </data>
+  <data name="DUPLICATE_NOTIFY_USER" xml:space="preserve">
+    <value>중복된 사용자입니다</value>
+  </data>
+  <data name="EACH_PRINT_QUANTITY" xml:space="preserve">
+    <value>Print quantity/batch</value>
+  </data>
+  <data name="ECGUIQuery" xml:space="preserve">
+    <value>ECGUI 쿼리</value>
+  </data>
+  <data name="EDIT" xml:space="preserve">
+    <value>편집</value>
+  </data>
+  <data name="EDIT_APPROVER" xml:space="preserve">
+    <value>승인자 수정</value>
+  </data>
+  <data name="EDIT_ORDER_INFO" xml:space="preserve">
+    <value>Edit order info</value>
+  </data>
+  <data name="EditOrders" xml:space="preserve">
+    <value>주문 수정</value>
+  </data>
+  <data name="EMail" xml:space="preserve">
+    <value>이메일</value>
+  </data>
+  <data name="EMail1" xml:space="preserve">
+    <value>이메일</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>종료 날짜</value>
+  </data>
+  <data name="EndTime" xml:space="preserve">
+    <value>종료 시간</value>
+  </data>
+  <data name="ENGLISH" xml:space="preserve">
+    <value>영어</value>
+  </data>
+  <data name="ENTER_BARCODE" xml:space="preserve">
+    <value>바코드를 입력</value>
+  </data>
+  <data name="ENTER_PASSWORD" xml:space="preserve">
+    <value>비밀번호를 입력하세요</value>
+  </data>
+  <data name="ENTER_QRCODE" xml:space="preserve">
+    <value>QRCODE를 입력</value>
+  </data>
+  <data name="ENTER_WEIGHT" xml:space="preserve">
+    <value>무게를 입력</value>
+  </data>
+  <data name="ENTRIE_TO_DEPOT" xml:space="preserve">
+    <value>整单配置到Depot</value>
+  </data>
+  <data name="ENTRIE_TO_WAREHOUSE" xml:space="preserve">
+    <value>整单配置到Warehouse</value>
+  </data>
+  <data name="ERROR" xml:space="preserve">
+    <value>오류</value>
+  </data>
+  <data name="ERROR_LOADING_ORDERS" xml:space="preserve">
+    <value>주문 불러오기 오류</value>
+  </data>
+  <data name="ERROR_PROCESSING_REQUEST" xml:space="preserve">
+    <value>요청을 처리하는 동안 오류가 발생했습니다</value>
+  </data>
+  <data name="Event" xml:space="preserve">
+    <value>행사</value>
+  </data>
+  <data name="EVENT_DEPOT" xml:space="preserve">
+    <value>활동 저장소</value>
+  </data>
+  <data name="EVENT_SHOP" xml:space="preserve">
+    <value>스토어 이벤트</value>
+  </data>
+  <data name="EVENT_SKU" xml:space="preserve">
+    <value>활동 SKU</value>
+  </data>
+  <data name="EventManagement" xml:space="preserve">
+    <value>이벤트 관리</value>
+  </data>
+  <data name="EventName" xml:space="preserve">
+    <value>이벤트</value>
+  </data>
+  <data name="EventSetup" xml:space="preserve">
+    <value>이벤트 설정</value>
+  </data>
+  <data name="EventType" xml:space="preserve">
+    <value>Event Type</value>
+  </data>
+  <data name="ExchangeDetails" xml:space="preserve">
+    <value>Exchange details</value>
+  </data>
+  <data name="ExchangeOrders" xml:space="preserve">
+    <value>교환 주문</value>
+  </data>
+  <data name="EXISTED_TYPE_OF_PROPERTY" xml:space="preserve">
+    <value>해당값이 이미 존재합니다</value>
+  </data>
+  <data name="EXPORT_EXCEL" xml:space="preserve">
+    <value>엑셀</value>
+  </data>
+  <data name="EXTERNAL_CODE" xml:space="preserve">
+    <value>外部編碼</value>
+  </data>
+  <data name="FAIL" xml:space="preserve">
+    <value>Fail</value>
+  </data>
+  <data name="FAIlED_MATCH_STORE" xml:space="preserve">
+    <value>未能匹配到店铺</value>
+  </data>
+  <data name="FAILURE_CANCEL_ORDER" xml:space="preserve">
+    <value>주문을 취소 할 수 없습니다</value>
+  </data>
+  <data name="FAILURE_TO_DELETE" xml:space="preserve">
+    <value>당신은 삭제할 수 없습니다</value>
+  </data>
+  <data name="FAILURE_TO_SAVE" xml:space="preserve">
+    <value>저장 실패</value>
+  </data>
+  <data name="FaxNumber" xml:space="preserve">
+    <value>팩스 번호</value>
+  </data>
+  <data name="FaxNumber1" xml:space="preserve">
+    <value>팩스 번호</value>
+  </data>
+  <data name="FewInvNum" xml:space="preserve">
+    <value>Few Inv Num</value>
+  </data>
+  <data name="FIELD_NOT_FOUND" xml:space="preserve">
+    <value>파일을 발견할 수 없습니다</value>
+  </data>
+  <data name="FILE_IS_MISSING" xml:space="preserve">
+    <value>파일이 누락되었습니다</value>
+  </data>
+  <data name="FileName" xml:space="preserve">
+    <value>파일 이름</value>
+  </data>
+  <data name="FINISHED_L" xml:space="preserve">
+    <value>완료</value>
+  </data>
+  <data name="Flag" xml:space="preserve">
+    <value>플래그</value>
+  </data>
+  <data name="FOCUS_SCAN" xml:space="preserve">
+    <value>Please focus here and then scan the QRCode</value>
+  </data>
+  <data name="FOCUS_SCAN_NFC" xml:space="preserve">
+    <value>Please focus here and then scan the QRCode</value>
+  </data>
+  <data name="FORBIDDEN_CREATE_REFUND" xml:space="preserve">
+    <value>禁止重複創建退貨單</value>
+  </data>
+  <data name="FRAME_TIME" xml:space="preserve">
+    <value>下架时间</value>
+  </data>
+  <data name="FREEZE_ON" xml:space="preserve">
+    <value>Frozed by</value>
+  </data>
+  <data name="FREIGHT" xml:space="preserve">
+    <value>運費</value>
+  </data>
+  <data name="Frozen" xml:space="preserve">
+    <value>고정</value>
+  </data>
+  <data name="FrozenOrder" xml:space="preserve">
+    <value>냉동 주문</value>
+  </data>
+  <data name="GENDER" xml:space="preserve">
+    <value>성별</value>
+  </data>
+  <data name="GENERATE" xml:space="preserve">
+    <value>Generate</value>
+  </data>
+  <data name="GENERATE_DOC_AFTERSHIPPED" xml:space="preserve">
+    <value>텍스트 파일 후 패키지 상품</value>
+  </data>
+  <data name="GetTrackingNo" xml:space="preserve">
+    <value>하나의 숫자 인</value>
+  </data>
+  <data name="Globalhotel" xml:space="preserve">
+    <value>리 &amp; 펑 글로벌 호텔</value>
+  </data>
+  <data name="GOODS_AMOUNT" xml:space="preserve">
+    <value>商品合計</value>
+  </data>
+  <data name="GOODS_NOT_RECEIVED" xml:space="preserve">
+    <value>未到货</value>
+  </data>
+  <data name="GOODS_RACK" xml:space="preserve">
+    <value>Rack</value>
+  </data>
+  <data name="GOODS_RECEIVED" xml:space="preserve">
+    <value>已到貨</value>
+  </data>
+  <data name="GOODS_STATUS" xml:space="preserve">
+    <value>到货状态</value>
+  </data>
+  <data name="Handler" xml:space="preserve">
+    <value>핸들러</value>
+  </data>
+  <data name="HKG" xml:space="preserve">
+    <value>홍콩</value>
+  </data>
+  <data name="HOMEPAGE" xml:space="preserve">
+    <value>공식 웹 사이트</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="Inbox" xml:space="preserve">
+    <value>받은 편지함</value>
+  </data>
+  <data name="IndividualSKUCheck" xml:space="preserve">
+    <value>개별 SKU 확인</value>
+  </data>
+  <data name="InProgress" xml:space="preserve">
+    <value>처리</value>
+  </data>
+  <data name="InputMemberInfo" xml:space="preserve">
+    <value>Input Member Info</value>
+  </data>
+  <data name="InQty" xml:space="preserve">
+    <value>입고수량</value>
+  </data>
+  <data name="INTERVAL_AFTER_LAST" xml:space="preserve">
+    <value>距离上次配置时间大于(分钟)</value>
+  </data>
+  <data name="Interview" xml:space="preserve">
+    <value>면접 평가 양식</value>
+  </data>
+  <data name="INVALID_CONDITION_VALUE" xml:space="preserve">
+    <value>조건값이 유효하지 않습니다</value>
+  </data>
+  <data name="INVALID_DEADLINE" xml:space="preserve">
+    <value>기한이 유효하지 않습니다</value>
+  </data>
+  <data name="INVALID_EMAIL_FORMAT" xml:space="preserve">
+    <value>이메일 형식이 잘못 되었습니다.</value>
+  </data>
+  <data name="INVALID_FORMAT" xml:space="preserve">
+    <value>잘못된 형식</value>
+  </data>
+  <data name="INVALID_PARAMETER" xml:space="preserve">
+    <value>매개 변수가 잘못되었습니다</value>
+  </data>
+  <data name="INVALID_PASSWORD" xml:space="preserve">
+    <value>잘못된 암호</value>
+  </data>
+  <data name="INVALID_USERNAME_OR_PASSWORD" xml:space="preserve">
+    <value>사용자 이름이나 암호가 잘못되었습니다</value>
+  </data>
+  <data name="INVALID_VALUE" xml:space="preserve">
+    <value>값이 유효하지 않습니다</value>
+  </data>
+  <data name="Inventory" xml:space="preserve">
+    <value>목록</value>
+  </data>
+  <data name="INVENTORY_QUANTITY" xml:space="preserve">
+    <value>庫存數量</value>
+  </data>
+  <data name="InventoryCheck" xml:space="preserve">
+    <value>재고체크</value>
+  </data>
+  <data name="InventoryPullback" xml:space="preserve">
+    <value>전송화물</value>
+  </data>
+  <data name="InventorySync" xml:space="preserve">
+    <value>Inventory Sync</value>
+  </data>
+  <data name="Invoice" xml:space="preserve">
+    <value>송장</value>
+  </data>
+  <data name="INVOICE_CHOOSE" xml:space="preserve">
+    <value>發票選擇</value>
+  </data>
+  <data name="IptPhone" xml:space="preserve">
+    <value>IPT Phone</value>
+  </data>
+  <data name="IptPhone1" xml:space="preserve">
+    <value>IPT Phone</value>
+  </data>
+  <data name="IS_PRINT_REMARK" xml:space="preserve">
+    <value>REMARK 인쇄여부</value>
+  </data>
+  <data name="JOB_WAREHOUSE" xml:space="preserve">
+    <value>작업 창고</value>
+  </data>
+  <data name="KOR" xml:space="preserve">
+    <value>한국</value>
+  </data>
+  <data name="KOREAN" xml:space="preserve">
+    <value>한국어</value>
+  </data>
+  <data name="l" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Lane" xml:space="preserve">
+    <value>Lane</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>언어</value>
+  </data>
+  <data name="LARGEST_INVENTORY" xml:space="preserve">
+    <value>最大庫存</value>
+  </data>
+  <data name="Leave" xml:space="preserve">
+    <value>휴일 신청서</value>
+  </data>
+  <data name="Level" xml:space="preserve">
+    <value>Level</value>
+  </data>
+  <data name="LicensingBackend" xml:space="preserve">
+    <value>Licensing Backend</value>
+  </data>
+  <data name="LOCATION" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="LOCKED" xml:space="preserve">
+    <value>잠금</value>
+  </data>
+  <data name="LOGIN" xml:space="preserve">
+    <value>로그인</value>
+  </data>
+  <data name="LOGISTICS" xml:space="preserve">
+    <value>물류</value>
+  </data>
+  <data name="LOGISTICS_COMPANY" xml:space="preserve">
+    <value>물류</value>
+  </data>
+  <data name="LOGISTICS_CONFIG" xml:space="preserve">
+    <value>물류 구성</value>
+  </data>
+  <data name="LOGISTICS_UNIT" xml:space="preserve">
+    <value>화주</value>
+  </data>
+  <data name="LogisticsConfig" xml:space="preserve">
+    <value>물류 지정</value>
+  </data>
+  <data name="LogisticUnit" xml:space="preserve">
+    <value>물류정보</value>
+  </data>
+  <data name="LOGOUT" xml:space="preserve">
+    <value>로그 아웃</value>
+  </data>
+  <data name="Logs" xml:space="preserve">
+    <value>일지</value>
+  </data>
+  <data name="LOOK_FOR_APPROVER" xml:space="preserve">
+    <value>결재자를 선택하십시오</value>
+  </data>
+  <data name="LOOK_FOR_NOTIFY_USER" xml:space="preserve">
+    <value>협조자를 선택하십시오</value>
+  </data>
+  <data name="MAIN_PICTURE" xml:space="preserve">
+    <value>商品主图片</value>
+  </data>
+  <data name="MARKET" xml:space="preserve">
+    <value>Market</value>
+  </data>
+  <data name="MEMBER_RECORED" xml:space="preserve">
+    <value>회원 정보</value>
+  </data>
+  <data name="MembershipRecords" xml:space="preserve">
+    <value>회원 기록</value>
+  </data>
+  <data name="MENBER_CONTENT" xml:space="preserve">
+    <value>會員折抵內容</value>
+  </data>
+  <data name="MENBER_DISCOUNT" xml:space="preserve">
+    <value>會員折抵</value>
+  </data>
+  <data name="MenuGroup" xml:space="preserve">
+    <value>메뉴 그룹</value>
+  </data>
+  <data name="MenuGroup1" xml:space="preserve">
+    <value>메뉴 그룹</value>
+  </data>
+  <data name="Merchandise" xml:space="preserve">
+    <value>Merchandise</value>
+  </data>
+  <data name="MERCHANDISE_NO" xml:space="preserve">
+    <value>상품번호</value>
+  </data>
+  <data name="MERCHANDISE_QUANTITY" xml:space="preserve">
+    <value>수량</value>
+  </data>
+  <data name="MERGE_ORDERS" xml:space="preserve">
+    <value>合并订单</value>
+  </data>
+  <data name="MIN_WAREHOUSE_PiCKING_NUM" xml:space="preserve">
+    <value>其中一个仓的Picking数量小于</value>
+  </data>
+  <data name="MINIMUN_INVENTORY" xml:space="preserve">
+    <value>最小庫存</value>
+  </data>
+  <data name="MOBILE" xml:space="preserve">
+    <value>휴대 전화</value>
+  </data>
+  <data name="MODIFY" xml:space="preserve">
+    <value>수정</value>
+  </data>
+  <data name="MODIFY_RULE" xml:space="preserve">
+    <value>修改规则</value>
+  </data>
+  <data name="MORE" xml:space="preserve">
+    <value>더</value>
+  </data>
+  <data name="MORNING" xml:space="preserve">
+    <value>아침</value>
+  </data>
+  <data name="MULTIPLE_ORDER" xml:space="preserve">
+    <value>Multiple Orders</value>
+  </data>
+  <data name="MYS" xml:space="preserve">
+    <value>말레이시아</value>
+  </data>
+  <data name="NAME" xml:space="preserve">
+    <value>전체 이름</value>
+  </data>
+  <data name="NEED_DECIMAL_POINT" xml:space="preserve">
+    <value>소수점 관리</value>
+  </data>
+  <data name="NEED_PRINT_PICKLIST" xml:space="preserve">
+    <value>피킹리스트 인쇄여부</value>
+  </data>
+  <data name="NEED_PRINT_QRCODE" xml:space="preserve">
+    <value>QRCode 인쇄 여부</value>
+  </data>
+  <data name="NEED_PRINT_SHOPPING_DETAILS" xml:space="preserve">
+    <value>Detail 인쇄 여부</value>
+  </data>
+  <data name="NEED_WEIGHTTING" xml:space="preserve">
+    <value>무게정보</value>
+  </data>
+  <data name="NEWCOMMING_ORDER" xml:space="preserve">
+    <value>새로운 주문</value>
+  </data>
+  <data name="Next_Page" xml:space="preserve">
+    <value>下一页</value>
+  </data>
+  <data name="NFC_MUST_EQUAL_CODE" xml:space="preserve">
+    <value>NFC No 必须等于 Code</value>
+  </data>
+  <data name="NIGHT" xml:space="preserve">
+    <value>밤</value>
+  </data>
+  <data name="NO" xml:space="preserve">
+    <value>NO</value>
+  </data>
+  <data name="NO_APPROVER_FOUND" xml:space="preserve">
+    <value>결재자를 찾을 수 없습니다</value>
+  </data>
+  <data name="NO_CORRECT_ORDER" xml:space="preserve">
+    <value>주문을 찾을수 없습니ㅏ.</value>
+  </data>
+  <data name="NO_ELIGIBLE_WORKFLOW_FOUND" xml:space="preserve">
+    <value>해당 업무프로세스를 찾을 수 없습니다</value>
+  </data>
+  <data name="NO_NEXT_APPROVER_FOUND" xml:space="preserve">
+    <value>결재자를 찾을 수 없습니다</value>
+  </data>
+  <data name="NO_SKU_FOUND" xml:space="preserve">
+    <value>SKU가 없습니다.</value>
+  </data>
+  <data name="NO_TRANSFER_TO_DEPOT" xml:space="preserve">
+    <value>不允许转移到DEPOT仓库</value>
+  </data>
+  <data name="NormalPhone" xml:space="preserve">
+    <value>Normal Phone</value>
+  </data>
+  <data name="NormalPhone1" xml:space="preserve">
+    <value>Normal Phone</value>
+  </data>
+  <data name="NOT_FIND_CA" xml:space="preserve">
+    <value>没有找到CA订单对应的活动</value>
+  </data>
+  <data name="NOT_FIND_PA" xml:space="preserve">
+    <value>没有找到PA订单对应的活动</value>
+  </data>
+  <data name="NOT_SUPPORT_REFUND" xml:space="preserve">
+    <value>Refund unsupported</value>
+  </data>
+  <data name="Notification" xml:space="preserve">
+    <value>공고</value>
+  </data>
+  <data name="NOTIFY_USER_NOT_FOUND" xml:space="preserve">
+    <value>사용자를 발견할 수 없습니다</value>
+  </data>
+  <data name="NotInOrder" xml:space="preserve">
+    <value>이 제품은 순서가 아닌</value>
+  </data>
+  <data name="NotStarted" xml:space="preserve">
+    <value>시작되지 않았습니다</value>
+  </data>
+  <data name="NoWHSetting" xml:space="preserve">
+    <value>Current warehouse has no setting</value>
+  </data>
+  <data name="NUM_ALL_NOT_ZERO" xml:space="preserve">
+    <value>所有的數量不能都爲 0</value>
+  </data>
+  <data name="OfficialWebsiteOrders" xml:space="preserve">
+    <value>공식 웹 사이트 주문</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="OLD_NEW" xml:space="preserve">
+    <value>商品新旧程度</value>
+  </data>
+  <data name="OMS" xml:space="preserve">
+    <value>Order Management System</value>
+  </data>
+  <data name="ORDER" xml:space="preserve">
+    <value>주문 용지</value>
+  </data>
+  <data name="ORDER_AMOUNT" xml:space="preserve">
+    <value>금액</value>
+  </data>
+  <data name="ORDER_CONFIGURATION_SETTING" xml:space="preserve">
+    <value>주문 환경셋팅</value>
+  </data>
+  <data name="ORDER_EXIST_REFUND_OR_EXCHANGE" xml:space="preserve">
+    <value>当前已存在未完成的换货单或退货单</value>
+  </data>
+  <data name="ORDER_FILTER_MODE" xml:space="preserve">
+    <value>启用OrderFilter模式</value>
+  </data>
+  <data name="ORDER_HAS_MORE_ORDERNO" xml:space="preserve">
+    <value>此单有多个原单号，无法继续操作</value>
+  </data>
+  <data name="ORDER_MERCHANDISES" xml:space="preserve">
+    <value>제품 주문</value>
+  </data>
+  <data name="ORDER_NO" xml:space="preserve">
+    <value>주문 번호</value>
+  </data>
+  <data name="ORDER_NOT_EDIT" xml:space="preserve">
+    <value>Unable to edit this order</value>
+  </data>
+  <data name="ORDER_NOT_FOUND" xml:space="preserve">
+    <value>나는 관련 주문을 찾을 수 없습니다!</value>
+  </data>
+  <data name="ORDER_NOT_FOUND_OR_NO_NEED_CONFIRM" xml:space="preserve">
+    <value>주문 문이 없거나 확인되지 않았습니다.</value>
+  </data>
+  <data name="ORDER_NOT_FOUND_OR_NO_NEED_PACK" xml:space="preserve">
+    <value>주문 문이 없거나 패킹이되지 않았습니다</value>
+  </data>
+  <data name="ORDER_NOT_FOUND_OR_NO_NEED_RETURNBACK" xml:space="preserve">
+    <value>沒有找到此訂單或此訂單狀態無法退回</value>
+  </data>
+  <data name="ORDER_NUM" xml:space="preserve">
+    <value>주문번호</value>
+  </data>
+  <data name="ORDER_OPERATION" xml:space="preserve">
+    <value>주문작업</value>
+  </data>
+  <data name="ORDER_OPERATION_SETTING" xml:space="preserve">
+    <value>주문 셋팅</value>
+  </data>
+  <data name="ORDER_PARAMETER_SETTING" xml:space="preserve">
+    <value>订单参数设定</value>
+  </data>
+  <data name="ORDER_PURCHASE_DATE" xml:space="preserve">
+    <value>판매날짜</value>
+  </data>
+  <data name="ORDER_RECORDS" xml:space="preserve">
+    <value>주문 내역</value>
+  </data>
+  <data name="ORDER_REVIEW_AMOUNT" xml:space="preserve">
+    <value>주문 금액</value>
+  </data>
+  <data name="ORDER_REVIEW_QUANTITY" xml:space="preserve">
+    <value>주문 수량</value>
+  </data>
+  <data name="ORDER_SENT" xml:space="preserve">
+    <value>订单已经发送到</value>
+  </data>
+  <data name="ORDER_SHPPED" xml:space="preserve">
+    <value>주문 배송</value>
+  </data>
+  <data name="ORDER_STATUS" xml:space="preserve">
+    <value>訂單狀態</value>
+  </data>
+  <data name="Order_Status_Approved" xml:space="preserve">
+    <value>창고지정중</value>
+  </data>
+  <data name="Order_Status_Assigned" xml:space="preserve">
+    <value>창고지정완료</value>
+  </data>
+  <data name="Order_Status_Canceled" xml:space="preserve">
+    <value>취소</value>
+  </data>
+  <data name="Order_Status_Ordered" xml:space="preserve">
+    <value>보류중인주문</value>
+  </data>
+  <data name="Order_Status_Packed" xml:space="preserve">
+    <value>패킹완료</value>
+  </data>
+  <data name="Order_Status_Packing" xml:space="preserve">
+    <value>패킹중</value>
+  </data>
+  <data name="Order_Status_Picked" xml:space="preserve">
+    <value>피킹완료</value>
+  </data>
+  <data name="Order_Status_Picking" xml:space="preserve">
+    <value>피킹중</value>
+  </data>
+  <data name="Order_Status_Received" xml:space="preserve">
+    <value>배송완료</value>
+  </data>
+  <data name="Order_Status_Returned" xml:space="preserve">
+    <value>반품</value>
+  </data>
+  <data name="Order_Status_Shipped" xml:space="preserve">
+    <value>배송</value>
+  </data>
+  <data name="Order_Status_Shipping" xml:space="preserve">
+    <value>배송준비중</value>
+  </data>
+  <data name="ORDER_SUCCESSFULLY" xml:space="preserve">
+    <value>訂單已成功回復，但無法更新至已出貨狀態</value>
+  </data>
+  <data name="OrderActions" xml:space="preserve">
+    <value>주문작업</value>
+  </data>
+  <data name="OrderCancelled" xml:space="preserve">
+    <value>주문 취소</value>
+  </data>
+  <data name="OrderDetails" xml:space="preserve">
+    <value>Order details</value>
+  </data>
+  <data name="OrderHistory" xml:space="preserve">
+    <value>주문 내역</value>
+  </data>
+  <data name="ORDERNO_REQ" xml:space="preserve">
+    <value>번호는 null 일 수 없습니다</value>
+  </data>
+  <data name="OrderNoneOfStock" xml:space="preserve">
+    <value>재고</value>
+  </data>
+  <data name="OrderOutOfStock" xml:space="preserve">
+    <value>재고 없음</value>
+  </data>
+  <data name="OrderQuery" xml:space="preserve">
+    <value>주문 추적</value>
+  </data>
+  <data name="OrderRef" xml:space="preserve">
+    <value>단일 원래 없습니다</value>
+  </data>
+  <data name="OrdersOnHold" xml:space="preserve">
+    <value>Orders OnHold</value>
+  </data>
+  <data name="OriOrderDetails" xml:space="preserve">
+    <value>원래 주문 세부 정보</value>
+  </data>
+  <data name="OTHER" xml:space="preserve">
+    <value>다른</value>
+  </data>
+  <data name="OTHER_PARAMETERS" xml:space="preserve">
+    <value>기타 매개 변수</value>
+  </data>
+  <data name="OTHER_SHOP" xml:space="preserve">
+    <value>其他店鋪</value>
+  </data>
+  <data name="OtherCountry" xml:space="preserve">
+    <value>다른 나라</value>
+  </data>
+  <data name="OtherReason" xml:space="preserve">
+    <value>다른 이유</value>
+  </data>
+  <data name="OUT_OF_STOCK_CONTROL" xml:space="preserve">
+    <value>Stockout control</value>
+  </data>
+  <data name="OUTOFSTOCK_ORDER" xml:space="preserve">
+    <value>재고 없음</value>
+  </data>
+  <data name="OutOfStockQuery" xml:space="preserve">
+    <value>缺货查询</value>
+  </data>
+  <data name="OutQty" xml:space="preserve">
+    <value>출고수량</value>
+  </data>
+  <data name="OVERDUR" xml:space="preserve">
+    <value>만료</value>
+  </data>
+  <data name="OVERDUR_HOURS" xml:space="preserve">
+    <value>주문 후 (시간)</value>
+  </data>
+  <data name="Pack" xml:space="preserve">
+    <value>패킹</value>
+  </data>
+  <data name="PACK_FINISHED" xml:space="preserve">
+    <value>패킹 완료</value>
+  </data>
+  <data name="PACKER" xml:space="preserve">
+    <value>패커</value>
+  </data>
+  <data name="PAGE_UNDER_DEVELOPMENT" xml:space="preserve">
+    <value>이 페이지의 내용은 아직 개발 중입니다 ......</value>
+  </data>
+  <data name="Pager_Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="Pager_Previous" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="Pager_Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="PARAMETER_NAME" xml:space="preserve">
+    <value>参数名称</value>
+  </data>
+  <data name="PARAMETER_SETTINGS" xml:space="preserve">
+    <value>환경 설정</value>
+  </data>
+  <data name="PARAMETER_VALUE" xml:space="preserve">
+    <value>参数值</value>
+  </data>
+  <data name="PartialShip" xml:space="preserve">
+    <value>Partial Ship</value>
+  </data>
+  <data name="PasswardExpiredDate" xml:space="preserve">
+    <value>패스워드 만료일</value>
+  </data>
+  <data name="PasswardExpiredDate1" xml:space="preserve">
+    <value>패스워드 만료일</value>
+  </data>
+  <data name="PASSWORD" xml:space="preserve">
+    <value>암호</value>
+  </data>
+  <data name="PASSWORD_CHANGE" xml:space="preserve">
+    <value>密码已经修改</value>
+  </data>
+  <data name="PASSWORD_REPEATED" xml:space="preserve">
+    <value>新密码不能和旧密码重复</value>
+  </data>
+  <data name="PASSWORD_REQUIRED" xml:space="preserve">
+    <value>암호는 필수입력입니다.</value>
+  </data>
+  <data name="PASTE_AND_SCAN_PACKAGE" xml:space="preserve">
+    <value>상품에 바코드를 부착해주세요</value>
+  </data>
+  <data name="PAYMENT_STATUS" xml:space="preserve">
+    <value>付款狀態</value>
+  </data>
+  <data name="PAYMENT_WAY" xml:space="preserve">
+    <value>결제</value>
+  </data>
+  <data name="PEDDING_ORDERS" xml:space="preserve">
+    <value>새로운 주문</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>대기중인</value>
+  </data>
+  <data name="PENDING_ORDERS_SETTING" xml:space="preserve">
+    <value>보류중인 주문이 모드를 승인</value>
+  </data>
+  <data name="PERCENTAGE" xml:space="preserve">
+    <value>百分比</value>
+  </data>
+  <data name="PERMISSIONS" xml:space="preserve">
+    <value>권한</value>
+  </data>
+  <data name="PERMISSIONS_SETTING" xml:space="preserve">
+    <value>권한설정</value>
+  </data>
+  <data name="PHONE" xml:space="preserve">
+    <value>전화</value>
+  </data>
+  <data name="Pick" xml:space="preserve">
+    <value>피킹</value>
+  </data>
+  <data name="PICK_CONFIRM" xml:space="preserve">
+    <value>피킹 확인</value>
+  </data>
+  <data name="PICK_CONFIRMED" xml:space="preserve">
+    <value>피킹 확인</value>
+  </data>
+  <data name="PICK_ORDER" xml:space="preserve">
+    <value>拣货单</value>
+  </data>
+  <data name="Picked" xml:space="preserve">
+    <value>피킹 완료</value>
+  </data>
+  <data name="PICKER" xml:space="preserve">
+    <value>피커</value>
+  </data>
+  <data name="PICKING_AREA" xml:space="preserve">
+    <value>Picking Area</value>
+  </data>
+  <data name="PICKING_PROBLEM_ORDER" xml:space="preserve">
+    <value>Picking Problem Order</value>
+  </data>
+  <data name="PLEASE_SCAN_NFC_OR_QRCode" xml:space="preserve">
+    <value>Please scan QRCode</value>
+  </data>
+  <data name="PLEASE_SELECT" xml:space="preserve">
+    <value>선택하세요</value>
+  </data>
+  <data name="PLEASE_SELECT_A_VALUE" xml:space="preserve">
+    <value>해당값을 선택하십시오</value>
+  </data>
+  <data name="PleaseInputBarcode" xml:space="preserve">
+    <value>바코드를 작성해주십시오</value>
+  </data>
+  <data name="PleaseInputPassword" xml:space="preserve">
+    <value>Please input the password</value>
+  </data>
+  <data name="POINTS_DISCOUNT" xml:space="preserve">
+    <value>點數折抵</value>
+  </data>
+  <data name="POSDate" xml:space="preserve">
+    <value>POS날짜</value>
+  </data>
+  <data name="Position" xml:space="preserve">
+    <value>직위</value>
+  </data>
+  <data name="Position1" xml:space="preserve">
+    <value>직위</value>
+  </data>
+  <data name="POSNo" xml:space="preserve">
+    <value>POS번호</value>
+  </data>
+  <data name="PREORDER_END" xml:space="preserve">
+    <value>预定订单结束时间</value>
+  </data>
+  <data name="PREORDER_START" xml:space="preserve">
+    <value>预定订单开始时间</value>
+  </data>
+  <data name="PREPACKAGE" xml:space="preserve">
+    <value>Pre packages</value>
+  </data>
+  <data name="PRESELL" xml:space="preserve">
+    <value>预售</value>
+  </data>
+  <data name="PRESELL_WAREHOUSE" xml:space="preserve">
+    <value>预售仓库</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>가격</value>
+  </data>
+  <data name="PRINT" xml:space="preserve">
+    <value>인쇄</value>
+  </data>
+  <data name="PRINT_BATCHES" xml:space="preserve">
+    <value>Print batch</value>
+  </data>
+  <data name="PRINT_PARAMETERS" xml:space="preserve">
+    <value>Cilent 매개 변수를 인쇄</value>
+  </data>
+  <data name="PRINT_PICKLIST" xml:space="preserve">
+    <value>打印拣货单</value>
+  </data>
+  <data name="PRINT_WORK" xml:space="preserve">
+    <value>인쇄 및 작업</value>
+  </data>
+  <data name="PrintByBatch" xml:space="preserve">
+    <value>Print By Batch</value>
+  </data>
+  <data name="PRINTER" xml:space="preserve">
+    <value>프린터</value>
+  </data>
+  <data name="PRINTER_TYPE" xml:space="preserve">
+    <value>프린터 종류</value>
+  </data>
+  <data name="Printers" xml:space="preserve">
+    <value>프린터</value>
+  </data>
+  <data name="PRIORITY" xml:space="preserve">
+    <value>Priority</value>
+  </data>
+  <data name="Privileges" xml:space="preserve">
+    <value>권한</value>
+  </data>
+  <data name="PROBLEM_ORDER" xml:space="preserve">
+    <value>주문 수정</value>
+  </data>
+  <data name="PROCEESSED_ORDER" xml:space="preserve">
+    <value>처리완료</value>
+  </data>
+  <data name="PROCESSING_ORDER" xml:space="preserve">
+    <value>처리중</value>
+  </data>
+  <data name="PRODUCT_SYNC" xml:space="preserve">
+    <value>貨品同步策略</value>
+  </data>
+  <data name="PRODUCT_SYNC_NOT_SAVED" xml:space="preserve">
+    <value>無法保存貨品同步策略</value>
+  </data>
+  <data name="PRODUCT_SYNC_SAVED" xml:space="preserve">
+    <value>貨品同步策略已經保存</value>
+  </data>
+  <data name="ProductDetails" xml:space="preserve">
+    <value>Product details</value>
+  </data>
+  <data name="ProductName" xml:space="preserve">
+    <value>Product Name</value>
+  </data>
+  <data name="ProductNo" xml:space="preserve">
+    <value>ProductNo</value>
+  </data>
+  <data name="Progressing" xml:space="preserve">
+    <value>Progressing</value>
+  </data>
+  <data name="PROVINCE" xml:space="preserve">
+    <value>Province</value>
+  </data>
+  <data name="PullbackedQty" xml:space="preserve">
+    <value>반품된 수량</value>
+  </data>
+  <data name="PullbackQty" xml:space="preserve">
+    <value>반품수량</value>
+  </data>
+  <data name="Purchaser" xml:space="preserve">
+    <value>Purchaser</value>
+  </data>
+  <data name="QRCODE_INCORRECT_FORMAT" xml:space="preserve">
+    <value>QRCode 格式不正確</value>
+  </data>
+  <data name="QRCODE_UNRECONGNIZED" xml:space="preserve">
+    <value>无法识别的QRcode</value>
+  </data>
+  <data name="QTY_MORE_THAN_ZERO" xml:space="preserve">
+    <value>QTY必须大于0</value>
+  </data>
+  <data name="QUANTITY" xml:space="preserve">
+    <value>수량</value>
+  </data>
+  <data name="Query" xml:space="preserve">
+    <value>질문</value>
+  </data>
+  <data name="RACK" xml:space="preserve">
+    <value>Rack</value>
+  </data>
+  <data name="RACK_MANAGEMENT" xml:space="preserve">
+    <value>RACK 관리</value>
+  </data>
+  <data name="RackBox" xml:space="preserve">
+    <value>SkuRackBox</value>
+  </data>
+  <data name="RACKNO_REPETITION" xml:space="preserve">
+    <value>重复的 RackNo</value>
+  </data>
+  <data name="RE_RENTER_FOR_PAGE" xml:space="preserve">
+    <value>有新的调货, 请重新进入该页面操作</value>
+  </data>
+  <data name="REASON" xml:space="preserve">
+    <value>이유</value>
+  </data>
+  <data name="REASON_AND_REMARK" xml:space="preserve">
+    <value>비고 및 사유</value>
+  </data>
+  <data name="ReceiveDate" xml:space="preserve">
+    <value>Received Date</value>
+  </data>
+  <data name="ReceivedQty" xml:space="preserve">
+    <value>도착수량</value>
+  </data>
+  <data name="RECEIVER" xml:space="preserve">
+    <value>받는사람</value>
+  </data>
+  <data name="Receiving_Shop" xml:space="preserve">
+    <value>영수증 가게</value>
+  </data>
+  <data name="Receiving_Status" xml:space="preserve">
+    <value>수신 상태</value>
+  </data>
+  <data name="RecentAccessDate" xml:space="preserve">
+    <value>최근접속일</value>
+  </data>
+  <data name="RecentAccessDate1" xml:space="preserve">
+    <value>최근접속일</value>
+  </data>
+  <data name="REFUND_CLOSED" xml:space="preserve">
+    <value>Refund closed</value>
+  </data>
+  <data name="REFUND_CONFIGURATION_SETTING" xml:space="preserve">
+    <value>Refund Order Configuration 【Audit Mode】</value>
+  </data>
+  <data name="REFUND_JDRefund" xml:space="preserve">
+    <value>이 환불</value>
+  </data>
+  <data name="REFUND_LOGISTICS_COMPANY" xml:space="preserve">
+    <value>Refund logistics company</value>
+  </data>
+  <data name="REFUND_NO_REFUND" xml:space="preserve">
+    <value>No Refund</value>
+  </data>
+  <data name="REFUND_SELLER_REFUSE_BUYER" xml:space="preserve">
+    <value>Seller refused refund.</value>
+  </data>
+  <data name="REFUND_STATUS" xml:space="preserve">
+    <value>Refund status</value>
+  </data>
+  <data name="REFUND_SUCCESS" xml:space="preserve">
+    <value>Refund success</value>
+  </data>
+  <data name="REFUND_TIME" xml:space="preserve">
+    <value>Refund time</value>
+  </data>
+  <data name="REFUND_WAIT_BUYER_RETURN_GOODS" xml:space="preserve">
+    <value>Waiting for buyer to return goods</value>
+  </data>
+  <data name="REFUND_WAIT_SELLER_AGREE" xml:space="preserve">
+    <value>Waiting for seller to agree refund</value>
+  </data>
+  <data name="REFUND_WAIT_SELLER_CONFIRM_GOODS" xml:space="preserve">
+    <value>Waiting for seller to confirm goods</value>
+  </data>
+  <data name="RefundAmount" xml:space="preserve">
+    <value>Refund Amount</value>
+  </data>
+  <data name="RefundDetails" xml:space="preserve">
+    <value>환불 주문 세부 정보</value>
+  </data>
+  <data name="RefundOrder" xml:space="preserve">
+    <value>订单退回</value>
+  </data>
+  <data name="RefundOrderNo" xml:space="preserve">
+    <value>Refund OrderNo</value>
+  </data>
+  <data name="RefundPerson" xml:space="preserve">
+    <value>Refund Person</value>
+  </data>
+  <data name="RefundProduct" xml:space="preserve">
+    <value>Refund Product</value>
+  </data>
+  <data name="RefuseRefund" xml:space="preserve">
+    <value>Refuse Refund</value>
+  </data>
+  <data name="Region" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="REMARK" xml:space="preserve">
+    <value>비고</value>
+  </data>
+  <data name="ReplaceGoodsDetails" xml:space="preserve">
+    <value>대체 된 주문 세부 정보</value>
+  </data>
+  <data name="REPLENISH_AREA" xml:space="preserve">
+    <value>Replenish Area</value>
+  </data>
+  <data name="REPLENISHMENT_AREA_SHELF" xml:space="preserve">
+    <value>Replensh Area Rack</value>
+  </data>
+  <data name="REPORT_RECIPIENT" xml:space="preserve">
+    <value>영수증 리포트</value>
+  </data>
+  <data name="Reporting" xml:space="preserve">
+    <value>Reporting</value>
+  </data>
+  <data name="REPRINT_PICK_ORDER" xml:space="preserve">
+    <value>重印捡货单</value>
+  </data>
+  <data name="REPRINT_QRCODE" xml:space="preserve">
+    <value>REPRINT QRCODE</value>
+  </data>
+  <data name="RequestDateTime" xml:space="preserve">
+    <value>에 대한 수요</value>
+  </data>
+  <data name="RequestedQuantity" xml:space="preserve">
+    <value>요청한 수량</value>
+  </data>
+  <data name="RequiredFinalShipByDate" xml:space="preserve">
+    <value>최종 출하 일</value>
+  </data>
+  <data name="RETURN" xml:space="preserve">
+    <value>반환</value>
+  </data>
+  <data name="RETURN_BACK" xml:space="preserve">
+    <value>반환</value>
+  </data>
+  <data name="RETURN_MANAGEMENT" xml:space="preserve">
+    <value>반품관리</value>
+  </data>
+  <data name="RETURN_PICK_ORDER" xml:space="preserve">
+    <value>退回到拣货单</value>
+  </data>
+  <data name="RETURNBACK_FINISHED" xml:space="preserve">
+    <value>退回完成</value>
+  </data>
+  <data name="ReturnConfirm" xml:space="preserve">
+    <value>수신 확인</value>
+  </data>
+  <data name="ReturnDetails" xml:space="preserve">
+    <value>Return details</value>
+  </data>
+  <data name="ReturnHandle" xml:space="preserve">
+    <value>반환 핸들</value>
+  </data>
+  <data name="ReturnRequest" xml:space="preserve">
+    <value>반환 핸들</value>
+  </data>
+  <data name="ReviewOrders" xml:space="preserve">
+    <value>보류중인 주문</value>
+  </data>
+  <data name="REWORK_REASON" xml:space="preserve">
+    <value>변경사유</value>
+  </data>
+  <data name="RFCFM" xml:space="preserve">
+    <value>환불</value>
+  </data>
+  <data name="RFJobs" xml:space="preserve">
+    <value>반환 작업</value>
+  </data>
+  <data name="RFReview" xml:space="preserve">
+    <value>환불을 보류</value>
+  </data>
+  <data name="ROW" xml:space="preserve">
+    <value>行</value>
+  </data>
+  <data name="ROW_DATA_DUPLICATED" xml:space="preserve">
+    <value>동일한 데이터 행이 이미 존재합니다</value>
+  </data>
+  <data name="SAME_BUYER_HOURS" xml:space="preserve">
+    <value>동일 구매자 시간</value>
+  </data>
+  <data name="SAME_BUYER_QUANTITY" xml:space="preserve">
+    <value>동일 구매자의 수량</value>
+  </data>
+  <data name="SAVE" xml:space="preserve">
+    <value>저장</value>
+  </data>
+  <data name="SAVE_COMMENT_FAILED" xml:space="preserve">
+    <value>댓글 저장 실패</value>
+  </data>
+  <data name="SAVE_CONDITION_FAILED" xml:space="preserve">
+    <value>저장이 실패 되었습니다</value>
+  </data>
+  <data name="SAVE_EXECUTE" xml:space="preserve">
+    <value>保存并立即执行</value>
+  </data>
+  <data name="SAVE_FAILED" xml:space="preserve">
+    <value>保存失敗，缺少 Brand</value>
+  </data>
+  <data name="SCAN_BARCODE" xml:space="preserve">
+    <value>바코드 스캔</value>
+  </data>
+  <data name="SCAN_NFC" xml:space="preserve">
+    <value>Please scan the NFC/QRCode</value>
+  </data>
+  <data name="SCAN_NFC_CARD" xml:space="preserve">
+    <value>请扫描NFC卡片</value>
+  </data>
+  <data name="SCAN_NFC_TO_UNINSTALL" xml:space="preserve">
+    <value>Scan the NFC/QRCode to uninstall</value>
+  </data>
+  <data name="SCAN_QRCODE" xml:space="preserve">
+    <value>QRCODE 스캔</value>
+  </data>
+  <data name="ScheduledWarehouses" xml:space="preserve">
+    <value>Scheduled Warehouses</value>
+  </data>
+  <data name="SEARCH" xml:space="preserve">
+    <value>검색</value>
+  </data>
+  <data name="SECONDS" xml:space="preserve">
+    <value>초</value>
+  </data>
+  <data name="SELECT" xml:space="preserve">
+    <value>선택</value>
+  </data>
+  <data name="SELECT_COUNTRY" xml:space="preserve">
+    <value>국가를 선택하세요</value>
+  </data>
+  <data name="SELECT_LOGISTICS_COMPANY" xml:space="preserve">
+    <value>물류 선택</value>
+  </data>
+  <data name="SELECT_ONE_ORDER" xml:space="preserve">
+    <value>Please select only one order to continue</value>
+  </data>
+  <data name="SELECT_ORDER" xml:space="preserve">
+    <value>주문 선택</value>
+  </data>
+  <data name="SELECT_REWORK_REASON" xml:space="preserve">
+    <value>사유를 선택하세요</value>
+  </data>
+  <data name="SELETE_BRAND" xml:space="preserve">
+    <value>请选择一个brand</value>
+  </data>
+  <data name="SelledQty" xml:space="preserve">
+    <value>판매수량</value>
+  </data>
+  <data name="SELLER_CONSIGNED_PART" xml:space="preserve">
+    <value>Seller part shipment</value>
+  </data>
+  <data name="SEND_TO_LOGISTICS_CONFIG" xml:space="preserve">
+    <value>물류 지정</value>
+  </data>
+  <data name="Sendback_Order_Please" xml:space="preserve">
+    <value>고객이 환불을 신청 한 순서를 보내 주시기 바랍니다</value>
+  </data>
+  <data name="SenderCity" xml:space="preserve">
+    <value>Seller city</value>
+  </data>
+  <data name="SenderDetails" xml:space="preserve">
+    <value>Seller Address</value>
+  </data>
+  <data name="SenderDistrict" xml:space="preserve">
+    <value>Seller district</value>
+  </data>
+  <data name="SenderMobile" xml:space="preserve">
+    <value>seller mobile</value>
+  </data>
+  <data name="SenderName" xml:space="preserve">
+    <value>Seller name</value>
+  </data>
+  <data name="SenderPhone" xml:space="preserve">
+    <value>Seller phone</value>
+  </data>
+  <data name="SenderProvince" xml:space="preserve">
+    <value>Seller province</value>
+  </data>
+  <data name="SenderTown" xml:space="preserve">
+    <value>Sender town</value>
+  </data>
+  <data name="SendToWHWaitReceive" xml:space="preserve">
+    <value>Send to warehouse</value>
+  </data>
+  <data name="ServiceDetails" xml:space="preserve">
+    <value>Order details</value>
+  </data>
+  <data name="ServiceOrder" xml:space="preserve">
+    <value>Service Order</value>
+  </data>
+  <data name="SET_NEW_RULE" xml:space="preserve">
+    <value>设定新规则</value>
+  </data>
+  <data name="SetOutOfStock" xml:space="preserve">
+    <value>Set Stockout</value>
+  </data>
+  <data name="SetReplenished" xml:space="preserve">
+    <value>Set replenished</value>
+  </data>
+  <data name="SGP" xml:space="preserve">
+    <value>싱가포르</value>
+  </data>
+  <data name="SHELF_TIME" xml:space="preserve">
+    <value>上架时间</value>
+  </data>
+  <data name="Ship" xml:space="preserve">
+    <value>배송</value>
+  </data>
+  <data name="ShipmentDate" xml:space="preserve">
+    <value>배송 시간</value>
+  </data>
+  <data name="Shipped" xml:space="preserve">
+    <value>배송</value>
+  </data>
+  <data name="ShippedRefundOrder" xml:space="preserve">
+    <value>Shipped Refund Order</value>
+  </data>
+  <data name="SHIPPER" xml:space="preserve">
+    <value>SHIPPER</value>
+  </data>
+  <data name="SHIPPING" xml:space="preserve">
+    <value>배송</value>
+  </data>
+  <data name="SHIPPING_COST" xml:space="preserve">
+    <value>배송비</value>
+  </data>
+  <data name="Shipping_Shop" xml:space="preserve">
+    <value>배송 가게</value>
+  </data>
+  <data name="Shipping_Status" xml:space="preserve">
+    <value>배송 상태</value>
+  </data>
+  <data name="SHOP" xml:space="preserve">
+    <value>매장</value>
+  </data>
+  <data name="ShopCode" xml:space="preserve">
+    <value>매장코드</value>
+  </data>
+  <data name="SHORTAGE_OF_REJECTED" xml:space="preserve">
+    <value>Stockout return</value>
+  </data>
+  <data name="SIMPLIFIED_CHINESE" xml:space="preserve">
+    <value>중국어 간체</value>
+  </data>
+  <data name="SINGLE_ORDER" xml:space="preserve">
+    <value>Single Orders</value>
+  </data>
+  <data name="SIZE" xml:space="preserve">
+    <value>SIZE </value>
+  </data>
+  <data name="SKU" xml:space="preserve">
+    <value>Sku</value>
+  </data>
+  <data name="SKU_EDIT_ECOMM_ONLY" xml:space="preserve">
+    <value>ECOMM팀만 수정가능</value>
+  </data>
+  <data name="SKU_INFORMATION_LACK" xml:space="preserve">
+    <value>Sku_资料缺失</value>
+  </data>
+  <data name="SKU_NOT_FOUND" xml:space="preserve">
+    <value>sku未找到</value>
+  </data>
+  <data name="SKU_NUM_WRONG" xml:space="preserve">
+    <value>sku数量不正确</value>
+  </data>
+  <data name="UPLOAD_STOCKTRANSFER_WRONG" xml:space="preserve">
+    <value>Sku or Shop is invalid</value>
+  </data>
+  <data name="SkuInventorysQuery" xml:space="preserve">
+    <value>倉庫標記缺貨查詢</value>
+  </data>
+  <data name="SkuRack" xml:space="preserve">
+    <value>SKU RACK</value>
+  </data>
+  <data name="SLJobs" xml:space="preserve">
+    <value>배송 작업</value>
+  </data>
+  <data name="SpecialStore" xml:space="preserve">
+    <value>특별한 상점을 구입 리 &amp; 펑 그룹</value>
+  </data>
+  <data name="SPECIFY_DELIVERY_DATE" xml:space="preserve">
+    <value>배송날짜 지정</value>
+  </data>
+  <data name="SPECIFY_DELIVERY_TIME" xml:space="preserve">
+    <value>배송시간 지정</value>
+  </data>
+  <data name="SPLITING_FAILED" xml:space="preserve">
+    <value>拆單失敗，当前用户没有订单所在仓库的拆单权限</value>
+  </data>
+  <data name="SplitOrder" xml:space="preserve">
+    <value>Split</value>
+  </data>
+  <data name="SplitSuccess" xml:space="preserve">
+    <value>Data splited</value>
+  </data>
+  <data name="StaffDataManagement" xml:space="preserve">
+    <value>Staff Data Management</value>
+  </data>
+  <data name="START" xml:space="preserve">
+    <value>시작 시간</value>
+  </data>
+  <data name="START_OPERATION" xml:space="preserve">
+    <value>작업시작</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>시작 날짜</value>
+  </data>
+  <data name="StartTime" xml:space="preserve">
+    <value>시작 시간</value>
+  </data>
+  <data name="Stationery" xml:space="preserve">
+    <value>문구 신청서</value>
+  </data>
+  <data name="STATUS" xml:space="preserve">
+    <value>상태</value>
+  </data>
+  <data name="StatusSummary" xml:space="preserve">
+    <value>Status Summary</value>
+  </data>
+  <data name="STOCK_SHORTAGE" xml:space="preserve">
+    <value>Sku 未找到或者庫存不足</value>
+  </data>
+  <data name="STOCK_TRANSFER" xml:space="preserve">
+    <value>转仓</value>
+  </data>
+  <data name="STOCKOUT" xml:space="preserve">
+    <value>아웃</value>
+  </data>
+  <data name="StockOutNum" xml:space="preserve">
+    <value>Stockout Num</value>
+  </data>
+  <data name="StockTransfer" xml:space="preserve">
+    <value>재고이동</value>
+  </data>
+  <data name="Store" xml:space="preserve">
+    <value>가게</value>
+  </data>
+  <data name="STORE_NOT_FOUND" xml:space="preserve">
+    <value>未能匹配到店铺</value>
+  </data>
+  <data name="STORED" xml:space="preserve">
+    <value>저장 됨</value>
+  </data>
+  <data name="StoreDesign" xml:space="preserve">
+    <value>스토어 디자인 승인 양식</value>
+  </data>
+  <data name="StoreInspection" xml:space="preserve">
+    <value>가게를 확인</value>
+  </data>
+  <data name="Style" xml:space="preserve">
+    <value>스타일</value>
+  </data>
+  <data name="StyleOrBarcodeRequired" xml:space="preserve">
+    <value>SKU를 또는 바코드 중 하나 이상을 기입하십시오</value>
+  </data>
+  <data name="SUBCLSS_MERCHANDISE" xml:space="preserve">
+    <value>商品所属子类目</value>
+  </data>
+  <data name="SUCCESS" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="SyncStatus" xml:space="preserve">
+    <value>동기화 상태</value>
+  </data>
+  <data name="SYSTEM_SETTINGS" xml:space="preserve">
+    <value>시스템 설정</value>
+  </data>
+  <data name="SystemParameters" xml:space="preserve">
+    <value>환경 설정</value>
+  </data>
+  <data name="SystemSettings" xml:space="preserve">
+    <value>시스템 설정</value>
+  </data>
+  <data name="SystemTotal" xml:space="preserve">
+    <value>System total</value>
+  </data>
+  <data name="TEMPLATE_NAME" xml:space="preserve">
+    <value>模板名称</value>
+  </data>
+  <data name="TEMPLATE_OUT_OF_DATE" xml:space="preserve">
+    <value>만료된 문서</value>
+  </data>
+  <data name="TemplateSetting" xml:space="preserve">
+    <value>템플릿 설정</value>
+  </data>
+  <data name="TestAll" xml:space="preserve">
+    <value>테스트 - 하위 단계 - 모든 통해</value>
+  </data>
+  <data name="TestAny" xml:space="preserve">
+    <value>테스트 - 하위 단계 - 어떤로</value>
+  </data>
+  <data name="TIME" xml:space="preserve">
+    <value>时间</value>
+  </data>
+  <data name="TMALL_SHIPPED_MODE" xml:space="preserve">
+    <value>Tmall发货模式</value>
+  </data>
+  <data name="TOO_MANY_PRINTS" xml:space="preserve">
+    <value>一次打印数量过多</value>
+  </data>
+  <data name="TooManyRows" xml:space="preserve">
+    <value>Too many rows，do you want to update to db?</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="TOTAL_COUNT" xml:space="preserve">
+    <value>주문 수량</value>
+  </data>
+  <data name="TOTAL_ORDER_AMOUNT" xml:space="preserve">
+    <value>合計訂單金額(NT)</value>
+  </data>
+  <data name="TOTAL_ORDER_COUNT" xml:space="preserve">
+    <value>총 주문 수</value>
+  </data>
+  <data name="TOTAL_QTY" xml:space="preserve">
+    <value>總量</value>
+  </data>
+  <data name="TOTAL_QTY_COUNT" xml:space="preserve">
+    <value>총 수량</value>
+  </data>
+  <data name="TRACKING_NO" xml:space="preserve">
+    <value>배송번호</value>
+  </data>
+  <data name="TrackingNumber" xml:space="preserve">
+    <value>추적 번호</value>
+  </data>
+  <data name="TRADE_BUYER_SIGNED" xml:space="preserve">
+    <value>Buyer signed</value>
+  </data>
+  <data name="TRADE_CANCELED" xml:space="preserve">
+    <value>취소되었습니다</value>
+  </data>
+  <data name="TRADE_CLOSED" xml:space="preserve">
+    <value>Trade closed</value>
+  </data>
+  <data name="TRADE_CLOSED_BY_TAOBAO" xml:space="preserve">
+    <value>Trade closed by taobao</value>
+  </data>
+  <data name="TRADE_FINISHED" xml:space="preserve">
+    <value>Trade finished</value>
+  </data>
+  <data name="TRADITIONAL_CHINESE" xml:space="preserve">
+    <value>중국어 번체</value>
+  </data>
+  <data name="TRANSACTION_ID" xml:space="preserve">
+    <value>Transaction no</value>
+  </data>
+  <data name="TransferCompltedRate" xml:space="preserve">
+    <value>전송완료율</value>
+  </data>
+  <data name="TRANSTYPE" xml:space="preserve">
+    <value>交易類別</value>
+  </data>
+  <data name="TravelAbroad" xml:space="preserve">
+    <value>해외에서 신청서를 여행</value>
+  </data>
+  <data name="TRTURN_DISABLED_TIME" xml:space="preserve">
+    <value>退回时禁用时间</value>
+  </data>
+  <data name="TWN" xml:space="preserve">
+    <value>대만</value>
+  </data>
+  <data name="TYPE" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="UNABLE_CANCEL_NOT_EFULL" xml:space="preserve">
+    <value>이 아닌건 취소불가능</value>
+  </data>
+  <data name="UNABLE_CHANGE_CONDITION" xml:space="preserve">
+    <value>조건을 바꿀 수 없다</value>
+  </data>
+  <data name="UNABLE_CHANGE_CONDITION_RELATION" xml:space="preserve">
+    <value>조건값을 변경할 수 없습니다</value>
+  </data>
+  <data name="UNABLE_CREATE_NEW_TEMPLATE" xml:space="preserve">
+    <value>새로운 문서를 생성할수 없습니다</value>
+  </data>
+  <data name="UNABLE_DELETE_DATA" xml:space="preserve">
+    <value>无法删除数据</value>
+  </data>
+  <data name="UNABLE_FIND_SETTING" xml:space="preserve">
+    <value>无法找到设定</value>
+  </data>
+  <data name="UNABLE_MODIFY_ORDER" xml:space="preserve">
+    <value>수정할수 없습니다.</value>
+  </data>
+  <data name="UNABLE_MODIFY_TO_SHIPPING" xml:space="preserve">
+    <value>배송을 수정할수 없습니다.</value>
+  </data>
+  <data name="UNABLE_OBTAIN_TRACKING_NO" xml:space="preserve">
+    <value>无法获取快递单号</value>
+  </data>
+  <data name="UNABLE_SENT_REQ" xml:space="preserve">
+    <value>요청이 완료 되지 않았습니다</value>
+  </data>
+  <data name="UNABLE_TO_ADD_NOTIFY_USER" xml:space="preserve">
+    <value>사용자에게 알림을 추가 할 수 없음</value>
+  </data>
+  <data name="UNABLE_TO_COPY_TEMPLATE" xml:space="preserve">
+    <value>문서를 복사할 수 없습니다</value>
+  </data>
+  <data name="UNABLE_TO_CREATE_YOUR_APPLICATION" xml:space="preserve">
+    <value>품의서를 생성할 수 없습니다</value>
+  </data>
+  <data name="UNABLE_TO_EDIT_TEMPLATE" xml:space="preserve">
+    <value>문서를 수정할 수 없습니다</value>
+  </data>
+  <data name="UNABLE_TO_VIEW_TEMPLATE" xml:space="preserve">
+    <value>문서를</value>
+  </data>
+  <data name="UNABLE_UPDATE_DATA" xml:space="preserve">
+    <value>데이터를 업데이트 할 수 없습니다</value>
+  </data>
+  <data name="UNALBE_TO_MOVE" xml:space="preserve">
+    <value>이동할수 없습니다.</value>
+  </data>
+  <data name="UNASSIGN_TO_APP" xml:space="preserve">
+    <value>Not Assigned to App </value>
+  </data>
+  <data name="UNAUTHORIZED_PAGE" xml:space="preserve">
+    <value>접근권한이 없습니다.</value>
+  </data>
+  <data name="UNLIMITED" xml:space="preserve">
+    <value>무한</value>
+  </data>
+  <data name="UNPROCESSING_ORDER" xml:space="preserve">
+    <value>미처리</value>
+  </data>
+  <data name="UNPROCESSING_PREORDER" xml:space="preserve">
+    <value>Unprocessing presaled orders</value>
+  </data>
+  <data name="UnshippedRefundOrder" xml:space="preserve">
+    <value>Unshipped Refund Order</value>
+  </data>
+  <data name="UNSUPPORTED_FILEFORMAT" xml:space="preserve">
+    <value>파일 형식은 지원되지 않습니다</value>
+  </data>
+  <data name="UNUPLOADED_PROBLEM_ORDER" xml:space="preserve">
+    <value>Not uploaded problem orders</value>
+  </data>
+  <data name="UPDATE_FIELD_FAILED" xml:space="preserve">
+    <value>해당값을 변경할 수 없습니다</value>
+  </data>
+  <data name="UpdateTimeout" xml:space="preserve">
+    <value>검색 결과는 {} 두 번째 (들) 후 업데이트되면서됩니다.</value>
+  </data>
+  <data name="UPDATING" xml:space="preserve">
+    <value>Updating......</value>
+  </data>
+  <data name="UPLOAD_ATTACHMENT_FAILED" xml:space="preserve">
+    <value>업로드 할수 없습니다</value>
+  </data>
+  <data name="UPLOAD_CSV_EXCEL" xml:space="preserve">
+    <value>를 CSV (UTF8), Excel 파일 형식을 업로드하세요</value>
+  </data>
+  <data name="UPLOAD_ERROR" xml:space="preserve">
+    <value>上传出现问题，行数</value>
+  </data>
+  <data name="UPLOAD_EXCEL" xml:space="preserve">
+    <value>를 Excel 파일 형식을 업로드하세요</value>
+  </data>
+  <data name="UPLOAD_FAILED" xml:space="preserve">
+    <value>上传失败</value>
+  </data>
+  <data name="UPLOAD_IMG" xml:space="preserve">
+    <value>UPLOAD IMAGE</value>
+  </data>
+  <data name="Upload_RackBox" xml:space="preserve">
+    <value>Upload RackBox</value>
+  </data>
+  <data name="Upload_Skus_To_Search" xml:space="preserve">
+    <value>Upload Skus To Search</value>
+  </data>
+  <data name="UPLOAD_STORAGE" xml:space="preserve">
+    <value>上传储位</value>
+  </data>
+  <data name="UPLOAD_VIRTUAL_INVENTORY" xml:space="preserve">
+    <value>上传虛擬倉庫存</value>
+  </data>
+  <data name="UploadNewTemplate" xml:space="preserve">
+    <value>새 템플릿 파일을 업로드</value>
+  </data>
+  <data name="UploadPicker" xml:space="preserve">
+    <value>Upload Picker</value>
+  </data>
+  <data name="UploadSkus" xml:space="preserve">
+    <value>Upload Skus</value>
+  </data>
+  <data name="USE_PREPACKAGES" xml:space="preserve">
+    <value>启用预装包裹</value>
+  </data>
+  <data name="UsedCarts" xml:space="preserve">
+    <value>Used Carts</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>사용자</value>
+  </data>
+  <data name="USER_CANNOT_OPERATION" xml:space="preserve">
+    <value>当前用户无法执行此操作</value>
+  </data>
+  <data name="USER_NO_DUPLICATED" xml:space="preserve">
+    <value>반복 사용자 ID</value>
+  </data>
+  <data name="USER_NOT_FOUND" xml:space="preserve">
+    <value>사용자를 찾을수 없습니다.</value>
+  </data>
+  <data name="UserGrade" xml:space="preserve">
+    <value>등급</value>
+  </data>
+  <data name="UserId" xml:space="preserve">
+    <value>아이디</value>
+  </data>
+  <data name="UserInfo" xml:space="preserve">
+    <value>사용자 정보</value>
+  </data>
+  <data name="UserManagement" xml:space="preserve">
+    <value>사용자 관리</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>이름</value>
+  </data>
+  <data name="UserSearch" xml:space="preserve">
+    <value>사용자 조회</value>
+  </data>
+  <data name="UseYN" xml:space="preserve">
+    <value>사용유무</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>version</value>
+  </data>
+  <data name="VERSION_NOT_REPEATED" xml:space="preserve">
+    <value>版本号不能重复.</value>
+  </data>
+  <data name="VIEW_ALL_ORDERS" xml:space="preserve">
+    <value>주문 현황</value>
+  </data>
+  <data name="VIEW_APPLICATION_HISTORY" xml:space="preserve">
+    <value>문서 변경 정보</value>
+  </data>
+  <data name="VIEW_APPROVER" xml:space="preserve">
+    <value>승인자보기</value>
+  </data>
+  <data name="VIEW_ASSIGN_SCHEDULER" xml:space="preserve">
+    <value>查看分配调度程序</value>
+  </data>
+  <data name="VIEW_PREVIOUS_VERSIONS" xml:space="preserve">
+    <value>진행상태</value>
+  </data>
+  <data name="ViewAllOrders" xml:space="preserve">
+    <value>주문 현황</value>
+  </data>
+  <data name="ViewAllRefund" xml:space="preserve">
+    <value>모든 반환보기</value>
+  </data>
+  <data name="ViewBarsUnderPacking" xml:space="preserve">
+    <value>View Bars Under Packing</value>
+  </data>
+  <data name="ViewInstalledCarts" xml:space="preserve">
+    <value>View Installed Carts</value>
+  </data>
+  <data name="ViewOrder" xml:space="preserve">
+    <value>View Order</value>
+  </data>
+  <data name="VIRTUAL_WAREHOUSE" xml:space="preserve">
+    <value>虛擬倉</value>
+  </data>
+  <data name="VIRTUAL_WAREHOUSE_INVENTORY" xml:space="preserve">
+    <value>虛擬倉庫存</value>
+  </data>
+  <data name="WAIT_BUYER_CONFIRM_GOODS" xml:space="preserve">
+    <value>Waiting for buyer to confirm goods</value>
+  </data>
+  <data name="WAIT_GOODS_RECEIVE_CONFIRM" xml:space="preserve">
+    <value>출원 접수</value>
+  </data>
+  <data name="WAIT_SELLER_SEND_GOODS" xml:space="preserve">
+    <value>Waiting for seller to send goods</value>
+  </data>
+  <data name="WAIT_SELLER_STOCK_OUT" xml:space="preserve">
+    <value>라이브러리를 기다리는 중</value>
+  </data>
+  <data name="WAREHOUSE" xml:space="preserve">
+    <value>창고</value>
+  </data>
+  <data name="WAREHOUSE_COMBINE" xml:space="preserve">
+    <value>仓库合并</value>
+  </data>
+  <data name="WAREHOUSE_NO" xml:space="preserve">
+    <value>仓库编号</value>
+  </data>
+  <data name="WAREHOUSE_NOT_PATIALLY_PACKED" xml:space="preserve">
+    <value>仓库除赠品外，无法部分包货</value>
+  </data>
+  <data name="WAREHOUSE_PICKING_APP" xml:space="preserve">
+    <value>仓库捡货app</value>
+  </data>
+  <data name="WarehouseDepot" xml:space="preserve">
+    <value>Warehouse Depot</value>
+  </data>
+  <data name="WarehouseManagement" xml:space="preserve">
+    <value>창고 관리</value>
+  </data>
+  <data name="WAREHOUSETYPE" xml:space="preserve">
+    <value>倉庫類別</value>
+  </data>
+  <data name="Waybill" xml:space="preserve">
+    <value>Waybill</value>
+  </data>
+  <data name="WAYBILL_ORDER_NOT_FIND" xml:space="preserve">
+    <value>无法找到货运单号对应的订单</value>
+  </data>
+  <data name="WEB_APP_NAME" xml:space="preserve">
+    <value>WEB_APP 명</value>
+  </data>
+  <data name="WEIGHTING" xml:space="preserve">
+    <value>제품무게</value>
+  </data>
+  <data name="WHEN_ORDER_AMOUNT_GREATER" xml:space="preserve">
+    <value>주문 금액보다 크면</value>
+  </data>
+  <data name="WHEN_ORDER_QUANTITY_GREATER" xml:space="preserve">
+    <value>순서는 총 수보다 클 때</value>
+  </data>
+  <data name="WITHOUT_RACK" xml:space="preserve">
+    <value>No rack</value>
+  </data>
+  <data name="RETURN_APPLY_DATE" xml:space="preserve">
+    <value>Apply Date</value>
+  </data>
+  <data name="RETURN_ORDER_NUM" xml:space="preserve">
+    <value>Order Number</value>
+  </data>
+  <data name="ORDER_CREATED_DATE" xml:space="preserve">
+    <value>Order Create Date</value>
+  </data>
+  <data name="RETURN_REFUND_METHOD" xml:space="preserve">
+    <value>Refund Method</value>
+  </data>
+  <data name="RETURN_PROCESS_STATUS" xml:space="preserve">
+    <value>Progress</value>
+  </data>
+  <data name="RETURN_ORDER_DETAIL" xml:space="preserve">
+    <value>Detail</value>
+  </data>
+  <data name="RETURN_REFUND_AMOUNT" xml:space="preserve">
+    <value>Refund</value>
+  </data>
+  <data name="RETURN_SEE_DETAIL" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="RETURN_PROGRESS_CANCELED" xml:space="preserve">
+    <value>Canceled</value>
+  </data>
+  <data name="RETURN_PROGRESS_DONE_REFUND" xml:space="preserve">
+    <value>Refunded</value>
+  </data>
+  <data name="RETURN_PROGRESS_WAITING_REFUND" xml:space="preserve">
+    <value>Proceeding refund</value>
+  </data>
+  <data name="RETURN_PROGRESS_IN_WAREHOUSE" xml:space="preserve">
+    <value>In Warehouse</value>
+  </data>
+  <data name="RETURN_PROGRESS_ON_GOING" xml:space="preserve">
+    <value>In Logistic</value>
+  </data>
+  <data name="RETURN_PROGRESS_RECEIVED" xml:space="preserve">
+    <value>Application Received</value>
+  </data>
+  <data name="RETURN_ACCEPT_ORDER" xml:space="preserve">
+    <value>Accept Order</value>
+  </data>
+  <data name="PROD_IMG" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="PROD_NAME" xml:space="preserve">
+    <value>Product Name</value>
+  </data>
+  <data name="PROD_STYLE_NUM" xml:space="preserve">
+    <value>Style</value>
+  </data>
+  <data name="PROD_SIZE" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="PROD_COLOR" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="PROD_CUR_PRICE" xml:space="preserve">
+    <value>Current Price</value>
+  </data>
+  <data name="PROD_QTY" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="PROD_TOTAL_AMOUNT" xml:space="preserve">
+    <value>Sum</value>
+  </data>
+  <data name="ORDER_RECEIVER_NAME" xml:space="preserve">
+    <value>Sender Name</value>
+  </data>
+  <data name="ORDER_TEL" xml:space="preserve">
+    <value>Contact Number</value>
+  </data>
+  <data name="ORDER_ADDR" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="ORDER_LOGIS_STAT" xml:space="preserve">
+    <value>Logistic Status</value>
+  </data>
+  <data name="ORDER_PICKUP_DATE" xml:space="preserve">
+    <value>Pickup Period</value>
+  </data>
+  <data name="ORDER_BUYER_NAME" xml:space="preserve">
+    <value>Buyer Name</value>
+  </data>
+  <data name="RETURN_TOTAL_QTY" xml:space="preserve">
+    <value>Total Quantity</value>
+  </data>
+  <data name="RETURN_WH_RECEIVED" xml:space="preserve">
+    <value>Package Received</value>
+  </data>
+  <data name="RETURN_WH_REPORT" xml:space="preserve">
+    <value>WH Comment</value>
+  </data>
+  <data name="RETURN_WH_CONFIRM" xml:space="preserve">
+    <value>Package Confirmed</value>
+  </data>
+  <data name="SET_BRAND" xml:space="preserve">
+    <value>Set Brand</value>
+  </data>
+  <data name="RETURN_ORDER_LIST" xml:space="preserve">
+    <value>EC Order Return List</value>
+  </data>
+  <data name="SSN" xml:space="preserve">
+    <value>SSN</value>
+  </data>
+  <data name="RETURN_BANK_NAME" xml:space="preserve">
+    <value>Bank Name</value>
+  </data>
+  <data name="RETURN_ACC_NAME" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="RETURN_ACC_NUM" xml:space="preserve">
+    <value>Account Name</value>
+  </data>
+  <data name="REJECT_BY_EC" xml:space="preserve">
+    <value>Reject Approval</value>
+  </data>
+  <data name="REJECT_PROD_DAMAGED" xml:space="preserve">
+    <value>Product Damaged</value>
+  </data>
+  <data name="REJECT_PROD_LACK" xml:space="preserve">
+    <value>Product Inconsistency</value>
+  </data>
+  <data name="REJECT_OTHERS" xml:space="preserve">
+    <value>Other problem</value>
+  </data>
+  <data name="RETURN_REPORT_BTN" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="CONFIRMED" xml:space="preserve">
+    <value>Confirmed</value>
+  </data>
+  <data name="ACTION" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="ORCHANGE_BRAND" xml:space="preserve">
+    <value>Or select brand to browse</value>
+  </data>
+  <data name="LOGISTIC_TRACK_NUM" xml:space="preserve">
+    <value>Tracking Number</value>
+  </data>
+  <data name="RETURN_WH_COMFIRM_ALL" xml:space="preserve">
+    <value>Approve order</value>
+  </data>
+  <data name="RETURN_CHECK_PASS" xml:space="preserve">
+    <value>Pass</value>
+  </data>
+  <data name="RETURN_PENDING_CHECK" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="RETURN_PH_MUST" xml:space="preserve">
+    <value>(Required) Description</value>
+  </data>
+  <data name="DETAIL" xml:space="preserve">
+    <value>Detail</value>
+  </data>
+  <data name="CONF_ORDER_REJECT" xml:space="preserve">
+    <value>Confirm rejection ?</value>
+  </data>
+  <data name="CONF_REFUND_COMPLETE" xml:space="preserve">
+    <value>Confirm refund complete ?</value>
+  </data>
+  <data name="CONF_ORDER_ACCEPT" xml:space="preserve">
+    <value>Confirm acception ?</value>
+  </data>
+  <data name="CONF_APPROVE_ITEM" xml:space="preserve">
+    <value>Approve this item ?</value>
+  </data>
+  <data name="CONF_RECEIVED_PACK" xml:space="preserve">
+    <value>Is package received ?</value>
+  </data>
+  <data name="CONF_APPROVE_PACK" xml:space="preserve">
+    <value>Approve this order ?</value>
+  </data>
+  <data name="BATCH_ACTIONS" xml:space="preserve">
+    <value>Batch actions</value>
+  </data>
+  <data name="WorkFlow" xml:space="preserve">
+    <value>작업 흐름</value>
+  </data>
+  <data name="WorkPlace" xml:space="preserve">
+    <value>WORK PLACE</value>
+  </data>
+  <data name="WorkPlace1" xml:space="preserve">
+    <value>WORK PLACE</value>
+  </data>
+  <data name="WRONG_BATCH" xml:space="preserve">
+    <value>错误的批次</value>
+  </data>
+  <data name="WrongPasswordOfReturnBack" xml:space="preserve">
+    <value>Password is incorrect or no user has permission of this warehouse</value>
+  </data>
+  <data name="YES" xml:space="preserve">
+    <value>YES</value>
+  </data>
+  <data name="YOU_CAN_NOT_MODIFY_APPLATION" xml:space="preserve">
+    <value>문서를 변경할 권한이 없습니다</value>
+  </data>
+  <data name="ZIPCODE" xml:space="preserve">
+    <value>우편 번호</value>
+  </data>
+  <data name="QUANTITY_LESS_ORIGINAL" xml:space="preserve">
+    <value>Quantity should large than original value</value>
+  </data>
+  <data name="CHANGE_PASSWORD" xml:space="preserve">
+    <value>修改密码</value>
+  </data>
+  <data name="PASSWORD_GEEATER_6" xml:space="preserve">
+    <value>密码长度不能小于6</value>
+  </data>
+  <data name="PASSWORD_INCONSISTENT" xml:space="preserve">
+    <value>两次密码不一致</value>
+  </data>
+  <data name="UserYN" xml:space="preserve">
+    <value>UserYN</value>
+  </data>
+  <data name="NO_PERMISSION" xml:space="preserve">
+    <value>Brand unathorized</value>
+  </data>
+  <data name="ORDER_RETURN_TITLE" xml:space="preserve">
+    <value>return item</value>
+  </data>
+  <data name="PASSWORD_EXPIRED" xml:space="preserve">
+    <value>패스워드가 만료 되었습니다</value>
+  </data>
+  <data name="EXPORT_REFUND_ACCOUNT" xml:space="preserve">
+    <value>Download AC Info</value>
+  </data>
+  <data name="CONFIRM_DL_AC" xml:space="preserve">
+    <value>Confirm to download all selected item acoount information ?</value>
+  </data>
+  <data name="ORIGINAL_ORDER_AMOUNT" xml:space="preserve">
+    <value>Original Amount</value>
+  </data>
+  <data name="ORIGINAL_DANDE_FEE" xml:space="preserve">
+    <value>Original Shipping fee</value>
+  </data>
+  <data name="ORIGINAL_USED_POINT" xml:space="preserve">
+    <value>Original Used points</value>
+  </data>
+  <data name="ORIGINAL_DISCOUNT" xml:space="preserve">
+    <value>Original Discount</value>
+  </data>
+  <data name="ORIGINAL_NET_AMOUNT" xml:space="preserve">
+    <value>Original Net amount</value>
+  </data>
+  <data name="ORIGINAL_ORDER_DETAIL" xml:space="preserve">
+    <value>Orginal Order Items</value>
+  </data>
+  <data name="ORIGINAL_USED_COUPON" xml:space="preserve">
+    <value>Original Used Coupon</value>
+  </data>
+  <data name="NEW_ORDER_AMOUNT" xml:space="preserve">
+    <value>New Order Amount</value>
+  </data>
+  <data name="NEW_ORDER_DISCOUNT" xml:space="preserve">
+    <value>New Order Discount</value>
+  </data>
+  <data name="NEW_ORDER_NET_AMOUNT" xml:space="preserve">
+    <value>New net amount</value>
+  </data>
+  <data name="REFUND_TOTAL_AMOUNT" xml:space="preserve">
+    <value>Total Refund</value>
+  </data>
+  <data name="REFUND_POINT_OFFSET" xml:space="preserve">
+    <value>Refund points after offset</value>
+  </data>
+  <data name="REFUND_OFFSET" xml:space="preserve">
+    <value>Refund after offset</value>
+  </data>
+  <data name="REFUND_SHIPPING_FEE" xml:space="preserve">
+    <value>배송비</value>
+  </data>
+  <data name="REFUND_USE_POINT" xml:space="preserve">
+    <value>Refund points</value>
+  </data>
+  <data name="RETURN_PROGRESS_RETURNED" xml:space="preserve">
+    <value>Returned</value>
+  </data>
+  <data name="RETURN_REPORT_MAIL_BTN" xml:space="preserve">
+    <value>Send mail</value>
+  </data>
+  <data name="RETURN_SEND_MAIL_DESC" xml:space="preserve">
+    <value>You are about the send a mail to customer and report the problem, continue ?</value>
+  </data>
+  <data name="SET_TO_RETURNED" xml:space="preserve">
+    <value>Set status to 「Returned」</value>
+  </data>
+  <data name="SET_TO_RETURNED_DESC" xml:space="preserve">
+    <value>You are about to set the order status to 「Returned」, continue ?</value>
+  </data>
+  <data name="MAIL_RETURN_ALARM_TITLE" xml:space="preserve">
+    <value>Progress of order return</value>
+  </data>
+  <data name="PROBLEM" xml:space="preserve">
+    <value>Problem</value>
+  </data>
+  <data name="UPLOAD_HR_SHIFT_TABLE" xml:space="preserve">
+    <value>Upload Shift table</value>
+  </data>
+  <data name="DOWNLOAD_HR_FIVEDAYWORKWEEK_EXCEL" xml:space="preserve">
+    <value>Download Five-Day work week example</value>
+  </data>
+  <data name="DOWNLOAD_HR_TRANSFORM_EXCEL" xml:space="preserve">
+    <value>Download Transform example</value>
+  </data>
+  <data name="WRONG_BATCH_COUNT" xml:space="preserve">
+    <value>ConfirmTransferBatchCount setting is wrong.</value>
+  </data>
+  <data name="ALLOW_SPLIT_IFSTOCKOUT" xml:space="preserve">
+    <value>Split ignore stockout items</value>
+  </data>
+  <data name="EXPORT_ALL_REFUND_ACCOUNT" xml:space="preserve">
+    <value>Download All AC Info</value>
+  </data>
+  <data name="SELECT_ITEM_PROBLEM" xml:space="preserve">
+    <value>Select item problem</value>
+  </data>
+  <data name="REASON_REQUIRED" xml:space="preserve">
+    <value>Select at least one option</value>
+  </data>
+  <data name="OR_INTO_LIST" xml:space="preserve">
+    <value>Or go to the list</value>
+  </data>
+  <data name="INVALID_TRACKING_NUM" xml:space="preserve">
+    <value>Invalid tracking number</value>
+  </data>
+  <data name="CANNOT_FIND_TRACKING_NUM" xml:space="preserve">
+    <value>Cannot find this tracking number</value>
+  </data>
+  <data name="ALREADY_COMPLETE_REFUND" xml:space="preserve">
+    <value>The return process was already completed.</value>
+  </data>
+  <data name="ORDER_WAITING_FOR_REFUND" xml:space="preserve">
+    <value>This order is currently waiting for the refund process.</value>
+  </data>
+  <data name="CUSTOMER_SERVICE" xml:space="preserve">
+    <value>온라인몰</value>
+  </data>
+  <data name="SELETE_GRAB_BRAND" xml:space="preserve">
+    <value>请选择一个品牌</value>
+  </data>
+  <data name="ASSIGN_TO_SHIPSHOP_END" xml:space="preserve">
+    <value>分配到SHIPSHOP结束时间</value>
+  </data>
+  <data name="ASSIGN_TO_SHIPSHOP_START" xml:space="preserve">
+    <value>分配到SHIPSHOP开始时间</value>
+  </data>
+  <data name="SHIPSHOP_END" xml:space="preserve">
+    <value>SHIPSHOP订单结束时间</value>
+  </data>
+  <data name="SHIPSHOP_START" xml:space="preserve">
+    <value>SHIPSHOP订单开始时间</value>
+  </data>
+  <data name="ALLOW_ASSIGN_TO_SHIPSHOP" xml:space="preserve">
+    <value>是否允许分配到SHIPSHOP</value>
+  </data>
+  <data name="UBER_GRAB_MODE" xml:space="preserve">
+    <value>启用UberGrab模式</value>
+  </data>
+  <data name="ALREADY_CANCELED" xml:space="preserve">
+    <value>日期包含已被取消或者正在取消的日期</value>
+  </data>
+  <data name="PRINT_EXPRESS_WAYBILL" xml:space="preserve">
+    <value>打印快递单</value>
+  </data>
+</root>

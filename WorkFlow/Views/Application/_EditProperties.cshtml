@@ -1,0 +1,98 @@
+﻿
+@using WorkFlow.Ext
+@using Dreamlab.Core
+@using WorkFlowLib.Data
+@model WF_FlowPropertys[]
+@{
+    var staffNo = ViewBag.StaffNo as string;
+}
+<style type="text/css">
+    .radio-inline input[type="radio"] {
+        margin-top: 0px !important;
+    }
+</style>
+<table class="properties-table">
+    <tr>
+        <td><span>DEPARTMENT</span></td>
+        <td colspan="3">
+            @(ViewBag.CurrentDep as string)
+            @Html.Hidden("Dep", ViewBag.CurrentDep as string)
+        </td>
+    <tr>
+    <tr>
+        <td><span>SUBJECT</span></td>
+        <td><input type="text" name="Subject" data-val="true" data-val-required="*" class="form-control" /></td>
+        <td><span>DEADLINE</span></td>
+        <td><input type="text" name="Deadline" data-val="true" data-val-required="*" class="form-control datetime" /></td>
+    </tr>
+    @if (Model != null && Model.Length > 0)
+    {
+        int index = 0;
+        foreach (var props in Model.Where(p => p.StatusId > 0).OrderBy(p => p.OrderId).SplitToGroup(2))
+        {
+            <tr>
+                @foreach (WF_FlowPropertys prop in props)
+                {
+                    <td><span style="text-transform: uppercase;">@prop.PropertyName</span></td>
+                    <td>
+                        @HtmlUIHelper.RenderControl(prop, Html, index)
+                        @Html.Hidden("Properties[" + index + "].Id", prop.FlowPropertyId)
+                        @Html.Hidden("Properties[" + index + "].Type", prop.PropertyType)
+                    </td>
+                    index++;
+                }
+            </tr>
+        }
+        if ((ViewBag.HasCoverDuties as bool?).GetValueOrDefault())
+        {
+            <tr>
+
+                <td>
+                    <span>PERSON TO COVER DUTIES</span>
+                </td>
+                <td colspan="3">
+                    <div class="clearfix" style="padding-bottom: 10px"></div>
+                    <div id="div_cover_duties">
+                        @Html.Partial("_CoverDuties", new ViewDataDictionary
+                                {
+                                   { "CurrentStaffNo", staffNo}
+                                })
+                    </div>
+                    <a href="#" id="add_person_cover_duty" style="padding:4px;">Add more</a>
+                </td>
+            </tr>
+        }
+    }
+
+    <tr>
+        <td><span>FINAL NOTIFY USER</span></td>
+        <td colspan="3">
+            <div id="div_notify_users">
+                @Html.Partial("_NotifyUser", string.Empty)
+            </div>
+            <a href="#" id="add_user">Add more final notify user</a>
+        </td>
+    </tr>
+    <tr>
+        <td><span>ATTACHMENTS</span></td>
+        <td colspan="3">
+            @Html.Partial("_Upload")
+        </td>
+    </tr>
+</table>
+
+<script type="text/javascript">
+    $(function () {
+        $('#add_user').on('click', function () {
+            $.postData('@Url.Action("NotifyUser")', {}, function (data) {
+                $('#div_notify_users').append(data);
+            });
+        });
+        $.addDateAndTimePicker();
+        $('#add_person_cover_duty').on('click', function () {
+            $.postData('@Url.Action("AddCoverDuties")', {}, function (data) {
+                $('#div_cover_duties').append(data);
+            });
+        });
+    });
+</script>

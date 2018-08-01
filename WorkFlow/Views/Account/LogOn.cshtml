@@ -1,0 +1,65 @@
+﻿@model WorkFlow.Models.LogOnViewModel
+@{
+    ViewBag.Title = "LogOn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    #menu-toggle-btn {
+        display: none;
+    }
+
+    .content-section {
+        left: 0;
+    }
+</style>
+<div class="row text-center" id="login_form">
+    <div class="login-section">
+        <div>
+            <p style="font-size: 42px; color: crimson;">
+                Intranet
+            </p>
+        </div>
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary(true, "", new { @class = "text-danger", style = "text-align:left;padding-top:10px" })
+            @Html.AntiForgeryToken()
+            <div>
+                @Html.Label(Resources.StringResource.ACCOUNT_STAFF_CODE + "/Account", new { @class = "control-label" })
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.Username, new { @class = "form-control login-control" })
+                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.Label(Resources.StringResource.PASSWORD + "/Password", new { @class = "control-label" })
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.Password, new { @class = "form-control login-control" })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+            <div>
+                <input type="submit" value="@(Resources.StringResource.LOGIN)" class="btn btn-login" onclick="return ondosubmit();" />
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        function ondosubmit() {
+            if ($('#login_form form').valid()) {
+                $('#login_form :submit').attr('disabled', 'disabled');
+            }
+            $('#login_form form').submit();
+            return false;
+        }
+
+        $(function() {
+            if ($('#left-menu').size() > 0) {
+                location.href = "@Url.Action("LogOn", "Account")";
+                return;
+            }
+            $('#Password').attr('type', 'password');
+        });
+    </script>
+}

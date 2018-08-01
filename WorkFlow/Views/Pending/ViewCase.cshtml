@@ -1,0 +1,53 @@
+﻿@using WorkFlowLib.Data
+@using WorkFlowLib.DTO
+@using Dreamlab.Core
+@model FlowInfo
+
+<div style="margin: 10px">
+    @Html.Partial("~/Views/Inbox/ViewSimpleCase.cshtml", Model)
+</div>
+<hr class="step-line">
+@{
+    WF_FlowTypes flowType = ViewBag.FlowType as WF_FlowTypes;
+    if (flowType != null && flowType.TemplateType == 1)
+    {
+        @Html.Partial("ViewStoreApprovalForm")
+    }
+    else if (flowType != null && flowType.TemplateType == 2)
+    {
+        @Html.Partial("_ViewLeaveApplication", Model)
+    }
+    else if (flowType != null && flowType.TemplateType == 7)
+    {
+        @Html.Partial("_ViewStoreClosureForm", Model)
+    }
+    else
+    {
+        @Html.Partial("~/Views/Pending/_ViewProperties.cshtml")
+    }
+}
+<br />
+<br />
+<br />
+@if (ViewBag.DisplayButtons != false)
+{
+    <table style="margin: 0 auto;">
+        @if (Model.CaseInfo.Applicant.EqualsIgnoreCaseAndBlank(User.Identity.Name)
+            && Model.CaseInfo.Aborted == null
+            && Model.CaseInfo.Approved == null
+            && Model.CaseInfo.Rejected == null
+            && Model.CaseInfo.Cancelled == null)
+        {
+            <tr>
+                <td colspan="2">
+                    <div id="btn_list_div" style="margin-top: 40px;">
+                        <a class="btn btn-danger btn-lg" data-ajax="true" data-ajax-confirm="确定要取消当前申请？" data-ajax-update="#div_content" data-ajax-loading="#div_progress" data-ajax-mode="replace" data-ajax-method="post" href="@Url.Action("CancelApp", new {flowCaseId = Model.CaseInfo.FlowCaseId})">
+                            CANCEL MY APPLICATION
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+}
+

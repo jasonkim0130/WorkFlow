@@ -1,0 +1,13 @@
+﻿@using Resources
+@model string
+@{
+    ViewBag.Title = StringResource.ERROR;
+}
+<div style="margin: 20px">
+    <hgroup>
+        <h3 class="alert alert-danger">
+            <img src="~/Content/Images/warning.png" style="max-width: 40px; max-height: 40px;" />
+            @Html.Raw(Model?.Replace("\n", "<br/>"))
+        </h3>
+    </hgroup>
+</div>

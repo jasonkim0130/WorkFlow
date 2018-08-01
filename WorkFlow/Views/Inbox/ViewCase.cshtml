@@ -1,0 +1,67 @@
+﻿@using WorkFlowLib.Data
+@using WorkFlowLib.DTO
+@using WorkFlow.Ext
+@model FlowInfo
+<div id="div_page">
+    <div style="margin: 10px">
+        @Html.Partial("_FlowSteps", Model)
+    </div>
+    <hr class="step-line">
+
+    <div>
+        @{
+            WF_FlowTypes flowType = ViewBag.FlowType as WF_FlowTypes;
+            if (flowType != null && flowType.TemplateType == 1)
+            {
+                @Html.Partial("_ViewStoreApprovalForm", Model)
+            }
+            else if (flowType != null && flowType.TemplateType == 2)
+            {
+                @Html.Partial("_ViewLeaveApplication", Model)
+            }
+            else if (flowType != null && flowType.TemplateType == 7)
+            {
+                @Html.Partial("_ViewStoreClosureForm", Model)
+            }
+            else
+            {
+                <div style="text-align: center;">
+                    @Html.Partial("_ViewProperties", Model)
+                </div>
+            }
+        }
+    </div>
+
+    <div style="text-align: center;">
+        <div id="div_approve"></div>
+        <div id="div_message"></div>
+        <table style="margin: 0 auto;">
+            <tr>
+                <td class="text-center approve-btn-cell">
+                    <div id="btn_list_div" style="margin-top: 40px;">
+                        @Ajax.ModalActionLink("APPROVE", "Approve", new { flowCaseId = Model.CaseInfo.FlowCaseId }, new ModalAjaxOptions
+                        {
+                            HttpMethod = "post",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "div_progress",
+                            Class = "btn btn-success btn-lg",
+                            ModalTargetId = "div_approve",
+                            UpdateTargetId = "div_content"
+                        })
+                        <a class="btn btn-primary btn-lg" data-ajax="true" data-ajax-update="#div_message" data-ajax-loading="#div_progress" data-ajax-mode="replace" data-ajax-method="post" href="@Url.Action("SendBackMessageModal", new {flowCaseId = Model.CaseInfo.FlowCaseId})">
+                            SEND BACK FOR REVISION
+                        </a>
+                        <a class="btn btn-warning btn-lg" data-ajax="true" data-ajax-update="#div_message" data-ajax-loading="#div_progress" data-ajax-method="get" data-ajax-mode="replace" href="@Url.Action("ApproveComment", new {flowCaseId = Model.CaseInfo.FlowCaseId})">
+                            APPROVE WITH COMMENT
+                        </a>
+                        <a class="btn btn-danger btn-lg" data-ajax="true" data-ajax-update="#div_message" data-ajax-loading="#div_progress" data-ajax-mode="replace" data-ajax-method="post" href="@Url.Action("RejectMessageModal", new {flowCaseId = Model.CaseInfo.FlowCaseId})">
+                            REJECT
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="div_message_cont"></div>
+    @Html.Partial("_ApplicationLogs", Model.CaseInfo.FlowCaseId)
+</div>

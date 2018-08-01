@@ -1,0 +1,27 @@
+﻿
+@using WorkFlowLib.DTO
+@using WorkFlow.Ext
+@{
+    var comments = ViewBag.Comments as CaseNotification[];
+}
+<div>
+    @if (comments != null && comments.Length > 0)
+    {
+        <table>
+            <tr>
+                <td style="text-align: left;">
+                    <h4>Comments:</h4>
+                </td>
+            </tr>
+            @foreach (var msg in comments)
+            {
+                <tr>
+                    <td style="text-align: left;">
+                        <h4><span class="userno">@(WebCacheHelper.GetWF_UsernameByNo(msg.Sender))</span> Commented on @msg.Created.ToString("M/d/yyyy h:m:s tt") </h4>
+                        <h5 style="margin-left: 20px; max-width: 600px;">@msg.Comments</h5>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</div>

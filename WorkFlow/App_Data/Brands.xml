@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CountryBrands>
+  <CountryBrand Country="TWN" Brands="ROS,HCT,HTN,APM"/>
+  <CountryBrand Country="CHN" Brands="ROS,HCT,HTN"/>
+  <CountryBrand Country="KOR" Brands="HCT,HTN,HTJ"/>
+  <CountryBrand Country="HKG" Brands="HTN"/>
+  <CountryBrand Country="SGP" Brands="HCT,HTN"/>
+  <CountryBrand Country="MYS" Brands="HTN"/>
+</CountryBrands>

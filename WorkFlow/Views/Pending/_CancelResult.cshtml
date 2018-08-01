@@ -1,0 +1,34 @@
+﻿@using Newtonsoft.Json
+@using WorkFlowLib.Results
+@using WorkFlowLib.DTO
+@using WorkFlow.Controllers
+@model FlowInfo
+@{
+    CancelFlowResult result = (CancelFlowResult)ViewBag.CancelResult;
+}
+<div class="text-center">
+    @if (result == CancelFlowResult.Canceled)
+    {
+        <div style="margin: 10px">
+            @Html.Partial("~/Views/Inbox/ViewSimpleCase.cshtml", Model)
+        </div>
+        <hr class="step-line">
+        <h2 style="line-height: 50px;">
+            <img src="~/Content/Images/Workflow/approval/Rejected.png" style="width: 250px; height: 200px;" />
+            <p style="margin-bottom: 10px;">
+                Application cancelled
+            </p>
+        </h2>
+        <script type="text/javascript">
+            $(function () {
+                $.page.badgeSubject.updatePage(@Html.Raw(JsonConvert.SerializeObject(WorkFlowBadgeData.GetPendingBadgeData(ViewBag.PendingCount))));
+            });
+        </script>
+    }
+    else
+    {
+        <h2>
+            <p style="color: crimson;">Unable to cancel your application.</p>
+        </h2>
+    }
+</div>

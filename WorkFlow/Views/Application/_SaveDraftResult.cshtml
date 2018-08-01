@@ -1,0 +1,18 @@
+﻿@using Newtonsoft.Json
+@using WorkFlowLib.DTO
+@using WorkFlow.Controllers
+@model FlowInfo
+<div class="text-center">
+    <div style="margin: 10px">
+        @Html.Partial("~/Views/Inbox/_FlowSteps.cshtml", Model)
+    </div>
+    <hr class="step-line">
+    <h2>Your application is saved.</h2>
+    @Html.Partial("~/Views/Inbox/_ApplicationLogs.cshtml", (int)ViewBag.FlowCaseId)
+    <script type="text/javascript">
+        $(function () {
+            $('#div_create_data').remove();
+            $.page.badgeSubject.updatePage(@Html.Raw(JsonConvert.SerializeObject(WorkFlowBadgeData.GetPendingBadgeData(ViewBag.PendingCount))));
+        });
+    </script>
+</div>

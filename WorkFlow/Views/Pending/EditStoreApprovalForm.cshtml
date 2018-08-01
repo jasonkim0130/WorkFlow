@@ -1,0 +1,2050 @@
+﻿@using Newtonsoft.Json
+@using WorkFlowLib.Data
+@using WorkFlowLib.DTO
+@using WorkFlowLib
+@using WorkFlow.Ext
+@using Dreamlab.Core
+
+@model FlowInfo
+
+@{
+    PropertiesValue properties = ViewBag.Properties as PropertiesValue;
+    string[] users = ViewBag.FinalNotifyUsers;
+    string[] nextApprovers = ViewBag.NextApprover as string[];
+    var country = GetPropertyValueByPropertyName("Country");
+    var CAPEX = JsonConvert.SerializeObject(Consts.CAPEX);
+    var brandImages = new Dictionary<string, string>
+{
+{ "HCT", Url.Content("~/Content/Images/Brands_HCT.png")},
+{ "HTN", Url.Content("~/Content/Images/Brands_HT.png")},
+{ "ROS", Url.Content("~/Content/Images/Brands_RTS.png")},
+{ "APM", Url.Content("~/Content/Images/Brands_AP.png")},
+{ "LEO", Url.Content("~/Content/Images/Brands_LEO.png")}
+};
+    var Cities = ViewBag.Cities as IEnumerable<Cities>;
+    var ReasonForApplication = GetPropertyValueByPropertyName("ReasonForApplication");
+}
+
+@helper GenerateHiddenHtml(WF_FlowPropertys prop, string guid)
+    {
+        @Html.Hidden("PropertyList.Index", guid);
+        @Html.Hidden("PropertyList[" + guid + "].Id", prop?.FlowPropertyId.ToString())
+        @Html.Hidden("PropertyList[" + guid + "].Type", prop?.PropertyType.ToString())
+}
+
+@helper GenerateTextBox(string propName, string id = null, bool disabled = false, string style = null, string placeholder = null, bool showValue = true, bool readOnly = false, bool removeRequired = false)
+    {
+        var guid = Guid.NewGuid().ToString();
+        PropertiesValue properties = ViewBag.Properties as PropertiesValue;
+        WF_FlowPropertys prop = properties.PropertyInfo.FirstOrDefault(p => p.StatusId < 0 && p.PropertyName == propName);
+        var value = showValue ? GetPropertyValue(properties, prop) : null;
+        var attributes = GetAttributesByPropertyName(propName, id, disabled, style);
+        if (placeholder != null)
+        {
+            attributes.Add("placeholder", placeholder);
+        }
+        if (readOnly)
+        {
+            attributes.Add("readonly", "readonly");
+            if (!disabled)
+            {
+                attributes["class"] += " backgroundcolor-transparent";
+            }
+        }
+        if (removeRequired)
+        {
+            if (attributes.ContainsKey("data-val"))
+            {
+                attributes.Remove("data-val");
+            }
+        }
+        @Html.TextBox("PropertyList[" + guid + "].Value", value, attributes)
+        @GenerateHiddenHtml(prop, guid)
+}
+
+@helper GenerateHidden(string propName, string cid, string validationMessage = null, string group = null)
+    {
+        var guid = Guid.NewGuid().ToString();
+        PropertiesValue properties = ViewBag.Properties as PropertiesValue;
+        WF_FlowPropertys prop = properties.PropertyInfo.FirstOrDefault(p => p.StatusId < 0 && p.PropertyName == propName);
+        var value = GetPropertyValue(properties, prop);
+        IDictionary<string, object> attributes = new Dictionary<string, object>();
+        attributes.Add("id", cid);
+        if (group != null)
+        {
+            attributes.Add("data-group-name", group);
+        }
+        if (validationMessage != null)
+        {
+            attributes.Add("data-val", "true");
+            attributes.Add("data-val-required", validationMessage);
+            @Html.ValidationMessage("PropertyList[" + guid + "].Value")
+        }
+        @Html.Hidden("PropertyList[" + guid + "].Value", value, attributes)
+        @GenerateHiddenHtml(prop, guid)
+}
+
+@helper GenerateRadioButton(string propName, string value, string id = null, bool appendHiddenControls = false, string existsGuid = null, string groupName = null, bool disabled = false, bool removeRequired = false)
+    {
+        var guid = existsGuid ?? Guid.NewGuid().ToString();
+        PropertiesValue properties = ViewBag.Properties as PropertiesValue;
+        WF_FlowPropertys prop = properties.PropertyInfo.FirstOrDefault(p => p.StatusId < 0 && p.PropertyName == propName);
+        var stringValue = GetPropertyValue(properties, prop);
+        bool isChecked = stringValue.EqualsIgnoreCaseAndBlank(value);
+        var attributes = GetAttributesByPropertyName(propName, id, disabled);
+        attributes.Remove("class");
+        if (groupName != null)
+        {
+            attributes.Add("data-group-name", groupName);
+        }
+        if (removeRequired)
+        {
+            if (attributes.ContainsKey("data-val"))
+            {
+                attributes.Remove("data-val");
+            }
+        }
+        @Html.RadioButton("PropertyList[" + guid + "].Value", value, isChecked, attributes)
+        if (appendHiddenControls)
+        {
+            @GenerateHiddenHtml(prop, guid)
+        }
+}
+
+@helper GenerateTextArea(string propName, string style = null)
+    {
+        var guid = Guid.NewGuid().ToString();
+        PropertiesValue properties = ViewBag.Properties as PropertiesValue;
+        WF_FlowPropertys prop = properties.PropertyInfo.FirstOrDefault(p => p.StatusId < 0 && p.PropertyName == propName);
+        var value = GetPropertyValue(properties, prop);
+        @Html.TextArea("PropertyList[" + guid + "].Value", value, GetAttributesByPropertyName(propName, style: style))
+        @GenerateHiddenHtml(prop, guid)
+}
+@helper GenerateRadioButtonList(string propName, string texts, string id = null)
+    {
+        var guid = Guid.NewGuid().ToString();
+        PropertiesValue properties = ViewBag.Properties as PropertiesValue;
+        WF_FlowPropertys prop = properties.PropertyInfo.FirstOrDefault(p => p.StatusId < 0 && p.PropertyName == propName);
+        var value = GetPropertyValue(properties, prop);
+        IDictionary<string, object> attributes = GetAttributesByPropertyName(propName, id);
+        attributes["data-group-name"] = propName;
+        @HtmlUIHelper.GenerateRadioButtonList(Html, "PropertyList[" + guid + "].Value", texts, attributes, value)
+        @GenerateHiddenHtml(prop, guid)
+}
+@helper GenerateDropDownList(string propName, string texts, string id = null, string title = null)
+    {
+        var guid = Guid.NewGuid().ToString();
+        PropertiesValue properties = ViewBag.Properties as PropertiesValue;
+        WF_FlowPropertys prop = properties.PropertyInfo.FirstOrDefault(p => p.StatusId < 0 && p.PropertyName == propName);
+        var value = GetPropertyValue(properties, prop);
+        @HtmlUIHelper.GenerateDropDownList(Html, "PropertyList[" + guid + "].Value", texts, GetAttributesByPropertyName(propName, id), value, title)
+        @GenerateHiddenHtml(prop, guid)
+}
+@helper GenerateDropDownList(string propName, IEnumerable<SelectListItem> selectList, string id = null, string title = null)
+    {
+        var guid = Guid.NewGuid().ToString();
+        PropertiesValue properties = ViewBag.Properties as PropertiesValue;
+        WF_FlowPropertys prop = properties.PropertyInfo.FirstOrDefault(p => p.StatusId < 0 && p.PropertyName == propName);
+        //    var selectList = new SelectList(strings, GetPropertyValue(properties, prop));
+        @Html.DropDownList("PropertyList[" + guid + "].Value", selectList, title, GetAttributesByPropertyName(propName, id))
+        @GenerateHiddenHtml(prop, guid)
+}
+
+@helper GenerateCheckBox(string propName, string id = null, bool disabled = false)
+    {
+        var guid = Guid.NewGuid().ToString();
+        PropertiesValue properties = ViewBag.Properties as PropertiesValue;
+        WF_FlowPropertys prop = properties.PropertyInfo.FirstOrDefault(p => p.StatusId < 0 && p.PropertyName == propName);
+        var value = GetPropertyValue(properties, prop);
+        var attributes = GetAttributesByPropertyName(propName, id, disabled);
+        attributes.Remove("class");
+        @Html.CheckBox("PropertyList[" + guid + "].Value", value.AsBool(), attributes)
+        @GenerateHiddenHtml(prop, guid)
+}
+
+@functions{
+    public string hideControl(string name, bool showInClass = true)
+    {
+        PropertiesValue properties = ViewBag.Properties as PropertiesValue;
+        return properties.PropertyInfo.Count(p => p.PropertyName.Equals(name) && p.StatusId < 0) > 0 ? "" : (showInClass ? " control-hide" : "class=control-hide");
+    }
+
+    public string hideControls(string controlNames, bool showInclass = true)
+    {
+        PropertiesValue properties = ViewBag.Properties as PropertiesValue;
+        var names = controlNames.Split(',');
+        var count = names.Count(name => properties.PropertyInfo.Count(p => p.PropertyName == name && p.StatusId < 0) > 0);
+        return count > 0 ? "" : (showInclass ? "control-hide" : "class=control-hide");
+    }
+
+    public string GetPropertyValueByPropertyName(string propertyName)
+    {
+        PropertiesValue properties = ViewBag.Properties as PropertiesValue;
+        WF_FlowPropertys prop = properties.PropertyInfo.FirstOrDefault(p => p.StatusId < 0 && p.PropertyName.Equals(propertyName));
+        return GetPropertyValue(properties, prop);
+    }
+
+    public string GetPropertyValue(PropertiesValue properties, WF_FlowPropertys prop)
+    {
+        if (prop == null)
+        {
+            return null;
+        }
+        WF_CasePropertyValues value = properties.Values.FirstOrDefault(p => p.PropertyId == prop.FlowPropertyId);
+        return value?.StringValue
+            ?? value?.IntValue?.ToString()
+            ?? value?.DateTimeValue?.ToString("yyyy-MM-ddTHH:mm")
+            ?? value?.NumericValue?.ToString("0.##")
+            ?? value?.TextValue
+            ?? value?.DateValue?.ToString("M/d/yyyy")
+            ?? value?.UserNoValue;
+    }
+
+    public IDictionary<string, object> GetAttributesByPropertyName(string propertyName, string id = null, bool disabled = false, string style = null)
+    {
+        PropertiesValue properties = ViewBag.Properties as PropertiesValue;
+        WF_FlowPropertys prop = properties.PropertyInfo.FirstOrDefault(p => p.StatusId < 0 && p.PropertyName.Equals(propertyName));
+        IDictionary<string, object> attributes = HtmlUIHelper.GetHtmlAttributes(prop, true, disabled, style);
+        if (id != null)
+        {
+            attributes["id"] = id;
+        }
+        return attributes;
+    }
+}
+<style type="text/css">
+    .table-borderless > thead > tr > th,
+    .table-borderless > tbody > tr > th,
+    .table-borderless > tfoot > tr > th,
+    .table-borderless > thead > tr > td,
+    .table-borderless > tbody > tr > td,
+    .table-borderless > tfoot > tr > td,
+    .table-borderless > thead,
+    .table-borderless > tbody,
+    .table-borderless > tfoot {
+        border: none;
+    }
+
+    .vertical-middle {
+        vertical-align: middle !important;
+    }
+
+    .nopadding {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .btn-white {
+        background-color: white;
+        border: 1px black solid;
+        color: black;
+        display: inline-block;
+    }
+
+    .backgroundcolor-red {
+        background-color: red;
+    }
+
+    .backgroundcolor-green {
+        background-color: green;
+    }
+
+    .backgroundcolor-yellow {
+        background-color: yellow;
+    }
+
+    input[type="radio"] {
+        width: 20px;
+        height: 20px;
+    }
+
+    .radio-inline input[type="radio"] {
+        margin-top: 0px !important;
+        margin-left: -25px !important;
+    }
+
+    .textcolor-grey {
+        color: grey !important;
+    }
+
+    .textcolor-red {
+        color: red !important;
+    }
+
+    .textcolor-green {
+        color: green !important;
+    }
+
+    .control-hide {
+        display: none;
+    }
+
+    .container-btn-images {
+        display: inline-block;
+        padding: 2px;
+    }
+
+    .btn-image {
+        display: inline-block;
+        padding: 2px;
+        background-color: transparent;
+        max-width: 100px;
+    }
+
+        .btn-image:hover {
+            background-color: #4fa3e6;
+        }
+
+    .btn-image-selected {
+        background-color: #4fa3e6;
+    }
+
+    .left-offset {
+        padding-left: 30px !important;
+    }
+
+    .checkbox input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        margin-top: 0px;
+        margin-left: -25px !important;
+    }
+
+    .backgroundcolor-transparent {
+        background-color: transparent !important;
+        opacity: 1;
+    }
+
+    .date {
+        width: 120px !important;
+    }
+
+    .panel-heading > .control-label {
+        font-size: 16px;
+    }
+
+    .center-vertical {
+        display: inline-block;
+        vertical-align: middle;
+        float: none;
+    }
+</style>
+
+<script type="text/javascript">
+    function getKeyOfCAPEXRanage(country, storeSize) {
+        var key = "";
+        if (country === "CHN") {
+            if (storeSize < 100) {
+                key = "<100";
+            } else if (storeSize >= 100 && storeSize <= 150) {
+                key = "100-150";
+            } else if (storeSize >= 150 && storeSize <= 200) {
+                key = "150-200";
+            } else if (storeSize > 200) {
+                key = ">200";
+            }
+        } else if (country === "TWN") {
+            var sqft = storeSize * 10.7639;
+            if (sqft < 1000) {
+                key = "<1000";
+            } else if (sqft >= 1000 && sqft < 1500) {
+                key = "1000-1500";
+            } else if (sqft > 1500 && sqft < 2000) {
+                key = "1500-2000";
+            } else if (sqft > 2000) {
+                key = ">2000";
+            }
+        }
+        return key;
+    }
+    function withinGuideline() {
+        $("#lblWithinCAPEXPerSqm").text("");
+        var rdbStoreType = $("input[name='StoreType1']:checked");
+        if (rdbStoreType.length === 0) {
+            return;
+        }
+        var storeType = rdbStoreType.val();
+        var storeSize = parseFloat($("#txtStoreSize").val());
+        if (isNaN(storeSize)) {
+            return;
+        }
+        var brand = $("#txtBrands").val();
+        if (brand.length == 0) {
+            return;
+        }
+        var capexPerSqm = parseFloat($("#txtCAPEXPerSqm").val());
+        if (isNaN(capexPerSqm)) {
+            return;
+        }
+        var country = $("#txtCountry").val().toUpperCase();
+        var key = getKeyOfCAPEXRanage(country, storeSize);
+        if (key.length === 0) {
+            return;
+        }
+        var capex = $.parseJSON('@Html.Raw(CAPEX)');
+        if (capex.isEmptyObject) {
+            return;
+        }
+        if (!capex.hasOwnProperty(country)) {
+            return;
+        }
+        if (!capex[country].hasOwnProperty(brand)) {
+            return;
+        }
+        if (!capex[country][brand].hasOwnProperty(storeType)) {
+            return;
+        }
+        if (!capex[country][brand][storeType].hasOwnProperty(key)) {
+            return;
+        }
+        var value = capex[country][brand][storeType][key];
+        if (isNaN(value)) {
+            return;
+        }
+        if (country === "CHN") {
+            var within = capexPerSqm > value ? "No" : "Yes";
+            $("#lblWithinCAPEXPerSqm").text(within);
+            $("#txtCAPEXPerSqmWithinGl").val(within);
+        } else if (country === "TWN") {
+            var capexPerSqft = capexPerSqm * 10.7639;
+            var within = capexPerSqft > value ? "No" : "Yes";
+            $("#lblWithinCAPEXPerSqm").text(within);
+            $("#txtCAPEXPerSqmWithinGl").val(within);
+        }
+    }
+    function calcExpectedTime() {
+        var storeSize = parseFloat($("#txtStoreSize").val());
+        var capexPerSqm = parseFloat($("#txtCAPEXPerSqm").val());
+        var nop1 = parseFloat($("#txtPLStoreNOP1").val());
+        var nop2 = parseFloat($("#txtPLStoreNOP2").val());
+        var nop3 = parseFloat($("#txtPLStoreNOP3").val());
+        var expense1 = parseFloat($("#txtPLTotalOperatingExpenses1").val());
+        var expense2 = parseFloat($("#txtPLTotalOperatingExpenses2").val());
+        var expense3 = parseFloat($("#txtPLTotalOperatingExpenses3").val());
+        storeSize = isNaN(storeSize) ? 0 : storeSize;
+        capexPerSqm = isNaN(capexPerSqm) ? 0 : capexPerSqm;
+        nop1 = isNaN(nop1) ? 0 : nop1;
+        nop2 = isNaN(nop2) ? 0 : nop2;
+        nop3 = isNaN(nop3) ? 0 : nop3;
+        expense1 = isNaN(expense1) ? 0 : expense1;
+        expense2 = isNaN(expense2) ? 0 : expense2;
+        expense3 = isNaN(expense3) ? 0 : expense3;
+
+        $("#txtExpectedTimeToBreakeven").val("");
+        if ((nop1 + nop2 + nop3) < 0) {
+            $("#lblExpectedTimeToBreakeven").text("N/A");
+        } else {
+            var breakEven = 0;
+            if (nop1 > 0) {
+                breakEven = expense1 / nop1 * 12;
+            } else if (nop1 < 0 && (nop1 + nop2) > 0) {
+                breakEven = (expense1 + expense2) / (nop1 + nop2) * 12 + 12;
+            } else if ((nop1 + nop2) < 0 && (nop1 + nop2 + nop3) > 0) {
+                breakEven = (expense1 + expense2) / (nop1 + nop2 + nop3) * 12 + 24;
+            }
+            var formattedValue = $.formatMoney(breakEven, 2, "", "");
+            $("#lblExpectedTimeToBreakeven").text(formattedValue);
+            $("#txtExpectedTimeToBreakeven").val(formattedValue);
+        }
+        var totalCAPEX = capexPerSqm * storeSize;
+        $("#txtExpectedTimeToCAPEXRecovery").val("");
+        if (totalCAPEX > (nop1 + nop2 + nop3)) {
+            $("#lblExpectedTimeToCAPXRecovery").text("N/A");
+        } else {
+            var r = 0;
+            if (nop1 > 0 && totalCAPEX < nop1) {
+                r = totalCAPEX * 12 / nop1;
+            } else if (nop2 > 0 && totalCAPEX > nop1 && totalCAPEX < (nop1 + nop2)) {
+                r = (totalCAPEX - nop1) * 12 / nop2 + 12;
+            } else if (nop3 > 0 && totalCAPEX > (nop1 + nop2)) {
+                r = (totalCAPEX - nop1 - nop2) * 12 / nop3 + 24;
+            }
+            var formattedValue = $.formatMoney(r, 2, "", "");
+            $("#lblExpectedTimeToCAPXRecovery").text(formattedValue);
+            $("#txtExpectedTimeToCAPEXRecovery").val(formattedValue);
+        }
+    }
+    function loadValue(commonName, propName, data) {
+        if (data.hasOwnProperty(propName)) {
+            for (var i = 1; i < 4; i++) {
+                var lblName = "lbl" + commonName + i;
+                var txtName = "txt" + commonName + i;
+                var value = data[propName]["Year" + i];
+                var formattedValue = $.formatMoney(value, 0, "");
+                $("#" + lblName).text(formattedValue);
+                $("#" + txtName).val((!isNaN(value) ? value : ""));
+            }
+        }
+    }
+    function loadSingleValue(commonName, propName, data) {
+        if (data.hasOwnProperty(propName)) {
+            var value = data[propName];
+            var formattedValue = $.formatMoney(value, 0, "");
+            var lblName = "lbl" + commonName;
+            var txtName = "txt" + commonName;
+            $("#" + lblName).text(formattedValue);
+            $("#" + txtName).val(value);
+        }
+    }
+    function receivedAfterFileUploaded(data) {
+        if ($.isEmptyObject(data)) {
+            return;
+        }
+        $("#txtUploadedFile").val(true);
+        var storeSize = 0, ofStaffs = 0;
+        if (data.hasOwnProperty("StoreSize")) {
+            storeSize = parseFloat(data.StoreSize);
+        }
+        if (data.hasOwnProperty("ofStaffs")) {
+            ofStaffs = parseFloat(data.ofStaffs);
+        }
+        if (data.hasOwnProperty("NetSales")) {
+            for (var i = 1; i < 4; i++) {
+                var lblName = "lblPLSales" + i;
+                var txtName = "txtPLSales" + i;
+                var value = data.NetSales["Year" + i];
+                var formattedValue = $.formatMoney(value, 0, "");
+                $("#" + lblName).text(formattedValue);
+                $("#" + txtName).val(value);
+                if (i === 1) {
+                    if (!isNaN(value)) {
+                        var floatValue = parseFloat(value);
+                        if (!isNaN(storeSize) && storeSize > 0) {
+                            var result = floatValue / 12 / storeSize;
+                            formattedValue = $.formatMoney(result, 2, "");
+                            $("#lblSalesPerSqm").text(formattedValue);
+                            $("#txtSalesPerSqm").val(result);
+                        }
+                        if (!isNaN(ofStaffs) && ofStaffs > 0) {
+                            var result = floatValue / ofStaffs;
+                            formattedValue = $.formatMoney(result, 2, "");
+                            $("#lblSalesPerHeadcount").text(formattedValue);
+                            $("#txtSalesPerHeadcount").val(result);
+                        }
+                    }
+                }
+            }
+        }
+        if (data.hasOwnProperty("NetSales") && data.hasOwnProperty("CommissionPercent")) {
+            for (var i = 1; i < 4; i++) {
+                var lblName = "lblPLStaffCommission" + i;
+                var txtName = "txtPLStaffCommission" + i;
+                var netsales = parseFloat(data.NetSales["Year" + i]);
+                var percent = parseFloat(data.CommissionPercent["Year" + i]);
+                if (!isNaN(netsales) && !isNaN(percent)) {
+                    var value = netsales * percent;
+                    var formattedValue = $.formatMoney(value, 0, "");
+                    $("#" + lblName).text(formattedValue);
+                    $("#" + txtName).val(value);
+                }
+            }
+        }
+        if (data.hasOwnProperty("GrossMargin")) {
+            for (var i = 1; i < 4; i++) {
+                var lblName = "lblPLGrossMargin" + i;
+                var txtName = "txtPLGrossMargin" + i;
+                var value = data.GrossMargin["Year" + i];
+                var formattedValue = $.formatMoney(value, 1, "") + " %";
+                $("#" + lblName).text(formattedValue);
+                $("#" + txtName).val(value);
+            }
+        }
+        loadValue("PLGrossProfit", "GrossProfit", data);
+        loadValue("PLOccupancyCosts", "Occupancycharges", data);
+        loadValue("PLStaffSalary", "Salary", data);
+        loadValue("PLDepreciation", "Depreciation", data);
+        loadValue("PLRoyalty", "Royalty", data);
+        loadValue("PLOther", "Others", data);
+        loadValue("PLTotalOperatingExpenses", "Totaloperatingexpenses", data);
+        loadValue("PLStoreNOP", "OperatingProfit", data);
+        //construction cost
+        loadSingleValue("WallsCeilingFloor", "WallsCeilingFloor", data);
+        loadSingleValue("Furniture", "Furniture", data);
+        loadSingleValue("LaborCost", "LaborCost", data);
+        loadSingleValue("ITEquipment", "ITEquipment", data);
+        loadSingleValue("MovingAssemblyRemoval", "MovingAssemblyRemoval", data);
+        loadSingleValue("Others", "UtilitiesOthers", data);
+        loadSingleValue("NetGain", "NetGain", data);
+        if (data.hasOwnProperty("TotalCosts")) {
+            var value = data.TotalCosts;
+            var formattedValue = $.formatMoney(value, 0, "");
+            $("#lblTotalConstructionCost").text(formattedValue);
+            $("#txtTotalConstructionCost").val(value);
+            if (!isNaN(data.TotalCosts)) {
+                var total = parseFloat(data.TotalCosts);
+                if (!isNaN(storeSize) && storeSize > 0) {
+                    value = total / storeSize;
+                    formattedValue = $.formatMoney(value, 2, "");
+                    $("#lblCAPEXPerSqm").text(formattedValue);
+                    $("#txtCAPEXPerSqm").val(value);
+                    withinGuideline();
+                    calcExpectedTime();
+                }
+            }
+        }
+    }
+    function fileDeleted() {
+        $("#txtUploadedFile").val("");
+        $("label[data-group-name='PLSummary'],label[data-group-name='ConstructionCost'],label[data-group-name='Statistics']").each(function () {
+            $(this).text("");
+        });
+        $("input[data-group-name='PLSummary'],input[data-group-name='ConstructionCost'],input[data-group-name='Statistics']").each(function () {
+            $(this).val("");
+        });
+    }
+    $(function () {
+        if ($("#txtFirstRenewalPeriodFrom").hasClass("date")) {
+            $("#txtFirstRenewalPeriodFrom").removeClass("date");
+        }
+        if ($("#txtSecondRenewalPeriodFrom").hasClass("date")) {
+            $("#txtSecondRenewalPeriodFrom").removeClass("date");
+        }
+        $.addDateAndTimePicker();
+        $('.date').datepicker('option', 'dateFormat', 'm/d/yy');
+        //Reason for application
+        $("#ddlReasons").on("change", function () {
+            $("#lblExpectedOpeningDate").removeClass("textcolor-grey");
+            $("#txtExpectedOpeningDate").removeProp("disabled");
+            $("#cbxReplacementStore").removeProp("disabled");
+            $("#cbxReplacementStore").parent().removeClass("textcolor-grey");
+            $("table[data-group-name='PreviousTerm']").each(function () {
+                $(this).find("input").removeProp("disabled");
+                $(this).find("label").removeClass("textcolor-grey");
+            });
+            if ($(this).val() === "Contract Renewal without Renovation") {
+                $("#lblExpectedOpeningDate").addClass("textcolor-grey");
+                $("#txtExpectedOpeningDate").prop("disabled", true);
+                $("#cbxReplacementStore").prop("disabled", true);
+                $("#cbxReplacementStore").prop("checked", false);
+                $("#cbxReplacementStore").parent().addClass("textcolor-grey");
+            } else if ($(this).val() === "New Store") {
+                $("table[data-group-name='PreviousTerm']").each(function () {
+                    $(this).find("input").prop("disabled", true);
+                    $(this).find("label").addClass("textcolor-grey");
+                    $(this).find("input").val("");
+                    $(this).find("input[type='radio']").prop("checked", false);
+                    $(this).find(".field-validation-error").addClass("control-hide");
+                });
+                $("#cbxReplacementStore").prop("disabled", true);
+                $("#cbxReplacementStore").prop("checked", false);
+                $("#cbxReplacementStore").parent().addClass("textcolor-grey");
+            }
+        });
+        //Store Type and Store Size(sq.m)
+        $("input[data-group-name='StoreType']").bind("change", function () {
+            if ($(this).is($("input[name='StoreType2']"))) {
+                if ($(this).val() == "Franchise") {
+                    $("#div_franchisee_info").removeClass("control-hide");
+                    $("#txtNameOfFranchisee").rules("add", "required");
+                    $("#txtPaidByFranchiseeToBLS").rules("add", "required");
+                    $("#divRadioButtons input[type='radio']").each(function () {
+                        $(this).rules("add", "required");
+                    });
+                } else {
+                    if (!$("#div_franchisee_info").hasClass("control-hide")) {
+                        $("#div_franchisee_info").addClass("control-hide");
+                    }
+                    $("#txtNameOfFranchisee").rules("remove", "required");
+                    $("#txtPaidByFranchiseeToBLS").rules("remove", "required");
+                    $("#divRadioButtons input[type='radio']").each(function () {
+                        $(this).rules("remove", "required");
+                    });
+                }
+            } else {
+                if ($(this).val() === "Street Store") {
+                    $("#ddlStoreType").val("Street Shop");
+                } else if ($(this).val() == "Online Store") {
+                    $("#ddlStoreType").val("eCommerce");
+                } else if ($(this).val() == "Shopping Mall") {
+                    $("#ddlStoreType").val("Shopping Mall");
+                } else if ($(this).val() == "Dept.Store Counter") {
+                    $("#ddlStoreType").val("Department Store");
+                } else if ($(this).val() == "Flagship/Mega") {
+                    $("#ddlStoreType").val("Mega Shop");
+                }
+            }
+            var storeType1 = $("input[name='StoreType1']:checked");
+            var storeType2 = $("input[name='StoreType2']:checked");
+            var storeType3 = $("input[name='StoreType3']:checked");
+            if (storeType1.length > 0 && storeType2.length > 0 && storeType3.length > 0) {
+                $("#txtStoreType").val(storeType1.val() + "," + storeType2.val() + "," + storeType3.val());
+            }
+            withinGuideline();
+        });
+        //Franchisee Information part 2
+        $("#divFeeCalc input[type='text']").bind("change", function () {
+            var posSales = parseFloat($("#txtPOSSales").val());
+            var rental = parseFloat($("#txtRental").val());
+            var chargedByLandlord = parseFloat($("#txtChargedByLandlord").val());
+            var chargedByBLS = parseFloat($("#txtChargedToFranchisee").val());
+            var feePercentage = parseFloat($("#txtFeePercentage").val());
+            if (isNaN(posSales) || isNaN(rental) || isNaN(chargedByLandlord) || isNaN(chargedByBLS) || isNaN(feePercentage)) {
+                $("#lblManagementServiceFee").text("");
+                return;
+            }
+            var result;
+            //if (netsales < posSales * feePercentage) {
+            result = feePercentage / 100 * posSales - rental - chargedByLandlord - chargedByBLS;
+            //}
+            $("#lblManagementServiceFee").text(result);
+        });
+        //brands
+        $("#div_brands").on("click", function (e) {
+            if ($(e.target).hasClass("btn-image") || $(e.target.parentNode).hasClass("btn-image")) {
+                $("div[data-group-name='brands']").each(function () {
+                    $(this).removeClass("btn-image-selected");
+                });
+                var value;
+                if ($(e.target).hasClass("btn-image")) {
+                    $(e.target).addClass("btn-image-selected");
+                    value = $(e.target).attr("data-value");
+                }
+                if ($(e.target.parentNode).hasClass("btn-image")) {
+                    $(e.target.parentNode).addClass("btn-image-selected");
+                    value = $(e.target.parentElement).attr("data-value");
+                }
+                $("#txtBrands").val(value);
+                $("#txtStoreNamePrefix").val(value);
+                $("#txtStoreNamePrefix").trigger("change");
+                withinGuideline();
+            }
+        });
+        $("#tbStoreName").bind("change", function () {
+            var name = "";
+            $(this).find("input[type='text'],select").each(function () {
+                var value = $(this).val();
+                if ($(this).is("select") && $(this).val().length > 0) {
+                    value = $(this).find("option:checked").text();
+                }
+                if (value.length > 0) {
+                    if (name === "") {
+                        name = value;
+                    } else {
+                        name += " " + value;
+                    }
+                }
+            });
+            $("#txtSubject").val(name + " Store Approval");
+        });
+        $("#cbxFirstRenewal,#cbxSecondRenewal").bind("change", function () {
+            var divPeriod = $(this).parents("div[data-value='period']");
+            var from = divPeriod.find("div[data-value='from']").find("input[type='text']");
+            if ($(this).prop('checked') == true) {
+                if ($(this).prop("id") == "cbxFirstRenewal") {
+                    $("#cbxSecondRenewal").removeProp("disabled");
+                    $("#divFirstRenewal input[type='text']").removeProp("disabled");
+                    $("#divFirstRenewal input[readonly]").addClass("backgroundcolor-transparent");
+                    $("#divFirstRenewal label").removeClass("textcolor-grey");
+                    var contractPeriodTo = $("#divContractPeriod").find("div[data-value='to']").find("input[type='text']");
+                    if (contractPeriodTo.val() != "") {
+                        var toDate = new Date(contractPeriodTo.val());
+                        toDate.setDate(toDate.getDate() + 1);
+                        from.val((toDate.getMonth() + 1) + "/" + toDate.getDate() + "/" + toDate.getFullYear());
+                    }
+                }
+                else {
+                    $("#divSecondRenewal input[type='text']").removeProp("disabled");
+                    $("#divSecondRenewal input[readonly]").addClass("backgroundcolor-transparent");
+                    $("#divSecondRenewal label").removeClass("textcolor-grey");
+                    var FirstPeriodTo = $("#divFirstRenewal").find("div[data-value='to']").find("input[type='text']");
+                    if (FirstPeriodTo.val() != "") {
+                        var toDate = new Date(FirstPeriodTo.val());
+                        toDate.setDate(toDate.getDate() + 1);
+                        from.val((toDate.getMonth() + 1) + "/" + toDate.getDate() + "/" + toDate.getFullYear());
+                    }
+                }
+            }
+            else {
+                if ($(this).prop("id") == "cbxFirstRenewal") {
+                    $("#cbxSecondRenewal").prop("checked", false);
+                    $("#cbxSecondRenewal").prop("disabled", true);
+                    $("#divFirstRenewal input[type='text']").prop("disabled", true);
+                    $("#divFirstRenewal input[readonly]").removeClass("backgroundcolor-transparent");
+                    $("#divFirstRenewal input[type='text']").val("");
+                    $("#divFirstRenewal label").addClass("textcolor-grey");
+                }
+                $("#divSecondRenewal input[type='text']").prop("disabled", true);
+                $("#divSecondRenewal input[readonly]").removeClass("backgroundcolor-transparent");
+                $("#divSecondRenewal input[type='text']").val("");
+                $("#divSecondRenewal label").addClass("textcolor-grey");
+            }
+        });
+        $("input[data-group-name='CurrentTermType']").bind("change", function () {
+            var table = $(this).parents("table[data-group-name='CurrentTerm']");
+            $("table[data-group-name='CurrentTerm']").each(function () {
+                var flag = $(this).is(table);
+                $(this).find("input[type='text']").each(function () {
+                    if (flag) {
+                        $(this).removeProp("disabled");
+                    } else {
+                        $(this).prop("disabled", true);
+                        $(this).val("");
+                        var span = $("span[data-valmsg-for='" + $(this).attr("id") + "']");
+                        span.addClass("control-hide");
+                    }
+                });
+            });
+        });
+        $("input[data-group-name='PreviousTermType']").bind("change", function () {
+            var table = $(this).parents("table[data-group-name='PreviousTerm']");
+            $("table[data-group-name='PreviousTerm']").each(function () {
+                var flag = $(this).is(table);
+                $(this).find("input[type='text']").each(function () {
+                    if (flag) {
+                        $(this).removeProp("disabled");
+                    } else {
+                        $(this).prop("disabled", true);
+                        $(this).val("");
+                        var span = $("span[data-valmsg-for='" + $(this).attr("id") + "']");
+                        span.addClass("control-hide");
+                    }
+                });
+            });
+        });
+        function validateInput(invalid, input, errorSpan) {
+            if (input.length == 0 || errorSpan.length == 0) {
+                return;
+            }
+            errorSpan.addClass("control-hide");
+            $("[type=submit]").unbind("click", null);
+            if (invalid) {
+                errorSpan.removeClass("control-hide");
+                $("[type=submit]").bind("click", function () {
+                    input.focus();
+                    return false;
+                });
+            }
+        }
+        $("table[data-value='term'] input[type='text']").bind("change", function () {
+            var value = parseFloat($(this).val());
+            var span = $("span[data-valmsg-for='" + $(this).attr("id") + "']");
+            validateInput((!isNaN(value) && value > 50), $(this), span);
+        });
+        $("#divContractPeriod,#divFirstRenewal,#divSecondRenewal").bind("change", function (e) {
+            var divPeriod = $(e.target).parents("div[data-value='period']");
+            var from = divPeriod.find("div[data-value='from']").find("input[type='text']");
+            var to = divPeriod.find("div[data-value='to']").find("input[type='text']");
+            var errorSpan = divPeriod.find(".field-validation-error");
+            if (divPeriod.prop("id") === "divContractPeriod") {
+                var firstRenewalFrom = $("#divFirstRenewal").find("div[data-value='from']").find("input[type='text']");
+                if (!firstRenewalFrom.prop("disabled") && to.val() !== "") {
+                    var toDate = new Date(to.val());
+                    toDate.setDate(toDate.getDate() + 1);
+                    firstRenewalFrom.val((toDate.getMonth() + 1) + "/" + toDate.getDate() + "/" + toDate.getFullYear());
+                } else {
+                    firstRenewalFrom.val("");
+                }
+                firstRenewalFrom.trigger("change");
+            } else if (divPeriod.prop("id") === "divFirstRenewal") {
+                var secondRenewalFrom = $("#divSecondRenewal").find("div[data-value='from']").find("input[type='text']");
+                if (!secondRenewalFrom.prop("disabled") && to.val() !== "") {
+                    var toDate = new Date(to.val());
+                    toDate.setDate(toDate.getDate() + 1);
+                    secondRenewalFrom.val((toDate.getMonth() + 1) + "/" + toDate.getDate() + "/" + toDate.getFullYear());
+                } else {
+                    secondRenewalFrom.val("");
+                }
+                secondRenewalFrom.trigger("change");
+            }
+            validateInput((from.val() !== "" &&
+                    to.val() !== "" &&
+                    new Date(to.val()).getTime() < new Date(from.val()).getTime()),
+                to, errorSpan)
+        });
+
+        $("#txtStoreSize").bind("change", function () {
+            withinGuideline();
+            calcExpectedTime();
+        });
+    });
+</script>
+
+@if (Model != null)
+{
+    @Html.Hidden("FlowId", Model.FlowId)
+    @Html.Hidden("Dep", Model.CaseInfo.Department)
+    @Html.Hidden("Subject", Model.CaseInfo.Subject, new { id = "txtSubject" })
+    @GenerateHidden("Country", "txtCountry")
+    <div class="container" style="width:95%;">
+        <div class="form-group">
+            <label class="col-sm-1 control-label">Brand:</label>
+            <div class="col-sm-10">
+                <div id="div_brands" class="container-btn-images">
+                    @{
+                        var checkedBrand = GetPropertyValueByPropertyName("Brand");
+                        foreach (var brand in Consts.BrandsOfContries[country])
+                        {
+                            bool flag = brand.EqualsIgnoreCaseAndBlank(checkedBrand);
+                            <div class="btn-image @(flag ? "btn-image-selected" : "" )" data-group-name="brands" data-value="@brand" data-brandsRequired="true">
+                                <img src="@brandImages[brand]" class="img-responsive" />
+                            </div>
+                        }
+                    }
+                </div>
+                @GenerateHidden("Brand", "txtBrands", validationMessage: "Brand is required")
+            </div>
+        </div>
+        <!--2-3-->
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <label class="control-label">Reason for application</label>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <div class="col-sm-3">
+                        @GenerateDropDownList("ReasonForApplication", "New Store,Contract Renewal with Renovation,Contract Renewal without Renovation,Renovation without Contract Renewal", "ddlReasons", title: "Please select")
+                    </div>
+                    <div class="col-sm-2">
+                        @{
+                            var IsNewStore = ReasonForApplication.EqualsIgnoreCaseAndBlank("New Store");
+                            var disabledReplacement = IsNewStore || ReasonForApplication.EqualsIgnoreCaseAndBlank("Contract Renewal without Renovation");
+                        }
+                        <label class="control-label checkbox @(disabledReplacement?"textcolor-grey":"")">
+                            @GenerateCheckBox("ReplacementStore", "cbxReplacementStore", disabledReplacement)
+                            Replacement Store
+                        </label>
+                    </div>
+                    <label class="control-label col-sm-2">Deadline:</label>
+                    <div class="col-sm-3">
+                        <div style="display: inline-block;">
+                            @Html.TextBox("Deadline", (Model.CaseInfo.Deadline.HasValue ? Model.CaseInfo.Deadline.Value.ToString("M/d/yyyy") : string.Empty), new { @class = "form-control input-sm date", data_val = "true", data_val_required = "*" })
+                        </div>
+                        <div style="display:inline-block; padding:5px;">
+                            <img src="~/Content/Images/Workflow/Application/icon_calendar.png" style="max-width: 25px; height:20px;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--4-18-->
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <label class="control-label">Store Information</label>
+            </div>
+            <div class="panel-body">
+                <div style="padding:0 10px;">
+                    <div>
+                        <label class="control-label">Store Type</label>
+                        <div class="left-offset">
+                            @{
+                                var StoreTypeAttributes = GetAttributesByPropertyName("StoreType");
+                                StoreTypeAttributes.Add("data-group-name", "StoreType");
+                                var StoreTypes = GetPropertyValueByPropertyName("StoreType").Split(',');
+                                var StoreType1 = StoreTypes[0];
+                                var StoreType2 = StoreTypes.Length > 1 ? StoreTypes[1] : String.Empty;
+                                var StoreType3 = StoreTypes.Length > 2 ? StoreTypes[2] : String.Empty;
+                            }
+                            <div class="row">
+                                @HtmlUIHelper.GenerateRadioButtonList(Html, "StoreType1", "Street Store,Online Store,Shopping Mall,Dept.Store Counter,Flagship/Mega,Outlet", StoreTypeAttributes, StoreType1)
+                            </div>
+                            <div class="row">
+                                @HtmlUIHelper.GenerateRadioButtonList(Html, "StoreType2", "Self-Run,Franchise", StoreTypeAttributes, StoreType2)
+                            </div>
+                            <div class="row">
+                                @HtmlUIHelper.GenerateRadioButtonList(Html, "StoreType3", "Permanent,Pop-Up", StoreTypeAttributes, StoreType3)
+                            </div>
+                            <div class="row">
+                                @GenerateHidden("StoreType", "txtStoreType", validationMessage: "Store type is required")
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding-bottom:10px">
+                        <label class="control-label">Store Name</label>
+                        <div class="clearfix" style="padding-bottom:5px;"></div>
+                        <div class="left-offset">
+                            <table id="tbStoreName">
+                                <tr>
+                                    <td style="padding:0 5px;">
+                                        @GenerateTextBox("StoreNamePrefix", "txtStoreNamePrefix", style: "width:100px;", readOnly: true)
+                                    </td>
+                                    <td style="padding:0 5px;">
+                                        @{
+                                            var city = GetPropertyValueByPropertyName("City");
+                                        }
+                                        @GenerateDropDownList("City",
+                                                         Cities.Select(item => new SelectListItem()
+                                                         {
+                                                             Text = item.Name,
+                                                             Value = item.Name,
+                                                             Selected = item.Name.EqualsIgnoreCaseAndBlank(city)
+                                                         }), title: "Select area")
+                                    </td>
+                                    <td style="padding:0 5px;">
+                                        @GenerateTextBox("StoreLocation", placeholder: "Please enter Mall/Dept/Street Name", style: "width:280px;")
+                                    </td>
+                                    <td style="padding:0 5px;">
+                                        @GenerateDropDownList("StoreTypeForName", "Street Shop,Department Store,eCommerce,Mega Shop,Shopping Mall,Other", id: "ddlStoreType", title: "Please select")
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div style="padding:10px 0px;">
+                        <label class="control-label" style="float:left;margin-right:15px;">Shop Code:</label>
+                        <div>
+                            @GenerateTextBox("ShopCode")
+                        </div>
+                    </div>
+                    <div style="padding-bottom:10px;">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <label class="control-label">City Tier:</label>
+                                    </td>
+                                    <td style="padding:0 10px;">
+                                        @GenerateRadioButtonList("CityTier", "1,2,3,4")
+                                    </td>
+                                    <td>
+                                        <label class="control-label">Mall/Dept Store Tier:</label>
+                                    </td>
+                                    <td style="padding:0 10px;">
+                                        @GenerateRadioButtonList("MallDeptStoreTier", "1,2,3,4")
+                                    </td>
+                                    <td>
+                                        <label class="control-label">Store Size (sq.m)</label>
+                                    </td>
+                                    <td style="padding:0 10px;">
+                                        @GenerateTextBox("StoreSize", "txtStoreSize", style: "width:100px;")
+                                    </td>
+                                    <td>
+                                        <label class="control-label"># of Staff:</label>
+                                    </td>
+                                    <td style="padding:0 10px;">
+                                        @GenerateTextBox("OfSalesStaff", style: "width:100px;")
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row" style="padding-bottom: 10px;">
+                        @{
+                            var disabedForOpeningDate = false;
+                            var classForOpeningDate = "";
+                            if (ReasonForApplication.EqualsIgnoreCaseAndBlank("Contract Renewal without Renovation"))
+                            {
+                                disabedForOpeningDate = true;
+                                classForOpeningDate = "textcolor-grey";
+                            }
+                        }
+                        <label class="control-label col-sm-2 center-vertical @classForOpeningDate" id="lblExpectedOpeningDate">Expected Opening Date:</label>
+                        <div class="col-sm-3 center-vertical">
+                            <div class="col-sm-9 nopadding">
+                                <div style="display: inline-block;">
+                                    @GenerateTextBox("ExpectedOpeningDate", "txtExpectedOpeningDate", disabedForOpeningDate)
+                                </div>
+                                <div style="display: inline-block; padding: 5px;">
+                                    <img src="~/Content/Images/Workflow/Application/icon_calendar.png" style="max-width: 25px; height: 20px;" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom: 10px;">
+                        <label class="control-label col-sm-2 center-vertical">Location Customer Profile:</label>
+                        <div class="col-sm-3 center-vertical">
+                            @GenerateTextBox("LocationCustomerProfile")
+                        </div>
+                        <div class="col-sm-2 text-right center-vertical">
+                            <label class="control-label">Location Traffic:</label>
+                        </div>
+                        <div class="col-sm-3 center-vertical">
+                            @GenerateDropDownList("LocationTraffic", "Quiet,Low,Moderate,Heavy,Very Heavy", title: "Please select")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--19-30-->
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <label class="control-label">Key Contract Terms</label>
+            </div>
+            <div class="panel-body">
+                <div style="padding:0 10px;">
+                    <div class="row" style="padding-bottom:10px;">
+                        <label class="control-label col-sm-2 center-vertical">Name of Landlord/Operator:</label>
+                        <div class="col-sm-4 center-vertical">
+                            @GenerateTextBox("NameOfLandlord")
+                        </div>
+                        @{
+                            var hideCreditTerms = hideControl("CreditTerms");
+                        }
+                        <label class="control-label col-sm-2 center-vertical">Credit Terms (if applicable):</label>
+                        <div class="col-sm-3 center-vertical">
+                            <div class="col-sm-5 nopadding">
+                                @GenerateTextBox("CreditTerms")
+                            </div>
+                            <label class="control-label col-sm-2">days</label>
+                        </div>
+                    </div>
+                    <div style="border-bottom: 1px solid; height: 1px"></div>
+                    <div class="clearfix" style="margin-bottom: 15px"></div>
+                    <div class="form-group" id="divContractPeriod" data-value="period">
+                        <label class="control-label col-sm-2">Contract Period:</label>
+                        <div class="col-sm-9">
+                            <div style="display: inline-block;" data-value="from">
+                                @GenerateTextBox("ContractPeriodFrom")
+                            </div>
+                            <div style="display:inline-block; padding:5px;">
+                                <img src="~/Content/Images/Workflow/Application/icon_calendar.png" style="max-width: 25px; height:20px;" />
+                            </div>
+                            <div style="display: inline-block; padding: 0 10px;">
+                                <label class="control-label">to</label>
+                            </div>
+                            <div style="display: inline-block;" data-value="to">
+                                @GenerateTextBox("ContractPeriodTo")
+                            </div>
+                            <div style="display:inline-block; padding:5px;">
+                                <img src="~/Content/Images/Workflow/Application/icon_calendar.png" style="max-width: 25px; height:20px;" />
+                            </div>
+                        </div>
+                        <div class="col-sm-7 nopadding">
+                            <span class="field-validation-error control-hide">
+                                The to date can not be earlier than the from date
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group" id="divFirstRenewal" data-value="period">
+                        @{
+                            var disabedForFirstRenewal = true;
+                            var classForFirstRenewal = "textcolor-grey";
+                            var FirstRenewalChecked = GetPropertyValueByPropertyName("FirstRenewal").AsBool();
+                            if (FirstRenewalChecked)
+                            {
+                                disabedForFirstRenewal = false;
+                                classForFirstRenewal = "";
+                            }
+                        }
+                        <div class="col-sm-2">
+                            <label class="control-label checkbox @classForFirstRenewal">
+                                @GenerateCheckBox("FirstRenewal", "cbxFirstRenewal")
+                                1<sup>st</sup>Renewal Period:
+                            </label>
+                        </div>
+                        <div class="col-sm-9">
+                            <div style="display: inline-block; width: 120px;" data-value="from">
+                                @GenerateTextBox("FirstRenewalPeriodFrom", "txtFirstRenewalPeriodFrom", disabled: disabedForFirstRenewal, readOnly: true)
+                            </div>
+                            <div style="display:inline-block; padding:5px;">
+                                <img src="~/Content/Images/Workflow/Application/icon_calendar.png" style="max-width: 25px; height:20px;" />
+                            </div>
+                            <div style="display: inline-block;padding: 0 10px;">
+                                <label class="control-label @classForFirstRenewal">to</label>
+                            </div>
+                            <div style="display: inline-block;" data-value="to">
+                                @GenerateTextBox("FirstRenewalPeriodTo", disabled: disabedForFirstRenewal)
+                            </div>
+                            <div style="display:inline-block; padding:5px;">
+                                <img src="~/Content/Images/Workflow/Application/icon_calendar.png" style="max-width: 25px; height:20px;" />
+                            </div>
+                        </div>
+                        <div class="col-sm-7 nopadding">
+                            <span class="field-validation-error control-hide">
+                                The to date can not be earlier than the from date
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group" id="divSecondRenewal" data-value="period">
+                        @{
+                            var disabedForSecondRenewal = true;
+                            var classForSecondRenewal = "textcolor-grey";
+                            if (GetPropertyValueByPropertyName("SecondRenewal").AsBool())
+                            {
+                                disabedForSecondRenewal = false;
+                                classForSecondRenewal = "";
+                            }
+                        }
+                        <div class="col-sm-2">
+                            <label class="control-label checkbox @classForSecondRenewal">
+                                @GenerateCheckBox("SecondRenewal", "cbxSecondRenewal", !FirstRenewalChecked)
+                                2<sup>st</sup>Renewal Period:
+                            </label>
+                        </div>
+                        <div class="col-sm-9">
+                            <div style="display: inline-block; width: 120px;" data-value="from">
+                                @GenerateTextBox("SecondRenewalPeriodFrom", "txtSecondRenewalPeriodFrom", disabled: disabedForSecondRenewal, readOnly: true)
+                            </div>
+                            <div style="display:inline-block; padding:5px;">
+                                <img src="~/Content/Images/Workflow/Application/icon_calendar.png" style="max-width: 25px; height:20px;" />
+                            </div>
+                            <div style="display: inline-block; padding: 0 10px;">
+                                <label class="control-label @classForSecondRenewal">to</label>
+                            </div>
+                            <div style="display: inline-block;" data-value="to">
+                                @GenerateTextBox("SecondRenewalPeriodTo", disabled: disabedForSecondRenewal)
+                            </div>
+                            <div style="display:inline-block; padding:5px;">
+                                <img src="~/Content/Images/Workflow/Application/icon_calendar.png" style="max-width: 25px; height:20px;" />
+                            </div>
+                        </div>
+                        <div class="col-sm-7 nopadding">
+                            <span class="field-validation-error control-hide">
+                                The to date can not be earlier than the from date
+                            </span>
+                        </div>
+                    </div>
+                    <div style="border-bottom: 1px solid; height: 1px"></div>
+                    <div class="clearfix" style="margin-bottom: 15px"></div>
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <table class="table table-bordered text-center" data-value="term">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center" width="33%"></th>
+                                        <th class="text-center" width="33%">Current Term</th>
+                                        <th class="text-center" width="33%">Previous Term</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        var CurrentTermGuid = Guid.NewGuid().ToString();
+                                        var PreviousTermGuid = Guid.NewGuid().ToString();
+                                        var CurrentTermType = GetPropertyValueByPropertyName("CurrentTermType");
+                                        var PreviousTermType = GetPropertyValueByPropertyName("PreviousTermType");
+                                        var DisabledPreviousTerm = IsNewStore;
+                                    }
+                                    <tr>
+                                        <td class="vertical-middle">
+                                            <label class="control-label">
+                                                Fixed Rent
+                                            </label>
+                                        </td>
+                                        <td>
+                                            @{
+                                                var rentFlag = CurrentTermType.EqualsIgnoreCaseAndBlank("Fixed Rent");
+                                            }
+                                            <table data-group-name="CurrentTerm">
+                                                <tr>
+                                                    <td class="text-center" style="width: 10%;">
+                                                        <label class="control-label">
+                                                            @GenerateRadioButton("CurrentTermType", "Fixed Rent", existsGuid: CurrentTermGuid, groupName: "CurrentTermType")
+                                                        </label>
+                                                    </td>
+                                                    <td style="width:30%;">
+                                                        <label class="control-label">Rent</label>
+                                                    </td>
+                                                    <td style="width:60%;">
+                                                        @GenerateTextBox("CurrentTermRent", "txtCurrentTermRent", disabled: !rentFlag, showValue: rentFlag)
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td>
+                                            @{
+                                                rentFlag = PreviousTermType.EqualsIgnoreCaseAndBlank("Fixed Rent");
+                                            }
+                                            <table data-group-name="PreviousTerm">
+                                                <tr>
+                                                <tr>
+                                                    <td class="text-center" style="width:10%;">
+                                                        <label class="control-label">
+                                                            @GenerateRadioButton("PreviousTermType", "Fixed Rent", existsGuid: PreviousTermGuid, groupName: "PreviousTermType", disabled: DisabledPreviousTerm)
+                                                        </label>
+                                                    </td>
+                                                    <td style="width:30%;">
+                                                        <label class="control-label @(IsNewStore?"textcolor-grey":"")">Rent</label>
+                                                    </td>
+                                                    <td style="width:60%;">
+                                                        @GenerateTextBox("PreviousTermRent", "txtPreviousTermRent", disabled: !rentFlag || DisabledPreviousTerm, showValue: rentFlag)
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="vertical-middle">
+                                            <label class="control-label">
+                                                Turnover % with Minimum Fixed Rent
+                                            </label>
+                                        </td>
+                                        <td>
+                                            @{
+                                                var turnoverFlag = CurrentTermType.EqualsIgnoreCaseAndBlank("Turnover % with Minimum Fixed Rent");
+                                            }
+                                            <table data-group-name="CurrentTerm">
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td class="text-left">
+                                                        <span class="field-validation-error control-hide" data-valmsg-for="txtCurrentTermTurnover">
+                                                            Cannot be > 50%
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td rowspan="2" class="text-center" style="width:10%;">
+                                                        <label class="control-label">
+                                                            @GenerateRadioButton("CurrentTermType", "Turnover % with Minimum Fixed Rent", existsGuid: CurrentTermGuid, groupName: "CurrentTermType")
+                                                        </label>
+                                                    </td>
+                                                    <td style="width:30%;">
+                                                        <label class="control-label">Turnover %</label>
+                                                    </td>
+                                                    <td style="width:60%;padding:5px 0;">
+                                                        <div class="input-group">
+                                                            @GenerateTextBox("CurrentTermTurnover", "txtCurrentTermTurnover", disabled: !turnoverFlag, showValue: turnoverFlag)
+                                                            <span class="input-group-addon">%</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="control-label">
+                                                            Rent
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        @GenerateTextBox("CurrentTermRent", "txtCurrentTermRent1", disabled: !turnoverFlag, showValue: turnoverFlag)
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td>
+                                            @{
+                                                turnoverFlag = PreviousTermType.EqualsIgnoreCaseAndBlank("Turnover % with Minimum Fixed Rent");
+                                            }
+                                            <table data-group-name="PreviousTerm">
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td class="text-left">
+                                                        <span class="field-validation-error control-hide" data-valmsg-for="txtPreviousTermTurnover">
+                                                            Cannot be > 50%
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td rowspan="2" class="text-center" style="width:10%;">
+                                                        <label class="control-label">
+                                                            @GenerateRadioButton("PreviousTermType", "Turnover % with Minimum Fixed Rent", existsGuid: PreviousTermGuid, groupName: "PreviousTermType", disabled: DisabledPreviousTerm)
+                                                        </label>
+                                                    </td>
+                                                    <td style="width:30%;">
+                                                        <label class="control-label @(IsNewStore?"textcolor-grey":"")">Turnover %</label>
+                                                    </td>
+                                                    <td style="width:60%;padding:5px 0;">
+                                                        <div class="input-group">
+                                                            @GenerateTextBox("PreviousTermTurnover", "txtPreviousTermTurnover", disabled: !turnoverFlag || DisabledPreviousTerm, showValue: turnoverFlag)
+                                                            <span class="input-group-addon">%</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="control-label @(IsNewStore?"textcolor-grey":"")">
+                                                            Rent
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        @GenerateTextBox("PreviousTermRent", "txtPreviousTermRent1", disabled: !turnoverFlag || DisabledPreviousTerm, showValue: turnoverFlag)
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="vertical-middle">
+                                            <label class="control-label">
+                                                Fixed Rent + Turnover %
+                                            </label>
+                                        </td>
+                                        <td>
+                                            @{
+                                                var FixedRentFlag = CurrentTermType.EqualsIgnoreCaseAndBlank("Fixed Rent + Turnover %");
+                                            }
+                                            <table data-group-name="CurrentTerm">
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td class="text-left">
+                                                        <span class="field-validation-error control-hide" data-valmsg-for="txtCurrentTermTurnover1">
+                                                            Cannot be > 50%
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td rowspan="3" class="text-center" style="width:10%;">
+                                                        <label class="control-label">
+                                                            @GenerateRadioButton("CurrentTermType", "Fixed Rent + Turnover %", appendHiddenControls: true, existsGuid: CurrentTermGuid, groupName: "CurrentTermType")
+                                                        </label>
+                                                    </td>
+                                                    <td style="width:30%;">
+                                                        <label class="control-label">Turnover %</label>
+                                                    </td>
+                                                    <td style="width:60%;padding:5px 0;">
+                                                        <div class="input-group">
+                                                            @GenerateTextBox("CurrentTermTurnover", "txtCurrentTermTurnover1", disabled: !FixedRentFlag, showValue: FixedRentFlag)
+                                                            <span class="input-group-addon">%</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td class="text-left">
+                                                        <span class="field-validation-error control-hide" data-valmsg-for="txtCurrentTermRent2">
+                                                            Cannot be > 50
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="control-label">
+                                                            Rent
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        @GenerateTextBox("CurrentTermRent", "txtCurrentTermRent2", disabled: !FixedRentFlag, showValue: FixedRentFlag)
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td>
+                                            @{
+                                                FixedRentFlag = PreviousTermType.EqualsIgnoreCaseAndBlank("Fixed Rent + Turnover %");
+                                            }
+                                            <table data-group-name="PreviousTerm">
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td class="text-left">
+                                                        <span class="field-validation-error control-hide" data-valmsg-for="txtPreviousTermTurnover1">
+                                                            Cannot be > 50%
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td rowspan="3" class="text-center" style="width:10%;">
+                                                        <label class="control-label">
+                                                            @GenerateRadioButton("PreviousTermType", "Fixed Rent + Turnover %", appendHiddenControls: true, existsGuid: PreviousTermGuid, groupName: "PreviousTermType", disabled: DisabledPreviousTerm)
+                                                        </label>
+                                                    </td>
+                                                    <td style="width:30%;">
+                                                        <label class="control-label @(IsNewStore?"textcolor-grey":"")">Turnover %</label>
+                                                    </td>
+                                                    <td style="width:60%;padding:5px 0;">
+                                                        <div class="input-group">
+                                                            @GenerateTextBox("PreviousTermTurnover", "txtPreviousTermTurnover1", disabled: !FixedRentFlag || DisabledPreviousTerm, showValue: FixedRentFlag)
+                                                            <span class="input-group-addon">%</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td class="text-left">
+                                                        <span class="field-validation-error control-hide" data-valmsg-for="txtPreviousTermRent2">
+                                                            Cannot be > 50
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="control-label @(IsNewStore?"textcolor-grey":"")">
+                                                            Rent
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        @GenerateTextBox("PreviousTermRent", "txtPreviousTermRent2", disabled: !FixedRentFlag || DisabledPreviousTerm, showValue: FixedRentFlag)
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div style="border-bottom: 1px solid; height: 1px"></div>
+                    <div class="clearfix" style="margin-bottom: 15px"></div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <table class="col-sm-12">
+                                <tr>
+                                    <td width="50%">
+                                        <table>
+                                            <tr>
+                                                <td class="text-right" style="padding:5px 10px;">
+                                                    <label class="control-label">Deposit/Key Money:</label>
+                                                </td>
+                                                <td style="padding:5px 10px;">
+                                                    @GenerateTextBox("CashAmount", "txtCashAmount")
+                                                </td>
+                                            </tr>
+                                            <tr class="@hideControl("Premium")">
+                                                <td class="text-right" style="padding:5px 10px;">
+                                                    <label class="control-label">Premium (if applicable):</label>
+                                                </td>
+                                                <td style="padding:5px 10px;">
+                                                    @GenerateTextBox("Premium", "txtPremium")
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <label class="control-label col-sm-1">Refundable?</label>
+                        <div class="col-sm-2">
+                            @GenerateRadioButtonList("MoneyRefundable", "Yes,No")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--31-33-->
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <label class="control-label">Financial Information</label>
+            </div>
+            <div class="panel-body">
+                <div style="padding:0 10px;">
+                    <div class="row text-center">
+                        @Html.Hidden("txtUploadedFile", true, new { data_val = "true", data_val_required = "Financial Information upload is required." })
+                        @Html.ValidationMessage("txtUploadedFile")
+                    </div>
+                    <div class="row text-center">
+                        @Html.Partial("~/Views/Application/_UploadPLExcel.cshtml")
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div style="background-color:#7f7f7f;text-align:center;vertical-align:middle;">
+                                <label style="color:white;padding-top:5px;font-size:larger;">
+                                    P&amp;L Summary
+                                </label>
+                            </div>
+                            <div>
+                                <table class="table table-borderless text-center">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 35%;"></th>
+                                            <th class="text-center">Year 1</th>
+                                            <th class="text-center">Year 2</th>
+                                            <th class="text-center">Year 3</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            var summaries = new[]
+                                            {
+                                                                                                        new KeyValuePair<string, string>("Sales", "PLSales"),
+                                                                                                        new KeyValuePair<string, string>("Gross Profit", "PLGrossProfit"),
+                                                                                                        new KeyValuePair<string, string>("Gross Margin", "PLGrossMargin"),
+                                                                                                        new KeyValuePair<string, string>("Occupancy Costs", "PLOccupancyCosts"),
+                                                                                                        new KeyValuePair<string, string>("Staff Salary", "PLStaffSalary"),
+                                                                                                        new KeyValuePair<string, string>("Staff Commission", "PLStaffCommission"),
+                                                                                                        new KeyValuePair<string, string>("Depreciation", "PLDepreciation"),
+                                                                                                        new KeyValuePair<string, string>("Royalty", "PLRoyalty"),
+                                                                                                        new KeyValuePair<string, string>("Other", "PLOther"),
+                                                                                                        new KeyValuePair<string, string>("Total Operating Expenses", "PLTotalOperatingExpenses"),
+                                                                                                        new KeyValuePair<string, string>("Store NOP", "PLStoreNOP")
+                                                                                                    };
+                                            var DataGroupName = "PLSummary";
+                                            foreach (var item in summaries)
+                                            {
+                                                <tr>
+                                                    <td class="text-right">
+                                                        <label class="control-label">
+                                                            @item.Key
+                                                        </label>
+                                                    </td>
+                                                    @for (int i = 1; i < 4; i++)
+                                                    {
+                                                        var lblName = "lbl" + item.Value + i;
+                                                        var txtName = "txt" + item.Value + i;
+                                                        var propName = item.Value + i;
+                                                        var propValue = GetPropertyValueByPropertyName(propName);
+                                                        if (item.Value.EqualsIgnoreCaseAndBlank("PLGrossMargin"))
+                                                        {
+                                                            propValue += " %";
+                                                        }
+                                                        <td>
+                                                            <label class="control-label" id="@lblName" data-group-name="@DataGroupName">@propValue</label>
+                                                            @GenerateHidden(propName, txtName, group: DataGroupName)
+                                                        </td>
+                                                    }
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div style="background-color:#7f7f7f;text-align:center;vertical-align:middle;">
+                                <label style="color:white;padding-top:5px;font-size:larger;">
+                                    Construction Cost Breakdown
+                                </label>
+                            </div>
+                            <div>
+                                <table class="table table-borderless text-center">
+                                    <thead>
+                                        <tr>
+                                            <th width="35%">&nbsp;</th>
+                                            <th>&nbsp;</th>
+                                        </tr>
+                                        <tr></tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            var costs = new[]
+                                            {
+                                                                                                    new KeyValuePair<string, string>("Walls, Ceiling, & Floor", "WallsCeilingFloor"),
+                                                                                                    new KeyValuePair<string, string>("Furniture", "Furniture"),
+                                                                                                    new KeyValuePair<string, string>("Labor Cost", "LaborCost"),
+                                                                                                    new KeyValuePair<string, string>("IT Equipment", "ITEquipment"),
+                                                                                                    new KeyValuePair<string, string>("Utilities & Others", "Others"),
+                                                                                                    new KeyValuePair<string, string>("Moving, Assembly, Removal", "MovingAssemblyRemoval"),
+                                                                                                    new KeyValuePair<string, string>("Total Construction Cost", "TotalConstructionCost"),
+                                                                                                    new KeyValuePair<string, string>("3-Year Net Gain", "NetGain")
+                                                                                                };
+                                            DataGroupName = "ConstructionCost";
+                                            foreach (var item in costs)
+                                            {
+                                                var lblName = "lbl" + item.Value;
+                                                var txtName = "txt" + item.Value;
+                                                <tr>
+                                                    <td class="text-right">
+                                                        <label class="control-label">
+                                                            @item.Key
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label class="control-label" id="@lblName" data-group-name="@DataGroupName">@GetPropertyValueByPropertyName(item.Value)</label>
+                                                        @GenerateHidden(item.Value, txtName, group: DataGroupName)
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div style="background-color:#7f7f7f;text-align:center;vertical-align:middle;">
+                                <label style="color:white;padding-top:5px;font-size:larger;">
+                                    Statistics
+                                </label>
+                            </div>
+                            <div>
+                                <table class="table table-borderless">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 35%;"></th>
+                                            <th></th>
+                                            <th class="text-center">Within Guideline?</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-right">
+                                                <label class="control-label">
+                                                    Sales per Square Meter
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label class="control-label" id="lblSalesPerSqm" data-group-name="Statistics">@GetPropertyValueByPropertyName("SalesPerSqm")</label>
+                                            </td>
+                                            <td class="text-center">
+                                                <label class="control-label" id="lblWithinSalesPerSqm" data-group-name="Statistics">@GetPropertyValueByPropertyName("SalesPerSqmWithinGl")</label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-right">
+                                                <label class="control-label">
+                                                    CAPX per Square Meter
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label class="control-label" id="lblCAPEXPerSqm" data-group-name="Statistics">@GetPropertyValueByPropertyName("CAPEXPerSqm")</label>
+                                            </td>
+                                            <td class="text-center">
+                                                <label class="control-label" id="lblWithinCAPEXPerSqm" data-group-name="Statistics">@GetPropertyValueByPropertyName("CAPEXPerSqmWithinGl")</label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-right">
+                                                <label class="control-label">
+                                                    Sales per Headcount
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label class="control-label" id="lblSalesPerHeadcount" data-group-name="Statistics">@GetPropertyValueByPropertyName("SalesPerHeadcount")</label>
+                                            </td>
+                                            <td class="text-center">
+                                                <label class="control-label" id="lblWithinSalesPerHeadcount" data-group-name="Statistics">@GetPropertyValueByPropertyName("SalesPerHeadcountWithinGl")</label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-right">
+                                                <label class="control-label">
+                                                    Expected Time to Breakeven
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label id="lblExpectedTimeToBreakeven" class="control-label" data-group-name="Statistics">@GetPropertyValueByPropertyName("ExpectedTimeToBreakeven")</label>
+                                            </td>
+                                            <td class="text-center">
+                                                <label id="lblExpectedTimeToBreakevenWithinGl" class="control-label" data-group-name="Statistics">@GetPropertyValueByPropertyName("ExpectedTimeToBreakevenWithinGl")</label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-right">
+                                                <label class="control-label">
+                                                    Expected Time to CAPX Recovery
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label id="lblExpectedTimeToCAPXRecovery" class="control-label" data-group-name="Statistics">@GetPropertyValueByPropertyName("ExpectedTimeToCAPEXRecovery")</label>
+                                            </td>
+                                            <td class="text-center">
+                                                <label id="lblExpectedTimeToCAPEXRecoveryWithinGl" class="control-label" data-group-name="Statistics">@GetPropertyValueByPropertyName("ExpectedTimeToCAPEXRecoveryWithinGl")</label>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                @GenerateHidden("SalesPerSqm", "txtSalesPerSqm", group: "Statistics")
+                                @GenerateHidden("SalesPerSqmWithinGl", "txtSalesPerSqmWithinGl", group: "Statistics")
+                                @GenerateHidden("CAPEXPerSqm", "txtCAPEXPerSqm", group: "Statistics")
+                                @GenerateHidden("CAPEXPerSqmWithinGl", "txtCAPEXPerSqmWithinGl", group: "Statistics")
+                                @GenerateHidden("SalesPerHeadcount", "txtSalesPerHeadcount", group: "Statistics")
+                                @GenerateHidden("SalesPerHeadcountWithinGl", "txtSalesPerHeadcountWithinGl", group: "Statistics")
+                                @GenerateHidden("ExpectedTimeToBreakeven", "txtExpectedTimeToBreakeven", group: "Statistics")
+                                @GenerateHidden("ExpectedTimeToBreakevenWithinGl", "txtExpectedTimeToBreakevenWithinGl", group: "Statistics")
+                                @GenerateHidden("ExpectedTimeToCAPEXRecovery", "txtExpectedTimeToCAPEXRecovery", group: "Statistics")
+                                @GenerateHidden("ExpectedTimeToCAPEXRecoveryWithinGl", "txtExpectedTimeToCAPEXRecoveryWithinGl", group: "Statistics")
+                            </div>
+                        </div>
+                    </div>
+                    <div style="border-bottom: 1px solid; height: 1px"></div>
+                    <div class="clearfix" style="margin-bottom: 15px"></div>
+                    <div>
+                        <label class="control-label col-sm-3">Is this store in the annual budget?</label>
+                        <div class="col-sm-2">
+                            @GenerateRadioButtonList("WithinAnnualBudget", "Yes,No")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--34-51-->
+        @{
+            var classForFranchisee = "control-hide";
+            var franchise = StoreTypes.LastOrDefault(t => t == "Franchise");
+            var removeRequired = true;
+            if (franchise != null && franchise.Length > 0)
+            {
+                classForFranchisee = "";
+                removeRequired = false;
+            }
+        }
+        <div class="panel panel-primary @classForFranchisee" id="div_franchisee_info">
+            <div class="panel-heading">
+                <label class="control-label">Franchisee Information</label>
+            </div>
+            <div class="panel-body">
+                <div class="form-group @hideControl("NameOfFranchisee")">
+                    <label class="control-label col-sm-2">Name of Franchisee:</label>
+                    <div class="col-sm-4">
+                        @GenerateTextBox("NameOfFranchisee", "txtNameOfFranchisee", removeRequired: removeRequired)
+                    </div>
+                </div>
+                <div class="container @hideControls("DeptStoreLeaseContract,Rent,InventoryRisk,ConstructionWallsCeilingFlooring,LooseFumiture,Staff,StoreOpsExpenses,CollectMoneyFromDeptStorePOS,POSSystem,PaidByFranchiseeToBLS")">
+                    <div class="row col-sm-6" id="divRadioButtons">
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th class="col-sm-6"></th>
+                                    <th class="text-center">
+                                        <label class="control-label">BLS</label>
+                                    </th>
+                                    <th class="text-center">
+                                        <label class="control-label">Franchisee</label>
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr @hideControl("DeptStoreLeaseContract", false)>
+                                    <td class="text-right">
+                                        <label class="control-label">Dept Store/Lease Contract:</label>
+                                    </td>
+                                    @{
+                                        var guid = Guid.NewGuid().ToString();
+                                    }
+                                    <td class="text-center vertical-middle">
+                                        @GenerateRadioButton("DeptStoreLeaseContract", "BLS", existsGuid: guid, removeRequired: removeRequired)
+                                    </td>
+                                    <td class="text-center vertical-middle">
+                                        @GenerateRadioButton("DeptStoreLeaseContract", "Franchisee", appendHiddenControls: true, existsGuid: guid, removeRequired: removeRequired)
+                                    </td>
+                                    <td class="vertical-middle">
+                                        @GenerateTextBox("DeptStoreLeaseContractRemark", removeRequired: removeRequired)
+                                    </td>
+                                </tr>
+                                <tr @hideControl("Rent", false)>
+                                    <td class="text-right">
+                                        <label class="control-label">Rent:</label>
+                                    </td>
+                                    @{
+                                        guid = Guid.NewGuid().ToString();
+                                    }
+                                    <td class="text-center vertical-middle">
+                                        @GenerateRadioButton("Rent", "BLS", existsGuid: guid, removeRequired: removeRequired)
+                                    </td>
+                                    <td class="text-center vertical-middle">
+                                        @GenerateRadioButton("Rent", "Franchisee", appendHiddenControls: true, existsGuid: guid, removeRequired: removeRequired)
+                                    </td>
+                                    <td class="vertical-middle">
+                                        @GenerateTextBox("RentRemark", removeRequired: removeRequired)
+                                    </td>
+                                </tr>
+                                <tr @hideControl("InventoryRisk", false)>
+                                    <td class="text-right">
+                                        <label class="control-label">Inventory Risk:</label>
+                                    </td>
+                                    @{
+                                        guid = Guid.NewGuid().ToString();
+                                    }
+                                    <td class="text-center vertical-middle">
+                                        @GenerateRadioButton("InventoryRisk", "BLS", existsGuid: guid, removeRequired: removeRequired)
+                                    </td>
+                                    <td class="text-center vertical-middle">
+                                        @GenerateRadioButton("InventoryRisk", "Franchisee", appendHiddenControls: true, existsGuid: guid, removeRequired: removeRequired)
+                                    </td>
+                                    <td class="vertical-middle">
+                                        @GenerateTextBox("InventoryRiskRemark", removeRequired: removeRequired)
+                                    </td>
+                                </tr>
+                                <tr @hideControl("ConstructionWallsCeilingFlooring", false)>
+                                    <td class="text-right">
+                                        <label class="control-label">Construction-Walls, Celling, Flooring:</label>
+                                    </td>
+                                    @{
+                                        guid = Guid.NewGuid().ToString();
+                                    }
+                                    <td class="text-center vertical-middle">
+                                        @GenerateRadioButton("ConstructionWallsCeilingFlooring", "BLS", existsGuid: guid, removeRequired: removeRequired)
+                                    </td>
+                                    <td class="text-center vertical-middle">
+                                        @GenerateRadioButton("ConstructionWallsCeilingFlooring", "Franchisee", appendHiddenControls: true, existsGuid: guid, removeRequired: removeRequired)
+                                    </td>
+                                    <td class="vertical-middle">
+                                        @GenerateTextBox("ConstructionWallsCeilingFlooringRemark", removeRequired: removeRequired)
+                                    </td>
+                                </tr>
+                                <tr @hideControl("LooseFumiture", false)>
+                                    <td class="text-right">
+                                        <label class="control-label">Loose Fumiture:</label>
+                                    </td>
+                                    @{
+                                        guid = Guid.NewGuid().ToString();
+                                    }
+                                    <td class="text-center vertical-middle">
+                                        @GenerateRadioButton("LooseFumiture", "BLS", existsGuid: guid, removeRequired: removeRequired)
+                                    </td>
+                                    <td class="text-center vertical-middle">
+                                        @GenerateRadioButton("LooseFumiture", "Franchisee", appendHiddenControls: true, existsGuid: guid, removeRequired: removeRequired)
+                                    </td>
+                                    <td class="vertical-middle">
+                                        @GenerateTextBox("LooseFumitureRemark", removeRequired: removeRequired)
+                                    </td>
+                                </tr>
+                                <tr @hideControl("Staff", false)>
+                                    <td class="text-right">
+                                        <label class="control-label">Staff:</label>
+                                    </td>
+                                    @{
+                                        guid = Guid.NewGuid().ToString();
+                                    }
+                                    <td class="text-center vertical-middle">
+                                        @GenerateRadioButton("Staff", "BLS", existsGuid: guid, removeRequired: removeRequired)
+                                    </td>
+                                    <td class="text-center vertical-middle">
+                                        @GenerateRadioButton("Staff", "Franchisee", appendHiddenControls: true, existsGuid: guid, removeRequired: removeRequired)
+                                    </td>
+                                    <td class="vertical-middle">
+                                        @GenerateTextBox("StaffRemark", removeRequired: removeRequired)
+                                    </td>
+                                </tr>
+                                <tr @hideControl("StoreOpsExpenses", false)>
+                                    <td class="text-right">
+                                        <label class="control-label">Store Ops Expenses:</label>
+                                    </td>
+                                    @{
+                                        guid = Guid.NewGuid().ToString();
+                                    }
+                                    <td class="text-center vertical-middle">
+                                        @GenerateRadioButton("StoreOpsExpenses", "BLS", existsGuid: guid, removeRequired: removeRequired)
+                                    </td>
+                                    <td class="text-center vertical-middle">
+                                        @GenerateRadioButton("StoreOpsExpenses", "Franchisee", appendHiddenControls: true, existsGuid: guid, removeRequired: removeRequired)
+                                    </td>
+                                    <td class="vertical-middle">
+                                        @GenerateTextBox("StoreOpsExpensesRemark", removeRequired: removeRequired)
+                                    </td>
+                                </tr>
+                                <tr @hideControl("CollectMoneyFromDeptStorePOS", false)>
+                                    <td class="text-right">
+                                        <label class="control-label">Collect money from Dept. Store/POS:</label>
+                                    </td>
+                                    @{
+                                        guid = Guid.NewGuid().ToString();
+                                    }
+                                    <td class="text-center vertical-middle">
+                                        @GenerateRadioButton("CollectMoneyFromDeptStorePOS", "BLS", existsGuid: guid, removeRequired: removeRequired)
+                                    </td>
+                                    <td class="text-center vertical-middle">
+                                        @GenerateRadioButton("CollectMoneyFromDeptStorePOS", "Franchisee", appendHiddenControls: true, existsGuid: guid, removeRequired: removeRequired)
+                                    </td>
+                                    <td class="vertical-middle">
+                                        @GenerateTextBox("CollectMoneyFromDeptStorePOSRemark", removeRequired: removeRequired)
+                                    </td>
+                                </tr>
+                                <tr @hideControl("POSSystem", false)>
+                                    <td class="text-right">
+                                        <label class="control-label">POS System:</label>
+                                    </td>
+                                    @{
+                                        guid = Guid.NewGuid().ToString();
+                                    }
+                                    <td class="text-center vertical-middle">
+                                        @GenerateRadioButton("POSSystem", "BLS", existsGuid: guid, removeRequired: removeRequired)
+                                    </td>
+                                    <td class="text-center vertical-middle">
+                                        @GenerateRadioButton("POSSystem", "Franchisee", appendHiddenControls: true, existsGuid: guid, removeRequired: removeRequired)
+                                    </td>
+                                    <td class="vertical-middle">
+                                        @GenerateTextBox("POSSystemRemark", removeRequired: removeRequired)
+                                    </td>
+                                </tr>
+                                <tr @hideControl("PaidByFranchiseeToBLS", false)>
+                                    <td class="text-right">
+                                        <label class="control-label">Deposit to be paid by Franchisee to BLS:</label>
+                                    </td>
+                                    <td class="vertical-middle" colspan="3">
+                                        @GenerateTextBox("PaidByFranchiseeToBLS", "txtPaidByFranchiseeToBLS", removeRequired: removeRequired)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div style="border-bottom: 1px solid; height: 1px"></div>
+                <div class="clearfix" style="margin-bottom: 15px"></div>
+                <div @hideControls("POSSales,Rental,ChargedByLandlord,ChargedToFranchisee,FeePercentage", false) id="divFeeCalc">
+                    <div class="row">
+                        <div class="col-sm-6" style="padding-top: 10px;">
+                            <div class="form-group @hideControl("POSSales")">
+                                <label class="control-label col-sm-4">POS Sales:</label>
+                                <div class="col-sm-6">
+                                    @GenerateTextBox("POSSales", "txtPOSSales")
+                                </div>
+                            </div>
+                            <div class="form-group @hideControl("FeePercentage")">
+                                <label class="control-label col-sm-4">Commission %:</label>
+                                <div class="col-sm-6">
+                                    <div class="input-group">
+                                        @GenerateTextBox("FeePercentage", "txtFeePercentage")
+                                        <span class="input-group-addon">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group @hideControl("Rental")">
+                                <label class="control-label col-sm-4">Rental:</label>
+                                <div class="col-sm-6">
+                                    @GenerateTextBox("Rental", "txtRental")
+                                </div>
+                            </div>
+                            <div class="form-group @hideControl("ChargedByLandlord")">
+                                <label class="control-label col-sm-4">Misc. Exp. Charged by Landlord:</label>
+                                <div class="col-sm-6">
+                                    <div class="clearfix" style="margin-bottom: 10px"></div>
+                                    @GenerateTextBox("ChargedByLandlord", "txtChargedByLandlord")
+                                </div>
+                            </div>
+                            <div class="form-group @hideControl("ChargedToFranchisee")">
+                                <label class="control-label col-sm-4">Misc. Exp. Charged to Franchisee by BLS:</label>
+                                <div class="col-sm-6">
+                                    <div class="clearfix" style="margin-bottom: 10px"></div>
+                                    @GenerateTextBox("ChargedToFranchisee", "txtChargedToFranchisee")
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5 well" style="padding-top: 10px; padding-bottom: 10px;">
+                            <div>
+                                <div class="row">
+                                    <label style="text-decoration: underline;">Definitions</label>
+                                </div>
+                                <div class="row">
+                                    <label>
+                                        POS Sales (P) = Sales from customers, ex-VAT
+                                    </label>
+                                </div>
+                                <div class="clearfix" style="margin-bottom: 5px"></div>
+                                <div class="row">
+                                    <label>
+                                        Commission X (C)
+                                    </label>
+                                </div>
+                                <div class="clearfix" style="margin-bottom: 5px"></div>
+                                <div class="row">
+                                    <label>
+                                        Rental (Y) = Rental/Landlord Commission, ex-VAT, less promo activities discount or rebate, other non-invoiced expenses
+                                    </label>
+                                </div>
+                                <div class="clearfix" style="margin-bottom: 5px"></div>
+                                <div class="row">
+                                    <label>
+                                        Misc. Exp. Charged by Landlord (A) = Invoiced expenses, ex-VAT, as charged or reimbursed by landlord
+                                    </label>
+                                </div>
+                                <div class="clearfix" style="margin-bottom: 5px"></div>
+                                <div class="row">
+                                    <label>
+                                        Misc. Exp. Charged to Franchisee by BLS (B) = damages and expense, ex-VAT, chargeable by BLS
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @{
+                            var POSSales = GetPropertyValueByPropertyName("POSSales");
+                            var Rental = GetPropertyValueByPropertyName("Rental");
+                            var ChargedByLandlord = GetPropertyValueByPropertyName("ChargedByLandlord");
+                            var ChargedToFranchisee = GetPropertyValueByPropertyName("ChargedToFranchisee");
+                            var FeePercentage = GetPropertyValueByPropertyName("FeePercentage");
+                            var ManagementServiceFee = string.Empty;
+                            if (POSSales != null && Rental != null && ChargedByLandlord != null && ChargedToFranchisee != null && FeePercentage != null)
+                            {
+                                var fee = double.Parse(POSSales) * double.Parse(FeePercentage) / 100 - double.Parse(Rental) - double.Parse(ChargedByLandlord) - double.Parse(ChargedToFranchisee);
+                                ManagementServiceFee = fee.ToString("#.##");
+                            }
+                        }
+                        <label class="control-label col-sm-2">Management Service Fee Calculation:</label>
+                        <div class="col-sm-4">
+                            <div class="clearfix" style="margin-bottom: 10px"></div>
+                            <label class="control-label" id="lblManagementServiceFee">
+                                @ManagementServiceFee
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary @hideControl("OtherInformation")">
+            <div class="panel-heading">
+                <label class="control-label">Other Information</label>
+            </div>
+            <div class="panel-body">
+                @GenerateTextArea("OtherInformation", style: "min-width:100%")
+            </div>
+        </div>
+    </div>
+
+}
+
+
+
+

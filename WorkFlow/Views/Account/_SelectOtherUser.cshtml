@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Change current user to the following for testing";
+}
+@using (Ajax.BeginForm("LoginAsOther", "Account", new AjaxOptions()
+{
+    HttpMethod = "post",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "div_main_modal",
+}, new { id = "selectUserForm" }))
+{
+    @Html.TextBox("user", null, new { data_val = "true", data_val_required = "*", @class = "form-control", style = "margin-bottom: 10px;" })
+}
+<script type="text/javascript">
+    $("#selectUserForm").removeData("validator").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse($("#selectUserForm"));
+</script>

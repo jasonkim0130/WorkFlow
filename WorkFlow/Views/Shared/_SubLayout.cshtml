@@ -1,0 +1,28 @@
+﻿@using Resources
+@using WorkFlow.Models
+<div style="background: white; padding: 8px; padding-top: 0;">
+    <ul class="nav nav-tabs" id="ul_subm" style="margin-left: 20px;">
+        @foreach (var item in ViewBag.Menus as SubMenu[])
+        {
+            <li role="presentation" class="@(item.Active ? "h5 active" : "h5")">
+                <a data-ajax="true" data-ajax-loading="#div_progress" data-ajax-method="get" data-ajax-mode="replace" data-ajax-begin="$('#ul_subm .active').removeClass('active');$(this).closest('li').addClass('active');" data-ajax-update="#div_tab_content" data-ajax-failure="$('#div_tab_content').html('@StringResource.ERROR_PROCESSING_REQUEST')" data-loaded="@(item.Loaded)" href="@Url.Action(item.ActionName, item.RouteValues)">
+                    @item.Name
+                    @if (item.Badge.HasValue)
+                    {
+                        <span class="badge red">
+                            @item.Badge
+                        </span>
+                    }
+                </a>
+            </li>
+        }
+    </ul>
+    <div id="div_tab_content">
+        @RenderBody()
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#ul_subm .active>a:not([data-loaded="True"])').click();
+    });
+</script>

@@ -1,0 +1,149 @@
+﻿@using WorkFlowLib.DTO
+@using WorkFlowLib.Parameters
+@using WorkFlow.Ext
+@using WorkFlowLib
+@model CaseLog[]
+<div style="max-height: 500px; overflow-y: auto">
+    <table class="table table-bordered logs-table">
+        <tr>
+            <th>Time</th>
+            <th>Date</th>
+            <th>Description</th>
+        </tr>
+        @foreach (var @group in Model.GroupBy(p => new { p.LogType, p.MessageId, p.MessageTypeId })) //#TODO
+        {
+            var item = @group.First();
+            string usernameByNo = string.Join(", ", @group.Select(p => WebCacheHelper.GetWF_UsernameByNo(p.ReceiverUser)));
+            string sender = WebCacheHelper.GetWF_UsernameByNo(item.SenderUser);
+            <tr>
+                <td>@item.Created.ToLocalTime().ToString("HH:mm")</td>
+                <td>@item.Created.ToLocalTime().ToString("MM/dd/yyyy")</td>
+                <td>
+                    @if (item.LogType == "Notifications")
+                    {
+                        string contentId = (string)(Html.ViewData.ContainsKey("msgcont") ? Html.ViewData["msgcont"] : "#div_msg_cont");
+                        if (item.MessageTypeId == (int)NotificationSources.ApproverCommentted)
+                        {
+                            <p>
+                                <span class="userno">@sender</span> has commentted on the application.
+                                <a data-ajax="true" data-ajax-update="#div_msg_cont"
+                                   data-ajax-mode="replace"
+                                   data-ajax-method="post"
+                                   href="@Url.Action("ViewComment", "Inbox", new { messageId = item.MessageId })">
+                                    View
+                                </a>
+                            </p>
+                        }
+                        else if (item.MessageTypeId == (int)NotificationSources.ApproverAbort)
+                        {
+                            <p>
+                                <span class="userno">@sender</span> has commentted on the application.
+                                <a data-ajax="true" data-ajax-update="@contentId"
+                                   data-ajax-mode="replace"
+                                   data-ajax-method="post"
+                                   href="@Url.Action("ViewComment", "Inbox", new { messageId = item.MessageId })">
+                                    View
+                                </a>
+                            </p>
+                        }
+                        else if (item.MessageTypeId == (int)NotificationSources.ApproverRejected)
+                        {
+                            <p>
+                                <span class="userno">@sender</span> has commentted on the application.
+                                <a data-ajax="true" data-ajax-update="#div_msg_cont"
+                                   data-ajax-mode="replace"
+                                   data-ajax-method="post"
+                                   href="@Url.Action("ViewComment", "Inbox", new { messageId = item.MessageId })">
+                                    View
+                                </a>
+                            </p>
+                        }
+                        else if (item.MessageTypeId == (int)NotificationSources.StepNotificateUser || item.MessageTypeId == (int)NotificationSources.ApplicantNotificateUser || item.MessageTypeId == (int)NotificationSources.LastStepNotificateUser)
+                        {
+                            <p>
+                                <span class="userno">@usernameByNo</span> has been notified
+                            </p>
+                        }
+                        else if (item.MessageTypeId == (int)NotificationSources.FinalNotifyUser)
+                        {
+                            <p>
+                                Application has been sent to final notification user
+                                <span class="userno">@usernameByNo</span>
+                            </p>
+                        }
+                        else if (item.MessageTypeId == (int)NotificationSources.CoverPerson)
+                        {
+                            <p>
+                                Application has been sent to covered person
+                                <span class="userno">@usernameByNo</span>
+                            </p>
+                        }
+                        else if (item.MessageTypeId == (int)NotificationSources.Secretary)
+                        {
+                            <p>
+                                Application has been sent to secretary
+                                <span class="userno">@usernameByNo</span>
+                            </p>
+                        }
+                    }
+                    else
+                    {
+                        if (item.MessageTypeId == (int)CaseLogType.AppAssignApprover)
+                        {
+                            <p>Application is with <span class="userno">@usernameByNo</span></p>
+                        }
+                        else if (item.MessageTypeId == (int)CaseLogType.AppViewed)
+                        {
+                            <p>
+                                Application has been read by
+                                <span class="userno">@usernameByNo</span>
+                            </p>
+                        }
+                        else if (item.MessageTypeId == (int)CaseLogType.AppStepApproved)
+                        {
+                            <p>Application is approved by <span class="userno">@usernameByNo</span></p>
+                        }
+                        else if (item.MessageTypeId == (int)CaseLogType.AppStepRejected)
+                        {
+                            <p>
+                                Application is rejected by <span class="userno">@usernameByNo</span>
+                            </p>
+                        }
+                        else if (item.MessageTypeId == (int)CaseLogType.AppStepAbort)
+                        {
+                            <p>
+                                Application is send back to revise by <span class="userno">@usernameByNo</span>
+                            </p>
+                        }
+                        else if (item.MessageTypeId == (int)CaseLogType.AppCancelled)
+                        {
+                            <p>Application is cancelled by <span class="userno">@usernameByNo</span></p>
+                        }
+                        else if (item.MessageTypeId == (int)CaseLogType.AppCreated)
+                        {
+                            <p>Application was successfully submitted <span class="userno">@usernameByNo</span></p>
+                        }
+                        else if (item.MessageTypeId == (int)CaseLogType.AppRevised)
+                        {
+                            <p>
+                                Application is revised by <span class="userno">@usernameByNo</span> to a new version.
+                            </p>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+    @if (ViewBag.ShowRefresh == true)
+    {
+        <div style="text-align: center">
+            <input id="refreshLogs" type="button" class="btn btn-primary btn-sm" value="Refresh" />
+        </div>
+    }
+</div>
+
+<script>
+    $('#refreshLogs').click(function () {
+        $('#log_content').load('@Url.Action("GetCaseLogs","Inbox",new { flowcaseid = ViewBag.FlowCaseId})', null);
+    });
+</script>

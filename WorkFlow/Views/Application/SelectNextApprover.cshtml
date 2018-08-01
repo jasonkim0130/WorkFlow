@@ -1,0 +1,28 @@
+﻿@using Resources
+@using WorkFlow.Ext
+@using WorkFlowLib.DTO
+@model List<Employee[]>
+@{
+    ViewBag.Title = "Select next approvers";
+    ViewBag.DisplayButtons = false;
+    ViewBag.DisplaySelfButtons = true;
+}
+@foreach (var item in Model)
+{
+    foreach (Employee employee in item)
+    {
+        employee.Name = WebCacheHelper.GetWF_UsernameByNo(employee.UserNo);
+    }
+    <div style="margin-bottom: 10px;">
+        @Html.DropDownList("nextApprover", new SelectList(item, "UserNo", "Name", item.Length == 1 ? item[0].UserNo : null), StringResource.SELECT, new { data_val = "true", data_val_required = "*", @class = "form-control" })
+    </div>
+}
+@section buttons{
+    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="$('#div_modal_cont').remove();">@StringResource.CANCEL</button>
+    <button type="submit" class="btn btn-primary">@StringResource.OK</button>
+}
+<script type="text/javascript">
+    //$("#select_flow_form").removeData("validator").removeData("unobtrusiveValidation");
+    //$.validator.unobtrusive.parse($("#select_flow_form"));
+    $("#nextApprover").rules("add", "required");
+</script>

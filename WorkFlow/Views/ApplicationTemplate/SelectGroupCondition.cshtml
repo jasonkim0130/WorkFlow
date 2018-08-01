@@ -1,0 +1,38 @@
+﻿
+@using WorkFlow.Ext
+@using Resources
+@{
+    ViewBag.Title = "Select group condition";
+    int? conditionId = (int?)ViewBag.CondtitionId;
+}
+@using (Ajax.BeginModalForm("ChangeGroupCondition", new ModalAjaxOptions
+{
+    HttpMethod = "post",
+    InsertionMode = InsertionMode.Replace,
+    LoadingElementId = "div_progress",
+    Id = "template_form",
+    UpdateTargetId = "flowtemplate" + ViewBag.FlowId.ToString()
+}))
+{
+    @Html.Hidden("StepGroupId", ViewBag.StepGroupId as string)
+    @Html.Hidden("FlowId", ViewBag.FlowId as string)
+    <div class="form-group">
+        <label>Group Condition</label>
+        @Html.DropDownList("condition", new[] { new SelectListItem
+{
+    Text = "All", Value = "1", Selected = (conditionId==1)
+},
+new SelectListItem
+{
+   Text = "Any", Value = "2",Selected = (conditionId==2)
+} },
+            "--Select--", new { @class = "form-control", data_val = "true", data_val_required = "*" })
+    </div>
+}
+@section buttons{
+    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="$('#div_modal_cont').remove();">@StringResource.CANCEL</button>
+    <button type="submit" class="btn btn-primary">@StringResource.OK</button>
+}
+<script type="text/javascript">
+    $("#template_form").addUnobtrusiveValidation();
+</script>

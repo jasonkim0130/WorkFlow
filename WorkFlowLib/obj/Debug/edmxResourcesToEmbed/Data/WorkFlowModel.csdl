@@ -1,0 +1,1152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WorkFlowModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="StaffInfo">
+    <Key>
+      <PropertyRef Name="StaffInfoId" />
+    </Key>
+    <Property Name="StaffInfoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StaffId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EnglishFirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="EnglishLastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="LocalFirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="LocalLastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ResidentialAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CorrespondenceAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="HomeTelephone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MobileTelephone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="BankName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="BankAccountNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MaritalStatus" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FamilyMembers" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Qualification" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PreviousData" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="EffectiveDate" Type="DateTime" Precision="0" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SystemLogs">
+    <Key>
+      <PropertyRef Name="LogId" />
+    </Key>
+    <Property Name="LogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Created" Type="DateTime" Precision="3" />
+    <Property Name="StatusID" Type="Int32" Nullable="false" />
+    <Property Name="LogTypeId" Type="Int32" />
+    <Property Name="LogTitle" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="Parameter" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="UserDeviceTokens">
+    <Key>
+      <PropertyRef Name="UserDeviceTokenId" />
+    </Key>
+    <Property Name="UserDeviceTokenId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DeviceToken" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastDeviceLang" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DeptCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <Property Name="LastDeviceLang" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="RegistrationToken" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="WF_ApplicantNotificationUsers">
+    <Key>
+      <PropertyRef Name="ApplicationNotificationUserId" />
+    </Key>
+    <Property Name="ApplicationNotificationUserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FlowId" Type="Int32" Nullable="false" />
+    <Property Name="NotifyUserType" Type="Int32" />
+    <Property Name="UserNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="UserRole" Type="Int32" />
+    <Property Name="ManagerOption" Type="Int32" />
+    <Property Name="ManagerLevel" Type="Int32" />
+    <Property Name="ManagerMaxLevel" Type="Int32" />
+    <Property Name="ManagerLevelOperator" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="CriteriaGradeOperator" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="CriteriaGrade" Type="Int32" />
+    <Property Name="CountryType" Type="Int32" />
+    <Property Name="DeptType" Type="Int32" />
+    <Property Name="BrandType" Type="Int32" />
+    <Property Name="DeptTypeSource" Type="Int32" />
+    <Property Name="FixedCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FixedDept" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FixedBrand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FixedDeptType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="WF_Flows" Relationship="Self.FK_WF_ApplicantNotificationUsers_WF_Flows" FromRole="WF_ApplicantNotificationUsers" ToRole="WF_Flows" />
+  </EntityType>
+  <EntityType Name="WF_CaseCoverUsers">
+    <Key>
+      <PropertyRef Name="CaseCoverUserId" />
+    </Key>
+    <Property Name="CaseCoverUserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FlowCaseId" Type="Int32" Nullable="false" />
+    <Property Name="UserNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="WF_FlowCases" Relationship="WorkFlowModel.FK_WF_CaseCoverUsers_FlowCases" FromRole="WF_CaseCoverUsers" ToRole="WF_FlowCases" />
+  </EntityType>
+  <EntityType Name="WF_CaseLogs">
+    <Key>
+      <PropertyRef Name="CaseLogId" />
+    </Key>
+    <Property Name="CaseLogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FlowCaseId" Type="Int32" Nullable="false" />
+    <Property Name="LogTypeId" Type="Int32" Nullable="false" />
+    <Property Name="UserNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="WF_FlowCases" Relationship="WorkFlowModel.FK_WF_CaseLogs_WF_FlowCases" FromRole="WF_CaseLogs" ToRole="WF_FlowCases" />
+  </EntityType>
+  <EntityType Name="WF_CaseNotificateUsers">
+    <Key>
+      <PropertyRef Name="CaseNotificateUserId" />
+    </Key>
+    <Property Name="CaseNotificateUserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FlowCaseId" Type="Int32" Nullable="false" />
+    <Property Name="UserNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="WF_FlowCases" Relationship="WorkFlowModel.FK_WF_CaseNotificateUsers_FlowCases" FromRole="WF_CaseNotificateUsers" ToRole="WF_FlowCases" />
+  </EntityType>
+  <EntityType Name="WF_CaseNotificationReceivers">
+    <Key>
+      <PropertyRef Name="CaseNotificationReceiverId" />
+    </Key>
+    <Property Name="CaseNotificationReceiverId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CaseNotificationId" Type="Int32" Nullable="false" />
+    <Property Name="SourceType" Type="Int32" />
+    <Property Name="Receiver" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IsRead" Type="Int32" Nullable="false" />
+    <Property Name="IsDissmissed" Type="Int32" Nullable="false" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="WF_CaseNotifications" Relationship="Self.FK_WF_CaseNotificationReceivers_WF_CaseNotifications" FromRole="WF_CaseNotificationReceivers" ToRole="WF_CaseNotifications" />
+  </EntityType>
+  <EntityType Name="WF_CaseNotifications">
+    <Key>
+      <PropertyRef Name="CaseNotificationId" />
+    </Key>
+    <Property Name="CaseNotificationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NotificationType" Type="Int32" Nullable="false" />
+    <Property Name="FlowCaseId" Type="Int32" Nullable="false" />
+    <Property Name="FlowStepId" Type="Int32" />
+    <Property Name="Source" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Comments" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Sender" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="WF_CaseNotificationReceivers" Relationship="Self.FK_WF_CaseNotificationReceivers_WF_CaseNotifications" FromRole="WF_CaseNotifications" ToRole="WF_CaseNotificationReceivers" />
+    <NavigationProperty Name="WF_FlowSteps" Relationship="Self.FK_WF_CaseNotifications_WF_FlowSteps" FromRole="WF_CaseNotifications" ToRole="WF_FlowSteps" />
+    <NavigationProperty Name="WF_FlowCases" Relationship="WorkFlowModel.FK_WF_CaseNotifications_WF_FlowCases" FromRole="WF_CaseNotifications" ToRole="WF_FlowCases" />
+  </EntityType>
+  <EntityType Name="WF_CasePropertyValues">
+    <Key>
+      <PropertyRef Name="CasePropertyValueId" />
+    </Key>
+    <Property Name="CasePropertyValueId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PropertyId" Type="Int32" Nullable="false" />
+    <Property Name="FlowCaseId" Type="Int32" Nullable="false" />
+    <Property Name="StringValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IntValue" Type="Int32" />
+    <Property Name="DateTimeValue" Type="DateTime" Precision="3" />
+    <Property Name="NumericValue" Type="Decimal" Precision="16" Scale="4" />
+    <Property Name="DateValue" Type="DateTime" Precision="3" />
+    <Property Name="UserNoValue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TextValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="WF_FlowPropertys" Relationship="Self.FK_WF_CasePropertyValues_WF_FlowPropertys" FromRole="WF_CasePropertyValues" ToRole="WF_FlowPropertys" />
+    <NavigationProperty Name="WF_FlowCases" Relationship="WorkFlowModel.FK_PropertyValues_FlowCases" FromRole="WF_CasePropertyValues" ToRole="WF_FlowCases" />
+  </EntityType>
+  <EntityType Name="WF_CaseSteps">
+    <Key>
+      <PropertyRef Name="CaseStepId" />
+    </Key>
+    <Property Name="CaseStepId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FlowCaseId" Type="Int32" Nullable="false" />
+    <Property Name="FlowStepId" Type="Int32" Nullable="false" />
+    <Property Name="UserNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="WF_FlowCases" Relationship="WorkFlowModel.FK_WF_CaseSteps_WF_FlowCases" FromRole="WF_CaseSteps" ToRole="WF_FlowCases" />
+  </EntityType>
+  <EntityType Name="WF_CaseUserActions">
+    <Key>
+      <PropertyRef Name="CaseUserActionId" />
+    </Key>
+    <Property Name="CaseUserActionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FlowCaseId" Type="Int32" Nullable="false" />
+    <Property Name="FlowStepId" Type="Int32" Nullable="false" />
+    <Property Name="ActionId" Type="Int32" Nullable="false" />
+    <Property Name="Comments" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="UserNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="WF_FlowSteps" Relationship="Self.FK_FlowCaseUserActions_FlowSteps" FromRole="WF_CaseUserActions" ToRole="WF_FlowSteps" />
+    <NavigationProperty Name="WF_FlowCases" Relationship="WorkFlowModel.FK_FlowCaseUserActions_FlowCases" FromRole="WF_CaseUserActions" ToRole="WF_FlowCases" />
+  </EntityType>
+  <EntityType Name="WF_CountryArchivePaths">
+    <Key>
+      <PropertyRef Name="FlowGroupId" />
+      <PropertyRef Name="CountryCode" />
+    </Key>
+    <Property Name="FlowGroupId" Type="Int32" Nullable="false" />
+    <Property Name="CountryCode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ApprovedArchivePath" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="WF_FlowGroups" Relationship="Self.FK_WF_CountryArchivePaths_WF_FlowGroups" FromRole="WF_CountryArchivePaths" ToRole="WF_FlowGroups" />
+  </EntityType>
+  <EntityType Name="WF_FlowCases_Attachments">
+    <Key>
+      <PropertyRef Name="AttachementId" />
+    </Key>
+    <Property Name="AttachementId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FlowCaseId" Type="Int32" Nullable="false" />
+    <Property Name="FileName" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <Property Name="OriFileName" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FileSize" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="WF_FlowCases" Relationship="WorkFlowModel.FK_WF_FlowCases_Attachments" FromRole="WF_FlowCases_Attachments" ToRole="WF_FlowCases" />
+  </EntityType>
+  <EntityType Name="WF_FlowConditions">
+    <Key>
+      <PropertyRef Name="FlowConditionId" />
+    </Key>
+    <Property Name="FlowConditionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FlowPropertyId" Type="Int32" />
+    <Property Name="OtherPropertyType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="FlowId" Type="Int32" Nullable="false" />
+    <Property Name="Operator" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Value" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="WF_FlowPropertys" Relationship="Self.FK_WF_FlowConditions_WF_FlowPropertys" FromRole="WF_FlowConditions" ToRole="WF_FlowPropertys" />
+    <NavigationProperty Name="WF_Flows" Relationship="Self.FK_WF_FlowConditions_WF_Flows" FromRole="WF_FlowConditions" ToRole="WF_Flows" />
+  </EntityType>
+  <EntityType Name="WF_FlowGroups">
+    <Key>
+      <PropertyRef Name="FlowGroupId" />
+    </Key>
+    <Property Name="FlowGroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FlowTypeId" Type="Int32" Nullable="false" />
+    <Property Name="Version" Type="Int32" Nullable="false" />
+    <Property Name="HasCoverUsers" Type="Boolean" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <Property Name="ApprovedArchivePath" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="WF_CountryArchivePaths" Relationship="Self.FK_WF_CountryArchivePaths_WF_FlowGroups" FromRole="WF_FlowGroups" ToRole="WF_CountryArchivePaths" />
+    <NavigationProperty Name="WF_FlowTypes" Relationship="Self.FK_WF_FlowGroups_WF_FlowTypes" FromRole="WF_FlowGroups" ToRole="WF_FlowTypes" />
+    <NavigationProperty Name="WF_FlowPropertys" Relationship="Self.FK_WF_FlowPropertys_WF_FlowGroups" FromRole="WF_FlowGroups" ToRole="WF_FlowPropertys" />
+    <NavigationProperty Name="WF_Flows" Relationship="Self.FK_WF_Flows_WF_FlowGroups" FromRole="WF_FlowGroups" ToRole="WF_Flows" />
+  </EntityType>
+  <EntityType Name="WF_FlowPropertys">
+    <Key>
+      <PropertyRef Name="FlowPropertyId" />
+    </Key>
+    <Property Name="FlowPropertyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PropertyType" Type="Int32" Nullable="false" />
+    <Property Name="PropertyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Compulsory" Type="Boolean" Nullable="false" />
+    <Property Name="DataSource" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <Property Name="OrderId" Type="Int32" />
+    <Property Name="FlowGroupId" Type="Int32" />
+    <Property Name="Code" Type="Int32" />
+    <Property Name="ViewType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Tab" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="RowIndex" Type="Int32" />
+    <Property Name="ColumnIndex" Type="Int32" />
+    <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AllowMultiple" Type="Boolean" />
+    <Property Name="Width" Type="Int32" />
+    <Property Name="Height" Type="Int32" />
+    <Property Name="HAlign" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="VAlign" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="FontColor" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Validation" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="FontSize" Type="Int32" />
+    <Property Name="ValidationMsg" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="BgColor" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="WF_CasePropertyValues" Relationship="Self.FK_WF_CasePropertyValues_WF_FlowPropertys" FromRole="WF_FlowPropertys" ToRole="WF_CasePropertyValues" />
+    <NavigationProperty Name="WF_FlowConditions" Relationship="Self.FK_WF_FlowConditions_WF_FlowPropertys" FromRole="WF_FlowPropertys" ToRole="WF_FlowConditions" />
+    <NavigationProperty Name="WF_FlowGroups" Relationship="Self.FK_WF_FlowPropertys_WF_FlowGroups" FromRole="WF_FlowPropertys" ToRole="WF_FlowGroups" />
+    <NavigationProperty Name="WF_TemplatePropCode" Relationship="Self.FK_WF_FlowPropertys_WF_TemplatePropCode" FromRole="WF_FlowPropertys" ToRole="WF_TemplatePropCode" />
+    <NavigationProperty Name="WF_StepConditions" Relationship="Self.FK_WF_StepConditions_WF_FlowPropertys" FromRole="WF_FlowPropertys" ToRole="WF_StepConditions" />
+  </EntityType>
+  <EntityType Name="WF_Flows">
+    <Key>
+      <PropertyRef Name="FlowId" />
+    </Key>
+    <Property Name="FlowId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FlowVersion" Type="Int32" Nullable="false" />
+    <Property Name="UserNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FlowGroupId" Type="Int32" />
+    <Property Name="BaseFlowId" Type="Int32" />
+    <Property Name="ConditionRelation" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="WF_ApplicantNotificationUsers" Relationship="Self.FK_WF_ApplicantNotificationUsers_WF_Flows" FromRole="WF_Flows" ToRole="WF_ApplicantNotificationUsers" />
+    <NavigationProperty Name="WF_FlowConditions" Relationship="Self.FK_WF_FlowConditions_WF_Flows" FromRole="WF_Flows" ToRole="WF_FlowConditions" />
+    <NavigationProperty Name="WF_FlowGroups" Relationship="Self.FK_WF_Flows_WF_FlowGroups" FromRole="WF_Flows" ToRole="WF_FlowGroups" />
+    <NavigationProperty Name="WF_StepGroups" Relationship="Self.FK_StepGroups_Flows" FromRole="WF_Flows" ToRole="WF_StepGroups" />
+    <NavigationProperty Name="WF_LastStepNotifyUser" Relationship="Self.FK_WF_LastStepNotifyUser_WF_Flows" FromRole="WF_Flows" ToRole="WF_LastStepNotifyUser" />
+    <NavigationProperty Name="WF_FlowCases" Relationship="WorkFlowModel.FK_FlowCases_Flows" FromRole="WF_Flows" ToRole="WF_FlowCases" />
+  </EntityType>
+  <EntityType Name="WF_FlowSteps">
+    <Key>
+      <PropertyRef Name="FlowStepId" />
+    </Key>
+    <Property Name="FlowStepId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StepGroupId" Type="Int32" Nullable="false" />
+    <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ApproverType" Type="Int32" />
+    <Property Name="OrderId" Type="Int32" Nullable="false" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <Property Name="UserRole" Type="Int32" />
+    <Property Name="ManagerOption" Type="Int32" />
+    <Property Name="ManagerLevel" Type="Int32" />
+    <Property Name="ManagerMaxLevel" Type="Int32" />
+    <Property Name="ManagerLevelOperator" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="CriteriaGradeOperator" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="CriteriaGrade" Type="Int32" />
+    <Property Name="CountryType" Type="Int32" />
+    <Property Name="DeptType" Type="Int32" />
+    <Property Name="BrandType" Type="Int32" />
+    <Property Name="DeptTypeSource" Type="Int32" />
+    <Property Name="FixedCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FixedDept" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FixedBrand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FixedDeptType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NoApprover" Type="Boolean" />
+    <Property Name="NoApproverDataKey" Type="Int32" />
+    <Property Name="NoApproverOperator" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="NoApproverValue" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="NoApproverMaxValue" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="NotifyUser" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="WF_CaseNotifications" Relationship="Self.FK_WF_CaseNotifications_WF_FlowSteps" FromRole="WF_FlowSteps" ToRole="WF_CaseNotifications" />
+    <NavigationProperty Name="WF_CaseUserActions" Relationship="Self.FK_FlowCaseUserActions_FlowSteps" FromRole="WF_FlowSteps" ToRole="WF_CaseUserActions" />
+    <NavigationProperty Name="WF_StepGroups" Relationship="Self.FK_FlowSteps_StepGroups" FromRole="WF_FlowSteps" ToRole="WF_StepGroups" />
+    <NavigationProperty Name="WF_NoApproverConditions" Relationship="Self.FK_NoApproverInfo_WF_FlowSteps" FromRole="WF_FlowSteps" ToRole="WF_NoApproverConditions" />
+    <NavigationProperty Name="WF_Secretary" Relationship="Self.FK_WF_Secretary_WF_FlowSteps" FromRole="WF_FlowSteps" ToRole="WF_Secretary" />
+  </EntityType>
+  <EntityType Name="WF_FlowTypes">
+    <Key>
+      <PropertyRef Name="FlowTypeId" />
+    </Key>
+    <Property Name="FlowTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Dep" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Grade" Type="Int32" />
+    <Property Name="Creator" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <Property Name="Icon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TemplateType" Type="Int32" />
+    <Property Name="IconUrl" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Platform" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Tabs" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="WF_FlowGroups" Relationship="Self.FK_WF_FlowGroups_WF_FlowTypes" FromRole="WF_FlowTypes" ToRole="WF_FlowGroups" />
+  </EntityType>
+  <EntityType Name="WF_LastStepNotifyUser">
+    <Key>
+      <PropertyRef Name="LastStepNotifyUserId" />
+    </Key>
+    <Property Name="LastStepNotifyUserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FlowId" Type="Int32" Nullable="false" />
+    <Property Name="NotifyUserType" Type="Int32" />
+    <Property Name="UserNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="UserRole" Type="Int32" />
+    <Property Name="ManagerOption" Type="Int32" />
+    <Property Name="ManagerLevel" Type="Int32" />
+    <Property Name="ManagerMaxLevel" Type="Int32" />
+    <Property Name="ManagerLevelOperator" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="CriteriaGradeOperator" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="CriteriaGrade" Type="Int32" />
+    <Property Name="CountryType" Type="Int32" />
+    <Property Name="DeptType" Type="Int32" />
+    <Property Name="BrandType" Type="Int32" />
+    <Property Name="DeptTypeSource" Type="Int32" />
+    <Property Name="FixedCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FixedDept" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FixedBrand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FixedDeptType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="WF_Flows" Relationship="Self.FK_WF_LastStepNotifyUser_WF_Flows" FromRole="WF_LastStepNotifyUser" ToRole="WF_Flows" />
+  </EntityType>
+  <EntityType Name="WF_NoApproverConditions">
+    <Key>
+      <PropertyRef Name="NoApproverId" />
+    </Key>
+    <Property Name="NoApproverId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FlowStepId" Type="Int32" Nullable="false" />
+    <Property Name="NoApproverDataKey" Type="Int32" Nullable="false" />
+    <Property Name="NoApproverOperator" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NoApproverValue" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NoApproverMaxValue" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="WF_FlowSteps" Relationship="Self.FK_NoApproverInfo_WF_FlowSteps" FromRole="WF_NoApproverConditions" ToRole="WF_FlowSteps" />
+  </EntityType>
+  <EntityType Name="WF_Secretary">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SecretaryId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <Property Name="FlowStepId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="WF_FlowSteps" Relationship="Self.FK_WF_Secretary_WF_FlowSteps" FromRole="WF_Secretary" ToRole="WF_FlowSteps" />
+  </EntityType>
+  <EntityType Name="WF_StepConditions">
+    <Key>
+      <PropertyRef Name="StepConditionId" />
+    </Key>
+    <Property Name="StepConditionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FlowPropertyId" Type="Int32" Nullable="false" />
+    <Property Name="Operator" Type="Int32" Nullable="false" />
+    <Property Name="Value" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="WF_FlowPropertys" Relationship="Self.FK_WF_StepConditions_WF_FlowPropertys" FromRole="WF_StepConditions" ToRole="WF_FlowPropertys" />
+  </EntityType>
+  <EntityType Name="WF_StepGroupConditions">
+    <Key>
+      <PropertyRef Name="StepGroupConditionId" />
+    </Key>
+    <Property Name="StepGroupConditionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StepGroupId" Type="Int32" Nullable="false" />
+    <Property Name="Operator" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Value" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <Property Name="DataKey" Type="Int32" Nullable="false" />
+    <Property Name="MaxValue" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="NextStepGroupId" Type="Int32" />
+    <NavigationProperty Name="WF_StepGroups" Relationship="Self.FK_WF_StepGroupConditions_WF_StepGroups" FromRole="WF_StepGroupConditions" ToRole="WF_StepGroups" />
+  </EntityType>
+  <EntityType Name="WF_StepGroups">
+    <Key>
+      <PropertyRef Name="StepGroupId" />
+    </Key>
+    <Property Name="StepGroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FlowId" Type="Int32" Nullable="false" />
+    <Property Name="ConditionId" Type="Int32" Nullable="false" />
+    <Property Name="OrderId" Type="Int32" Nullable="false" />
+    <Property Name="IsAllowModify" Type="Boolean" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <Property Name="ConditionRelation" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="WF_Flows" Relationship="Self.FK_StepGroups_Flows" FromRole="WF_StepGroups" ToRole="WF_Flows" />
+    <NavigationProperty Name="WF_FlowSteps" Relationship="Self.FK_FlowSteps_StepGroups" FromRole="WF_StepGroups" ToRole="WF_FlowSteps" />
+    <NavigationProperty Name="WF_StepGroupConditions" Relationship="Self.FK_WF_StepGroupConditions_WF_StepGroups" FromRole="WF_StepGroups" ToRole="WF_StepGroupConditions" />
+    <NavigationProperty Name="WF_StepNotificateUsers" Relationship="Self.FK_WF_StepNotificateUsers_WF_StepGroups" FromRole="WF_StepGroups" ToRole="WF_StepNotificateUsers" />
+    <NavigationProperty Name="WF_FlowCases" Relationship="WorkFlowModel.FK_WF_FlowCases_WF_StepGroups" FromRole="WF_StepGroups" ToRole="WF_FlowCases" />
+  </EntityType>
+  <EntityType Name="WF_StepNotificateUsers">
+    <Key>
+      <PropertyRef Name="StepNotificateUserId" />
+    </Key>
+    <Property Name="StepNotificateUserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StepGroupId" Type="Int32" Nullable="false" />
+    <Property Name="UserNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <Property Name="NotifyUserType" Type="Int32" />
+    <Property Name="UserRole" Type="Int32" />
+    <Property Name="ManagerOption" Type="Int32" />
+    <Property Name="ManagerLevel" Type="Int32" />
+    <Property Name="ManagerMaxLevel" Type="Int32" />
+    <Property Name="ManagerLevelOperator" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="CriteriaGradeOperator" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="CriteriaGrade" Type="Int32" />
+    <Property Name="CountryType" Type="Int32" />
+    <Property Name="DeptType" Type="Int32" />
+    <Property Name="BrandType" Type="Int32" />
+    <Property Name="DeptTypeSource" Type="Int32" />
+    <Property Name="FixedCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FixedDept" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FixedBrand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FixedDeptType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="WF_StepGroups" Relationship="Self.FK_WF_StepNotificateUsers_WF_StepGroups" FromRole="WF_StepNotificateUsers" ToRole="WF_StepGroups" />
+  </EntityType>
+  <EntityType Name="WF_TemplatePropCode">
+    <Key>
+      <PropertyRef Name="TemplatePropCodeId" />
+    </Key>
+    <Property Name="TemplatePropCodeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TemplateType" Type="Int32" Nullable="false" />
+    <Property Name="PropCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="WF_FlowPropertys" Relationship="Self.FK_WF_FlowPropertys_WF_TemplatePropCode" FromRole="WF_TemplatePropCode" ToRole="WF_FlowPropertys" />
+  </EntityType>
+  <EntityType Name="BLSShopView">
+    <Key>
+      <PropertyRef Name="Brand" />
+      <PropertyRef Name="Country" />
+      <PropertyRef Name="ShopCode" />
+      <PropertyRef Name="ShopName" />
+    </Key>
+    <Property Name="Brand" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Country" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ShopCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ShopName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BLSSKUMaster">
+    <Key>
+      <PropertyRef Name="Brand" />
+      <PropertyRef Name="SKU" />
+      <PropertyRef Name="ItemCode" />
+      <PropertyRef Name="Color" />
+      <PropertyRef Name="SIZE" />
+      <PropertyRef Name="Season" />
+    </Key>
+    <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SKU" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ItemCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Color" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SIZE" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Season" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GlobalUserView">
+    <Key>
+      <PropertyRef Name="Country" />
+      <PropertyRef Name="EmployeeID" />
+      <PropertyRef Name="EmployeeNo" />
+      <PropertyRef Name="EmpStatus" />
+      <PropertyRef Name="EmpType" />
+      <PropertyRef Name="Dept" />
+      <PropertyRef Name="DeptType" />
+      <PropertyRef Name="ShopCode" />
+    </Key>
+    <Property Name="Country" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EmployeeID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EmployeeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="EmployeeNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EmpStatus" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EmpType" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="Gender" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="Age" Type="Int32" />
+    <Property Name="Brand" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Dept" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DeptType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ShopCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_WF_ApplicantNotificationUsers_WF_Flows">
+    <End Role="WF_Flows" Type="Self.WF_Flows" Multiplicity="1" />
+    <End Role="WF_ApplicantNotificationUsers" Type="Self.WF_ApplicantNotificationUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_Flows">
+        <PropertyRef Name="FlowId" />
+      </Principal>
+      <Dependent Role="WF_ApplicantNotificationUsers">
+        <PropertyRef Name="FlowId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WF_CaseNotificationReceivers_WF_CaseNotifications">
+    <End Role="WF_CaseNotifications" Type="Self.WF_CaseNotifications" Multiplicity="1" />
+    <End Role="WF_CaseNotificationReceivers" Type="Self.WF_CaseNotificationReceivers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_CaseNotifications">
+        <PropertyRef Name="CaseNotificationId" />
+      </Principal>
+      <Dependent Role="WF_CaseNotificationReceivers">
+        <PropertyRef Name="CaseNotificationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WF_CaseNotifications_WF_FlowSteps">
+    <End Role="WF_FlowSteps" Type="Self.WF_FlowSteps" Multiplicity="0..1" />
+    <End Role="WF_CaseNotifications" Type="Self.WF_CaseNotifications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_FlowSteps">
+        <PropertyRef Name="FlowStepId" />
+      </Principal>
+      <Dependent Role="WF_CaseNotifications">
+        <PropertyRef Name="FlowStepId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WF_CasePropertyValues_WF_FlowPropertys">
+    <End Role="WF_FlowPropertys" Type="Self.WF_FlowPropertys" Multiplicity="1" />
+    <End Role="WF_CasePropertyValues" Type="Self.WF_CasePropertyValues" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_FlowPropertys">
+        <PropertyRef Name="FlowPropertyId" />
+      </Principal>
+      <Dependent Role="WF_CasePropertyValues">
+        <PropertyRef Name="PropertyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FlowCaseUserActions_FlowSteps">
+    <End Role="WF_FlowSteps" Type="Self.WF_FlowSteps" Multiplicity="1" />
+    <End Role="WF_CaseUserActions" Type="Self.WF_CaseUserActions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_FlowSteps">
+        <PropertyRef Name="FlowStepId" />
+      </Principal>
+      <Dependent Role="WF_CaseUserActions">
+        <PropertyRef Name="FlowStepId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WF_CountryArchivePaths_WF_FlowGroups">
+    <End Role="WF_FlowGroups" Type="Self.WF_FlowGroups" Multiplicity="1" />
+    <End Role="WF_CountryArchivePaths" Type="Self.WF_CountryArchivePaths" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_FlowGroups">
+        <PropertyRef Name="FlowGroupId" />
+      </Principal>
+      <Dependent Role="WF_CountryArchivePaths">
+        <PropertyRef Name="FlowGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WF_FlowConditions_WF_FlowPropertys">
+    <End Role="WF_FlowPropertys" Type="Self.WF_FlowPropertys" Multiplicity="0..1" />
+    <End Role="WF_FlowConditions" Type="Self.WF_FlowConditions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_FlowPropertys">
+        <PropertyRef Name="FlowPropertyId" />
+      </Principal>
+      <Dependent Role="WF_FlowConditions">
+        <PropertyRef Name="FlowPropertyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WF_FlowConditions_WF_Flows">
+    <End Role="WF_Flows" Type="Self.WF_Flows" Multiplicity="1" />
+    <End Role="WF_FlowConditions" Type="Self.WF_FlowConditions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_Flows">
+        <PropertyRef Name="FlowId" />
+      </Principal>
+      <Dependent Role="WF_FlowConditions">
+        <PropertyRef Name="FlowId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WF_FlowGroups_WF_FlowTypes">
+    <End Role="WF_FlowTypes" Type="Self.WF_FlowTypes" Multiplicity="1" />
+    <End Role="WF_FlowGroups" Type="Self.WF_FlowGroups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_FlowTypes">
+        <PropertyRef Name="FlowTypeId" />
+      </Principal>
+      <Dependent Role="WF_FlowGroups">
+        <PropertyRef Name="FlowTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WF_FlowPropertys_WF_FlowGroups">
+    <End Role="WF_FlowGroups" Type="Self.WF_FlowGroups" Multiplicity="0..1" />
+    <End Role="WF_FlowPropertys" Type="Self.WF_FlowPropertys" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_FlowGroups">
+        <PropertyRef Name="FlowGroupId" />
+      </Principal>
+      <Dependent Role="WF_FlowPropertys">
+        <PropertyRef Name="FlowGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WF_Flows_WF_FlowGroups">
+    <End Role="WF_FlowGroups" Type="Self.WF_FlowGroups" Multiplicity="0..1" />
+    <End Role="WF_Flows" Type="Self.WF_Flows" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_FlowGroups">
+        <PropertyRef Name="FlowGroupId" />
+      </Principal>
+      <Dependent Role="WF_Flows">
+        <PropertyRef Name="FlowGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WF_FlowPropertys_WF_TemplatePropCode">
+    <End Role="WF_TemplatePropCode" Type="Self.WF_TemplatePropCode" Multiplicity="0..1" />
+    <End Role="WF_FlowPropertys" Type="Self.WF_FlowPropertys" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_TemplatePropCode">
+        <PropertyRef Name="TemplatePropCodeId" />
+      </Principal>
+      <Dependent Role="WF_FlowPropertys">
+        <PropertyRef Name="Code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WF_StepConditions_WF_FlowPropertys">
+    <End Role="WF_FlowPropertys" Type="Self.WF_FlowPropertys" Multiplicity="1" />
+    <End Role="WF_StepConditions" Type="Self.WF_StepConditions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_FlowPropertys">
+        <PropertyRef Name="FlowPropertyId" />
+      </Principal>
+      <Dependent Role="WF_StepConditions">
+        <PropertyRef Name="FlowPropertyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StepGroups_Flows">
+    <End Role="WF_Flows" Type="Self.WF_Flows" Multiplicity="1" />
+    <End Role="WF_StepGroups" Type="Self.WF_StepGroups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_Flows">
+        <PropertyRef Name="FlowId" />
+      </Principal>
+      <Dependent Role="WF_StepGroups">
+        <PropertyRef Name="FlowId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WF_LastStepNotifyUser_WF_Flows">
+    <End Role="WF_Flows" Type="Self.WF_Flows" Multiplicity="1" />
+    <End Role="WF_LastStepNotifyUser" Type="Self.WF_LastStepNotifyUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_Flows">
+        <PropertyRef Name="FlowId" />
+      </Principal>
+      <Dependent Role="WF_LastStepNotifyUser">
+        <PropertyRef Name="FlowId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FlowSteps_StepGroups">
+    <End Role="WF_StepGroups" Type="Self.WF_StepGroups" Multiplicity="1" />
+    <End Role="WF_FlowSteps" Type="Self.WF_FlowSteps" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_StepGroups">
+        <PropertyRef Name="StepGroupId" />
+      </Principal>
+      <Dependent Role="WF_FlowSteps">
+        <PropertyRef Name="StepGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NoApproverInfo_WF_FlowSteps">
+    <End Role="WF_FlowSteps" Type="Self.WF_FlowSteps" Multiplicity="1" />
+    <End Role="WF_NoApproverConditions" Type="Self.WF_NoApproverConditions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_FlowSteps">
+        <PropertyRef Name="FlowStepId" />
+      </Principal>
+      <Dependent Role="WF_NoApproverConditions">
+        <PropertyRef Name="FlowStepId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WF_Secretary_WF_FlowSteps">
+    <End Role="WF_FlowSteps" Type="Self.WF_FlowSteps" Multiplicity="1" />
+    <End Role="WF_Secretary" Type="Self.WF_Secretary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_FlowSteps">
+        <PropertyRef Name="FlowStepId" />
+      </Principal>
+      <Dependent Role="WF_Secretary">
+        <PropertyRef Name="FlowStepId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WF_StepGroupConditions_WF_StepGroups">
+    <End Role="WF_StepGroups" Type="Self.WF_StepGroups" Multiplicity="1" />
+    <End Role="WF_StepGroupConditions" Type="Self.WF_StepGroupConditions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_StepGroups">
+        <PropertyRef Name="StepGroupId" />
+      </Principal>
+      <Dependent Role="WF_StepGroupConditions">
+        <PropertyRef Name="StepGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WF_StepNotificateUsers_WF_StepGroups">
+    <End Role="WF_StepGroups" Type="Self.WF_StepGroups" Multiplicity="1" />
+    <End Role="WF_StepNotificateUsers" Type="Self.WF_StepNotificateUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_StepGroups">
+        <PropertyRef Name="StepGroupId" />
+      </Principal>
+      <Dependent Role="WF_StepNotificateUsers">
+        <PropertyRef Name="StepGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="WorkFlowEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="StaffInfo" EntityType="Self.StaffInfo" />
+    <EntitySet Name="SystemLogs" EntityType="Self.SystemLogs" />
+    <EntitySet Name="UserDeviceTokens" EntityType="Self.UserDeviceTokens" />
+    <EntitySet Name="Users" EntityType="Self.Users" />
+    <EntitySet Name="WF_ApplicantNotificationUsers" EntityType="Self.WF_ApplicantNotificationUsers" />
+    <EntitySet Name="WF_CaseCoverUsers" EntityType="Self.WF_CaseCoverUsers" />
+    <EntitySet Name="WF_CaseLogs" EntityType="Self.WF_CaseLogs" />
+    <EntitySet Name="WF_CaseNotificateUsers" EntityType="Self.WF_CaseNotificateUsers" />
+    <EntitySet Name="WF_CaseNotificationReceivers" EntityType="Self.WF_CaseNotificationReceivers" />
+    <EntitySet Name="WF_CaseNotifications" EntityType="Self.WF_CaseNotifications" />
+    <EntitySet Name="WF_CasePropertyValues" EntityType="Self.WF_CasePropertyValues" />
+    <EntitySet Name="WF_CaseSteps" EntityType="Self.WF_CaseSteps" />
+    <EntitySet Name="WF_CaseUserActions" EntityType="Self.WF_CaseUserActions" />
+    <EntitySet Name="WF_CountryArchivePaths" EntityType="Self.WF_CountryArchivePaths" />
+    <EntitySet Name="WF_FlowCases_Attachments" EntityType="Self.WF_FlowCases_Attachments" />
+    <EntitySet Name="WF_FlowConditions" EntityType="Self.WF_FlowConditions" />
+    <EntitySet Name="WF_FlowGroups" EntityType="Self.WF_FlowGroups" />
+    <EntitySet Name="WF_FlowPropertys" EntityType="Self.WF_FlowPropertys" />
+    <EntitySet Name="WF_Flows" EntityType="Self.WF_Flows" />
+    <EntitySet Name="WF_FlowSteps" EntityType="Self.WF_FlowSteps" />
+    <EntitySet Name="WF_FlowTypes" EntityType="Self.WF_FlowTypes" />
+    <EntitySet Name="WF_LastStepNotifyUser" EntityType="Self.WF_LastStepNotifyUser" />
+    <EntitySet Name="WF_NoApproverConditions" EntityType="Self.WF_NoApproverConditions" />
+    <EntitySet Name="WF_Secretary" EntityType="Self.WF_Secretary" />
+    <EntitySet Name="WF_StepConditions" EntityType="Self.WF_StepConditions" />
+    <EntitySet Name="WF_StepGroupConditions" EntityType="Self.WF_StepGroupConditions" />
+    <EntitySet Name="WF_StepGroups" EntityType="Self.WF_StepGroups" />
+    <EntitySet Name="WF_StepNotificateUsers" EntityType="Self.WF_StepNotificateUsers" />
+    <EntitySet Name="WF_TemplatePropCode" EntityType="Self.WF_TemplatePropCode" />
+    <EntitySet Name="BLSShopView" EntityType="Self.BLSShopView" />
+    <EntitySet Name="BLSSKUMaster" EntityType="Self.BLSSKUMaster" />
+    <EntitySet Name="GlobalUserView" EntityType="Self.GlobalUserView" />
+    <AssociationSet Name="FK_WF_ApplicantNotificationUsers_WF_Flows" Association="Self.FK_WF_ApplicantNotificationUsers_WF_Flows">
+      <End Role="WF_Flows" EntitySet="WF_Flows" />
+      <End Role="WF_ApplicantNotificationUsers" EntitySet="WF_ApplicantNotificationUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WF_CaseNotificationReceivers_WF_CaseNotifications" Association="Self.FK_WF_CaseNotificationReceivers_WF_CaseNotifications">
+      <End Role="WF_CaseNotifications" EntitySet="WF_CaseNotifications" />
+      <End Role="WF_CaseNotificationReceivers" EntitySet="WF_CaseNotificationReceivers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WF_CaseNotifications_WF_FlowSteps" Association="Self.FK_WF_CaseNotifications_WF_FlowSteps">
+      <End Role="WF_FlowSteps" EntitySet="WF_FlowSteps" />
+      <End Role="WF_CaseNotifications" EntitySet="WF_CaseNotifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WF_CasePropertyValues_WF_FlowPropertys" Association="Self.FK_WF_CasePropertyValues_WF_FlowPropertys">
+      <End Role="WF_FlowPropertys" EntitySet="WF_FlowPropertys" />
+      <End Role="WF_CasePropertyValues" EntitySet="WF_CasePropertyValues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FlowCaseUserActions_FlowSteps" Association="Self.FK_FlowCaseUserActions_FlowSteps">
+      <End Role="WF_FlowSteps" EntitySet="WF_FlowSteps" />
+      <End Role="WF_CaseUserActions" EntitySet="WF_CaseUserActions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WF_CountryArchivePaths_WF_FlowGroups" Association="Self.FK_WF_CountryArchivePaths_WF_FlowGroups">
+      <End Role="WF_FlowGroups" EntitySet="WF_FlowGroups" />
+      <End Role="WF_CountryArchivePaths" EntitySet="WF_CountryArchivePaths" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WF_FlowConditions_WF_FlowPropertys" Association="Self.FK_WF_FlowConditions_WF_FlowPropertys">
+      <End Role="WF_FlowPropertys" EntitySet="WF_FlowPropertys" />
+      <End Role="WF_FlowConditions" EntitySet="WF_FlowConditions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WF_FlowConditions_WF_Flows" Association="Self.FK_WF_FlowConditions_WF_Flows">
+      <End Role="WF_Flows" EntitySet="WF_Flows" />
+      <End Role="WF_FlowConditions" EntitySet="WF_FlowConditions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WF_FlowGroups_WF_FlowTypes" Association="Self.FK_WF_FlowGroups_WF_FlowTypes">
+      <End Role="WF_FlowTypes" EntitySet="WF_FlowTypes" />
+      <End Role="WF_FlowGroups" EntitySet="WF_FlowGroups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WF_FlowPropertys_WF_FlowGroups" Association="Self.FK_WF_FlowPropertys_WF_FlowGroups">
+      <End Role="WF_FlowGroups" EntitySet="WF_FlowGroups" />
+      <End Role="WF_FlowPropertys" EntitySet="WF_FlowPropertys" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WF_Flows_WF_FlowGroups" Association="Self.FK_WF_Flows_WF_FlowGroups">
+      <End Role="WF_FlowGroups" EntitySet="WF_FlowGroups" />
+      <End Role="WF_Flows" EntitySet="WF_Flows" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WF_FlowPropertys_WF_TemplatePropCode" Association="Self.FK_WF_FlowPropertys_WF_TemplatePropCode">
+      <End Role="WF_TemplatePropCode" EntitySet="WF_TemplatePropCode" />
+      <End Role="WF_FlowPropertys" EntitySet="WF_FlowPropertys" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WF_StepConditions_WF_FlowPropertys" Association="Self.FK_WF_StepConditions_WF_FlowPropertys">
+      <End Role="WF_FlowPropertys" EntitySet="WF_FlowPropertys" />
+      <End Role="WF_StepConditions" EntitySet="WF_StepConditions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StepGroups_Flows" Association="Self.FK_StepGroups_Flows">
+      <End Role="WF_Flows" EntitySet="WF_Flows" />
+      <End Role="WF_StepGroups" EntitySet="WF_StepGroups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WF_LastStepNotifyUser_WF_Flows" Association="Self.FK_WF_LastStepNotifyUser_WF_Flows">
+      <End Role="WF_Flows" EntitySet="WF_Flows" />
+      <End Role="WF_LastStepNotifyUser" EntitySet="WF_LastStepNotifyUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FlowSteps_StepGroups" Association="Self.FK_FlowSteps_StepGroups">
+      <End Role="WF_StepGroups" EntitySet="WF_StepGroups" />
+      <End Role="WF_FlowSteps" EntitySet="WF_FlowSteps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NoApproverInfo_WF_FlowSteps" Association="Self.FK_NoApproverInfo_WF_FlowSteps">
+      <End Role="WF_FlowSteps" EntitySet="WF_FlowSteps" />
+      <End Role="WF_NoApproverConditions" EntitySet="WF_NoApproverConditions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WF_Secretary_WF_FlowSteps" Association="Self.FK_WF_Secretary_WF_FlowSteps">
+      <End Role="WF_FlowSteps" EntitySet="WF_FlowSteps" />
+      <End Role="WF_Secretary" EntitySet="WF_Secretary" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WF_StepGroupConditions_WF_StepGroups" Association="Self.FK_WF_StepGroupConditions_WF_StepGroups">
+      <End Role="WF_StepGroups" EntitySet="WF_StepGroups" />
+      <End Role="WF_StepGroupConditions" EntitySet="WF_StepGroupConditions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WF_StepNotificateUsers_WF_StepGroups" Association="Self.FK_WF_StepNotificateUsers_WF_StepGroups">
+      <End Role="WF_StepGroups" EntitySet="WF_StepGroups" />
+      <End Role="WF_StepNotificateUsers" EntitySet="WF_StepNotificateUsers" />
+    </AssociationSet>
+    <EntitySet Name="Cities" EntityType="WorkFlowModel.Cities" />
+    <EntitySet Name="Provinces" EntityType="WorkFlowModel.Provinces" />
+    <EntitySet Name="WF_FlowCases" EntityType="WorkFlowModel.WF_FlowCases" />
+    <AssociationSet Name="FK_WF_CaseCoverUsers_FlowCases" Association="WorkFlowModel.FK_WF_CaseCoverUsers_FlowCases">
+      <End Role="WF_FlowCases" EntitySet="WF_FlowCases" />
+      <End Role="WF_CaseCoverUsers" EntitySet="WF_CaseCoverUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WF_CaseLogs_WF_FlowCases" Association="WorkFlowModel.FK_WF_CaseLogs_WF_FlowCases">
+      <End Role="WF_FlowCases" EntitySet="WF_FlowCases" />
+      <End Role="WF_CaseLogs" EntitySet="WF_CaseLogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WF_CaseNotificateUsers_FlowCases" Association="WorkFlowModel.FK_WF_CaseNotificateUsers_FlowCases">
+      <End Role="WF_FlowCases" EntitySet="WF_FlowCases" />
+      <End Role="WF_CaseNotificateUsers" EntitySet="WF_CaseNotificateUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WF_CaseNotifications_WF_FlowCases" Association="WorkFlowModel.FK_WF_CaseNotifications_WF_FlowCases">
+      <End Role="WF_FlowCases" EntitySet="WF_FlowCases" />
+      <End Role="WF_CaseNotifications" EntitySet="WF_CaseNotifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PropertyValues_FlowCases" Association="WorkFlowModel.FK_PropertyValues_FlowCases">
+      <End Role="WF_FlowCases" EntitySet="WF_FlowCases" />
+      <End Role="WF_CasePropertyValues" EntitySet="WF_CasePropertyValues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WF_CaseSteps_WF_FlowCases" Association="WorkFlowModel.FK_WF_CaseSteps_WF_FlowCases">
+      <End Role="WF_FlowCases" EntitySet="WF_FlowCases" />
+      <End Role="WF_CaseSteps" EntitySet="WF_CaseSteps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FlowCaseUserActions_FlowCases" Association="WorkFlowModel.FK_FlowCaseUserActions_FlowCases">
+      <End Role="WF_FlowCases" EntitySet="WF_FlowCases" />
+      <End Role="WF_CaseUserActions" EntitySet="WF_CaseUserActions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FlowCases_Flows" Association="WorkFlowModel.FK_FlowCases_Flows">
+      <End Role="WF_Flows" EntitySet="WF_Flows" />
+      <End Role="WF_FlowCases" EntitySet="WF_FlowCases" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WF_FlowCases_Attachments" Association="WorkFlowModel.FK_WF_FlowCases_Attachments">
+      <End Role="WF_FlowCases" EntitySet="WF_FlowCases" />
+      <End Role="WF_FlowCases_Attachments" EntitySet="WF_FlowCases_Attachments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WF_FlowCases_WF_StepGroups" Association="WorkFlowModel.FK_WF_FlowCases_WF_StepGroups">
+      <End Role="WF_StepGroups" EntitySet="WF_StepGroups" />
+      <End Role="WF_FlowCases" EntitySet="WF_FlowCases" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Cities">
+    <Key>
+      <PropertyRef Name="CityId" />
+    </Key>
+    <Property Name="CityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ProvinceCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <Property Name="CountryCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Provinces">
+    <Key>
+      <PropertyRef Name="ProvinceId" />
+    </Key>
+    <Property Name="ProvinceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProvinceCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WF_FlowCases">
+    <Key>
+      <PropertyRef Name="FlowCaseId" />
+    </Key>
+    <Property Name="FlowCaseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FlowId" Type="Int32" Nullable="false" />
+    <Property Name="UserNo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Subject" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Deadline" Type="DateTime" Precision="3" />
+    <Property Name="IsRead" Type="Int32" Nullable="false" />
+    <Property Name="IsFlagged" Type="Int32" Nullable="false" />
+    <Property Name="IsDissmissed" Type="Int32" Nullable="false" />
+    <Property Name="Approved" Type="DateTime" Precision="3" />
+    <Property Name="Rejected" Type="DateTime" Precision="3" />
+    <Property Name="CurrentStepGroup" Type="Int32" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <Property Name="ReviseAbort" Type="DateTime" Precision="3" />
+    <Property Name="Ver" Type="Int32" />
+    <Property Name="BaseFlowCaseId" Type="Int32" />
+    <Property Name="Canceled" Type="DateTime" Precision="3" />
+    <Property Name="LastApproverViewed" Type="DateTime" Precision="3" />
+    <Property Name="LastChecked" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="RelatedFlowCaseId" Type="Int32" />
+    <NavigationProperty Name="WF_CaseCoverUsers" Relationship="WorkFlowModel.FK_WF_CaseCoverUsers_FlowCases" FromRole="WF_FlowCases" ToRole="WF_CaseCoverUsers" />
+    <NavigationProperty Name="WF_CaseLogs" Relationship="WorkFlowModel.FK_WF_CaseLogs_WF_FlowCases" FromRole="WF_FlowCases" ToRole="WF_CaseLogs" />
+    <NavigationProperty Name="WF_CaseNotificateUsers" Relationship="WorkFlowModel.FK_WF_CaseNotificateUsers_FlowCases" FromRole="WF_FlowCases" ToRole="WF_CaseNotificateUsers" />
+    <NavigationProperty Name="WF_CaseNotifications" Relationship="WorkFlowModel.FK_WF_CaseNotifications_WF_FlowCases" FromRole="WF_FlowCases" ToRole="WF_CaseNotifications" />
+    <NavigationProperty Name="WF_CasePropertyValues" Relationship="WorkFlowModel.FK_PropertyValues_FlowCases" FromRole="WF_FlowCases" ToRole="WF_CasePropertyValues" />
+    <NavigationProperty Name="WF_CaseSteps" Relationship="WorkFlowModel.FK_WF_CaseSteps_WF_FlowCases" FromRole="WF_FlowCases" ToRole="WF_CaseSteps" />
+    <NavigationProperty Name="WF_CaseUserActions" Relationship="WorkFlowModel.FK_FlowCaseUserActions_FlowCases" FromRole="WF_FlowCases" ToRole="WF_CaseUserActions" />
+    <NavigationProperty Name="WF_Flows" Relationship="WorkFlowModel.FK_FlowCases_Flows" FromRole="WF_FlowCases" ToRole="WF_Flows" />
+    <NavigationProperty Name="WF_FlowCases_Attachments" Relationship="WorkFlowModel.FK_WF_FlowCases_Attachments" FromRole="WF_FlowCases" ToRole="WF_FlowCases_Attachments" />
+    <NavigationProperty Name="WF_StepGroups" Relationship="WorkFlowModel.FK_WF_FlowCases_WF_StepGroups" FromRole="WF_FlowCases" ToRole="WF_StepGroups" />
+  </EntityType>
+  <Association Name="FK_WF_CaseCoverUsers_FlowCases">
+    <End Type="WorkFlowModel.WF_FlowCases" Role="WF_FlowCases" Multiplicity="1" />
+    <End Type="WorkFlowModel.WF_CaseCoverUsers" Role="WF_CaseCoverUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_FlowCases">
+        <PropertyRef Name="FlowCaseId" />
+      </Principal>
+      <Dependent Role="WF_CaseCoverUsers">
+        <PropertyRef Name="FlowCaseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WF_CaseLogs_WF_FlowCases">
+    <End Type="WorkFlowModel.WF_FlowCases" Role="WF_FlowCases" Multiplicity="1" />
+    <End Type="WorkFlowModel.WF_CaseLogs" Role="WF_CaseLogs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_FlowCases">
+        <PropertyRef Name="FlowCaseId" />
+      </Principal>
+      <Dependent Role="WF_CaseLogs">
+        <PropertyRef Name="FlowCaseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WF_CaseNotificateUsers_FlowCases">
+    <End Type="WorkFlowModel.WF_FlowCases" Role="WF_FlowCases" Multiplicity="1" />
+    <End Type="WorkFlowModel.WF_CaseNotificateUsers" Role="WF_CaseNotificateUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_FlowCases">
+        <PropertyRef Name="FlowCaseId" />
+      </Principal>
+      <Dependent Role="WF_CaseNotificateUsers">
+        <PropertyRef Name="FlowCaseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WF_CaseNotifications_WF_FlowCases">
+    <End Type="WorkFlowModel.WF_FlowCases" Role="WF_FlowCases" Multiplicity="1" />
+    <End Type="WorkFlowModel.WF_CaseNotifications" Role="WF_CaseNotifications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_FlowCases">
+        <PropertyRef Name="FlowCaseId" />
+      </Principal>
+      <Dependent Role="WF_CaseNotifications">
+        <PropertyRef Name="FlowCaseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PropertyValues_FlowCases">
+    <End Type="WorkFlowModel.WF_FlowCases" Role="WF_FlowCases" Multiplicity="1" />
+    <End Type="WorkFlowModel.WF_CasePropertyValues" Role="WF_CasePropertyValues" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_FlowCases">
+        <PropertyRef Name="FlowCaseId" />
+      </Principal>
+      <Dependent Role="WF_CasePropertyValues">
+        <PropertyRef Name="FlowCaseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WF_CaseSteps_WF_FlowCases">
+    <End Type="WorkFlowModel.WF_FlowCases" Role="WF_FlowCases" Multiplicity="1" />
+    <End Type="WorkFlowModel.WF_CaseSteps" Role="WF_CaseSteps" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_FlowCases">
+        <PropertyRef Name="FlowCaseId" />
+      </Principal>
+      <Dependent Role="WF_CaseSteps">
+        <PropertyRef Name="FlowCaseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FlowCaseUserActions_FlowCases">
+    <End Type="WorkFlowModel.WF_FlowCases" Role="WF_FlowCases" Multiplicity="1" />
+    <End Type="WorkFlowModel.WF_CaseUserActions" Role="WF_CaseUserActions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_FlowCases">
+        <PropertyRef Name="FlowCaseId" />
+      </Principal>
+      <Dependent Role="WF_CaseUserActions">
+        <PropertyRef Name="FlowCaseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FlowCases_Flows">
+    <End Type="WorkFlowModel.WF_Flows" Role="WF_Flows" Multiplicity="1" />
+    <End Type="WorkFlowModel.WF_FlowCases" Role="WF_FlowCases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_Flows">
+        <PropertyRef Name="FlowId" />
+      </Principal>
+      <Dependent Role="WF_FlowCases">
+        <PropertyRef Name="FlowId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WF_FlowCases_Attachments">
+    <End Type="WorkFlowModel.WF_FlowCases" Role="WF_FlowCases" Multiplicity="1" />
+    <End Type="WorkFlowModel.WF_FlowCases_Attachments" Role="WF_FlowCases_Attachments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_FlowCases">
+        <PropertyRef Name="FlowCaseId" />
+      </Principal>
+      <Dependent Role="WF_FlowCases_Attachments">
+        <PropertyRef Name="FlowCaseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WF_FlowCases_WF_StepGroups">
+    <End Type="WorkFlowModel.WF_StepGroups" Role="WF_StepGroups" Multiplicity="0..1" />
+    <End Type="WorkFlowModel.WF_FlowCases" Role="WF_FlowCases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WF_StepGroups">
+        <PropertyRef Name="StepGroupId" />
+      </Principal>
+      <Dependent Role="WF_FlowCases">
+        <PropertyRef Name="CurrentStepGroup" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

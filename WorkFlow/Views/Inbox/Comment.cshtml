@@ -1,0 +1,29 @@
+﻿
+@using WorkFlow.Ext
+<div style="background-color: white;">
+    @using (Ajax.BeginModalForm("ApproveComment", "Inbox", new ModalAjaxOptions()
+    {
+        HttpMethod = "post",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "div_content",
+        Id = "commentForm",
+        LoadingElementId = "div_progress"
+    }))
+    {
+        @Html.Hidden("flowCaseId")
+        <div class="form-group">
+            @Html.TextArea("comments", new { style = "width:570px;max-width:570px;height:150px;max-height:150px;", data_val = "true", data_val_required = "*" })
+        </div>
+        <div class="form-group">
+            <label>
+                @Html.CheckBox("ccToAll", new { style = "width:20px;height:20px;" })
+                Notify applicant & previous approvers
+            </label>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $("#commentForm").addUnobtrusiveValidation();
+            });
+        </script>
+    }
+</div>

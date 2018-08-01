@@ -1,0 +1,24 @@
+﻿@model string
+@using WorkFlow.Ext
+@using Resources
+@{
+    var userName = WebCacheHelper.GetWF_UsernameByNo(Model);
+}
+<div class="notify-user" style="margin-bottom: 4px;">
+    <div style="display: inline-block">
+        @Html.TextBox("NotifyUsersName", userName, new { @class = "form-control input-sm notify-user-name" })
+        @Html.Hidden("NotifyUsers", Model, new { @class = "notify-user-id" })
+    </div>
+    <a href="#" onclick="$(this).closest('.notify-user').remove();">@StringResource.DELETE</a>
+</div>
+
+<script type="text/javascript">
+    $(".notify-user-name").autocomplete({
+        source:'@Url.Action("GetUserByName")',
+        select: function (event, ui) {
+            event.preventDefault();
+            $(event.target).val(ui.item.label);
+            $(event.target).siblings(".notify-user-id").val(ui.item.value);
+        }
+    });
+</script>

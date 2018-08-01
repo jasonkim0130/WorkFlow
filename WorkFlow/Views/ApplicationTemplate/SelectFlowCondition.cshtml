@@ -1,0 +1,33 @@
+﻿
+@using WorkFlow.Ext
+@using Resources
+@using Dreamlab.Core
+@{
+    ViewBag.Title = "Select flow condition type";
+    string relation = ViewBag.Relation as string;
+}
+@using (Ajax.BeginModalForm("ChangeFlowConditionRelation", new ModalAjaxOptions
+{
+    HttpMethod = "post",
+    InsertionMode = InsertionMode.Replace,
+    LoadingElementId = "div_progress",
+    Id = "template_form",
+    UpdateTargetId = "flowtemplate" + ViewBag.FlowId.ToString()
+}))
+{
+    @Html.Hidden("FlowId", ViewBag.FlowId as string)
+    <div class="form-group">
+        <label>Flow condition type</label>
+        @Html.DropDownList("relation", new[] {
+new SelectListItem { Text = "AND", Value = "AND",Selected = relation.EqualsIgnoreCaseAndBlank("and")},
+new SelectListItem { Text = "OR", Value = "OR",Selected = relation.EqualsIgnoreCaseAndBlank("or") } },
+            "--Select--", new { @class = "form-control", data_val = "true", data_val_required = "*" })
+    </div>
+}
+@section buttons{
+    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="$('#div_modal_cont').remove();">@StringResource.CANCEL</button>
+    <button type="submit" class="btn btn-primary">@StringResource.OK</button>
+}
+<script type="text/javascript">
+    $("#template_form").addUnobtrusiveValidation();
+</script>

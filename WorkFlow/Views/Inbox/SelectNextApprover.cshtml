@@ -1,0 +1,26 @@
+﻿
+@using WorkFlowLib.DTO
+@using Resources
+@model List<Employee[]>
+@{
+    ViewBag.Title = "Select next approver";
+}
+@using (Ajax.BeginForm("Approve", "Inbox", new AjaxOptions()
+{
+    HttpMethod = "post",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "div_content",
+    LoadingElementId = "div_progress"
+}, new { id = "selectApproverForm" }))
+{
+    foreach (Employee[] item in Model)
+    {
+        @Html.DropDownList("nextApprover", new SelectList(item, "UserNo", "Name", item.Length == 1 ? item[0].UserNo : null), StringResource.SELECT, new
+        { data_val = "true", data_val_required = "*", @class = "form-control", style = "margin-bottom: 10px;" })
+    }
+    @Html.Hidden("flowCaseId")
+}
+<script type="text/javascript">
+    $("#selectApproverForm").removeData("validator").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse($("#selectApproverForm"));
+</script>

@@ -1,0 +1,16 @@
+﻿@model KeyValuePair<string, string>
+@{
+    var guidIndex = Guid.NewGuid();
+}
+<tr class="country-archivepath" data-code="@Model.Key">
+    <td>
+        @Html.Hidden("CountryArchivePaths.index", guidIndex)
+        @Model.Key
+        @Html.Hidden("CountryArchivePaths[" + guidIndex + "].CountryCode", Model.Key)
+    </td>
+    <td class="archivepath">
+        @Model.Value
+        @Html.Hidden("CountryArchivePaths[" + guidIndex + "].ApprovedArchivePath", Model.Value)
+        <span class="pull-right text-danger glyphicon glyphicon-remove remove-archivepath"></span>
+    </td>
+</tr>

@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Comments for rejection:";
+}
+<div style="background-color: white;">
+    @using (Ajax.BeginForm("Reject", "Inbox", null, new AjaxOptions()
+    {
+        HttpMethod = "post",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "div_content",
+        LoadingElementId = "div_progress"
+    }, new { id = "reject_comments_form" }))
+    {
+        @Html.Hidden("flowCaseId")
+        <div class="form-group">
+            @Html.TextArea("comments", new { style = "width:570px;max-width:570px;height:150px;max-height:150px;", data_val = "true", data_val_required = "*" })
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $("#reject_comments_form").removeData("validator").removeData("unobtrusiveValidation");
+                $.validator.unobtrusive.parse($("#reject_comments_form"));
+            });
+        </script>
+    }
+</div>

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<page
+  xmlns="http://cloudprint.cainiao.com/print"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://cloudprint.cainiao.com/print http://cloudprint-docs-resource.oss-cn-shanghai.aliyuncs.com/lpml_schema.xsd"
+  xmlns:editor="http://cloudprint.cainiao.com/schema/editor"
+  width="100" height="100"  splitable="false">
+  <layout
+    editor:_for_="150760229595326"
+            
+    id="150760229596965" width="30" height="30" left="5" top="15"  style="zIndex:1;">
+    <barcode type="qrcode" ratioMode="keepRatio"  style="opacity:1;"  >{0}</barcode>
+  </layout>
+  <layout
+    editor:_for_="1507602341346738"
+            
+    id="1507602341346510" width="18" height="5" left="5" top="5"  style="zIndex:2;">
+    <text
+      style="fontFamily:SimHei;">
+      {1}
+    </text>
+
+  </layout>
+  <layout
+    editor:_for_="1507602409633195"
+            
+    id="1507602409633638" width="60" height="5" left="20" top="5"  style="zIndex:3;">
+    <text editor:_printName_="orderno"
+          style="fontFamily:SimHei;">
+    {2}
+    </text>
+
+  </layout>
+</page>

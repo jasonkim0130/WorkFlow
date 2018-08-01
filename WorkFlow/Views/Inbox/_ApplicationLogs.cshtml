@@ -1,0 +1,20 @@
+﻿@model int
+@if (ViewBag.DisplayLogs != false)
+{
+    <div id="div_msg_cont"></div>
+    <div class="case-logs" style="z-index: 100;">
+        <span class="h2" id="log_trigger">......</span>
+        <div class="log-content hidden" id="log_content"></div>
+    </div>
+    <script type="text/javascript">
+    $(function () {
+        $('#log_trigger').click(function () {
+            if ($('#log_content table').size() <1) {
+                $('#log_content').load('@Url.Action("GetCaseLogs","Inbox",new { flowcaseid = Model})', null);
+            }
+            $('#log_content').toggleClass('hidden');
+        });
+    });
+    </script>
+
+}

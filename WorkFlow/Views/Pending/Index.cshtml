@@ -1,0 +1,148 @@
+﻿@using Newtonsoft.Json
+@using WorkFlowLib.DTO.Query
+@using WorkFlow.Controllers
+@using WorkFlow.Ext
+@using Dreamlab.Core
+@model IEnumerable<PendingQueryRow>
+@{
+    bool? isDraft = ViewBag.IsDraft as bool?;
+    var BadgeData = isDraft.GetValueOrDefault() ? WorkFlowBadgeData.GetDraftBadgeDat(Model.Count()) : WorkFlowBadgeData.GetPendingBadgeData(Model.Count());
+}
+
+<div style="margin: 10px">
+    <div id="div_attach_cont"></div>
+    <table class="table order-table tablesorter" id="table_pendings">
+        <thead>
+            <tr>
+                <th style="width: 50px"></th>
+                <th data-compare="true" style="text-align: center;">
+                    <span class="orderable-display-value">Flag</span>
+                </th>
+                <th data-compare="true" style="text-align: center;">
+                    <span class="orderable-display-value">Department</span>
+                </th>
+                <th data-compare="true" style="text-align: center;">
+                    <span class="orderable-display-value">Applicant</span>
+                </th>
+                <th data-compare="true" style="text-align: center;">
+                    <span class="orderable-display-value">Type</span>
+                </th>
+                <th data-compare="true" style="text-align: center;">
+                    <span class="orderable-display-value">Subject</span>
+                </th>
+                <th style="text-align: center;">
+                    Version
+                </th>
+                <th data-compare="true" style="text-align: center;">
+                    <span class="orderable-display-value">Status</span>
+                </th>
+                <th data-compare="true" style="text-align: center;">
+                    <span class="orderable-display-value">Submit Date</span>
+                </th>
+                <th data-compare="true" style="text-align: center;">
+                    <span class="orderable-display-value">Last Updated</span>
+                </th>
+                <th style="width: 50px"></th>
+                <th style="width: 50px"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                var isSelf = (ViewBag.currentUser as string).EqualsIgnoreCaseAndBlank(item.Applicant);
+                var applicant = isSelf ? "Myself" : WebCacheHelper.GetWF_UsernameByNo(item.Applicant);
+                <tr class="data-row">
+                    <td style="text-align: left;">
+                        @if (item.HasAttachment)
+                        {
+                            <a data-ajax="true" data-ajax-method="get" data-ajax-mode="replace" data-ajax-update="#div_attach_cont" href="@Url.Action("ViewAttachmentContent", new {flowCaseId = item.FlowCaseId})">
+                                <img src="~/Content/Images/Workflow/Application/paperclip.png" style="width: 22px; height: 22px; margin-left: 10px;" class="view-attach" />
+                            </a>
+                        }
+                    </td>
+                    <td data-compare="@(item.IsFlagged)" class="flag-cell">
+                        @if (item.IsFlagged == 1)
+                        {
+                            <img src="~/Content/Images/Workflow/approval/Pinned Icon.png" data-url="@Url.Action("MarkFlag", "Pending", new {flowCaseId = item.FlowCaseId, flag = 1})" />
+                        }
+                        else
+                        {
+                            <img src="~/Content/Images/Workflow/approval/Unpinned Icon.png" data-url="@Url.Action("MarkFlag", "Pending", new {flowCaseId = item.FlowCaseId, flag = 2})" />
+                        }
+                    </td>
+
+                    <td data-compare="@(item.Department)">@(item.Department)</td>
+                    <td data-compare="@(applicant)">@(applicant)</td>
+                    <td data-compare="@(item.Type)">@(item.Type)</td>
+                    <td data-compare="@(item.Subject)">@(item.Subject)</td>
+                    <td>@(item.Ver ?? 0)</td>
+                    @if (item.IsDraft)
+                    {
+                        <td data-compare-number="0">
+                            <span style="color: crimson">Draft</span>
+                        </td>
+                    }
+                    else if (item.Aborted != null)
+                    {
+                        <td data-compare-number="0">
+                            <span style="color: crimson">Amendment Required</span>
+                        </td>
+                    }
+                    else if (item.Rejected != null)
+                    {
+                        <td data-compare-number="0">
+                            <span style="color: crimson">Rejected</span>
+                        </td>
+                    }
+                    else
+                    {
+                        <td data-compare-number="@(Math.Round((double) item.CompletedGroup/item.TotalGroup, 2))">
+                            @($"{item.CompletedGroup} / {item.TotalGroup}")
+                        </td>
+                    }
+                    <td data-compare-number="@(item.SubmitDate.ToLocalTime().Ticks)">@(item.SubmitDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm"))</td>
+                    <td data-compare-number="@(item.LastApproverViewed?.ToLocalTime().Ticks)">@(item.LastApproverViewed?.ToLocalTime().ToString("yyyy-MM-dd HH:mm"))</td>
+                    <td>
+                        @if (!item.IsDraft)
+                        {
+                            @Ajax.ActionLink("View", "ViewCase", new { id = item.FlowCaseId }, new AjaxOptions
+                            {
+                                HttpMethod = "Get",
+                                InsertionMode = InsertionMode.Replace,
+                                LoadingElementId = "div_progress",
+                                UpdateTargetId = "div_content",
+                                OnFailure = "ajaxError"
+                            })
+                        }
+                    </td>
+                    <td>
+                        @if (isSelf@*&& item.Aborted != null*@)
+{
+@Ajax.ActionLink("Edit", "EditCase", new { id = item.FlowCaseId }, new AjaxOptions
+{
+    HttpMethod = "Get",
+    InsertionMode = InsertionMode.Replace,
+    LoadingElementId = "div_progress",
+    UpdateTargetId = "div_content",
+    OnFailure = "ajaxError"
+})
+}
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#table_pendings').sortCommonTable();
+        $('#table_pendings').on('click', '.flag-cell img', function (e) {
+            e.stopPropagation();
+            $.postProgressData($(this).data('url'), null, function (data) {
+                $('#div_content').html(data);
+            });
+        });
+        $.page.badgeSubject.updatePage(@Html.Raw(JsonConvert.SerializeObject(BadgeData)));
+    });
+</script>

@@ -1,0 +1,146 @@
+﻿@using WorkFlowLib.Data
+@using WorkFlowLib.DTO
+@using WorkFlow.Ext
+@using Resources
+@model FlowInfo[]
+@{
+    WF_FlowPropertys[] props = ViewBag.Properties as WF_FlowPropertys[];
+    WF_FlowTypes flowtype = ViewBag.FlowType as WF_FlowTypes;
+    FlowConditionInfo[] conditionInfos = ViewBag.FlowsConditions as FlowConditionInfo[];
+    WF_FlowGroups flowGroup = ViewBag.FlowGroup as WF_FlowGroups;
+    var contries = (Dictionary<string, string>)ViewBag.CountryArchivePaths;
+}
+<h2 class="text-center"> @(flowtype?.Name.ToLocal())</h2>
+<h4 class="text-center"> @StringResource.Version: @(flowGroup?.Version)</h4>
+<div style="background-color: white; padding: 20px;">
+    <div id="prop_edit"></div>
+    <table class="table table-bordered theader" id="prop_table">
+        <thead>
+            <tr>
+                <th>Field type</th>
+                <th>Name</th>
+                <th>Compulsory</th>
+                <th class="hidden">Code</th>
+                <th>Tab</th>
+                <th>Row</th>
+                <th>Column</th>
+                <th>ViewType</th>
+                <th>Text</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (props != null)
+            {
+                foreach (var prop in props)
+                {
+                    <tr data-idval="@prop.FlowPropertyId">
+                        <td>
+                            @if (prop.StatusId == -1)
+                            {
+                                <span>無法操作</span>
+                            }
+                            else if (prop.PropertyType == 1)
+                            {
+                                <span>列表</span>
+                            }
+                            else if (prop.PropertyType == 2)
+                            {
+                                <span>整数</span>
+                            }
+                            else if (prop.PropertyType == 3)
+                            {
+                                <span>时间</span>
+                            }
+                            else if (prop.PropertyType == 4)
+                            {
+                                <span>小数</span>
+                            }
+                            else if (prop.PropertyType == 5)
+                            {
+                                <span>日期(yyyy-MM-dd)</span>
+                            }
+                            else if (prop.PropertyType == 6)
+                            {
+                                <span>员工编号</span>
+                            }
+                            else if (prop.PropertyType == 7)
+                            {
+                                <span>文本</span>
+                            }
+                            else if (prop.PropertyType == 8)
+                            {
+                                <span>时间（HH:mm）</span>
+                            }
+                            else if (prop.PropertyType == 9)
+                            {
+                                <span>Country</span>
+                            }
+                            else if (prop.PropertyType == 10)
+                            {
+                                <span>Role</span>
+                            }
+                            else if (prop.PropertyType == 11)
+                            {
+                                <span>Department</span>
+                            }
+                            else if (prop.PropertyType == 12)
+                            {
+                                <span>Platfrom/Brand</span>
+                            }
+                        </td>
+                        <td>@prop.PropertyName</td>
+                        <td>@(prop.Compulsory ? StringResource.YES : StringResource.NO)</td>
+                        <td class="hidden">@(prop.WF_TemplatePropCode?.PropCode)</td>
+                        <td>@(prop.Tab)</td>
+                        <td>@(prop.RowIndex)</td>
+                        <td>@(prop.ColumnIndex)</td>
+                        <td>@(prop.ViewType)</td>
+                        <td>@(prop.Text)</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-5">
+            <label>
+                <input type="checkbox" class="form-control" style="width:25px;height:25px;display:inline-block;vertical-align:-8px;" checked="@flowGroup.HasCoverUsers.GetValueOrDefault()" disabled="disabled" /> Show person to cover duties
+            </label>
+        </div>
+        <div class="col-md-7">
+            <table class="table table-bordered" style="width: 100%">
+                <tr>
+                    <td><label>Approved Archive Path</label></td>
+                    <td>@flowGroup.ApprovedArchivePath</td>
+                </tr>
+                @if (contries != null)
+                {
+                    foreach (string key in contries.Keys)
+                    {
+                        <tr>
+                            <td>
+                                @key
+                            </td>
+                            <td>@contries[key]</td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+    </div>
+</div>
+<hr style="border-top-color: lightgray; width: 100%" />
+<div id="div_steps">
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            @Html.Partial("_ViewFlowSteps", item, new ViewDataDictionary() { { "Conditions", conditionInfos?.FirstOrDefault(p => p.FlowId == item.FlowId) } })
+        }
+    }
+</div>
+<div class="text-center">
+    <a data-ajax="true" class="btn btn-default btn-lg" data-ajax-method="get" data-ajax-mode="replace" data-ajax-update="#div_content" data-ajax-loading="#div_progress" href="@Url.Action("Index")" style="margin-bottom: 8px;">
+        Back to list
+    </a>
+</div>

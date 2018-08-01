@@ -1,0 +1,74 @@
+﻿@using WorkFlowLib.DTO
+@using Resources
+@model NoApproverModel
+@functions{
+    public IEnumerable<SelectListItem> GetGradeItems(object selectedValue)
+    {
+        List<SelectListItem> items = new List<SelectListItem>();
+        for (int i = 0; i <= 8; i++)
+        {
+            items.Add(new SelectListItem
+            {
+                Text = (i == 0 ? "s" : i.ToString()),
+                Value = i.ToString(),
+                Selected = i.ToString().Equals(selectedValue?.ToString())
+            });
+        }
+        return items;
+    }
+}
+@{
+    Guid index = Guid.NewGuid();
+    bool? editable = ViewData["Editable"] as bool?;
+    List<SelectListItem> NoApproverDataItems = ViewData["NoApproverDataItems"] as List<SelectListItem>;
+    List<string> Operators = ViewData["Operators"] as List<string>;
+    if (Operators != null && Model != null && Model.NoApproverOperator.Equals("in"))
+    {
+        Operators.Add("in");
+    }
+    var NoApproverGrade = GetGradeItems(ViewData["Value"]);
+    var NoApproverMaxGrade = GetGradeItems(ViewData["MaxValue"]);
+    if (Model != null)
+    {
+        var selectedDataItem = NoApproverDataItems?.FirstOrDefault(p => p.Value.Equals(Model.NoApproverDataKey.ToString()));
+        if (selectedDataItem != null)
+        {
+            selectedDataItem.Selected = true;
+        }
+    }
+}
+
+<tr class="tr_noapprover">
+    <td style="padding-right: 10px; text-align: right">
+        IF
+        @Html.Hidden("NoApproverModel.index", index)
+    </td>
+    <td style="padding-right: 10px;">
+        @(editable == true
+                              ? Html.DropDownList("NoApproverModel[" + index + "].NoApproverDataKey", NoApproverDataItems, StringResource.SELECT, new { @class = "form-control", required = true })
+                              : Html.DropDownList("NoApproverModel[" + index + "].NoApproverDataKey", NoApproverDataItems, StringResource.SELECT, new { @class = "form-control", disabled = "disabled", required = true }))
+    </td>
+    <td style="padding-right: 10px;">
+        @(editable == true
+                                  ? Html.DropDownList("NoApproverModel[" + index + "].NoApproverOperator", new SelectList(Operators, Model?.NoApproverOperator ?? ""), StringResource.SELECT, new { @class = "form-control", required = true })
+                                  : Html.DropDownList("NoApproverModel[" + index + "].NoApproverOperator", new SelectList(Operators, Model?.NoApproverOperator ?? ""), StringResource.SELECT, new { @class = "form-control", disabled = "disabled", required = true }))
+    </td>
+    <td style="padding-right: 10px;">
+        @(editable == true
+                              ? Html.TextBox("NoApproverModel[" + index + "].NoApproverValue", Model?.NoApproverValue, new { @class = "form-control", id = "txtNoApproverValue", required = true })
+                              : Html.TextBox("NoApproverModel[" + index + "].NoApproverValue", Model?.NoApproverValue, new { @class = "form-control", id = "txtNoApproverValue", disabled = "disabled", required = true }))
+        @Html.DropDownList("NoApproverModel[" + index + "].NoApproverValue", NoApproverGrade, StringResource.SELECT, new { @class = "form-control inline", disabled = "disabled", style = "display: none;", id = "ddlNoApproverValue", required = true })
+    </td>
+    <td style="padding-right: 10px;">
+        @Html.DropDownList("NoApproverModel[" + index + "].NoApproverMaxValue", NoApproverMaxGrade, StringResource.SELECT, new { @class = "form-control inline", disabled = "disabled", style = "display: none;", id = "ddlNoApproverMaxValue" })
+        @if (editable == true)
+        {
+            <button class="btn btn-sm btn-danger delete_noapprover">Remove</button>
+        }
+    </td>
+    <td>
+        <span class="field-validation-error" id="spErrorForLevelRangeInNoApprover" style="display: none;">
+            Max grade cannot be less than min grade.
+        </span>
+    </td>
+</tr>

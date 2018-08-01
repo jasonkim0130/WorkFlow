@@ -1,0 +1,864 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D4EF43DF-2A31-49CB-8AC9-4661630CF41A}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WorkFlow</RootNamespace>
+    <AssemblyName>WorkFlow</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net47\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="Dreamlab.Core">
+      <HintPath>..\WorkFlowLib\Libs\Dreamlab.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Dreamlab.Db">
+      <HintPath>..\WorkFlowLib\Libs\Dreamlab.Db.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="jpush, Version=3.2.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\jpush.3.2.7\lib\net45\jpush.dll</HintPath>
+    </Reference>
+    <Reference Include="LinqToExcel, Version=1.11.0.0, Culture=neutral, PublicKeyToken=9c8ea65a58f03f1f, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinqToExcel.1.11.0\lib\LinqToExcel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PlexusIS.Mvc">
+      <HintPath>..\WorkFlowLib\Libs\PlexusIS.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="PushSharp.Amazon, Version=4.0.10.0, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
+      <HintPath>..\packages\PushSharp.4.0.10\lib\net45\PushSharp.Amazon.dll</HintPath>
+    </Reference>
+    <Reference Include="PushSharp.Apple, Version=4.0.10.0, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
+      <HintPath>..\packages\PushSharp.4.0.10\lib\net45\PushSharp.Apple.dll</HintPath>
+    </Reference>
+    <Reference Include="PushSharp.Blackberry, Version=4.0.10.0, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
+      <HintPath>..\packages\PushSharp.4.0.10\lib\net45\PushSharp.Blackberry.dll</HintPath>
+    </Reference>
+    <Reference Include="PushSharp.Core, Version=4.0.10.0, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
+      <HintPath>..\packages\PushSharp.4.0.10\lib\net45\PushSharp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="PushSharp.Firefox, Version=4.0.10.0, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
+      <HintPath>..\packages\PushSharp.4.0.10\lib\net45\PushSharp.Firefox.dll</HintPath>
+    </Reference>
+    <Reference Include="PushSharp.Google, Version=4.0.10.0, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
+      <HintPath>..\packages\PushSharp.4.0.10\lib\net45\PushSharp.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="PushSharp.Windows, Version=4.0.10.0, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
+      <HintPath>..\packages\PushSharp.4.0.10\lib\net45\PushSharp.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion, Version=1.13.52.2, Culture=neutral, PublicKeyToken=0669cf0452175907, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinqToExcel.1.11.0\lib\Remotion.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Data.Linq, Version=1.13.52.2, Culture=neutral, PublicKeyToken=0669cf0452175907, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinqToExcel.1.11.0\lib\Remotion.Data.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Interfaces, Version=1.13.52.2, Culture=neutral, PublicKeyToken=0669cf0452175907, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinqToExcel.1.11.0\lib\Remotion.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.4\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Abstractions, Version=3.3.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Abstractions.3.3.0\lib\net47\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Configuration, Version=5.2.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net47\Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.7.0.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Container.5.7.0\lib\net47\Unity.Container.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Interception, Version=5.5.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net47\Unity.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Interception.Configuration, Version=5.1.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net47\Unity.Interception.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mvc, Version=5.0.13.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Mvc.5.0.13\lib\net47\Unity.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RegistrationByConvention, Version=2.1.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net47\Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ServiceLocation, Version=2.1.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net47\Unity.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Diagnostics.DiagnosticSource">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.0\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.5.1\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.5.1\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.5.1\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.5.1\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.5.1\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.5.1\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_GlobalResources\StringResource.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StringResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\StringResource.en-US.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StringResource.en-US.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\StringResource.ko-KR.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StringResource.ko-KR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\StringResource.zh-CN.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StringResource.zh-CN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\CommandFactory.cs" />
+    <Compile Include="Commands\CommandTask.cs" />
+    <Compile Include="Commands\DbCommand.cs" />
+    <Compile Include="Commands\DbNonQueryCommand.cs" />
+    <Compile Include="Commands\DbQueryCommand.cs" />
+    <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Commands\PagerData.cs" />
+    <Compile Include="Commands\PagerPara.cs" />
+    <Compile Include="Commands\ParalessCommand.cs" />
+    <Compile Include="Commands\UpdateUsernameCmd.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdapterController.cs" />
+    <Compile Include="Controllers\ApplicationController.cs" />
+    <Compile Include="Controllers\ApplicationTemplateController.cs" />
+    <Compile Include="Controllers\ArchiveController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InboxController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
+    <Compile Include="Controllers\PendingController.cs" />
+    <Compile Include="Controllers\WFController.cs" />
+    <Compile Include="Controllers\WorkflowArchiveController.cs" />
+    <Compile Include="Controllers\WorkFlowBadgeData.cs" />
+    <Compile Include="Ext\CheckboxExtensions.cs" />
+    <Compile Include="Ext\FormsAuthenticationHelper.cs" />
+    <Compile Include="Ext\HtmlHelperExtensions.cs" />
+    <Compile Include="Ext\HtmlUIHelper.cs" />
+    <Compile Include="Ext\ModalExt.cs" />
+    <Compile Include="Ext\MultiLangRouteHandler.cs" />
+    <Compile Include="Ext\SiteExtention.cs" />
+    <Compile Include="Ext\WebCacheHelper.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Logic\BrandSettings.cs" />
+    <Compile Include="Logic\LoginManager.cs" />
+    <Compile Include="Logic\LoginProfile.cs" />
+    <Compile Include="Logic\RijndaelHelper.cs" />
+    <Compile Include="Logic\SideMenu.cs" />
+    <Compile Include="Logic\SideMenuInfo.cs" />
+    <Compile Include="Logic\WfBadgeQtyReader.cs" />
+    <Compile Include="Logic\WFUtilities.cs" />
+    <Compile Include="Models\LogOnViewModel.cs" />
+    <Compile Include="Models\MenuViewModel.cs" />
+    <Compile Include="Models\QtySummaryResult.cs" />
+    <Compile Include="Models\SubMenu.cs" />
+    <Compile Include="Models\WarehouseQtyResult.cs" />
+    <Compile Include="Models\WarehousesGroupModel.cs" />
+    <Compile Include="Models\WarningConfig.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\Brands.xml" />
+    <Content Include="App_Data\SideMenuInfo.xml" />
+    <Content Include="App_Data\SpecialWFTemplate.xml" />
+    <Content Include="Content\bootstrap-select.css" />
+    <Content Include="Content\bootstrap-select.min.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\cainiaotemplates\orderqrcode-pack-22221-bag-msg.xml" />
+    <Content Include="Content\cainiaotemplates\orderqrcode-pack-22221-bag.xml" />
+    <Content Include="Content\cainiaotemplates\orderqrcode-pack-22221.xml" />
+    <Content Include="Content\cainiaotemplates\orderqrcode-pack-22224.xml" />
+    <Content Include="Content\cainiaotemplates\orderqrcode-pack-3030new.xml" />
+    <Content Include="Content\cainiaotemplates\orderqrcode-pack-4050new.xml" />
+    <Content Include="Content\cainiaotemplates\orderqrcode-pack-other.xml" />
+    <Content Include="Content\cainiaotemplates\orderqrcode-pack.xml" />
+    <Content Include="Content\cainiaotemplates\orderqrcode.xml" />
+    <Content Include="Content\cainiaotemplates\orderqrcode2.xml" />
+    <Content Include="Content\cainiaotemplates\orderqrcode4090.xml" />
+    <Content Include="Content\cainiaotemplates\twn.orderqrcode-pack-other.xml" />
+    <Content Include="Content\daterangepicker.css" />
+    <Content Include="Content\Images\Application.png" />
+    <Content Include="Content\Images\Archive.png" />
+    <Content Include="Content\Images\archive_vote.png" />
+    <Content Include="Content\Images\arrow_menu_down.png" />
+    <Content Include="Content\Images\arrow_menu_down_blue.png" />
+    <Content Include="Content\Images\arrow_white.png" />
+    <Content Include="Content\Images\barcode.png" />
+    <Content Include="Content\Images\black5.png" />
+    <Content Include="Content\Images\Brands_AP.PNG" />
+    <Content Include="Content\Images\Brands_APM.PNG" />
+    <Content Include="Content\Images\Brands_HCT.PNG" />
+    <Content Include="Content\Images\Brands_HT.PNG" />
+    <Content Include="Content\Images\Brands_LEO.PNG" />
+    <Content Include="Content\Images\Brands_ROS.PNG" />
+    <Content Include="Content\Images\brand_APM.PNG" />
+    <Content Include="Content\Images\brand_hct.png" />
+    <Content Include="Content\Images\brand_htj.png" />
+    <Content Include="Content\Images\brand_htn.png" />
+    <Content Include="Content\Images\brand_leo.png" />
+    <Content Include="Content\Images\brand_ros.png" />
+    <Content Include="Content\Images\cafe.png" />
+    <Content Include="Content\Images\cafe_blue.png" />
+    <Content Include="Content\Images\cafe_white.png" />
+    <Content Include="Content\Images\Campaign.png" />
+    <Content Include="Content\Images\Campaign_blue.png" />
+    <Content Include="Content\Images\Campaign_white.png" />
+    <Content Include="Content\Images\checking_orders.png" />
+    <Content Include="Content\Images\checking_orders_blue.png" />
+    <Content Include="Content\Images\checking_orders_white.png" />
+    <Content Include="Content\Images\cheese_green.png" />
+    <Content Include="Content\Images\cheese_yellow.png" />
+    <Content Include="Content\Images\china.png" />
+    <Content Include="Content\Images\Complete_packing.png" />
+    <Content Include="Content\Images\costomer.jpg" />
+    <Content Include="Content\Images\diagram_switch.jpg" />
+    <Content Include="Content\Images\drag_orders1.png" />
+    <Content Include="Content\Images\drag_orders2.png" />
+    <Content Include="Content\Images\edit_order.png" />
+    <Content Include="Content\Images\edit_vote.png" />
+    <Content Include="Content\Images\events.png" />
+    <Content Include="Content\Images\events_blue.png" />
+    <Content Include="Content\Images\events_white.png" />
+    <Content Include="Content\Images\flag_red.png" />
+    <Content Include="Content\Images\flag_white.png" />
+    <Content Include="Content\Images\flow.png" />
+    <Content Include="Content\Images\frozen.png" />
+    <Content Include="Content\Images\frozen_blue.png" />
+    <Content Include="Content\Images\green3.png" />
+    <Content Include="Content\Images\Group456.png" />
+    <Content Include="Content\Images\Group457.png" />
+    <Content Include="Content\Images\Group458.png" />
+    <Content Include="Content\Images\Group459.png" />
+    <Content Include="Content\Images\Group460.png" />
+    <Content Include="Content\Images\hongkong.png" />
+    <Content Include="Content\Images\Icons\ADD.png" />
+    <Content Include="Content\Images\Icons\ADDRESS_BUTTON.png" />
+    <Content Include="Content\Images\Icons\ADDRESS_BUTTON_SMALL.png" />
+    <Content Include="Content\Images\Icons\Application.png" />
+    <Content Include="Content\Images\Icons\Archive.png" />
+    <Content Include="Content\Images\Icons\BuyingModule.png" />
+    <Content Include="Content\Images\Icons\Cafe.png" />
+    <Content Include="Content\Images\Icons\CALENDAR.png" />
+    <Content Include="Content\Images\Icons\Campaign.png" />
+    <Content Include="Content\Images\Icons\CANCEL.png" />
+    <Content Include="Content\Images\Icons\CANCEL_BUTTON.png" />
+    <Content Include="Content\Images\Icons\checking_orders.png" />
+    <Content Include="Content\Images\Icons\CONFIRM_BUTTON.png" />
+    <Content Include="Content\Images\Icons\CREATE_BY_LOCATION.png" />
+    <Content Include="Content\Images\Icons\CREATE_BY_UPLOAD.png" />
+    <Content Include="Content\Images\Icons\CREATE_BY_UPLOAD_GREY.png" />
+    <Content Include="Content\Images\Icons\CRMPortal.png" />
+    <Content Include="Content\Images\Icons\Documents.png" />
+    <Content Include="Content\Images\Icons\DOWNLOAD_BUTTON.png" />
+    <Content Include="Content\Images\Icons\events.png" />
+    <Content Include="Content\Images\Icons\GROUPING_GREEN.png" />
+    <Content Include="Content\Images\Icons\Inbox.png" />
+    <Content Include="Content\Images\Icons\LANGUAGE_GREEN.png" />
+    <Content Include="Content\Images\Icons\LANGUAGE_ICON.png" />
+    <Content Include="Content\Images\Icons\LicensingBackend.png" />
+    <Content Include="Content\Images\Icons\logistic_config.png" />
+    <Content Include="Content\Images\Icons\MarketingModule.png" />
+    <Content Include="Content\Images\Icons\Notification.png" />
+    <Content Include="Content\Images\Icons\NOTIFICATION_BUTTON.png" />
+    <Content Include="Content\Images\Icons\NOTIFICATION_GREEN.png" />
+    <Content Include="Content\Images\Icons\NOTIFICATION_ICON.png" />
+    <Content Include="Content\Images\Icons\OK_BUTTON.png" />
+    <Content Include="Content\Images\Icons\OrderManagement.png" />
+    <Content Include="Content\Images\Icons\order_list.png" />
+    <Content Include="Content\Images\Icons\order_records.png" />
+    <Content Include="Content\Images\Icons\Pending.png" />
+    <Content Include="Content\Images\Icons\PING_BUTTON.png" />
+    <Content Include="Content\Images\Icons\PlanningModule.png" />
+    <Content Include="Content\Images\Icons\Reporting.png" />
+    <Content Include="Content\Images\Icons\return_goods.png" />
+    <Content Include="Content\Images\Icons\rf.png" />
+    <Content Include="Content\Images\Icons\SAVE_BUTTON.png" />
+    <Content Include="Content\Images\Icons\settings.png" />
+    <Content Include="Content\Images\Icons\SETTINGS_ICON.png" />
+    <Content Include="Content\Images\Icons\SETTING_GREEN.png" />
+    <Content Include="Content\Images\Icons\SiteDevelopment.png" />
+    <Content Include="Content\Images\Icons\SourcingModule.png" />
+    <Content Include="Content\Images\Icons\StaffDataManagement.png" />
+    <Content Include="Content\Images\Icons\STAR_ICON.png" />
+    <Content Include="Content\Images\Icons\STATISTICS_GREEN.png" />
+    <Content Include="Content\Images\Icons\STATISTICS_ICON.png" />
+    <Content Include="Content\Images\Icons\storeins.png" />
+    <Content Include="Content\Images\Icons\tmall.png" />
+    <Content Include="Content\Images\Icons\UPDATE_BUTTON.png" />
+    <Content Include="Content\Images\Icons\UPDATE_ICON.png" />
+    <Content Include="Content\Images\Icons\UserManagement.png" />
+    <Content Include="Content\Images\Icons\VERSION_GREEN.png" />
+    <Content Include="Content\Images\Icons\warehouse_mg.png" />
+    <Content Include="Content\Images\Icons\Workflow.png" />
+    <Content Include="Content\Images\item.png" />
+    <Content Include="Content\Images\jdlogo.png" />
+    <Content Include="Content\Images\korea.png" />
+    <Content Include="Content\Images\likes.png" />
+    <Content Include="Content\Images\loading.gif" />
+    <Content Include="Content\Images\loading2.gif" />
+    <Content Include="Content\Images\logistic_config.png" />
+    <Content Include="Content\Images\logistic_config_blue.png" />
+    <Content Include="Content\Images\logistic_config_white.png" />
+    <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\LOWER_LEFT.png" />
+    <Content Include="Content\Images\LOWER_RIGHT.png" />
+    <Content Include="Content\Images\malaysia.png" />
+    <Content Include="Content\Images\next.png" />
+    <Content Include="Content\Images\nfc.jpg" />
+    <Content Include="Content\Images\Notification.png" />
+    <Content Include="Content\Images\ok.png" />
+    <Content Include="Content\Images\omni backed.png" />
+    <Content Include="Content\Images\order_list.png" />
+    <Content Include="Content\Images\order_list_blue.png" />
+    <Content Include="Content\Images\order_list_white.png" />
+    <Content Include="Content\Images\order_records.png" />
+    <Content Include="Content\Images\order_records_blue.png" />
+    <Content Include="Content\Images\order_records_white.png" />
+    <Content Include="Content\Images\out_of_stock.jpg" />
+    <Content Include="Content\Images\overdueicon.png" />
+    <Content Include="Content\Images\package.png" />
+    <Content Include="Content\Images\Pending.png" />
+    <Content Include="Content\Images\photo404.png" />
+    <Content Include="Content\Images\printing.png" />
+    <Content Include="Content\Images\QRCODE.png" />
+    <Content Include="Content\Images\QRcodeStick_to_the_package.png" />
+    <Content Include="Content\Images\refresh.png" />
+    <Content Include="Content\Images\return_goods.png" />
+    <Content Include="Content\Images\return_goods_blue.png" />
+    <Content Include="Content\Images\return_goods_white.png" />
+    <Content Include="Content\Images\rf.png" />
+    <Content Include="Content\Images\rf_blue.png" />
+    <Content Include="Content\Images\rf_white.png" />
+    <Content Include="Content\Images\scan_qrcode.png" />
+    <Content Include="Content\Images\selected_menu_bg.jpg" />
+    <Content Include="Content\Images\settings.png" />
+    <Content Include="Content\Images\settings_blue.png" />
+    <Content Include="Content\Images\settings_white.png" />
+    <Content Include="Content\Images\shipping.png" />
+    <Content Include="Content\Images\singapore.png" />
+    <Content Include="Content\Images\split_order.png" />
+    <Content Include="Content\Images\storeins.png" />
+    <Content Include="Content\Images\storeins_blue.png" />
+    <Content Include="Content\Images\storeins_white.png" />
+    <Content Include="Content\Images\taiwan.png" />
+    <Content Include="Content\Images\tmall.png" />
+    <Content Include="Content\Images\tmall_blue.png" />
+    <Content Include="Content\Images\top_bar_bg.jpg" />
+    <Content Include="Content\Images\trash_vote.png" />
+    <Content Include="Content\Images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\Images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\Images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\Images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\Images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\Images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\Images\UPPER_LEFT.png" />
+    <Content Include="Content\Images\UPPER_RIGHT.png" />
+    <Content Include="Content\Images\user.gif" />
+    <Content Include="Content\Images\user.png" />
+    <Content Include="Content\Images\user_blue.png" />
+    <Content Include="Content\Images\user_white.png" />
+    <Content Include="Content\Images\voting_box.jpg" />
+    <Content Include="Content\Images\voting_delete.jpg" />
+    <Content Include="Content\Images\voting_edit.jpg" />
+    <Content Include="Content\Images\warehouse_dark_grey.png" />
+    <Content Include="Content\Images\warehouse_green.png" />
+    <Content Include="Content\Images\warehouse_grey.png" />
+    <Content Include="Content\Images\warehouse_mg.png" />
+    <Content Include="Content\Images\warehouse_mg_blue.png" />
+    <Content Include="Content\Images\warehouse_mg_white.png" />
+    <Content Include="Content\Images\warehouse_orange.png" />
+    <Content Include="Content\Images\warehouse_red.png" />
+    <Content Include="Content\Images\warning.png" />
+    <Content Include="Content\Images\weight.png" />
+    <Content Include="Content\Images\wf.png" />
+    <Content Include="Content\Images\wf_blue.png" />
+    <Content Include="Content\Images\wf_white.png" />
+    <Content Include="Content\Images\Workflow\Application\Application.png" />
+    <Content Include="Content\Images\Workflow\Application\Application_white.png" />
+    <Content Include="Content\Images\Workflow\Application\Archive.png" />
+    <Content Include="Content\Images\Workflow\Application\Archive_white.png" />
+    <Content Include="Content\Images\Workflow\Application\BtnUploadFile.PNG" />
+    <Content Include="Content\Images\Workflow\Application\Cancel Button.png" />
+    <Content Include="Content\Images\Workflow\Application\EmployeeLocationExpenseClaim.png" />
+    <Content Include="Content\Images\Workflow\Application\Globalhotel.png" />
+    <Content Include="Content\Images\Workflow\Application\icon_calendar.png" />
+    <Content Include="Content\Images\Workflow\Application\Inbox.png" />
+    <Content Include="Content\Images\Workflow\Application\Inbox_white.png" />
+    <Content Include="Content\Images\Workflow\Application\Interview.png" />
+    <Content Include="Content\Images\Workflow\Application\LeaveApp.png" />
+    <Content Include="Content\Images\Workflow\Application\Message.png" />
+    <Content Include="Content\Images\Workflow\Application\Notification.png" />
+    <Content Include="Content\Images\Workflow\Application\Notification_white.png" />
+    <Content Include="Content\Images\Workflow\Application\OverseasBusinessTripApp.png" />
+    <Content Include="Content\Images\Workflow\Application\OverseasBusinessTripClaim.png" />
+    <Content Include="Content\Images\Workflow\Application\paperclip.png" />
+    <Content Include="Content\Images\Workflow\Application\Pending.png" />
+    <Content Include="Content\Images\Workflow\Application\Pending_white.png" />
+    <Content Include="Content\Images\Workflow\Application\PersonalDataChangeApp.png" />
+    <Content Include="Content\Images\Workflow\Application\SpecialStore.png" />
+    <Content Include="Content\Images\Workflow\Application\StaffRequisitionApp.png" />
+    <Content Include="Content\Images\Workflow\Application\Stationery.png" />
+    <Content Include="Content\Images\Workflow\Application\StoreApproval.png" />
+    <Content Include="Content\Images\Workflow\Application\StoreClosure.png" />
+    <Content Include="Content\Images\Workflow\Application\StoreDesign.png" />
+    <Content Include="Content\Images\Workflow\Application\Submitted Button.png" />
+    <Content Include="Content\Images\Workflow\Application\Submitted.png" />
+    <Content Include="Content\Images\Workflow\Application\Test.png" />
+    <Content Include="Content\Images\Workflow\Application\TestAll.png" />
+    <Content Include="Content\Images\Workflow\Application\TestAny.png" />
+    <Content Include="Content\Images\Workflow\Application\TravelAbroad.png" />
+    <Content Include="Content\Images\Workflow\Application\WorkFlow.png" />
+    <Content Include="Content\Images\Workflow\Application\WorkFlow_blue.png" />
+    <Content Include="Content\Images\Workflow\Application\WorkFlow_white.png" />
+    <Content Include="Content\Images\Workflow\Approval Bar\Amendment Approval Square.png" />
+    <Content Include="Content\Images\Workflow\Approval Bar\AmendmentAbort.png" />
+    <Content Include="Content\Images\Workflow\Approval Bar\Approved Green Arrow.png" />
+    <Content Include="Content\Images\Workflow\Approval Bar\Approved Green Square.png" />
+    <Content Include="Content\Images\Workflow\Approval Bar\Notified Arrow.png" />
+    <Content Include="Content\Images\Workflow\Approval Bar\Notified Bar.png" />
+    <Content Include="Content\Images\Workflow\Approval Bar\Pending Approval Arrow.png" />
+    <Content Include="Content\Images\Workflow\Approval Bar\Unapproved Grey Arrow.png" />
+    <Content Include="Content\Images\Workflow\Approval Bar\Unapproved Grey Square.png" />
+    <Content Include="Content\Images\Workflow\Approval Bar\Unnotified Arrow.png" />
+    <Content Include="Content\Images\Workflow\approval\Abort.png" />
+    <Content Include="Content\Images\Workflow\approval\Approve Button.png" />
+    <Content Include="Content\Images\Workflow\approval\Approved.png" />
+    <Content Include="Content\Images\Workflow\approval\Comment Button.png" />
+    <Content Include="Content\Images\Workflow\approval\Expired Cheese Icon.png" />
+    <Content Include="Content\Images\Workflow\approval\Fresh Cheese.png" />
+    <Content Include="Content\Images\Workflow\approval\Molded Cheese.png" />
+    <Content Include="Content\Images\Workflow\approval\Pinned Icon.png" />
+    <Content Include="Content\Images\Workflow\approval\Reject Button.png" />
+    <Content Include="Content\Images\Workflow\approval\Rejected.png" />
+    <Content Include="Content\Images\Workflow\approval\Slected Inbox Icon.png" />
+    <Content Include="Content\Images\Workflow\approval\Unpinned Icon.png" />
+    <Content Include="Content\Images\Workflow\approval\Unselected Application Icon.png" />
+    <Content Include="Content\Images\Workflow\approval\Unselected Archive Icon.png" />
+    <Content Include="Content\Images\Workflow\approval\Unselected Notification Icon.png" />
+    <Content Include="Content\Images\Workflow\approval\Unselected Pending Icon.png" />
+    <Content Include="Content\Images\Workflow\approval\WorkFlow Icon.png" />
+    <Content Include="Content\Images\Workflow\Archive\Selected Archive Icon.png" />
+    <Content Include="Content\Images\Workflow\Archive\Unselected Application Icon.png" />
+    <Content Include="Content\Images\Workflow\Archive\Unselected Inbox Icon.png" />
+    <Content Include="Content\Images\Workflow\Archive\Unselected Notification Icon.png" />
+    <Content Include="Content\Images\Workflow\Archive\Unselected Pending Icon.png" />
+    <Content Include="Content\Images\Workflow\Archive\WorkFlow Icon.png" />
+    <Content Include="Content\Images\Workflow\Notification\AllApprovalsObtained.png" />
+    <Content Include="Content\Images\Workflow\Notification\Dismiss Button.png" />
+    <Content Include="Content\Images\Workflow\Notification\Selected Notification Icon.png" />
+    <Content Include="Content\Images\Workflow\Notification\Unselected Application Icon.png" />
+    <Content Include="Content\Images\Workflow\Notification\Unselected Archive Icon.png" />
+    <Content Include="Content\Images\Workflow\Notification\Unselected Inbox Icon.png" />
+    <Content Include="Content\Images\Workflow\Notification\Unselected Pending Icon.png" />
+    <Content Include="Content\Images\Workflow\Notification\WorkFlow Icon.png" />
+    <Content Include="Content\Images\Workflow\Pending\Resubmitted.png" />
+    <Content Include="Content\Images\yellow4.png" />
+    <Content Include="Content\jquery-ui-drag-auto-date.css" />
+    <Content Include="Content\jquery-ui-drag-date.css" />
+    <Content Include="Content\jquery-ui-timepicker-addon.css" />
+    <Content Include="Content\Mobile-Site-1.28.css" />
+    <Content Include="Content\print-0.2.css" />
+    <Content Include="Content\print-0.3.css" />
+    <Content Include="Content\print-pick-list.css" />
+    <Content Include="Content\Site-1.55.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\bootstrap-select.js" />
+    <Content Include="Scripts\bootstrap-select.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\bootstrap-select.js.map" />
+    <Content Include="Scripts\jquery-1.12.3.min.map" />
+    <Content Include="Scripts\jquery-1.12.4.min.map" />
+    <Content Include="Content\bootstrap-select.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Scripts\cainiaoprint-1.6.js" />
+    <Content Include="Scripts\daterangepicker.js" />
+    <None Include="Scripts\jquery-1.12.3.intellisense.js" />
+    <Content Include="Scripts\jquery-1.12.3.js" />
+    <Content Include="Scripts\jquery-1.12.3.min.js" />
+    <None Include="Scripts\jquery-1.12.4.intellisense.js" />
+    <Content Include="Scripts\jquery-1.12.4.js" />
+    <Content Include="Scripts\jquery-1.12.4.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-timepicker-addon.js" />
+    <Content Include="Scripts\jquery-ui.drag.date.auto.min.js" />
+    <Content Include="Scripts\jquery-ui.drag.datepicker.min.js" />
+    <Content Include="Scripts\jquery.jqprint-0.3.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.3.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.3.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\mobile-site-1.27.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\qrcode\basic.html" />
+    <Content Include="Scripts\qrcode\jquery.qrcode.js" />
+    <Content Include="Scripts\qrcode\qrcode.js" />
+    <Content Include="Scripts\site-1.72.js" />
+    <Content Include="Scripts\upload\jquery.fileupload-process.js" />
+    <Content Include="Scripts\upload\jquery.fileupload.js" />
+    <Content Include="Scripts\upload\jquery.iframe-transport.js" />
+    <Content Include="Scripts\upload\jquery.ui.widget.js" />
+    <None Include="Scripts\_references.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\ConfirmChangePassword.cshtml" />
+    <Content Include="Views\Account\LogOn.cshtml" />
+    <Content Include="Views\Account\SelectCountry.cshtml" />
+    <Content Include="Views\Account\SwitchSite.cshtml" />
+    <Content Include="Views\Account\_SelectOtherUser.cshtml" />
+    <Content Include="Views\Shared\_LargeModalLayout.cshtml" />
+    <Content Include="Views\Shared\_Layout2.cshtml" />
+    <Content Include="Views\Shared\_LoginInfo.cshtml" />
+    <Content Include="Views\Shared\_ModalLayout.cshtml" />
+    <Content Include="Views\Shared\_PartialError.cshtml" />
+    <Content Include="Views\Shared\_PartialSuccess.cshtml" />
+    <Content Include="Views\Shared\_ReadonlyModalLayout.cshtml" />
+    <Content Include="Views\Shared\_SideMenu.cshtml" />
+    <Content Include="Views\Shared\_SubLayout.cshtml" />
+    <Content Include="Views\Shared\_Upload.cshtml" />
+    <Content Include="Views\Home\ChangePassword.cshtml" />
+    <Content Include="Views\Home\Frame.cshtml" />
+    <Content Include="Views\ApplicationTemplate\AddNewProperty.cshtml" />
+    <Content Include="Views\ApplicationTemplate\AddNewTemplate.cshtml" />
+    <Content Include="Views\ApplicationTemplate\AddNotifyUser.cshtml" />
+    <Content Include="Views\ApplicationTemplate\Edit.cshtml" />
+    <Content Include="Views\ApplicationTemplate\EditProperty.cshtml" />
+    <Content Include="Views\ApplicationTemplate\EditTemplate.cshtml" />
+    <Content Include="Views\ApplicationTemplate\FindUser.cshtml" />
+    <Content Include="Views\ApplicationTemplate\History.cshtml" />
+    <Content Include="Views\ApplicationTemplate\Index.cshtml" />
+    <Content Include="Views\ApplicationTemplate\SelectFlowCondition.cshtml" />
+    <Content Include="Views\ApplicationTemplate\SelectGroupCondition.cshtml" />
+    <Content Include="Views\ApplicationTemplate\ViewDetails.cshtml" />
+    <Content Include="Views\ApplicationTemplate\_Condition.cshtml" />
+    <Content Include="Views\ApplicationTemplate\_CountryArchivePathRow.cshtml" />
+    <Content Include="Views\ApplicationTemplate\_EditAlert.cshtml" />
+    <Content Include="Views\ApplicationTemplate\_FlowSteps.cshtml" />
+    <Content Include="Views\ApplicationTemplate\_NewStepCondition.cshtml" />
+    <Content Include="Views\ApplicationTemplate\_NoApproverCondition.cshtml" />
+    <Content Include="Views\ApplicationTemplate\_Property.cshtml" />
+    <Content Include="Views\ApplicationTemplate\_ProperyTable.cshtml" />
+    <Content Include="Views\ApplicationTemplate\_secretaryRule.cshtml" />
+    <Content Include="Views\ApplicationTemplate\_SpecialProperty.cshtml" />
+    <Content Include="Views\ApplicationTemplate\_StepCondition.cshtml" />
+    <Content Include="Views\ApplicationTemplate\_ViewApprover.cshtml" />
+    <Content Include="Views\ApplicationTemplate\_ViewFlowSteps.cshtml" />
+    <Content Include="Views\Application\CreateFlowCase.cshtml" />
+    <Content Include="Views\Application\FillDynamicFormValue.cshtml" />
+    <Content Include="Views\Application\FillFormValue.cshtml" />
+    <Content Include="Views\Application\Index.cshtml" />
+    <Content Include="Views\Application\SelectNextApprover.cshtml" />
+    <Content Include="Views\Application\StoreApprovalForm.cshtml" />
+    <Content Include="Views\Application\_CoverDuties.cshtml" />
+    <Content Include="Views\Application\_CreateResult.cshtml" />
+    <Content Include="Views\Application\_EditProperties.cshtml" />
+    <Content Include="Views\Application\_LeaveApplication.cshtml" />
+    <Content Include="Views\Application\_NotifyUser.cshtml" />
+    <Content Include="Views\Application\_SaveDraftResult.cshtml" />
+    <Content Include="Views\Application\_StoreClosureForm.cshtml" />
+    <Content Include="Views\Application\_Upload.cshtml" />
+    <Content Include="Views\Application\_UploadedFile.cshtml" />
+    <Content Include="Views\Application\_UploadPLExcel.cshtml" />
+    <Content Include="Views\Archive\Index.cshtml" />
+    <Content Include="Views\Inbox\Comment.cshtml" />
+    <Content Include="Views\Inbox\CommentContent.cshtml" />
+    <Content Include="Views\Inbox\Index.cshtml" />
+    <Content Include="Views\Inbox\Result.cshtml" />
+    <Content Include="Views\Inbox\SelectNextApprover.cshtml" />
+    <Content Include="Views\Inbox\UsersComment.cshtml" />
+    <Content Include="Views\Inbox\ViewCase.cshtml" />
+    <Content Include="Views\Inbox\ViewComment.cshtml" />
+    <Content Include="Views\Inbox\ViewHistoryCasess.cshtml" />
+    <Content Include="Views\Inbox\ViewSimpleCase.cshtml" />
+    <Content Include="Views\Inbox\_ApplicationLogs.cshtml" />
+    <Content Include="Views\Inbox\_FlowLogs.cshtml" />
+    <Content Include="Views\Inbox\_FlowSteps.cshtml" />
+    <Content Include="Views\Inbox\_RejectMessageModal.cshtml" />
+    <Content Include="Views\Inbox\_SendBackMessageModal.cshtml" />
+    <Content Include="Views\Inbox\_ViewLeaveApplication.cshtml" />
+    <Content Include="Views\Inbox\_ViewProperties.cshtml" />
+    <Content Include="Views\Inbox\_ViewStoreApprovalForm.cshtml" />
+    <Content Include="Views\Inbox\_ViewStoreClosureForm.cshtml" />
+    <Content Include="Views\Notification\Index.cshtml" />
+    <Content Include="Views\Notification\SelectNextApprover.cshtml" />
+    <Content Include="Views\Notification\ViewNotification.cshtml" />
+    <Content Include="Views\Notification\_CreateResult.cshtml" />
+    <Content Include="Views\Pending\EditCase.cshtml" />
+    <Content Include="Views\Pending\EditStoreApprovalForm.cshtml" />
+    <Content Include="Views\Pending\FillFormValue.cshtml" />
+    <Content Include="Views\Pending\Index.cshtml" />
+    <Content Include="Views\Pending\ViewCase.cshtml" />
+    <Content Include="Views\Pending\ViewReadOnlyCase.cshtml" />
+    <Content Include="Views\Pending\ViewStoreApprovalForm.cshtml" />
+    <Content Include="Views\Pending\_CancelResult.cshtml" />
+    <Content Include="Views\Pending\_CreateResult.cshtml" />
+    <Content Include="Views\Pending\_EditLeaveApplication.cshtml" />
+    <Content Include="Views\Pending\_EditProperties.cshtml" />
+    <Content Include="Views\Pending\_EditStoreClosureForm.cshtml" />
+    <Content Include="Views\Pending\_ViewLeaveApplication.cshtml" />
+    <Content Include="Views\Pending\_ViewProperties.cshtml" />
+    <Content Include="Views\Pending\_ViewStoreClosureForm.cshtml" />
+    <Content Include="Views\WorkflowArchive\Index.cshtml" />
+    <Content Include="Views\WorkflowArchive\ListApplication.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Commands\Paramter\" />
+    <Folder Include="Commands\Result\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\StringResource.en-US.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>StringResource.en-US.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\StringResource.ko-KR.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>StringResource.ko-KR.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\StringResource.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>StringResource.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\StringResource.zh-CN.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>StringResource.zh-CN.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WorkFlowLib\WorkFlow.Lib.csproj">
+      <Project>{dd7cf1a6-ef18-488b-b06c-5f95d3adcbf1}</Project>
+      <Name>WorkFlow.Lib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>55384</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:55384/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

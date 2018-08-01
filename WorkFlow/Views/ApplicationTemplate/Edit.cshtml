@@ -1,0 +1,157 @@
+﻿@using WorkFlowLib.Data
+@using WorkFlowLib.DTO
+@using WorkFlow.Ext
+@model FlowInfo[]
+@{
+    WF_FlowTypes flowtype = ViewBag.FlowType as WF_FlowTypes;
+    FlowConditionInfo[] conditionInfos = ViewBag.FlowsConditions as FlowConditionInfo[];
+    WF_FlowGroups flowGroup = ViewBag.FlowGroup as WF_FlowGroups;
+    var countries = (string[])ViewBag.Countries;
+    var countryArchivePaths = (Dictionary<string, string>)ViewBag.CountryArchivePaths;
+}
+<h2 class="text-center"> @(flowtype?.Name.ToLocal())</h2>
+<h4 class="text-center"> Version: @(flowGroup?.Version)</h4>
+<div style="background-color: white; margin: 20px;">
+    <div id="prop_edit"></div>
+    <div id="prop_table_cont">
+        @Html.Partial("_ProperyTable")
+    </div>
+</div>
+<div class="form-inline" style="background-color: white; margin: 20px;">
+    @using (Html.BeginForm("UpdateConfiguration", "ApplicationTemplate", FormMethod.Post, new { id = "frmConfiguration", style = "padding: 8px;" }))
+    {
+        @Html.Hidden("FlowGroupId", flowGroup.FlowGroupId)
+        <div class="row">
+            <div class="col-md-5">
+                <label>
+                    @Html.CheckBox("HasCoverUsers", flowGroup.HasCoverUsers.GetValueOrDefault(), new { @class = "form-control", style = "width:25px;height:25px;display:inline-block;vertical-align:-8px;" })
+                    Show person to cover duties
+                </label>
+            </div>
+            <div class="col-md-7">
+                <table class="table table-bordered" style="width: 100%" id="tableArchivePath">
+                    <tr>
+                        <td><label>Approved Archive Path</label></td>
+                        <td>@Html.TextBox("ApprovedArchivePath", flowGroup.ApprovedArchivePath, new { @class = "form-control" })</td>
+                    </tr>
+                    @foreach (var c in countryArchivePaths)
+                    {
+                        @Html.Partial("_CountryArchivePathRow", c)
+                    }
+                </table>
+                <div class="form-group" style="margin-bottom:8px;">
+                    <div class="input-group">
+                        @Html.DropDownList("drlCountryArchive", countries.Select(p => new SelectListItem { Text = p, Value = p }), new { @class = "form-control", style = "width:200px;" })
+                        @Html.TextBox("txtApprovedArchivePath", "", new { @class = "form-control", style = "width: 180px;" })
+                        <span class="input-group-btn">
+                            <input type="button" id="btnAddArchivePath" class="btn btn-primary" value="Add" style="border-radius:0px;">
+                        </span>
+                    </div>
+                    <span id="archivepath-warning" class="text-danger" style="display:none;">Please input ArchivePath!</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5"></div>
+            <div class="col-md-7">
+                <button id="btnUpdateArchivePath" type="button" class="btn btn-primary">Update</button>
+            </div>
+        </div>
+    }
+</div>
+<hr style="border-top-color: lightgray; width: 100%" />
+<div id="div_steps">
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            @Html.Partial("_FlowSteps", item, new ViewDataDictionary() { { "Conditions", conditionInfos?.FirstOrDefault(p => p.FlowId == item.FlowId) } })
+        }
+    }
+</div>
+<div class="text-center">
+    @Ajax.ActionLink("Add", "AddFlow", new { flowGroupId = flowGroup.FlowGroupId }, new AjaxOptions
+    {
+        HttpMethod = "post",
+        InsertionMode = InsertionMode.InsertAfter,
+        LoadingElementId = "div_progress",
+        UpdateTargetId = "div_steps"
+    }, new { @class = "btn btn-success btn-lg", style = "margin-bottom: 8px;" })
+    <a data-ajax="true" class="btn btn-primary btn-lg" data-ajax-method="get" data-ajax-mode="replace" data-ajax-update="#div_content" data-ajax-loading="#div_progress" href="@Url.Action("Save", new {flowGroupId = flowGroup.FlowGroupId})" style="margin-bottom: 8px;">
+        Publish
+    </a>
+    <a data-ajax="true" class="btn btn-default btn-lg" data-ajax-method="get" data-ajax-mode="replace" data-ajax-update="#div_content" data-ajax-loading="#div_progress" href="@Url.Action("Index")" style="margin-bottom: 8px;">
+        Back to list
+    </a>
+</div>
+
+<script>
+    function removeFlowSucc(data) {
+        if (data.success) {
+            $('#flowtemplate' + data.flowId).remove();
+        }
+    }
+
+    $("#btnAddArchivePath").on("click", function () {
+        var code = $('#drlCountryArchive').val(),
+            archivePath = $.trim($('#txtApprovedArchivePath').val()),
+            table = $('table#tableArchivePath tbody'),
+            tableCountry = $('table#tableArchivePath tbody tr.country-archivepath'),
+            row = $('table#tableArchivePath tbody tr.country-archivepath[data-code="' + code + '"]'), cell;
+        if (!archivePath) {
+            $('#archivepath-warning').show();
+            $('#txtApprovedArchivePath').focus();
+            return;
+        }
+
+        if (row.length > 0) {
+            cell = row.find('td.archivepath');
+            var input = cell.find('input');
+            cell.html('');
+            input.val(archivePath);
+            cell.append(input);
+            cell.append(archivePath);
+            cell.append('<span class="pull-right text-danger glyphicon glyphicon-remove remove-archivepath"></span>');
+        } else {
+            $.ajax({
+                url: "@Url.Action("CountryArchivePathRow")",
+                type: "POST",
+                data: { countryCode: code, path: archivePath},
+                success: function (html) {
+                    table.append(html);
+                }
+            });
+        }
+
+        $('#txtApprovedArchivePath').val('');
+        $("#drlCountryArchive").prop("selectedIndex", 0);
+    });
+
+    $(document).on("click", ".remove-archivepath", function (e) {
+        $(this).closest('tr').remove();
+    });
+
+    $("#txtApprovedArchivePath").on("keyup", function () {
+        if (!!$(this).val())
+            $('#archivepath-warning').hide();
+    });
+
+    $("#btnUpdateArchivePath").on("click", function () {
+        var form = $(this).closest("form");
+        $('#div_progress').show();
+        $.ajax({
+            url: form.attr("action"),
+            type: "POST",
+            data: form.serialize(),
+            success: function (html) {
+                alert("Update Successful!");
+            },
+            error: function () {
+                alert("Update failed!");
+            },
+            complete: function () {
+                $('#div_progress').hide();
+            }
+        });
+    });
+</script>

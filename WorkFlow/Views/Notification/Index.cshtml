@@ -1,0 +1,96 @@
+﻿@using Newtonsoft.Json
+@using WorkFlowLib.DTO.Query
+@using WorkFlowLib
+@using WorkFlow.Controllers
+@using WorkFlow.Ext
+@using Dreamlab.Core
+@model IEnumerable<NotificationQueryRow>
+<div style="margin: 10px">
+    <div id="div_attach_cont"></div>
+    <table class="table order-table tablesorter" id="table_notifications">
+        <thead>
+            <tr>
+                <th style="width: 50px"></th>
+                <th data-compare="true" style="text-align: center;">
+                    <span class="orderable-display-value">Department</span>
+                </th>
+                <th data-compare="true" style="text-align: center;">
+                    <span class="orderable-display-value">Applicant</span>
+                </th>
+                <th data-compare="true" style="text-align: center;">
+                    <span class="orderable-display-value">Type</span>
+                </th>
+                <th data-compare="true" style="text-align: center;">
+                    <span class="orderable-display-value">Subject</span>
+                </th>
+                <th data-compare="true" style="text-align: center;">
+                    <span class="orderable-display-value">Status</span>
+                </th>
+                <th data-compare="true" style="text-align: center;">
+                    <span class="orderable-display-value">Date / Time</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderBy(p => p.IsRead).ThenByDescending(p => p.Created))
+            {
+                var isSelf = (ViewBag.currentUser as string).EqualsIgnoreCaseAndBlank(item.Applicant);
+                <tr class="data-row notification-row@(item.IsRead == 1 ? " row-read" : string.Empty)" data-url="@Url.Action("ViewItem", "Notification", new {flowcaseid = item.FlowCaseId, caseNotificationReceiverId = item.CaseNotificationReceiverId})">
+                    <td style="text-align: left;">
+                        @if (item.HasAttachment)
+                        {
+                            <a data-ajax="true" data-ajax-method="get" data-ajax-mode="replace" data-ajax-update="#div_attach_cont" href="@Url.Action("ViewAttachmentContent", new {flowCaseId = item.FlowCaseId})">
+                                <img src="~/Content/Images/Workflow/Application/paperclip.png" style="width: 22px; height: 22px; margin-left: 10px;" class="view-attach" />
+                            </a>
+                        }
+                    </td>
+                    <td>@item.Department</td>
+                    <td>@(isSelf ? "Myself" : WebCacheHelper.GetWF_UsernameByNo(item.Applicant))</td>
+                    <td>@item.Type</td>
+                    <td>@item.Subject</td>
+                    <td>
+                        @{
+                            switch (item.NotificationType)
+                            {
+                                case (int)NotificationTypes.AppFinishedApproved:
+                                case (int)NotificationTypes.ApproveApp:
+                                    <text>APPROVED</text>
+                                    break;
+                                case (int)NotificationTypes.AppFinishedRejected:
+                                case (int)NotificationTypes.RejectApp:
+                                    <text>REJECTED</text>
+                                    break;
+                                case (int)NotificationTypes.AppFinishedAbort:
+                                    <text>REVISED</text>
+                                    break;
+                                case (int)NotificationTypes.Comments:
+                                    <text>COMMENTS</text>
+                                    break;
+                                default:
+                                    <text>ALERT</text>
+                                    break;
+                            }
+                        }
+                    </td>
+
+                    <td data-compare-number="@item.Created.ToLocalTime().Ticks">@item.Created.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#table_notifications').on('click', '.data-row', function (e) {
+            if ($(e.target).is('img')) {
+                return;
+            }
+            $.postProgressData($(this).data('url'), {}, function (data) {
+                $('#div_content').html(data);
+            });
+        });
+        $('#table_notifications').sortCommonTable();
+        $.page.badgeSubject.updatePage(@Html.Raw(JsonConvert.SerializeObject(WorkFlowBadgeData.GetNotificationBadgeData(Model.Count()))));
+    });
+</script>

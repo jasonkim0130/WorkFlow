@@ -1,0 +1,596 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="WorkFlowModelStoreContainer" CdmEntityContainer="WorkFlowEntities">
+    <EntitySetMapping Name="StaffInfo">
+      <EntityTypeMapping TypeName="WorkFlowModel.StaffInfo">
+        <MappingFragment StoreEntitySet="StaffInfo">
+          <ScalarProperty Name="StaffInfoId" ColumnName="StaffInfoId" />
+          <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+          <ScalarProperty Name="EnglishFirstName" ColumnName="EnglishFirstName" />
+          <ScalarProperty Name="EnglishLastName" ColumnName="EnglishLastName" />
+          <ScalarProperty Name="LocalFirstName" ColumnName="LocalFirstName" />
+          <ScalarProperty Name="LocalLastName" ColumnName="LocalLastName" />
+          <ScalarProperty Name="ResidentialAddress" ColumnName="ResidentialAddress" />
+          <ScalarProperty Name="CorrespondenceAddress" ColumnName="CorrespondenceAddress" />
+          <ScalarProperty Name="HomeTelephone" ColumnName="HomeTelephone" />
+          <ScalarProperty Name="MobileTelephone" ColumnName="MobileTelephone" />
+          <ScalarProperty Name="BankName" ColumnName="BankName" />
+          <ScalarProperty Name="BankAccountNumber" ColumnName="BankAccountNumber" />
+          <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+          <ScalarProperty Name="FamilyMembers" ColumnName="FamilyMembers" />
+          <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="PreviousData" ColumnName="PreviousData" />
+          <ScalarProperty Name="EffectiveDate" ColumnName="EffectiveDate" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SystemLogs">
+      <EntityTypeMapping TypeName="WorkFlowModel.SystemLogs">
+        <MappingFragment StoreEntitySet="SystemLogs">
+          <ScalarProperty Name="LogId" ColumnName="LogId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="LogTypeId" ColumnName="LogTypeId" />
+          <ScalarProperty Name="LogTitle" ColumnName="LogTitle" />
+          <ScalarProperty Name="Parameter" ColumnName="Parameter" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserDeviceTokens">
+      <EntityTypeMapping TypeName="WorkFlowModel.UserDeviceTokens">
+        <MappingFragment StoreEntitySet="UserDeviceTokens">
+          <ScalarProperty Name="UserDeviceTokenId" ColumnName="UserDeviceTokenId" />
+          <ScalarProperty Name="UserNo" ColumnName="UserNo" />
+          <ScalarProperty Name="DeviceToken" ColumnName="DeviceToken" />
+          <ScalarProperty Name="LastDeviceLang" ColumnName="LastDeviceLang" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="WorkFlowModel.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserNo" ColumnName="UserNo" />
+          <ScalarProperty Name="DeptCode" ColumnName="DeptCode" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="LastDeviceLang" ColumnName="LastDeviceLang" />
+          <ScalarProperty Name="RegistrationToken" ColumnName="RegistrationToken" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_ApplicantNotificationUsers">
+      <EntityTypeMapping TypeName="WorkFlowModel.WF_ApplicantNotificationUsers">
+        <MappingFragment StoreEntitySet="WF_ApplicantNotificationUsers">
+          <ScalarProperty Name="ApplicationNotificationUserId" ColumnName="ApplicationNotificationUserId" />
+          <ScalarProperty Name="FlowId" ColumnName="FlowId" />
+          <ScalarProperty Name="NotifyUserType" ColumnName="NotifyUserType" />
+          <ScalarProperty Name="UserNo" ColumnName="UserNo" />
+          <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+          <ScalarProperty Name="ManagerOption" ColumnName="ManagerOption" />
+          <ScalarProperty Name="ManagerLevel" ColumnName="ManagerLevel" />
+          <ScalarProperty Name="ManagerMaxLevel" ColumnName="ManagerMaxLevel" />
+          <ScalarProperty Name="ManagerLevelOperator" ColumnName="ManagerLevelOperator" />
+          <ScalarProperty Name="CriteriaGradeOperator" ColumnName="CriteriaGradeOperator" />
+          <ScalarProperty Name="CriteriaGrade" ColumnName="CriteriaGrade" />
+          <ScalarProperty Name="CountryType" ColumnName="CountryType" />
+          <ScalarProperty Name="DeptType" ColumnName="DeptType" />
+          <ScalarProperty Name="BrandType" ColumnName="BrandType" />
+          <ScalarProperty Name="DeptTypeSource" ColumnName="DeptTypeSource" />
+          <ScalarProperty Name="FixedCountry" ColumnName="FixedCountry" />
+          <ScalarProperty Name="FixedDept" ColumnName="FixedDept" />
+          <ScalarProperty Name="FixedBrand" ColumnName="FixedBrand" />
+          <ScalarProperty Name="FixedDeptType" ColumnName="FixedDeptType" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_CaseCoverUsers">
+      <EntityTypeMapping TypeName="WorkFlowModel.WF_CaseCoverUsers">
+        <MappingFragment StoreEntitySet="WF_CaseCoverUsers">
+          <ScalarProperty Name="CaseCoverUserId" ColumnName="CaseCoverUserId" />
+          <ScalarProperty Name="FlowCaseId" ColumnName="FlowCaseId" />
+          <ScalarProperty Name="UserNo" ColumnName="UserNo" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_CaseLogs">
+      <EntityTypeMapping TypeName="WorkFlowModel.WF_CaseLogs">
+        <MappingFragment StoreEntitySet="WF_CaseLogs">
+          <ScalarProperty Name="CaseLogId" ColumnName="CaseLogId" />
+          <ScalarProperty Name="FlowCaseId" ColumnName="FlowCaseId" />
+          <ScalarProperty Name="LogTypeId" ColumnName="LogTypeId" />
+          <ScalarProperty Name="UserNo" ColumnName="UserNo" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_CaseNotificateUsers">
+      <EntityTypeMapping TypeName="WorkFlowModel.WF_CaseNotificateUsers">
+        <MappingFragment StoreEntitySet="WF_CaseNotificateUsers">
+          <ScalarProperty Name="CaseNotificateUserId" ColumnName="CaseNotificateUserId" />
+          <ScalarProperty Name="FlowCaseId" ColumnName="FlowCaseId" />
+          <ScalarProperty Name="UserNo" ColumnName="UserNo" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_CaseNotificationReceivers">
+      <EntityTypeMapping TypeName="WorkFlowModel.WF_CaseNotificationReceivers">
+        <MappingFragment StoreEntitySet="WF_CaseNotificationReceivers">
+          <ScalarProperty Name="CaseNotificationReceiverId" ColumnName="CaseNotificationReceiverId" />
+          <ScalarProperty Name="CaseNotificationId" ColumnName="CaseNotificationId" />
+          <ScalarProperty Name="SourceType" ColumnName="SourceType" />
+          <ScalarProperty Name="Receiver" ColumnName="Receiver" />
+          <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+          <ScalarProperty Name="IsDissmissed" ColumnName="IsDissmissed" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_CaseNotifications">
+      <EntityTypeMapping TypeName="WorkFlowModel.WF_CaseNotifications">
+        <MappingFragment StoreEntitySet="WF_CaseNotifications">
+          <ScalarProperty Name="CaseNotificationId" ColumnName="CaseNotificationId" />
+          <ScalarProperty Name="NotificationType" ColumnName="NotificationType" />
+          <ScalarProperty Name="FlowCaseId" ColumnName="FlowCaseId" />
+          <ScalarProperty Name="FlowStepId" ColumnName="FlowStepId" />
+          <ScalarProperty Name="Source" ColumnName="Source" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Sender" ColumnName="Sender" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_CasePropertyValues">
+      <EntityTypeMapping TypeName="WorkFlowModel.WF_CasePropertyValues">
+        <MappingFragment StoreEntitySet="WF_CasePropertyValues">
+          <ScalarProperty Name="CasePropertyValueId" ColumnName="CasePropertyValueId" />
+          <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+          <ScalarProperty Name="FlowCaseId" ColumnName="FlowCaseId" />
+          <ScalarProperty Name="StringValue" ColumnName="StringValue" />
+          <ScalarProperty Name="IntValue" ColumnName="IntValue" />
+          <ScalarProperty Name="DateTimeValue" ColumnName="DateTimeValue" />
+          <ScalarProperty Name="NumericValue" ColumnName="NumericValue" />
+          <ScalarProperty Name="DateValue" ColumnName="DateValue" />
+          <ScalarProperty Name="UserNoValue" ColumnName="UserNoValue" />
+          <ScalarProperty Name="TextValue" ColumnName="TextValue" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_CaseSteps">
+      <EntityTypeMapping TypeName="WorkFlowModel.WF_CaseSteps">
+        <MappingFragment StoreEntitySet="WF_CaseSteps">
+          <ScalarProperty Name="CaseStepId" ColumnName="CaseStepId" />
+          <ScalarProperty Name="FlowCaseId" ColumnName="FlowCaseId" />
+          <ScalarProperty Name="FlowStepId" ColumnName="FlowStepId" />
+          <ScalarProperty Name="UserNo" ColumnName="UserNo" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_CaseUserActions">
+      <EntityTypeMapping TypeName="WorkFlowModel.WF_CaseUserActions">
+        <MappingFragment StoreEntitySet="WF_CaseUserActions">
+          <ScalarProperty Name="CaseUserActionId" ColumnName="CaseUserActionId" />
+          <ScalarProperty Name="FlowCaseId" ColumnName="FlowCaseId" />
+          <ScalarProperty Name="FlowStepId" ColumnName="FlowStepId" />
+          <ScalarProperty Name="ActionId" ColumnName="ActionId" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="UserNo" ColumnName="UserNo" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_CountryArchivePaths">
+      <EntityTypeMapping TypeName="WorkFlowModel.WF_CountryArchivePaths">
+        <MappingFragment StoreEntitySet="WF_CountryArchivePaths">
+          <ScalarProperty Name="FlowGroupId" ColumnName="FlowGroupId" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+          <ScalarProperty Name="ApprovedArchivePath" ColumnName="ApprovedArchivePath" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_FlowCases_Attachments">
+      <EntityTypeMapping TypeName="WorkFlowModel.WF_FlowCases_Attachments">
+        <MappingFragment StoreEntitySet="WF_FlowCases_Attachments">
+          <ScalarProperty Name="AttachementId" ColumnName="AttachementId" />
+          <ScalarProperty Name="FlowCaseId" ColumnName="FlowCaseId" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="OriFileName" ColumnName="OriFileName" />
+          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_FlowConditions">
+      <EntityTypeMapping TypeName="WorkFlowModel.WF_FlowConditions">
+        <MappingFragment StoreEntitySet="WF_FlowConditions">
+          <ScalarProperty Name="FlowConditionId" ColumnName="FlowConditionId" />
+          <ScalarProperty Name="FlowPropertyId" ColumnName="FlowPropertyId" />
+          <ScalarProperty Name="OtherPropertyType" ColumnName="OtherPropertyType" />
+          <ScalarProperty Name="FlowId" ColumnName="FlowId" />
+          <ScalarProperty Name="Operator" ColumnName="Operator" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_FlowGroups">
+      <EntityTypeMapping TypeName="WorkFlowModel.WF_FlowGroups">
+        <MappingFragment StoreEntitySet="WF_FlowGroups">
+          <ScalarProperty Name="FlowGroupId" ColumnName="FlowGroupId" />
+          <ScalarProperty Name="FlowTypeId" ColumnName="FlowTypeId" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="HasCoverUsers" ColumnName="HasCoverUsers" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="ApprovedArchivePath" ColumnName="ApprovedArchivePath" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_FlowPropertys">
+      <EntityTypeMapping TypeName="WorkFlowModel.WF_FlowPropertys">
+        <MappingFragment StoreEntitySet="WF_FlowPropertys">
+          <ScalarProperty Name="FlowPropertyId" ColumnName="FlowPropertyId" />
+          <ScalarProperty Name="PropertyType" ColumnName="PropertyType" />
+          <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+          <ScalarProperty Name="Compulsory" ColumnName="Compulsory" />
+          <ScalarProperty Name="DataSource" ColumnName="DataSource" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="FlowGroupId" ColumnName="FlowGroupId" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="ViewType" ColumnName="ViewType" />
+          <ScalarProperty Name="Tab" ColumnName="Tab" />
+          <ScalarProperty Name="RowIndex" ColumnName="RowIndex" />
+          <ScalarProperty Name="ColumnIndex" ColumnName="ColumnIndex" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="AllowMultiple" ColumnName="AllowMultiple" />
+          <ScalarProperty Name="Width" ColumnName="Width" />
+          <ScalarProperty Name="Height" ColumnName="Height" />
+          <ScalarProperty Name="HAlign" ColumnName="HAlign" />
+          <ScalarProperty Name="VAlign" ColumnName="VAlign" />
+          <ScalarProperty Name="FontColor" ColumnName="FontColor" />
+          <ScalarProperty Name="Validation" ColumnName="Validation" />
+          <ScalarProperty Name="FontSize" ColumnName="FontSize" />
+          <ScalarProperty Name="ValidationMsg" ColumnName="ValidationMsg" />
+          <ScalarProperty Name="BgColor" ColumnName="BgColor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_Flows">
+      <EntityTypeMapping TypeName="WorkFlowModel.WF_Flows">
+        <MappingFragment StoreEntitySet="WF_Flows">
+          <ScalarProperty Name="FlowId" ColumnName="FlowId" />
+          <ScalarProperty Name="FlowVersion" ColumnName="FlowVersion" />
+          <ScalarProperty Name="UserNo" ColumnName="UserNo" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="FlowGroupId" ColumnName="FlowGroupId" />
+          <ScalarProperty Name="BaseFlowId" ColumnName="BaseFlowId" />
+          <ScalarProperty Name="ConditionRelation" ColumnName="ConditionRelation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_FlowSteps">
+      <EntityTypeMapping TypeName="WorkFlowModel.WF_FlowSteps">
+        <MappingFragment StoreEntitySet="WF_FlowSteps">
+          <ScalarProperty Name="FlowStepId" ColumnName="FlowStepId" />
+          <ScalarProperty Name="StepGroupId" ColumnName="StepGroupId" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="UserNo" ColumnName="UserNo" />
+          <ScalarProperty Name="ApproverType" ColumnName="ApproverType" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+          <ScalarProperty Name="ManagerOption" ColumnName="ManagerOption" />
+          <ScalarProperty Name="ManagerLevel" ColumnName="ManagerLevel" />
+          <ScalarProperty Name="ManagerMaxLevel" ColumnName="ManagerMaxLevel" />
+          <ScalarProperty Name="ManagerLevelOperator" ColumnName="ManagerLevelOperator" />
+          <ScalarProperty Name="CriteriaGradeOperator" ColumnName="CriteriaGradeOperator" />
+          <ScalarProperty Name="CriteriaGrade" ColumnName="CriteriaGrade" />
+          <ScalarProperty Name="CountryType" ColumnName="CountryType" />
+          <ScalarProperty Name="DeptType" ColumnName="DeptType" />
+          <ScalarProperty Name="BrandType" ColumnName="BrandType" />
+          <ScalarProperty Name="DeptTypeSource" ColumnName="DeptTypeSource" />
+          <ScalarProperty Name="FixedCountry" ColumnName="FixedCountry" />
+          <ScalarProperty Name="FixedDept" ColumnName="FixedDept" />
+          <ScalarProperty Name="FixedBrand" ColumnName="FixedBrand" />
+          <ScalarProperty Name="FixedDeptType" ColumnName="FixedDeptType" />
+          <ScalarProperty Name="NoApprover" ColumnName="NoApprover" />
+          <ScalarProperty Name="NoApproverDataKey" ColumnName="NoApproverDataKey" />
+          <ScalarProperty Name="NoApproverOperator" ColumnName="NoApproverOperator" />
+          <ScalarProperty Name="NoApproverValue" ColumnName="NoApproverValue" />
+          <ScalarProperty Name="NoApproverMaxValue" ColumnName="NoApproverMaxValue" />
+          <ScalarProperty Name="NotifyUser" ColumnName="NotifyUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_FlowTypes">
+      <EntityTypeMapping TypeName="WorkFlowModel.WF_FlowTypes">
+        <MappingFragment StoreEntitySet="WF_FlowTypes">
+          <ScalarProperty Name="FlowTypeId" ColumnName="FlowTypeId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Dep" ColumnName="Dep" />
+          <ScalarProperty Name="Grade" ColumnName="Grade" />
+          <ScalarProperty Name="Creator" ColumnName="Creator" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="TemplateType" ColumnName="TemplateType" />
+          <ScalarProperty Name="IconUrl" ColumnName="IconUrl" />
+          <ScalarProperty Name="Platform" ColumnName="Platform" />
+          <ScalarProperty Name="Tabs" ColumnName="Tabs" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_LastStepNotifyUser">
+      <EntityTypeMapping TypeName="WorkFlowModel.WF_LastStepNotifyUser">
+        <MappingFragment StoreEntitySet="WF_LastStepNotifyUser">
+          <ScalarProperty Name="LastStepNotifyUserId" ColumnName="LastStepNotifyUserId" />
+          <ScalarProperty Name="FlowId" ColumnName="FlowId" />
+          <ScalarProperty Name="NotifyUserType" ColumnName="NotifyUserType" />
+          <ScalarProperty Name="UserNo" ColumnName="UserNo" />
+          <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+          <ScalarProperty Name="ManagerOption" ColumnName="ManagerOption" />
+          <ScalarProperty Name="ManagerLevel" ColumnName="ManagerLevel" />
+          <ScalarProperty Name="ManagerMaxLevel" ColumnName="ManagerMaxLevel" />
+          <ScalarProperty Name="ManagerLevelOperator" ColumnName="ManagerLevelOperator" />
+          <ScalarProperty Name="CriteriaGradeOperator" ColumnName="CriteriaGradeOperator" />
+          <ScalarProperty Name="CriteriaGrade" ColumnName="CriteriaGrade" />
+          <ScalarProperty Name="CountryType" ColumnName="CountryType" />
+          <ScalarProperty Name="DeptType" ColumnName="DeptType" />
+          <ScalarProperty Name="BrandType" ColumnName="BrandType" />
+          <ScalarProperty Name="DeptTypeSource" ColumnName="DeptTypeSource" />
+          <ScalarProperty Name="FixedCountry" ColumnName="FixedCountry" />
+          <ScalarProperty Name="FixedDept" ColumnName="FixedDept" />
+          <ScalarProperty Name="FixedBrand" ColumnName="FixedBrand" />
+          <ScalarProperty Name="FixedDeptType" ColumnName="FixedDeptType" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_NoApproverConditions">
+      <EntityTypeMapping TypeName="WorkFlowModel.WF_NoApproverConditions">
+        <MappingFragment StoreEntitySet="WF_NoApproverConditions">
+          <ScalarProperty Name="NoApproverId" ColumnName="NoApproverId" />
+          <ScalarProperty Name="FlowStepId" ColumnName="FlowStepId" />
+          <ScalarProperty Name="NoApproverDataKey" ColumnName="NoApproverDataKey" />
+          <ScalarProperty Name="NoApproverOperator" ColumnName="NoApproverOperator" />
+          <ScalarProperty Name="NoApproverValue" ColumnName="NoApproverValue" />
+          <ScalarProperty Name="NoApproverMaxValue" ColumnName="NoApproverMaxValue" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_Secretary">
+      <EntityTypeMapping TypeName="WorkFlowModel.WF_Secretary">
+        <MappingFragment StoreEntitySet="WF_Secretary">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="SecretaryId" ColumnName="SecretaryId" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="FlowStepId" ColumnName="FlowStepId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_StepConditions">
+      <EntityTypeMapping TypeName="WorkFlowModel.WF_StepConditions">
+        <MappingFragment StoreEntitySet="WF_StepConditions">
+          <ScalarProperty Name="StepConditionId" ColumnName="StepConditionId" />
+          <ScalarProperty Name="FlowPropertyId" ColumnName="FlowPropertyId" />
+          <ScalarProperty Name="Operator" ColumnName="Operator" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_StepGroupConditions">
+      <EntityTypeMapping TypeName="WorkFlowModel.WF_StepGroupConditions">
+        <MappingFragment StoreEntitySet="WF_StepGroupConditions">
+          <ScalarProperty Name="StepGroupConditionId" ColumnName="StepGroupConditionId" />
+          <ScalarProperty Name="StepGroupId" ColumnName="StepGroupId" />
+          <ScalarProperty Name="Operator" ColumnName="Operator" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="DataKey" ColumnName="DataKey" />
+          <ScalarProperty Name="MaxValue" ColumnName="MaxValue" />
+          <ScalarProperty Name="NextStepGroupId" ColumnName="NextStepGroupId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_StepGroups">
+      <EntityTypeMapping TypeName="WorkFlowModel.WF_StepGroups">
+        <MappingFragment StoreEntitySet="WF_StepGroups">
+          <ScalarProperty Name="StepGroupId" ColumnName="StepGroupId" />
+          <ScalarProperty Name="FlowId" ColumnName="FlowId" />
+          <ScalarProperty Name="ConditionId" ColumnName="ConditionId" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="IsAllowModify" ColumnName="IsAllowModify" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="ConditionRelation" ColumnName="ConditionRelation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_StepNotificateUsers">
+      <EntityTypeMapping TypeName="WorkFlowModel.WF_StepNotificateUsers">
+        <MappingFragment StoreEntitySet="WF_StepNotificateUsers">
+          <ScalarProperty Name="StepNotificateUserId" ColumnName="StepNotificateUserId" />
+          <ScalarProperty Name="StepGroupId" ColumnName="StepGroupId" />
+          <ScalarProperty Name="UserNo" ColumnName="UserNo" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="NotifyUserType" ColumnName="NotifyUserType" />
+          <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+          <ScalarProperty Name="ManagerOption" ColumnName="ManagerOption" />
+          <ScalarProperty Name="ManagerLevel" ColumnName="ManagerLevel" />
+          <ScalarProperty Name="ManagerMaxLevel" ColumnName="ManagerMaxLevel" />
+          <ScalarProperty Name="ManagerLevelOperator" ColumnName="ManagerLevelOperator" />
+          <ScalarProperty Name="CriteriaGradeOperator" ColumnName="CriteriaGradeOperator" />
+          <ScalarProperty Name="CriteriaGrade" ColumnName="CriteriaGrade" />
+          <ScalarProperty Name="CountryType" ColumnName="CountryType" />
+          <ScalarProperty Name="DeptType" ColumnName="DeptType" />
+          <ScalarProperty Name="BrandType" ColumnName="BrandType" />
+          <ScalarProperty Name="DeptTypeSource" ColumnName="DeptTypeSource" />
+          <ScalarProperty Name="FixedCountry" ColumnName="FixedCountry" />
+          <ScalarProperty Name="FixedDept" ColumnName="FixedDept" />
+          <ScalarProperty Name="FixedBrand" ColumnName="FixedBrand" />
+          <ScalarProperty Name="FixedDeptType" ColumnName="FixedDeptType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_TemplatePropCode">
+      <EntityTypeMapping TypeName="WorkFlowModel.WF_TemplatePropCode">
+        <MappingFragment StoreEntitySet="WF_TemplatePropCode">
+          <ScalarProperty Name="TemplatePropCodeId" ColumnName="TemplatePropCodeId" />
+          <ScalarProperty Name="TemplateType" ColumnName="TemplateType" />
+          <ScalarProperty Name="PropCode" ColumnName="PropCode" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BLSShopView">
+      <EntityTypeMapping TypeName="WorkFlowModel.BLSShopView">
+        <MappingFragment StoreEntitySet="BLSShopView">
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="ShopCode" ColumnName="ShopCode" />
+          <ScalarProperty Name="ShopName" ColumnName="ShopName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BLSSKUMaster">
+      <EntityTypeMapping TypeName="WorkFlowModel.BLSSKUMaster">
+        <MappingFragment StoreEntitySet="BLSSKUMaster">
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="SKU" ColumnName="SKU" />
+          <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="SIZE" ColumnName="SIZE" />
+          <ScalarProperty Name="Season" ColumnName="Season" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GlobalUserView">
+      <EntityTypeMapping TypeName="WorkFlowModel.GlobalUserView">
+        <MappingFragment StoreEntitySet="GlobalUserView">
+          <ScalarProperty Name="ShopCode" ColumnName="ShopCode" />
+          <ScalarProperty Name="DeptType" ColumnName="DeptType" />
+          <ScalarProperty Name="Dept" ColumnName="Dept" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="EmpType" ColumnName="EmpType" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+          <ScalarProperty Name="EmployeeNo" ColumnName="EmployeeNo" />
+          <ScalarProperty Name="EmpStatus" ColumnName="EmpStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cities">
+      <EntityTypeMapping TypeName="WorkFlowModel.Cities">
+        <MappingFragment StoreEntitySet="Cities">
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ProvinceCode" ColumnName="ProvinceCode" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Provinces">
+      <EntityTypeMapping TypeName="WorkFlowModel.Provinces">
+        <MappingFragment StoreEntitySet="Provinces">
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ProvinceCode" ColumnName="ProvinceCode" />
+          <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_FlowCases">
+      <EntityTypeMapping TypeName="WorkFlowModel.WF_FlowCases">
+        <MappingFragment StoreEntitySet="WF_FlowCases">
+          <ScalarProperty Name="RelatedFlowCaseId" ColumnName="RelatedFlowCaseId" />
+          <ScalarProperty Name="LastChecked" ColumnName="LastChecked" />
+          <ScalarProperty Name="LastApproverViewed" ColumnName="LastApproverViewed" />
+          <ScalarProperty Name="Canceled" ColumnName="Canceled" />
+          <ScalarProperty Name="BaseFlowCaseId" ColumnName="BaseFlowCaseId" />
+          <ScalarProperty Name="Ver" ColumnName="Ver" />
+          <ScalarProperty Name="ReviseAbort" ColumnName="ReviseAbort" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="CurrentStepGroup" ColumnName="CurrentStepGroup" />
+          <ScalarProperty Name="Rejected" ColumnName="Rejected" />
+          <ScalarProperty Name="Approved" ColumnName="Approved" />
+          <ScalarProperty Name="IsDissmissed" ColumnName="IsDissmissed" />
+          <ScalarProperty Name="IsFlagged" ColumnName="IsFlagged" />
+          <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+          <ScalarProperty Name="Deadline" ColumnName="Deadline" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="UserNo" ColumnName="UserNo" />
+          <ScalarProperty Name="FlowId" ColumnName="FlowId" />
+          <ScalarProperty Name="FlowCaseId" ColumnName="FlowCaseId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

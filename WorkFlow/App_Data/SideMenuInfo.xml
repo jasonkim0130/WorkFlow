@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Menus>
+  <Menu Code="Work Flow" Icon="~/Content/Images/Icons/Workflow.png"/>
+  <Menu Code="Inbox" Icon="~/Content/Images/Icons/Inbox.png" Action="Index" Controller="Inbox"/>
+  <Menu Code="Notification" Icon="~/Content/Images/Icons/Notification.png" Action="Index" Controller="Notification"/>
+  <Menu Code="Pending" Icon="~/Content/Images/Icons/Pending.png" Action="Index" Controller="Pending"/>
+  <Menu Code="Archive" ParentCode="Work Flow" Icon="~/Content/Images/Icons/Archive.png" Action="Index" Controller="Archive"/>
+  <Menu Code="Draft" Icon="~/Content/Images/Icons/Pending.png" Action="DraftIndex" Controller="Pending"/>
+  <Menu Code="Application" Icon="~/Content/Images/Icons/Application.png" Action="Index" Controller="Application"/>
+  <Menu Code="Template design" Icon="~/Content/Images/Icons/settings.png"  Controller="ApplicationTemplate" Action="Index"/>
+</Menus>

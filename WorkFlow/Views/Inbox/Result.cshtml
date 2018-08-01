@@ -1,0 +1,63 @@
+﻿@using Newtonsoft.Json
+@using WorkFlowLib.DTO
+@using WorkFlowLib.Results
+@using WorkFlow.Controllers
+@using WorkFlow.Ext
+@model FlowInfo
+<div style="margin: 10px">
+    @Html.Partial("_FlowSteps", Model)
+</div>
+<hr class="step-line">
+<div class="text-center">
+    @if (ViewBag.approveResult == ApproveResult.Approved)
+    {
+        <img src="~/Content/Images/Workflow/approval/Approved.png" style="width: 260px; height: 200px;" />
+        var users = ViewBag.nextStepUsers as string[];
+        <h2>
+            @if (users?.Length > 0)
+            {
+                @: Application is on its way to @string.Join(",", users.Select(p => WebCacheHelper.GetWF_UsernameByNo(p)))
+            }
+        </h2>
+    }
+    else if (Model.CaseInfo.Aborted != null)
+    {
+        <img src="~/Content/Images/Workflow/approval/Abort.png" style="width: 250px;height: 200px;" />
+        <h2 style="color: crimson;">
+            Application has been sent back to applicant to revise!
+        </h2>
+    }
+    else if (ViewBag.approveResult == ApproveResult.Rejected)
+    {
+        <h2>
+            <img src="~/Content/Images/Workflow/approval/Rejected.png" style="width: 250px; height: 200px;" />
+            <p style="color: crimson;">Step have been rejected.</p>
+        </h2>
+    }
+    else if (ViewBag.approveResult == ApproveResult.FlowApproved)
+    {
+        <h2>
+            <img src="~/Content/Images/Workflow/Notification/AllApprovalsObtained.png" style="width: 288px; height: 168px;" />
+            <p style="color: #FB523C;">Application Complete.</p>
+        </h2>
+    }
+    else if (ViewBag.approveResult == ApproveResult.FlowRejected)
+    {
+        <h2>
+            <img src="~/Content/Images/Workflow/approval/Rejected.png" style="width: 250px; height: 200px;" />
+            <p style="color: crimson;">This application have been rejected.</p>
+        </h2>
+    }
+    else
+    {
+        <h2 style="color: crimson;">
+            Error: @ViewBag.approveResult
+        </h2>
+    }
+</div>
+@Html.Partial("_ApplicationLogs", Model.CaseInfo.FlowCaseId)
+<script type="text/javascript">
+    $(function () {
+        $.page.badgeSubject.updatePage(@Html.Raw(JsonConvert.SerializeObject(WorkFlowBadgeData.GetInboxBadgeData(ViewBag.InboxCount))));
+    });
+</script>

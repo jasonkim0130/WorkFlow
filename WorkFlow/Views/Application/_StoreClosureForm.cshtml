@@ -1,0 +1,982 @@
+﻿@using WorkFlowLib
+@using WorkFlowLib.Data
+@using WorkFlow.Ext
+@model WF_FlowPropertys[]
+
+<style type="text/css">
+    .table-borderless > thead > tr > th,
+    .table-borderless > tbody > tr > th,
+    .table-borderless > tfoot > tr > th,
+    .table-borderless > thead > tr > td,
+    .table-borderless > tbody > tr > td,
+    .table-borderless > tfoot > tr > td,
+    .table-borderless > thead,
+    .table-borderless > tbody,
+    .table-borderless > tfoot {
+        border: none;
+    }
+
+    .vertical-middle {
+        vertical-align: middle !important;
+    }
+
+    .nopadding {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .btn-white {
+        background-color: white;
+        border: 1px black solid;
+        color: black;
+        display: inline-block;
+    }
+
+    .backgroundcolor-red {
+        background-color: red;
+    }
+
+    .backgroundcolor-green {
+        background-color: green;
+    }
+
+    .backgroundcolor-yellow {
+        background-color: yellow;
+    }
+
+    input[type="radio"] {
+        width: 20px;
+        height: 20px;
+    }
+
+    .radio-inline input[type="radio"] {
+        margin-top: 0px !important;
+    }
+
+    .textcolor-grey {
+        color: grey !important;
+    }
+
+    .textcolor-red {
+        color: red !important;
+    }
+
+    .textcolor-green {
+        color: green !important;
+    }
+
+    .control-hide {
+        display: none;
+    }
+
+    .container-btn-images {
+        display: inline-block;
+        padding: 2px;
+    }
+
+    .btn-image {
+        display: inline-block;
+        padding: 2px;
+        background-color: transparent;
+        max-width: 100px;
+    }
+
+        .btn-image:hover {
+            background-color: #4fa3e6;
+        }
+
+    .btn-image-selected {
+        background-color: #4fa3e6;
+    }
+
+    .left-offset {
+        padding-left: 30px !important;
+    }
+
+    .checkbox input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        margin-top: 0px;
+    }
+
+    .backgroundcolor-transparent {
+        background-color: transparent !important;
+        opacity: 1;
+    }
+
+    .label-normal {
+        font-weight: normal;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .label-inline {
+        float: left;
+        margin-right: 15px;
+    }
+</style>
+
+@{
+    var brandImages = new Dictionary<string, string>
+{
+{ "HCT", Url.Content("~/Content/Images/Brands_HCT.png")},
+{ "HTN", Url.Content("~/Content/Images/Brands_HT.png")},
+{ "ROS", Url.Content("~/Content/Images/Brands_RTS.png")},
+{ "APM", Url.Content("~/Content/Images/Brands_AP.png")},
+{ "LEO", Url.Content("~/Content/Images/Brands_LEO.png")}
+};
+}
+
+@helper GenerateHiddenHtml(WF_FlowPropertys prop, string guid)
+    {
+        @Html.Hidden("PropertyList.Index", guid);
+        @Html.Hidden("PropertyList[" + guid + "].Id", prop?.FlowPropertyId.ToString())
+        @Html.Hidden("PropertyList[" + guid + "].Type", prop?.PropertyType.ToString())
+}
+
+@helper GenerateTextBox(string propName, string id = null, bool disabled = false, string style = null, string value = "", string placeholder = null, bool readOnly = false)
+    {
+        var guid = Guid.NewGuid().ToString();
+        WF_FlowPropertys prop = Model.FirstOrDefault(p => p.StatusId < 0 && p.PropertyName == propName);
+        var attributes = GetAttributesByPropertyName(propName, id, disabled, style);
+        if (placeholder != null)
+        {
+            attributes.Add("placeholder", placeholder);
+        }
+        if (readOnly)
+        {
+            attributes.Add("readonly", "readonly");
+            if (!disabled)
+            {
+                attributes["class"] += " backgroundcolor-transparent";
+            }
+        }
+        @Html.TextBox("PropertyList[" + guid + "].Value", value, attributes)
+        @GenerateHiddenHtml(prop, guid)
+}
+
+@helper GenerateHidden(string propName, string cid, string value = "", string validationMessage = null, string group = null)
+    {
+        var guid = Guid.NewGuid().ToString();
+        WF_FlowPropertys prop = Model.FirstOrDefault(p => p.StatusId < 0 && p.PropertyName == propName);
+        IDictionary<string, object> attributes = new Dictionary<string, object>();
+        attributes.Add("id", cid);
+        if (group != null)
+        {
+            attributes.Add("data-group-name", group);
+        }
+        if (validationMessage != null)
+        {
+            attributes.Add("data-val", "true");
+            attributes.Add("data-val-required", validationMessage);
+            @Html.ValidationMessage("PropertyList[" + guid + "].Value")
+        }
+        @Html.Hidden("PropertyList[" + guid + "].Value", value, attributes)
+        @GenerateHiddenHtml(prop, guid)
+}
+
+@helper GenerateRadioButton(string propName, string value, string id = null, bool isChecked = false, bool appendHiddenControls = false, string existsGuid = null, string groupName = null)
+    {
+        var guid = existsGuid ?? Guid.NewGuid().ToString();
+        WF_FlowPropertys prop = Model.FirstOrDefault(p => p.StatusId < 0 && p.PropertyName == propName);
+        var attributes = GetAttributesByPropertyName(propName, id);
+        attributes.Remove("class");
+        if (groupName != null)
+        {
+            attributes.Add("data-group-name", groupName);
+        }
+        @Html.RadioButton("PropertyList[" + guid + "].Value", value, isChecked, attributes)
+        if (appendHiddenControls)
+        {
+            @GenerateHiddenHtml(prop, guid)
+        }
+}
+
+@helper GenerateTextArea(string propName, string id = null, string style = null, string value = "")
+    {
+        var guid = Guid.NewGuid().ToString();
+        WF_FlowPropertys prop = Model.FirstOrDefault(p => p.StatusId < 0 && p.PropertyName == propName);
+        @Html.TextArea("PropertyList[" + guid + "].Value", value, GetAttributesByPropertyName(propName, id, style: style))
+        @GenerateHiddenHtml(prop, guid)
+}
+@helper GenerateRadioButtonList(string propName, string texts, string value = "")
+    {
+        var guid = Guid.NewGuid().ToString();
+        WF_FlowPropertys prop = Model.FirstOrDefault(p => p.StatusId < 0 && p.PropertyName == propName);
+        IDictionary<string, object> attributes = GetAttributesByPropertyName(propName);
+        attributes["data-group-name"] = propName;
+        @HtmlUIHelper.GenerateRadioButtonList(Html, "PropertyList[" + guid + "].Value", texts, attributes, value)
+        @GenerateHiddenHtml(prop, guid)
+}
+@helper GenerateDropDownList(string propName, string texts, string id = null, string value = "", string title = null)
+    {
+        var guid = Guid.NewGuid().ToString();
+        WF_FlowPropertys prop = Model.FirstOrDefault(p => p.StatusId < 0 && p.PropertyName == propName);
+        @HtmlUIHelper.GenerateDropDownList(Html, "PropertyList[" + guid + "].Value", texts, GetAttributesByPropertyName(propName, id), value, title)
+        @GenerateHiddenHtml(prop, guid)
+}
+@helper GenerateDropDownList(string propName, IEnumerable<SelectListItem> selectList, string id = null, string title = null)
+    {
+        var guid = Guid.NewGuid().ToString();
+        WF_FlowPropertys prop = Model.FirstOrDefault(p => p.StatusId < 0 && p.PropertyName == propName);
+        @Html.DropDownList("PropertyList[" + guid + "].Value", selectList, title, GetAttributesByPropertyName(propName, id))
+        @GenerateHiddenHtml(prop, guid)
+}
+
+@helper GenerateCheckBox(string propName, string id = null, bool disabled = false)
+    {
+        var guid = Guid.NewGuid().ToString();
+        WF_FlowPropertys prop = Model.FirstOrDefault(p => p.StatusId < 0 && p.PropertyName == propName);
+        var attributes = GetAttributesByPropertyName(propName, id, disabled);
+        attributes.Remove("class");
+        @Html.CheckBox("PropertyList[" + guid + "].Value", attributes)
+        @GenerateHiddenHtml(prop, guid)
+}
+
+@functions{
+    public string hideControl(string name, bool showInClass = true)
+    {
+        return Model.Count(p => p.PropertyName.Equals(name) && p.StatusId < 0) > 0 ? "" : (showInClass ? " control-hide" : "class=control-hide");
+    }
+
+    public string hideControls(string controlNames, bool showInclass = true)
+    {
+        var names = controlNames.Split(',');
+        var count = names.Count(name => Model.Count(p => p.PropertyName == name && p.StatusId < 0) > 0);
+        return count > 0 ? "" : (showInclass ? "control-hide" : "class=control-hide");
+    }
+
+    public IDictionary<string, object> GetAttributesByPropertyName(string propertyName, string id = null, bool disabled = false, string style = null)
+    {
+        WF_FlowPropertys prop = Model.FirstOrDefault(p => p.StatusId < 0 && p.PropertyName.Equals(propertyName));
+        IDictionary<string, object> attributes = HtmlUIHelper.GetHtmlAttributes(prop, true, disabled, style);
+        if (id != null)
+        {
+            attributes["id"] = id;
+        }
+        return attributes;
+    }
+
+}
+
+@if (Model != null)
+{
+    @Html.Hidden("Dep", ViewBag.CurrentDep as string)
+    @Html.Hidden("Subject", null, new { id = "txtSubject" })
+    @GenerateHidden("Country", "txtCountry", ViewBag.Country as string)
+    <div class="container" style="width: 95%;">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <label class="control-label">Store Search</label>
+            </div>
+            <div class="panel-body">
+                <table>
+                    <tr>
+                        <td align="right" style="padding:0 10px;">
+                            <label class="control-label">Brand:</label>
+                        </td>
+                        <td style="padding:0 10px;">
+                            <div id="div_brands" class="container-btn-images">
+                                @{
+                                    foreach (var brand in Consts.BrandsOfContries[ViewBag.Country])
+                                    {
+                                        <div class="btn-image" data-group-name="brands" data-value="@brand" data-brandsRequired="true">
+                                            <img src="@brandImages[brand]" class="img-responsive" />
+                                        </div>
+                                    }
+                                }
+                            </div>
+                            @GenerateHidden("Brand", "txtBrands", validationMessage: "Brand is required")
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" style="padding:0 10px;">
+                            <label class="control-label">Select a Shop:</label>
+                        </td>
+                        <td style="padding:0 10px;">
+                            @GenerateDropDownList("Shop", "", "ddlShop")
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <label class="control-label">Store Information</label>
+            </div>
+            <div class="panel-body">
+                <div style="padding:0 10px;">
+                    <div>
+                        <label class="control-label">Store Type</label>
+                        <div class="left-offset">
+                            @{
+                                var StoreTypeAttributes = GetAttributesByPropertyName("StoreType");
+                                StoreTypeAttributes.Add("data-group-name", "StoreType");
+                            }
+                            <div class="row">
+                                @HtmlUIHelper.GenerateRadioButtonList(Html, "StoreType1", "Street Store,Online Store,Shopping Mall,Dept.Store Counter,Flagship/Mega,Outlet", StoreTypeAttributes)
+                            </div>
+                            <div class="row">
+                                @HtmlUIHelper.GenerateRadioButtonList(Html, "StoreType2", "Self-Run,Franchise", StoreTypeAttributes)
+                            </div>
+                            <div class="row">
+                                @HtmlUIHelper.GenerateRadioButtonList(Html, "StoreType3", "Permanent,Pop-Up", StoreTypeAttributes)
+                            </div>
+                            <div class="row">
+                                @GenerateHidden("StoreType", "txtStoreType", validationMessage: "Store type is required")
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="control-label">Store Name</label>
+                        <div style="padding-left:15px;">
+                            <label class="control-label label-normal" id="lblStoreName"></label>
+                            @GenerateHidden("StoreName", "txtStoreName")
+                        </div>
+                    </div>
+                    <div style="padding-bottom:10px;">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <label class="control-label">City Tier:</label>
+                                    </td>
+                                    <td style="padding:0 10px;">
+                                        @HtmlUIHelper.GenerateRadioButtonList(Html, "CityTier", "1,2,3,4", GetAttributesByPropertyName("CityTier"))
+                                        @GenerateHidden("CityTier", "txtCityTier")
+                                    </td>
+                                    <td>
+                                        <label class="control-label">Mall/Dept Store Tier:</label>
+                                    </td>
+                                    <td style="padding:0 10px;">
+                                        @HtmlUIHelper.GenerateRadioButtonList(Html, "MallDeptStoreTier", "1,2,3,4", GetAttributesByPropertyName("MallDeptStoreTier"))
+                                        @GenerateHidden("MallDeptStoreTier", "txtMallDeptStoreTier")
+                                    </td>
+                                    <td>
+                                        <label class="control-label">Store Size (sq.m)</label>
+                                    </td>
+                                    <td style="padding:0 10px;">
+                                        @GenerateTextBox("StoreSize", "txtStoreSize", style: "width:100px;")
+                                    </td>
+                                    <td>
+                                        <label class="control-label"># of Staff:</label>
+                                    </td>
+                                    <td style="padding:0 10px;">
+                                        @GenerateTextBox("StaffCount", "txtStaffCount", style: "width:100px;")
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <label class="control-label label-inline">Shop Opening Date:</label>
+                        @GenerateTextBox("ShopOpeningDate", "txtShopOpeningDate")
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <label class="control-label">Key Contract Terms</label>
+            </div>
+            <div class="panel-body">
+                <div style="padding:0 10px;">
+                    <table>
+                        <tr>
+                            <td>
+                                <label class="control-label">Name of Landlord/Operator:</label>
+                            </td>
+                            <td style="padding-left:10px;">
+                                @GenerateTextBox("NameOfLandlord", "txtNameOfLandlord", style: "min-width:280px;")
+                            </td>
+                            <td width="10%">&nbsp;</td>
+                            <td>
+                                <label class="control-label">Credit Terms(if applicable):</label>
+                            </td>
+                            <td style="padding-left:10px;">
+                                @GenerateTextBox("CreditTerms", "txtCreditTerms")
+                            </td>
+                            <td>
+                                <label class="control-label">days</label>
+                            </td>
+                        </tr>
+                    </table>
+                    <div style="border-bottom: 1px solid; height: 1px; margin:10px 0px;"></div>
+                    <table>
+                        <tr>
+                            <td>
+                                <label class="control-label">Contract Period:</label>
+                            </td>
+                            <td style="padding-left:10px;">
+                                @GenerateTextBox("ContractPeriodFrom", "txtContractPeriodFrom")
+                            </td>
+                            <td style="padding-left:10px;">
+                                <label class="control-label">To</label>
+                            </td>
+                            <td style="padding-left:10px;">
+                                @GenerateTextBox("ContractPeriodTo", "txtContractPeriodTo")
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td colspan="3" style="padding:10px;">
+                                <span class="field-validation-error control-hide">
+                                    The to date can not be earlier than the from date
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+                    <label class="control-label">Rental/Lease Amount</label>
+                    <div class="row">
+                        <div class="col-sm-offset-3 col-sm-6">
+                            <table class="table table-bordered" style="margin:5px;">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th style="text-align:center;">
+                                            <label class="control-label" style="text-decoration:underline;">Current Term</label>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        var CurrentTermGuid = Guid.NewGuid().ToString();
+                                    }
+                                    <tr>
+                                        <td style="vertical-align:middle;text-align:center;">
+                                            <label>Fixed Rent</label>
+                                        </td>
+                                        <td>
+                                            <table data-group-name="CurrentTerm">
+                                                <tr>
+                                                    <td style="width:10%;text-align:center">
+                                                        <label class="control-label">
+                                                            @GenerateRadioButton("CurrentTermType", "Fixed Rent", existsGuid: CurrentTermGuid, groupName: "CurrentTermType")
+                                                        </label>
+                                                    </td>
+                                                    <td style="width:30%;text-align:right;">
+                                                        <label class="control-label">Rent</label>
+                                                    </td>
+                                                    <td style="width:60%;padding:5px;">
+                                                        @GenerateTextBox("CurrentTermRent", "txtCurrentTermRent", disabled: true)
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align:middle;text-align:center;">
+                                            <label>Turnover % with Minimum Fixed Rent</label>
+                                        </td>
+                                        <td>
+                                            <table data-group-name="CurrentTerm" class="text-center">
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td class="text-left">
+                                                        <span class="field-validation-error control-hide" data-valmsg-for="txtCurrentTermTurnover">
+                                                            Cannot be > 50%
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td rowspan="2" style="width:10%;">
+                                                        <label class="control-label">
+                                                            @GenerateRadioButton("CurrentTermType", "Turnover % with Minimum Fixed Rent", existsGuid: CurrentTermGuid, groupName: "CurrentTermType")
+                                                        </label>
+                                                    </td>
+                                                    <td style="width:30%;text-align:right;">
+                                                        <label class="control-label">Turnover %</label>
+                                                    </td>
+                                                    <td style="width:60%;padding:5px;">
+                                                        <div class="input-group">
+                                                            @GenerateTextBox("CurrentTermTurnover", "txtCurrentTermTurnover", disabled: true)
+                                                            <span class="input-group-addon">%</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:right;">
+                                                        <label class="control-label">
+                                                            Rent
+                                                        </label>
+                                                    </td>
+                                                    <td style="padding:5px;">
+                                                        @GenerateTextBox("CurrentTermRent", "txtCurrentTermRent1", disabled: true)
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align:middle;text-align:center;">
+                                            <label>
+                                                Fixed Rent + Turnover %
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <table data-group-name="CurrentTerm">
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td class="text-left">
+                                                        <span class="field-validation-error control-hide" data-valmsg-for="txtCurrentTermTurnover1">
+                                                            Cannot be > 50%
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td rowspan="3" class="text-center" style="width:10%;">
+                                                        <label class="control-label">
+                                                            @GenerateRadioButton("CurrentTermType", "Fixed Rent + Turnover %", existsGuid: CurrentTermGuid, groupName: "CurrentTermType")
+                                                        </label>
+                                                    </td>
+                                                    <td style="width:30%;text-align:right;">
+                                                        <label class="control-label">Turnover %</label>
+                                                    </td>
+                                                    <td style="width:60%;padding:5px;">
+                                                        <div class="input-group">
+                                                            @GenerateTextBox("CurrentTermTurnover", "txtCurrentTermTurnover1", disabled: true)
+                                                            <span class="input-group-addon">%</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td class="text-left">
+                                                        <span class="field-validation-error control-hide" data-valmsg-for="txtCurrentTermRent2">
+                                                            Cannot be > 50
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:right;">
+                                                        <label class="control-label">
+                                                            Rent
+                                                        </label>
+                                                    </td>
+                                                    <td style="padding:5px;">
+                                                        @GenerateTextBox("CurrentTermRent", "txtCurrentTermRent2", disabled: true)
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            @GenerateHidden("CurrentTermType", "txtCurrentTermType")
+                        </div>
+                    </div>
+
+                    <div style="border-bottom: 1px solid; height: 1px; margin:10px 0px;"></div>
+
+                    <div style="margin:10px 0px;">
+                        <label class="control-label label-inline">Deposit/Key Money:</label>
+                        @GenerateTextBox("DepositMoney", "txtDepositMoney")
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="control-label label-inline">Premium(if applicable):</label>
+                            @GenerateTextBox("Premium", "txtPremium")
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="control-label label-inline">Refundable Amount:</label>
+                            @GenerateTextBox("RefundableAmount", "txtRefundableAmount")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <label class="control-label">Closure Information</label>
+            </div>
+            <div class="panel-body">
+                <div style="padding:0px 10px;">
+                    <div>
+                        <label class="control-label label-inline">Store Closure Date:</label>
+                        <div>
+                            @GenerateTextBox("StoreClosureDate")
+                        </div>
+                    </div>
+                    <div>
+                        <label class="control-label">Reason for Closure:</label>
+                        <div>
+                            @GenerateTextArea("ReasonForClosure", style: "min-width:100%")
+                        </div>
+                    </div>
+                    <div style="border-bottom: 1px solid; height: 1px; margin:10px 0px;"></div>
+                    <div id="divCostOfClosure">
+                        <div class="row" style="margin-bottom:10px;">
+                            <label class="control-label col-sm-2">Loss on Disposal:</label>
+                            <div class="col-sm-4">
+                                @GenerateTextBox("LossOnDisposal")
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="control-label col-sm-2">Reinstatement Cost:</label>
+                            <div class="col-sm-4">
+                                @GenerateTextBox("ReinstatementCost")
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="control-label col-sm-2">Lease Termination Cost(if applicable):</label>
+                            <div class="col-sm-4">
+                                <div class="clearfix" style="margin-bottom: 10px"></div>
+                                @GenerateTextBox("LeaseTerminationCost")
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="control-label col-sm-2">Staff Termination Cost(if applicable):</label>
+                            <div class="col-sm-4">
+                                <div class="clearfix" style="margin-bottom: 10px"></div>
+                                @GenerateTextBox("StaffTerminationCost")
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="control-label col-sm-2">Total Cost of Closure:</label>
+                            <label class="control-label col-sm-4" style="text-align:left;" id="lblTotalCostOfClosure"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <label class="control-label">Financial Information</label>
+            </div>
+            <div class="panel-body">
+                <div class="row text-center">
+                    @Html.Hidden("txtUploadedFile", null, new { data_val = "true", data_val_required = "Financial Information upload is required." })
+                    @Html.ValidationMessage("txtUploadedFile")
+                </div>
+                <div class="row text-center">
+                    @Html.Partial("~/Views/Application/_UploadPLExcel.cshtml")
+                </div>
+                <div style="background-color:#7f7f7f;text-align:center;vertical-align:middle;">
+                    <label style="color:white;padding-top:5px;font-size:larger;">
+                        P&amp;L Summary
+                    </label>
+                </div>
+                <div class="clearfix" style="margin-bottom:10px;"></div>
+                <div class="row nopadding">
+                    <table class="col-sm-8 text-center">
+                        <thead>
+                            <tr>
+                                <th style="width:30%"></th>
+                                <th style="width:35%;background-color:#959595;vertical-align:middle;text-align:center;border-right:1px solid white;">
+                                    <label style="color:white;padding-top:5px;">
+                                        Past 12 Months
+                                    </label>
+                                </th>
+                                <th style="width:35%;background-color:#959595;vertical-align:middle;text-align:center;">
+                                    <label style="color:white;padding-top:5px;">
+                                        Year1 (if renewed)
+                                    </label>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                var summaries = new[]
+                                {
+                                                                new KeyValuePair<string, string>("Sales", "PLSales"),
+                                                                new KeyValuePair<string, string>("Gross Profit", "PLGrossProfit"),
+                                                                new KeyValuePair<string, string>("Occupancy Costs", "PLOccupancyCosts"),
+                                                                new KeyValuePair<string, string>("Staff Salary", "PLStaffSalary"),
+                                                                new KeyValuePair<string, string>("Depreciation", "PLDepreciation"),
+                                                                new KeyValuePair<string, string>("Royalty", "PLRoyalty"),
+                                                                new KeyValuePair<string, string>("Other", "PLOther"),
+                                                                new KeyValuePair<string, string>("Total Operating Expenses", "PLTotalOperatingExpenses"),
+                                                                new KeyValuePair<string, string>("Store NOP", "PLStoreNOP")
+                                                            };
+                                var DataGroupName = "PLSummary";
+                                foreach (var item in summaries)
+                                {
+                                    <tr>
+                                        <td class="text-right">
+                                            <label class="control-label">
+                                                @item.Key
+                                            </label>
+                                        </td>
+                                        @for (int i = 1; i <= 2; i++)
+                                        {
+                                            var lblName = "lbl" + item.Value + i;
+                                            var txtName = "txt" + item.Value + i;
+                                            <td>
+                                                <label class="control-label" id="@lblName" data-group-name="@DataGroupName"></label>
+                                                @GenerateHidden(item.Value + i, txtName, group: DataGroupName)
+                                            </td>
+                                        }
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <label class="control-label">Other Information</label>
+            </div>
+            <div class="panel-body">
+                @GenerateTextArea("OtherInformation", style: "min-width:100%")
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function receivedAfterFileUploaded(data) {
+            if ($.isEmptyObject(data)) {
+                return;
+            }
+            var keys = new Array("Sales", "GrossProfit", "OccupancyCharges", "Salary", "Depreciation", "Royalty", "Others", "TotalOperatingExpenses", "OperatingProfit");
+            var propNames = new Array("PLSales", "PLGrossProfit", "PLOccupancyCosts", "PLStaffSalary", "PLDepreciation", "PLRoyalty", "PLOther", "PLTotalOperatingExpenses", "PLStoreNOP");
+            for (var i = 0; i < keys.length; i++) {
+                if (data.hasOwnProperty(keys[i])) {
+                    for (var j = 1; j <= 2; j++) {
+                        var lblName = "lbl" + propNames[i] + j;
+                        var txtName = "txt" + propNames[i] + j;
+                        var value = data[keys[i]]["col" + j];
+                        var formattedValue = $.formatMoney(value, 0, "");
+                        $("#" + lblName).text(formattedValue);
+                        $("#" + txtName).val((!isNaN(value) ? value : ""));
+                    }
+                }
+            }
+            $("#txtUploadedFile").val(true);
+        }
+
+        function fileDeleted() {
+            $("#txtUploadedFile").val("");
+            $("label[data-group-name='PLSummary']").text("");
+            $("input[data-group-name='PLSummary']").val("");
+        }
+
+        $(function () {
+            $.addDateAndTimePicker();
+            $('.date').datepicker('option', 'dateFormat', 'm/d/yy');
+            //brands
+            $("#div_brands").on("click", function (e) {
+                if ($(e.target).hasClass("btn-image") || $(e.target.parentNode).hasClass("btn-image")) {
+                    $("div[data-group-name='brands']").each(function () {
+                        $(this).removeClass("btn-image-selected");
+                    });
+                    var value;
+                    if ($(e.target).hasClass("btn-image")) {
+                        $(e.target).addClass("btn-image-selected");
+                        value = $(e.target).attr("data-value");
+                    }
+                    if ($(e.target.parentNode).hasClass("btn-image")) {
+                        $(e.target.parentNode).addClass("btn-image-selected");
+                        value = $(e.target.parentElement).attr("data-value");
+                    }
+                    $("#txtBrands").val(value);
+                    $('#div_progress').show();
+                    $.ajax({
+                        type: 'GET',
+                        url: '@Url.Action("GetShopList")',
+                        data: { brand: value },
+                        error: ajaxError,
+                        success: function(data) {
+                            if (data) {
+                                $("#ddlShop").empty();
+                                $("#ddlShop").append("<option selected='selected'></option>");
+                                var json = JSON.parse(data);
+                                for (var i = 0; i < json.length; i++) {
+                                    $("#ddlShop").append("<option value='" + json[i].ShopCode + "'>" + json[i].ShopName + "</option>")
+                                }
+                            }
+                        },
+                        complete: function() {
+                            $('#div_progress').hide();
+                        }
+                    });
+                }
+            });
+            //Store Type and Store Size(sq.m)
+            $("input[data-group-name='StoreType']").bind("change", function () {
+                var storeType1 = $("input[name='StoreType1']:checked");
+                var storeType2 = $("input[name='StoreType2']:checked");
+                var storeType3 = $("input[name='StoreType3']:checked");
+                if (storeType1.length > 0 && storeType2.length > 0 && storeType3.length > 0) {
+                    $("#txtStoreType").val(storeType1.val() + "," + storeType2.val() + "," + storeType3.val());
+                }
+            });
+            function getJsonValue(data, key, defaultValue) {
+                var ret = defaultValue;
+                if (defaultValue === undefined) {
+                    ret = "";
+                }
+                if (data.hasOwnProperty(key)) {
+                    ret = data[key];
+                }
+                return ret;
+            };
+            function storeInfoEditable(editable) {
+                if (editable) {
+                    $('#txtShopOpeningDate').datepicker().datepicker('option', 'dateFormat', 'm/d/yy');
+                    $('#txtContractPeriodFrom').datepicker().datepicker('option', 'dateFormat', 'm/d/yy');
+                    $('#txtContractPeriodTo').datepicker().datepicker('option', 'dateFormat', 'm/d/yy');
+                } else {
+                    $('#txtShopOpeningDate').datepicker('destroy');
+                    $('#txtContractPeriodFrom').datepicker('destroy');
+                    $('#txtContractPeriodTo').datepicker('destroy');
+                }
+                $("input[data-group-name='StoreType']").prop("disabled", !editable);
+                $("input[name='CityTier']").prop("disabled", !editable);
+                $("input[name='MallDeptStoreTier']").prop("disabled", !editable);
+                $("input[data-group-name='CurrentTermType']").prop("disabled", !editable);
+                $('#txtStoreSize').prop("readonly", !editable);
+                $('#txtStaffCount').prop("readonly", !editable);
+                $('#txtShopOpeningDate').prop("readonly", !editable);
+                $('#txtContractPeriodFrom').prop('readonly', !editable);
+                $('#txtContractPeriodTo').prop('readonly', !editable);
+                $("#txtNameOfLandlord").prop("readonly", !editable);
+                $("#txtCreditTerms").prop("readonly", !editable);
+                $("#txtDepositMoney").prop("readonly", !editable);
+                $("#txtPremium").prop("readonly", !editable);
+                $("#txtRefundableAmount").prop("readonly", !editable);
+            }
+            function loadStoreInfo(data) {
+                var json = JSON.parse(data);
+                var storeType = getJsonValue(json, "StoreType");
+                if (storeType.length > 0) {
+                    var types = storeType.split(",");
+                    for (var i = 0; i < types.length; i++) {
+                        var ctrlName = "StoreType" + (i + 1);
+                        $("input[name='" + ctrlName + "'][value='" + types[i] + "']").prop("checked", true);
+                    }
+                    $("input[data-group-name='StoreType']").trigger("change");
+                } else {
+                    $("input[name='StoreType1']").prop("checked", false);
+                    $("input[name='StoreType2']").prop("checked", false);
+                    $("input[name='StoreType3']").prop("checked", false);
+                    $("#txtStoreType").val("");
+                }
+                var storeName = getJsonValue(json, "StoreNamePrefix") + getJsonValue(json, "City") + getJsonValue(json, "StoreLocation") + getJsonValue(json, "StoreTypeForName");
+                if (storeName.length == 0) {
+                    storeName = $("#ddlShop").find("option:selected").text();
+                }
+                $("#lblStoreName").text(storeName);
+                $("#txtStoreName").val(storeName);
+                var cityTier = getJsonValue(json, "CityTier");
+                if (cityTier.length > 0) {
+                    $("input[name='CityTier'][value='" + cityTier + "']").prop("checked", true);
+                    $("#txtCityTier").val(cityTier);
+                } else {
+                    $("input[name='CityTier']").prop("checked", false);
+                    $("#txtCityTier").val("");
+                }
+                var mallDeptStoreTier = getJsonValue(json, "MallDeptStoreTier");
+                if (mallDeptStoreTier.length > 0) {
+                    $("input[name='MallDeptStoreTier'][value='" + mallDeptStoreTier + "']").prop("checked", true);
+                    $("#txtMallDeptStoreTier").val(mallDeptStoreTier);
+                } else {
+                    $("input[name='MallDeptStoreTier']").prop("checked", false);
+                    $("#txtMallDeptStoreTier").val("");
+                }
+                $("#txtStoreSize").val(getJsonValue(json, "StoreSize"));
+                $("#txtStaffCount").val(getJsonValue(json, "OfSalesStaff"));
+                $("#txtShopOpeningDate").val(getJsonValue(json,"ExpectedOpeningDate"));
+                $("#txtNameOfLandlord").val(getJsonValue(json,"NameOfLandlord"));
+                $("#txtCreditTerms").val(getJsonValue(json,"CreditTerms"));
+                $("#txtContractPeriodFrom").val(getJsonValue(json,"ContractPeriodFrom"));
+                $("#txtContractPeriodTo").val(getJsonValue(json, "ContractPeriodTo"));
+                var currentTermType = getJsonValue(json, "CurrentTermType");
+                if (currentTermType.length > 0) {
+                    var radiobutton = $("input[data-group-name='CurrentTermType'][value='" + currentTermType + "']");
+                    if (radiobutton.length > 0) {
+                        radiobutton.prop("checked", true);
+                        var radioButtons = $("input[data-group-name='CurrentTermType']");
+                        var index = radioButtons.index(radiobutton);
+                        var rent = getJsonValue(json, "CurrentTermRent");
+                        var turnover = getJsonValue(json, "CurrentTermTurnover");
+                        $("table[data-group-name='CurrentTerm']").find("input[type='text']").prop("readonly", false);
+                        radiobutton.parents("table[data-group-name='CurrentTerm']").find("input[type='text']").prop("readonly", true);
+                        if (index == 0) {
+                            $("#txtCurrentTermRent").val(rent);
+                        } else if (index == 1) {
+                            $("#txtCurrentTermRent1").val(rent);
+                            $("#txtCurrentTermTurnover").val(turnover);
+                        } else if (index == 2) {
+                            $("#txtCurrentTermRent2").val(rent);
+                            $("#txtCurrentTermTurnover1").val(turnover);
+                        }
+                        radiobutton.trigger("change");
+                    }
+                } else {
+                    $("input[data-group-name='CurrentTermType']").prop("checked", false);
+                    var inputs = $("table[data-group-name='CurrentTerm']").find("input[type='text']");
+                    inputs.val("");
+                    inputs.prop("disabled", true);
+                    inputs.prop("readonly", false);
+                }
+
+                var cashAmount = getJsonValue(json, "CashAmount");
+                $("#txtDepositMoney").val(cashAmount);
+                if (getJsonValue(json, "MoneyRefundable").toLowerCase() === "yes") {
+                    $("#txtRefundableAmount").val(cashAmount);
+                } else {
+                    $("#txtRefundableAmount").val("");
+                }
+                $("#txtPremium").val(getJsonValue(json, "Premium"));
+                storeInfoEditable($.isEmptyObject(json));
+                $("#txtSubject").val($("#txtStoreName").val() + " Closure");
+            }
+
+            $("#ddlShop").on("change", function () {
+                $('#div_progress').show();
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("GetShopInfo")',
+                    data: { shopCode: $(this).val() },
+                    error: ajaxError,
+                    success: function (data) {
+                        loadStoreInfo(data);
+                    },
+                    complete: function () {
+                        $('#div_progress').hide();
+                    }
+                });
+            });
+            $("#divCostOfClosure").on("change", function () {
+                var total = 0;
+                $("#divCostOfClosure").find("input[data-val-number]").each(function () {
+                    var value = parseFloat($(this).val());
+                    if (!isNaN(value)) {
+                        total += value;
+                    }
+                });
+                $("#lblTotalCostOfClosure").text($.formatMoney(total, 0, ""));
+            });
+            $("input[name='CityTier']").bind("change", function () {
+                $("#txtCityTier").val($(this).val());
+            });
+            $("input[name='MallDeptStoreTier']").bind("change", function () {
+                $("#txtMallDeptStoreTier").val($(this).val());
+            });
+            $("input[data-group-name='CurrentTermType']").bind("change", function () {
+                $("#txtCurrentTermType").val($(this).val());
+                var table = $(this).parents("table[data-group-name='CurrentTerm']");
+                $("table[data-group-name='CurrentTerm']").each(function () {
+                    var flag = $(this).is(table);
+                    $(this).find("input[type='text']").each(function () {
+                        if (flag) {
+                            $(this).removeProp("disabled");
+                        } else {
+                            $(this).prop("disabled", true);
+                            $(this).removeProp("readonly");
+                            $(this).val("");
+                            var span = $("span[data-valmsg-for='" + $(this).attr("id") + "']");
+                            span.addClass("control-hide");
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+}

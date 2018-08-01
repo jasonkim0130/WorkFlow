@@ -1,0 +1,70 @@
+﻿@using WorkFlowLib.Data
+@using WorkFlow.Ext
+@model WF_FlowGroups
+@{
+    WF_FlowTypes flowType = ViewBag.FlowType as WF_FlowTypes;
+}
+<div class="page-header text-center">
+    <h2> @flowType.Name.ToLocal()</h2>
+</div>
+@if (Model == null)
+{
+    <div class="alert alert-warning" style="margin: 20px 50px;">
+        No suitable application template found.
+    </div>
+}
+else
+{
+    using (Ajax.BeginModalForm("SaveApp", new ModalAjaxOptions()
+    {
+        HttpMethod = "post",
+        InsertionMode = InsertionMode.Replace,
+        LoadingElementId = "div_progress",
+        Id = "select_flow_form",
+        ModalTargetId = "submit_cont",
+        UpdateTargetId = "div_content",
+        Class = "form-horizontal"
+    }))
+    {
+        <div id="submit_cont"></div>
+        <div id="div_create_data">
+            @if (flowType.TemplateType == 1)
+            {
+                @Html.Partial("~/Views/Application/StoreApprovalForm.cshtml", Model.WF_FlowPropertys.ToArray())
+            }
+            else if (flowType.TemplateType == 2)
+            {
+                @Html.Partial("_LeaveApplication", Model.WF_FlowPropertys.ToArray())
+            }
+            else if (flowType.TemplateType == 7)
+            {
+                @Html.Partial("_StoreClosureForm", Model.WF_FlowPropertys.ToArray())
+            }
+            else
+            {
+                @Html.Partial("~/Views/Application/_EditProperties.cshtml", Model.WF_FlowPropertys.ToArray())
+            }
+            @Html.Hidden("flowTypeId", Model.FlowTypeId)
+            <div class="text-center approve-btn-cell">
+                <div id="btn_list_div" style="margin-top: 40px;">
+                    <button type="submit" onclick="$('#select_flow_form').prop('action','@(Url.Action("SaveDraft"))')" class="btn btn-primary btn-lg">
+                        SAVE
+                    </button>
+                    <button type="submit" class="btn btn-success btn-lg">
+                        SUBMIT
+                    </button>
+                    <a data-ajax="true" class="btn btn-danger btn-lg" data-ajax-method="get" data-ajax-mode="replace" data-ajax-update="#div_content" href="@Url.Action("Index")">
+                        CANCEL
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+    <script type="text/javascript">
+        $("#select_flow_form").addUnobtrusiveValidation();
+        if ($("#select_flow_form input:hidden").length > 0) {
+            $('#select_flow_form').data('validator').settings.ignore = '';
+        }
+    </script>
+}
+

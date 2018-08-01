@@ -1,0 +1,20 @@
+﻿@{
+    Layout = null;
+}
+<html>
+<head>
+    <title>Go to @ViewBag.country</title>
+</head>
+<body>
+    <div style="text-align: center; font-size: 10px;">
+        Switching current site to @ViewBag.country ......
+    </div>
+    <form action="@Url.Action("GotoNewSite")" method="post" id="swForm">
+        <input type="hidden" value="@ViewBag.country" name="country" />
+        <input type="hidden" value="@ViewBag.language" name="language" />
+    </form>
+    <script type="text/javascript">
+        document.getElementById('swForm').submit();
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+﻿@using WorkFlowLib.DTO
+@model CaseHistory[]
+<div id="div_app_history">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <th>Ver</th>
+                <th>Created</th>
+                <th>LastUpdated</th>
+            </tr>
+        </thead>
+        @if (Model != null)
+        {
+            foreach (CaseHistory history in Model.OrderByDescending(p => p.Ver))
+            {
+                <tr>
+                    <td>
+                        @Ajax.ActionLink(history.Subject, "ViewReadOnlyCase", "Pending", new { id = history.FlowCaseId, current = ViewBag.FlowCaseId }, new AjaxOptions
+                        {
+                            HttpMethod = "Get",
+                            InsertionMode = InsertionMode.Replace,
+                            UpdateTargetId = "div_app_history",
+                            OnFailure = "ajaxError"
+                        })
+                    </td>
+                    <td>@history.Ver</td>
+                    <td>@(history.Created.ToLocalTime().ToString("yyyy-MM-dd HH:mm"))</td>
+                    <td>@(history.LastUpdated.ToLocalTime().ToString("yyyy-MM-dd HH:mm"))</td>
+                </tr>
+            }
+        }
+    </table>
+</div>

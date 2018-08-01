@@ -1,0 +1,178 @@
+﻿@using WorkFlowLib.Data
+@using WorkFlowLib
+@using Resources
+@{
+    WF_FlowTypes type = ViewBag.FlowType as WF_FlowTypes;
+    WF_FlowPropertys[] props = ViewBag.Properties as WF_FlowPropertys[];
+    WF_FlowGroups flowGroup = ViewBag.FlowGroup as WF_FlowGroups;
+    bool allowToAddProp = true;
+    bool isDynamic = type.TemplateType == 9;
+}
+<div style="padding: 10px;">
+    @Html.ActionLink(StringResource.DOWNLOAD_SAMPLE_EXCEL, "DownloadSampleExcel")
+    <a href="#" onclick="$('#fieldsAttach').trigger('click');" style="margin-left: 20px;">@StringResource.UPLOAD_CSV_EXCEL</a>
+    <span id="sp_up_prog"></span>
+    <div id="div_upload_content"></div>
+    <input id="fieldsAttach" type="file" style="visibility: hidden; display: inline;" />
+    <a data-ajax="true" class="btn btn-warning btn-sm pull-right" data-ajax-method="get" data-ajax-mode="replace" data-ajax-loading="#div_progress"
+       data-ajax-update="#prop_edit" href="@Url.Action("EditTemplatePropertyies", "ApplicationTemplate", new {flowTypeId = type.FlowTypeId})" style="margin-left: 20px; margin-bottom: 10px">
+        Edit template
+    </a>
+</div>
+<table class="table table-bordered" id="prop_table">
+    <thead>
+        <tr>
+            @if (isDynamic)
+            {
+                <th>Tab</th>
+                <th>Row</th>
+                <th>Column</th>
+                <th>View type</th>
+                <th>Data source</th>
+                <th>Width</th>
+                <th>Height</th>
+                <th>Align</th>
+                <th>Font size</th>
+                <th>Font color</th>
+                <th>Background color</th>
+                <th>Text</th>
+                <th>Validation</th>
+                <th>Validation Text</th>
+            }
+            <th>Field type</th>
+            @if (!isDynamic)
+            {
+                <th>Name</th>
+            }
+            <th>Compulsory</th>
+            @if (!isDynamic)
+            {
+                <th>Code</th>
+            }
+            <th>
+                <input type="checkbox" id="cbAll" style="width: 15px; height: 15px;" onclick="$('#prop_table>tbody :checkbox').prop('checked', this.checked);$('#prop_table>tbody tr')[this.checked ? 'addClass':'removeClass']('selected');" />
+                <input type="button" id="btn_delete_all" class="btn btn-sm btn-danger" value="Delete selected" />
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            SpecialPropertyModel[] allspecialprops = ViewBag.AllSpecialProperties as SpecialPropertyModel[];
+            if (type.TemplateType.HasValue && allspecialprops != null && allspecialprops.Length > 0)
+            {
+                allowToAddProp = false;
+                WF_FlowPropertys[] specialprops = ViewBag.SpecialProperties as WF_FlowPropertys[];
+                foreach (var prop in allspecialprops)
+                {
+                    @Html.Partial("_SpecialProperty", prop, new ViewDataDictionary
+                {
+                    {"Checked", specialprops?.Any(p => p.PropertyName == prop.FieldName && p.StatusId != 0) ?? false},
+                    {"GroupId", flowGroup.FlowGroupId},
+                    {"Tabs", ViewBag.Tabs},
+                    {"IsDynamic", isDynamic}
+                })
+                }
+            }
+            else
+            {
+                if (props != null)
+                {
+                    foreach (var prop in props.OrderBy(p => p.Tab).ThenBy(p => p.RowIndex).ThenBy(p => p.ColumnIndex))
+                    {
+                        @Html.Partial("_Property", prop, new ViewDataDictionary
+                    {
+                        {"GroupId", flowGroup.FlowGroupId},
+                        {"Tabs", ViewBag.Tabs},
+                        {"IsDynamic", isDynamic}
+                    })
+                    }
+                }
+            }
+        }
+    </tbody>
+    @if (allowToAddProp)
+    {
+        <tfoot>
+            <tr>
+                <td colspan="5">
+                    <a data-ajax="true" class="btn btn-primary btn-sm" data-ajax-method="get" data-ajax-mode="replace" data-ajax-loading="#div_progress"
+                       data-ajax-update="#prop_edit" href="@Url.Action("AddNewProperty", "ApplicationTemplate", new {flowGroupId = flowGroup.FlowGroupId})" style="margin-left: 20px; margin-bottom: 10px">
+                        Add new field
+                    </a>
+                </td>
+            </tr>
+        </tfoot>
+    }
+</table>
+<script type="text/javascript">
+    $('#fieldsAttach').fileupload({
+        url: '@Url.Action("RecieveFieldsFile")',
+        formData: { flowGroupId : @flowGroup.FlowGroupId},
+        send: function (e, data) {
+            if (data.files && data.files[0] && data.files[0].size > 1024 * 1024 * 10) {
+                alert('Please select a file less than10MB.');
+                return false;
+            }
+        },
+        complete: function (e, data) {
+            var text = e.responseText;
+            $('#div_content').append($(text));
+            //$('#appAttach').fileupload('destroy');
+        },
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10) + "%";
+            $('#sp_up_prog').html(progress);
+        }
+    });
+</script>
+<script type="text/javascript">
+    $('#prop_edit').html('');
+    $('#btn_delete_all').click(function() {
+        var idlist = $('#prop_table>tbody :checkbox:checked').map(function () { return this.value; }).get();
+        if (idlist.length < 1) {
+            alert('@StringResource.PLEASE_SELECT_A_VALUE');
+            return;
+        }
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("RemovePropertys")',
+            data: { propertyIds : idlist},
+            error: ajaxError,
+            success: function (data) {
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+                $('#div_content').html(data);
+            },
+            complete: function () {
+                $('#div_progress').hide();
+            }
+        });
+    });
+    $('.SpecialChecbox').click(function() {
+        var $this = $(this);
+        var flowgroupid = $this.data('flowgroupid');
+        var fieldtypeid = $this.data('fieldtypeid');
+        var fieldname = $this.data('fieldname');
+        var compulsory = $this.data('compulsory');
+        $('#div_progress').show();
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("UpdateSpecialProperty")',
+            data: { flowgroupid, fieldtypeid, fieldname, compulsory, enable: $(this).prop('checked') },
+            error: ajaxError,
+            success: function(data) {
+                if (data) {
+                    var $data = $(data);
+                    if (!$data.hasClass('modal')) {
+                        $('#prop_table_cont').html($data);
+                    }
+                }
+            },
+            complete: function () {
+                $('#div_progress').hide();
+            }
+        });
+    });
+</script>

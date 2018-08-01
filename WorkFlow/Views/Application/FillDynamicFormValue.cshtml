@@ -1,0 +1,133 @@
+﻿@using WorkFlowLib.Data
+@using WorkFlow.Ext
+@model WF_FlowPropertys[]
+@{
+    WF_FlowTypes flowType = ViewBag.FlowType as WF_FlowTypes;
+}
+<style>
+    .dynamic-app-table td {
+        border: 2px white solid !important;
+    }
+</style>
+@helper GenerateHtml(WF_FlowPropertys prop, int index)
+    {
+        if (prop.ViewType == "Label")
+        {
+            @Html.Label(prop.Text)
+        }
+        else if (prop.ViewType == "TextBox")
+        {
+            @Html.TextBox("Properties[" + index + "].Value", null, new { @class = "form-control" })
+            @Html.Hidden("Properties[" + index + "].Id", prop.FlowPropertyId)
+            @Html.Hidden("Properties[" + index + "].Type", prop.ViewType)
+        }
+        else if (prop.ViewType == "TextArea")
+        {
+            @Html.TextArea("Properties[" + index + "].Value", null, new { @class = "form-control" })
+            @Html.Hidden("Properties[" + index + "].Id", prop.FlowPropertyId)
+            @Html.Hidden("Properties[" + index + "].Type", prop.ViewType)
+        }
+        else if (prop.ViewType == "DropdownList")
+        {
+            List<SelectListItem> selectList = new List<SelectListItem>();
+            foreach (var item in prop.Text.Split('|'))
+            {
+                var temp = item.Split(':');
+                selectList.Add(new SelectListItem { Text = temp[1], Value = temp[0] });
+            }
+            @Html.DropDownList("Properties[" + index + "].Value", selectList, new { @class = "form-control" })
+            @Html.Hidden("Properties[" + index + "].Id", prop.FlowPropertyId)
+            @Html.Hidden("Properties[" + index + "].Type", prop.ViewType)
+        }
+        else if (prop.ViewType == "Calendar")
+        {
+            @Html.TextBox("Properties[" + index + "].Value", null, new { @class = "date form-control" })
+            @Html.Hidden("Properties[" + index + "].Id", prop.FlowPropertyId)
+            @Html.Hidden("Properties[" + index + "].Type", prop.ViewType)
+        }
+        else if (prop.ViewType == "ComboBox")
+        {
+            List<SelectListItem> selectList = new List<SelectListItem>();
+            foreach (var item in prop.Text.Split('|'))
+            {
+                var temp = item.Split(':');
+                selectList.Add(new SelectListItem { Text = temp[1], Value = temp[0] });
+            }
+            @Html.CheckboxList("Properties[" + index + "].Value", selectList)
+            @Html.Hidden("Properties[" + index + "].Id", prop.FlowPropertyId)
+            @Html.Hidden("Properties[" + index + "].Type", prop.ViewType)
+        }
+        else if (prop.ViewType == "Attachment")
+        {
+            @(new MvcHtmlString("<input type=\"file\" class=\"form-control\" style=\"height:40px\"/>"));
+        }
+}
+<div class="page-header text-center">
+    <h2>@flowType.Name</h2>
+</div>
+@if (Model == null && Model.Length > 0)
+{
+    <div class="alert alert-warning" style="margin: 20px 50px;">
+        No suitable application template found.
+    </div>
+}
+else
+{
+
+    int propIndex = 0;
+    var tabs = Model.Select(p => p.Tab).Distinct().OrderBy(p => p);
+    int tabIndex = 1;
+    <ul class="nav nav-tabs" id="ul_tab" style="margin-left: 20px;">
+        @foreach (var tab in tabs)
+        {
+            <li role="presentation" class="h5" data-target="content@(tabIndex)">
+                <a href="#">
+                    @tab
+                </a>
+            </li>
+            tabIndex++;
+        }
+    </ul>
+    int contentIndex = 1;
+    foreach (var tab in Model.GroupBy(p => p.Tab).OrderBy(p => p.Key))
+    {
+        int maxColumn = tab.Max(p => p.ColumnIndex) ?? 1;
+        <div id="content@(contentIndex)" style="display: none">
+            <table class="table table-bordered dynamic-app-table">
+                @foreach (var rows in tab.GroupBy(p => p.RowIndex))
+                {
+                    <tr>
+                        @for (int i = 1; i <= maxColumn; i++)
+                        {
+                            WF_FlowPropertys prop = rows.FirstOrDefault(p => p.ColumnIndex == i);
+                            <td>
+                                @if (prop != null)
+                                {
+                                    @GenerateHtml(prop, propIndex);
+                                    propIndex++;
+                                }
+                            </td>
+                        }
+                    </tr>
+                }
+            </table>
+        </div>
+        contentIndex++;
+    }
+
+
+    <script>
+        $(function () {
+            $('#ul_tab li').click(function () {
+                var $tabs = $('#ul_tab li');
+                $(this).addClass('active');
+                $tabs.not($(this).closest('li')).removeClass('active');
+                var $targetContent = $('#' + $(this).data('target'));
+                $targetContent.show();
+                $('[id^="content"]').not($targetContent).hide();
+            }).first().trigger('click');
+            $('.date').datepicker();
+        });
+    </script>
+}
+
